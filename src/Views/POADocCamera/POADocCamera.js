@@ -135,7 +135,9 @@ class POADocCamera extends Component {
                         label="My photo is clear"
                         onClick={() => {
                             window.cameraMode = "front"
-                            this.props.history.push('photo')
+                            // this.props.history.push('photo')
+                            this.props.history.push('faceliveness')
+                            
                         }}
                     />
                     <Button
