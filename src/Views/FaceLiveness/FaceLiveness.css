@@ -1,9 +1,9 @@
-.camera-container{
+/* .camera-container{
     z-index: 1;
     position: absolute;
     display: flex;
-}
-.frame-container{
+} */
+.face-frame-container{
     width: 100%;
     z-index: 33;    
     position: absolute;
@@ -15,11 +15,11 @@
     position: absolute;
     top: 50px;
 } */
-.framImg{
+.face-framImg{
     width: 100%;
     /* height: calc(100vh - 50px); */
 }
-.message-container{
+.face-message-container{
     z-index: 50;
     position: absolute;
     width: 100%;
@@ -27,7 +27,7 @@
     margin-bottom: 80px;
     
 }
-.txtMessage{
+.face-txtMessage{
     color:white;
     padding-left: 5%; 
     padding-right: 5%; 

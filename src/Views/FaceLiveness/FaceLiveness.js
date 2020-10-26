@@ -90,14 +90,14 @@ class FaceLivness extends Component {
                                 {/* <div className="Canvas-container" >
                                     <canvas id="myCanvas" height="150"/>
                                 </div> */}
-                                <div className="frame-container" >
-                                    <img src={ImgSrc} className="framImg" style={{ height: this.state.frameHeight }} />
+                                <div className="face-frame-container" >
+                                    <img src={ImgSrc} className="face-framImg" style={{ height: this.state.frameHeight }} />
                                 </div>
                                 {/* <div style={{ zIndex: "40", position: "absolute" }}>
                                     <ToastsContainer store={ToastsStore} />
                                 </div> */}
-                                <div className="message-container">
-                                    <p className="txtMessage">{faceDetectStatus}</p>
+                                <div className="face-message-container">
+                                    <p className="face-txtMessage">{faceDetectStatus}</p>
                                     {/* <button onClick={this.onCapture}>Capture</button> */}
                                 </div>
                             </div>
