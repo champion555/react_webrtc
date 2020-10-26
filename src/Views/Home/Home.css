@@ -1,0 +1,21 @@
+.body-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #7f00ff;
+    align-items: center;
+}
+
+.logoView {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background: #7f00ff;
+
+}
+
+.logoIcon {
+    width: 50%;
+    height: 60px;
+}

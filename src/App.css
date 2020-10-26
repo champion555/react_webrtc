@@ -1,0 +1,37 @@
+/* body {
+  overflow: hidden;
+  background-color: #7f00ff;
+} */
+
+#canvas {
+  display: none;
+}
+
+
+
+.margin-t {
+  margin-top: 30px;
+}
+
+video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.parent {
+  position: relative;
+  overflow-y: hidden;
+}
+
+Webcam {
+  position: absolute;
+}
+
+.control {
+  position: absolute;
+  display: block;
+  width: 50%;
+  margin: auto;
+  bottom: 50px;
+}

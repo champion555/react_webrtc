@@ -1,0 +1,19 @@
+.HeaderView{
+    background: #7f00ff;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btnBack{
+    display: flex;
+    margin-left: 10px;
+    width: 16px;
+    height: 15px;
+}
+.txtTitle{
+    text-align: center;
+    color: white;
+    margin-left: -10px;
+}
+
