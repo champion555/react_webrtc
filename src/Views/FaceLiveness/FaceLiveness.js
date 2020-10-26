@@ -4,7 +4,7 @@ import Header from "../../Components/header/header"
 import FaceDetector from "../../lib/FaceDetector"
 import UndetectImgURL from "../../assets/ic_undetected.png"
 import DetectImgURL from "../../assets/ic_detected.png"
-import { ToastsContainer, ToastsStore } from 'react-toasts';
+// import { ToastsContainer, ToastsStore } from 'react-toasts';
 import "./FaceLiveness.css"
 
 var face_x = null;
@@ -93,9 +93,9 @@ class FaceLivness extends Component {
                                 <div className="frame-container" >
                                     <img src={ImgSrc} className="framImg" style={{ height: this.state.frameHeight }} />
                                 </div>
-                                <div style={{ zIndex: "40", position: "absolute" }}>
+                                {/* <div style={{ zIndex: "40", position: "absolute" }}>
                                     <ToastsContainer store={ToastsStore} />
-                                </div>
+                                </div> */}
                                 <div className="message-container">
                                     <p className="txtMessage">{faceDetectStatus}</p>
                                     {/* <button onClick={this.onCapture}>Capture</button> */}
