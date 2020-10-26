@@ -144,7 +144,7 @@ class IDDocCamera extends Component {
                     <canvas ref={this.captureRef} width="320" height="240" id="canvas" style={{ display: "none" }}></canvas>
                 </div>
                 {(this.state.previewImageStatuse) && <div className="preview-container">
-                    <img src={this.state.ImageURL} style={{ width: "100%", height: window.innerHeight }} />
+                    <img src={this.state.IDDocImgURL} style={{ width: "100%", height: window.innerHeight }} />
                 </div>}
                 <div className="frame-container">
                     <img src={this.state.frameSrc} style={{ width: "100%", height: window.innerHeight }} />
