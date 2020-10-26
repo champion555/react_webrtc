@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import ApiService from '../../Services/ApiCallServices'
-
 import Header from "../../Components/header/header"
 import FaceDetector from "../../lib/FaceDetector"
 import UndetectImgURL from "../../assets/ic_undetected.png"
