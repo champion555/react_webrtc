@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.FaceDetect-camera{
+  display: flex !important;
+  width: 100%;
+  height: calc(100vh - 200px);
+}
