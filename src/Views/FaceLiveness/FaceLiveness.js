@@ -3,7 +3,7 @@ import Header from "../../Components/header/header"
 import FaceDetector from "../../lib/FaceDetector"
 import UndetectImgURL from "../../assets/ic_undetected.png"
 import DetectImgURL from "../../assets/ic_detected.png"
-import "./faceLivness.css"
+import "./FaceLiveness.css"
 
 var face_x = null;
 var face_y = null;
