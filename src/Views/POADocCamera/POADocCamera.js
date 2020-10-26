@@ -5,7 +5,7 @@ import captureImg from "../../assets/camera_take.png"
 import Webcam from '../../Components/Webcam.react';
 import frameURL from "../../assets/ic_poadoc.png"
 import Button from "../../Components/button/button"
-import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/AppUtils';
+import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
 
 import './POADocCamera.css';
 
