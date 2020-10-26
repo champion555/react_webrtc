@@ -30,7 +30,6 @@ class Home extends Component {
                     <Button
                         label="Start"
                         onClick={() => {
-                            window.cameraMode = "back"
                             this.props.history.push('idmain');
                             
                         }}

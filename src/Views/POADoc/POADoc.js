@@ -31,6 +31,7 @@ class POADoc extends Component {
         this.setState({ nextUrl: link })
     }
     onSelectCountry = (CountryName) => {
+        window.cameraMode = "back"
         this.props.history.push('poadoccam')
         window.countryName = CountryName
         

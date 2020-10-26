@@ -45,6 +45,7 @@ class IDMain extends Component {
         }else if (this.state.nextUrl == "resident"){
             window.IDType = "resident"
         }
+        window.cameraMode = "back"
         this.props.history.push('iddoccam')
         window.countryName = CountryName
         
