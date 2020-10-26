@@ -2,7 +2,7 @@ import Axios from '../api';
 import datauritoblob from 'datauritoblob'
 // handle user media capture
 export function captureUserMedia(callback, deviceId) {
-  alert(window.cameraMode)
+  // alert(window.cameraMode)
   if( window.cameraMode == "front"){
     var params = {
       audio: false, video: {
