@@ -48,6 +48,7 @@ class Home extends Component {
                         label="Video Face Liveness"
                         className="belowBtn"
                         onClick={() => {
+                            window.cameraMode = "front"
                             this.props.history.push('video');
                         }}
                     />
