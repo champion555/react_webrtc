@@ -6,7 +6,7 @@ import Webcam from '../../Components/Webcam.react';
 import frameURL from "../../assets/ic_background.png"
 import Button from "../../Components/button/button"
 import backURL from "../../assets/ic_back.png"
-import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/AppUtils';
+import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
 import './IDDocCamera.css';
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
