@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-
 import Header from "../../Components/header/header"
 import FaceDetector from "../../lib/FaceDetector"
 import UndetectImgURL from "../../assets/ic_undetected.png"
 import DetectImgURL from "../../assets/ic_detected.png"
-// import { ToastsContainer, ToastsStore } from 'react-toasts';
-import "./FaceLiveness.css"
+import "./faceLivness.css"
 
 var face_x = null;
 var face_y = null;
 
-class FaceLivness extends Component {
+class FaceLiveness extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -116,4 +114,4 @@ class FaceLivness extends Component {
     }
 }
 
-export default FaceLivness;
+export default FaceLiveness;
