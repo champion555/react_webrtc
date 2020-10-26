@@ -6,7 +6,8 @@ class Webcam extends React.Component {
     this.videoRef = React.createRef()
     this.state = {
       frameHeight: window.innerHeight,
-      faceMode:  window.cameraMode
+      faceMode:  window.cameraMode,
+      
     }
   }
 
