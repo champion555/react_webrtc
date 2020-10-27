@@ -37,6 +37,7 @@ class FaceLiveness extends Component {
     }
     captureImage = (GetImage) => {
         console.log("GetImage Data",GetImage)
+        alert("imageURL: ",GetImage)
         this.setState({ captureImg: GetImage });
         console.log("imageData : ", this.state.captureImg)
         // this.onAPICall()
