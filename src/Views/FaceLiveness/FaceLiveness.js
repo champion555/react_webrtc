@@ -34,10 +34,10 @@ class FaceLiveness extends Component {
             detectorActive: !this.state.detectorActive
         })
         // console.log("IMage URL:", this.state.ComeImage)
+        this.props.history.push('iddocresult')
     }
     captureImage = (GetImage) => {
         console.log("GetImage Data",GetImage)
-        alert("imageURL: ",GetImage)
         this.setState({ captureImg: GetImage });
         console.log("imageData : ", this.state.captureImg)
         // this.onAPICall()
