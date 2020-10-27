@@ -19,6 +19,8 @@ class FaceLiveness extends Component {
             captureSrc: captureURL,
             faceDetect:"",
             detectorActive: true,
+            captureImg: null,
+            DontReceve: false,
 
         }
     }
@@ -33,6 +35,23 @@ class FaceLiveness extends Component {
         })
         // console.log("IMage URL:", this.state.ComeImage)
     }
+    captureImage = (GetImage) => {
+        console.log("GetImage Data",GetImage)
+        this.setState({ captureImg: GetImage });
+        console.log("imageData : ", this.state.captureImg)
+        // this.onAPICall()
+    }
+    onCapture = () => {
+        this.setState({
+            detectorActive: !this.state.detectorActive
+        })
+        this.setState({
+            DontReceve:!this.state.DontReceve
+        })    
+    }
+    onAPICall=()=>{
+        // console.log("imageData : ", this.state.captureImg)
+    }
 
 
     render() {
@@ -43,7 +62,7 @@ class FaceLiveness extends Component {
         return (
             <div>
                 <Header headerText={this.state.sendHeaderText} />
-                <FaceDetector active={detectorActive}>
+                <FaceDetector onSelectImage={this.captureImage} detectorActiveflag={this.state.DontReceve} active={detectorActive}>
                     {facesData => {
                         facesData.map(face => {
                             var faceX = face.x

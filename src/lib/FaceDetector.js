@@ -23,6 +23,7 @@ export default class FaceDetector extends Component {
       noFaceFrames: 0,
       highFaceFrames: 0,
       framesSinceUpdate: 0,
+      imageVerified: true,
     }
   }
 
@@ -45,6 +46,22 @@ export default class FaceDetector extends Component {
   componentDidUpdate() {
     if (this.props.active && !this.workQueue.length) {
       this.newWorkQueue()
+    }
+  }
+  getImage = () => {
+    var imgURL
+    this.canvas.getContext('2d', { alpha: false })
+    imgURL = this.canvas.toDataURL()
+    // console.log('get image : ', imgURL)
+    if (this.props.detectorActiveflag && this.state.imageVerified) {
+      this.setState({
+        imageVerified : false
+      });
+      // this.setState({
+      //   imageURL: imgURL
+      // })
+      // console.log("img url_Child : ", this.state.imageURL)
+      this.props.onSelectImage(imgURL);
     }
   }
 
@@ -146,7 +163,7 @@ export default class FaceDetector extends Component {
 
       x = Math.min(Math.max(x, 0), 100)
       y = Math.min(Math.max(y, 0), 100)
-      
+      this.getImage()
       strength = Math.round(strength)
       return {x, y, size, strength}
     } 
