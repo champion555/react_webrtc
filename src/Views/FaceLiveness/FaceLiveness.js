@@ -47,7 +47,7 @@ class FaceLiveness extends Component {
             detectorActive: !this.state.detectorActive
         })
         this.setState({
-            DontReceve:!this.state.DontReceve
+            DontReceve:true
         })    
     }
     onAPICall=()=>{
