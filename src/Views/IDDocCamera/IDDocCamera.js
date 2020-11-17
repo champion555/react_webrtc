@@ -97,11 +97,10 @@ class IDDocCamera extends Component {
         }).then(res => {
             var response = res.data;
             console.log(response, response.message, response.errorList);
-            alert(response.statusCode);
-            if (response.statusCode == "200") {
-                this.setState({ previewImageStatuse: true })
-                this.setState({ frontCard: true })
-                this.setState({ IDDocImgURL: data })
+            this.setState({ previewImageStatuse: true })
+            this.setState({ frontCard: true })
+            this.setState({ IDDocImgURL: data })
+            if (response.statusCode == "200") {                
                 let { IDTarget } = this.state
                 if (IDTarget == "frontIDCard") {
                     this.setState({ titleMessage: "Image preview" })
