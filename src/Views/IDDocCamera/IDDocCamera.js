@@ -172,7 +172,7 @@ class IDDocCamera extends Component {
                     <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold" }}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
                 </div>}
-                {(this.state.isErrorStatus) &&   <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.35 }}>
+                {(!this.state.isErrorStatus) &&   <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.35 }}>
                     <div className = "container">
                         <div className = "title">   
                             <img src={this.state.errorIconURL} />
