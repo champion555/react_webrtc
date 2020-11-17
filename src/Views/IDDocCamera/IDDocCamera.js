@@ -4,6 +4,7 @@ import Header from "../../Components/header/header"
 import captureImg from "../../assets/camera_take.png"
 import Webcam from '../../Components/Webcam.react';
 import frameURL from "../../assets/ic_background2.png"
+import errorURL from "../../assets/ic_error.png"
 import Button from "../../Components/button/button"
 import backURL from "../../assets/ic_back.png"
 import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
@@ -30,6 +31,7 @@ class IDDocCamera extends Component {
             titleMessage: "",
             idTitle: "",
             isErrorStatus: false,
+            errorIconURL:errorURL,
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.webcamRef = React.createRef()
@@ -163,13 +165,23 @@ class IDDocCamera extends Component {
                     <img src={this.state.frameSrc} style={{ width: "100%", height: window.innerHeight }} />
                 </div>
                 <p className="messageTitle" style={{ bottom: "10px" }}>powerd by BIOMIID</p>
-
                 {(!this.state.previewImageStatuse) && <div className="captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
                 {(!this.state.isErrorStatus) && <div className="message-container" style={{ bottom: window.innerHeight * 0.35 }}>
                     <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold" }}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
+                </div>}
+                {(this.state.isErrorStatus) &&   <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.35 }}>
+                    <div className = "container">
+                        <div className = "title">   
+                            <img src={this.state.errorIconURL} />
+                            <p>The image quality is very low</p>
+                        </div>
+                        <div className = "message">
+                            <p>-Make sure the iamnge is not blurry or contains blares!</p>
+                        </div>
+                    </div>
                 </div>}
                 <div className="top-container">
                     <img src={this.state.ImageSrcs} style={{ width: "20px", height: "20px", marginLeft: "10px" }}

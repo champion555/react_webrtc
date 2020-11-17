@@ -60,5 +60,46 @@
 }
 
 
+.errorMessage {
+    position: absolute;
+    z-index: 1000;    
+    padding-left: 16px;
+    padding-right: 16px;        
+    width: 90%;
+}
 
+.errorMessage .container {
+    border: 1px solid yellow;
+    border-radius: 5px;
+}
 
+.errorMessage .title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 16px;
+    color: white;
+    height: 30px;
+}
+
+.errorMessage .title img {
+    width: 16px;
+}
+.errorMessage .title p {
+    margin-left: 10px;
+}
+
+.errorMessage .message {
+    color: white;
+    margin: 0px;
+    font-size: 11px;
+    font-weight: 200;
+    width: 100%;
+    padding-left: 16px;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.errorMessage .message p {
+    margin: 8px;
+}
