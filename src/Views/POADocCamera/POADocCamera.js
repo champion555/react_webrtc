@@ -4,6 +4,7 @@ import Header from "../../Components/header/header"
 import captureImg from "../../assets/camera_take.png"
 import Webcam from '../../Components/Webcam.react';
 import frameURL from "../../assets/ic_poadoc.png"
+import errorURL from "../../assets/ic_error.png"
 import Button from "../../Components/button/button"
 import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
 import { ImageQuality } from '../../lib/AppUtils';
@@ -22,7 +23,9 @@ class POADocCamera extends Component {
             frameSrc: frameURL,
             previewImageStatuse: false,
             frontCard: true,
-            message: ""
+            message: "",
+            isErrorStatus: false,
+            errorIconURL: errorURL,
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.webcamRef = React.createRef()
@@ -70,22 +73,24 @@ class POADocCamera extends Component {
             var response = res.data;
             console.log(response, response.message, response.errorList);
             alert(response.statusCode);
+            this.setState({ previewImageStatuse: true })
+            this.setState({ frontCard: true })
+            this.setState({ ImageURL: data })
             if (response.statusCode == "200") {
-                this.setState({ previewImageStatuse: true })
-                this.setState({ frontCard: true })
-                this.setState({ ImageURL: data })
+                this.setState({ isErrorStatus: false })
             } else {
-                alert("image quality is very low")
+                this.setState({ isErrorStatus: true })
             }
         }).catch(e => {
 
-            alert("image checking failed");
+            alert("image checking failed, Please try again.");
 
         })
 
     }
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
+        this.setState({ isErrorStatus: false })
     }
     render() {
         return (
@@ -98,23 +103,23 @@ class POADocCamera extends Component {
                 {(this.state.previewImageStatuse) && <div className="preview-container">
                     <img src={this.state.ImageURL} style={{ width: "100%", height: window.innerHeight }} />
                 </div>}
-                 <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.35 }}>
-                    <div className = "container">
-                        <div className = "title">   
+                {(this.state.isErrorStatus) && <div className="errorMessage" style={{ bottom: window.innerHeight * 0.35 }}>
+                    <div className="container">
+                        <div className="title">
                             <img src={this.state.errorIconURL} />
                             <p>The image quality is very low</p>
                         </div>
-                        <div className = "message">
+                        <div className="message">
                             <p>- Make sure the image is not blurry or contains blares!</p>
                         </div>
                     </div>
-                </div>
+                </div>}
                 {(!this.state.previewImageStatuse) && <div className="POA-captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
 
                 {(this.state.previewImageStatuse) && <div className="preview-button-container">
-                    <Button
+                {(!this.state.isErrorStatus) && <Button
                         label="My photo is clear"
                         onClick={() => {
                             window.cameraMode = "front"
@@ -122,7 +127,7 @@ class POADocCamera extends Component {
                             // this.props.history.push('faceliveness')
 
                         }}
-                    />
+                    />}
                     <Button
                         label="Re-take"
                         onClick={this.onReTake}
