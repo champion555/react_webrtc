@@ -67,7 +67,7 @@ class IDDocCamera extends Component {
     }
     requestUserMedia() {
         console.log('requestUserMedia')
-        // localStorage.setItem("cameraMode", "back")
+        localStorage.setItem("cameraMode", "back")
         captureUserMedia((stream, data) => {
             this.setState({ src: stream });
         });
@@ -102,7 +102,7 @@ class IDDocCamera extends Component {
             console.log(r)
 
         }).catch(e => {
-            
+
         console.error(e)            ;
             
         })
