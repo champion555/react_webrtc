@@ -125,6 +125,28 @@ function getToken() {
   })
 
 }
+
+export function ImageQuality(blobData, prCallback) { //parameters: { type, data, id }
+
+  const data = new FormData();
+  data.append('api_key', 'Mzc0MTExMjUtNTBmMS00ZTA3LWEwNjktZjQxM2UwNjA3ZGEw');
+  data.append('secret_key', 'YTE4YmM5YmYtZjZhYS00MTU5LWI4Y2EtYjQyYTRkNzAxOWZj');
+
+  return getToken().then(token => {
+    var data = new FormData();
+    const file = datauritoblob(blobData)
+
+    data.append('image_file', file);
+
+    return Axios.post("ImageQualityCheck", data, {
+      headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
+      onUploadProgress: progressEvent => {
+        if (prCallback) prCallback(blobData.size, progressEvent.loaded)
+      }
+    })
+  })
+}
+
 export function VideoUpload(blobData, isVideo = true, prCallback) { //parameters: { type, data, id }
 
   const data = new FormData();

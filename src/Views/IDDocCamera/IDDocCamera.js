@@ -108,31 +108,10 @@ class IDDocCamera extends Component {
         } else if (IDTarget == "backResident") {
             this.setState({ titleMessage: "Image preview" })
             this.setState({message:"Make sure the ID Docment image is clear to read"})        }
-        // alert(data);
-        // VideoUpload(data, false, (total, progress) => {
-        //     // this.setState({ uploadProgress: parseInt(progress * 100 / total) + '  %' });
-        // })
-        //     .then(r => {
-        //         console.log(r)
-        //         try {
-        //             this.props.history.push({
-        //                 pathname: '/result',
-        //                 state: {
-        //                     score: parseFloat(r.data.score),
-        //                     threshold: parseFloat(r.data.threshold),
-        //                     message: r.data.message
-        //                 }
-        //             });
-        //         } catch (e) {
-        //             console.error(e)
-        //             this.setState({ uploading: false })
-        //         }
-        //     })
-        //     .catch(e => {
-        //         this.setState({ uploading: false })
-        //         console.error(e)
-        //     })
-        // this.imgRef.current.setAttribute('src', data);
+        
+    }
+    onGetToken = () => {
+        
     }
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
@@ -173,7 +152,7 @@ class IDDocCamera extends Component {
                 {(!this.state.previewImageStatuse) && <div className="captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
-                <div className="message-container" style={{ bottom: window.innerHeight * 0.3 }}>
+                <div className="message-container" style={{ bottom: window.innerHeight * 0.35 }}>
                     <p style = {{textAlign:"center",color:"white",fontSize:"20px",fontWeight:"bold"}}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
                 </div>

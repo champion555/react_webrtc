@@ -16,7 +16,7 @@
     z-index: 4;
     position: absolute;
     width: 100%;
-    display:flex;
+    /* display:flex; */
     justify-content: center;
     flex-direction: column;
 }
