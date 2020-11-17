@@ -25,17 +25,17 @@ class IDDocCamera extends Component {
             ImageSrcs: backURL,
             previewImageStatuse: false,
             frontCard: true,
-            IDTarget:"",
+            IDTarget: "",
             message: "",
             titleMessage: "",
-            idTitle:""
+            idTitle: ""
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.webcamRef = React.createRef()
         this.captureRef = React.createRef()
 
     }
-    
+
     componentDidMount = () => {
         console.log(window.countryName)
         console.log(window.IDType)
@@ -46,23 +46,23 @@ class IDDocCamera extends Component {
         }
         this.requestUserMedia();
         this.onSetMessage();
-    }    
+    }
     onSetMessage = () => {
         if (window.IDType == "idcard") {
-            this.setState({IDTarget:"frontIDCard"})
+            this.setState({ IDTarget: "frontIDCard" })
             this.setState({ message: "Place the front page of ID Card inside the frame and take the photo" })
-            this.setState({titleMessage:"Front ID Card"})
-            this.setState({idTitle:"Front ID Card"})
+            this.setState({ titleMessage: "Front ID Card" })
+            this.setState({ idTitle: "Front ID Card" })
         } else if (window.IDType == "passport") {
-            this.setState({IDTarget:"passport"})
-            this.setState({idTitle:"Passport"})
+            this.setState({ IDTarget: "passport" })
+            this.setState({ idTitle: "Passport" })
             this.setState({ message: "Place the Passport inside the frame amd take the photo" })
-            this.setState({titleMessage:"Passport"})
+            this.setState({ titleMessage: "Passport" })
         } else if (window.IDType == "resident") {
-            this.setState({IDTarget:"frontResident"})
-            this.setState({idTitle:"Front Resident Permit"})
+            this.setState({ IDTarget: "frontResident" })
+            this.setState({ idTitle: "Front Resident Permit" })
             this.setState({ message: "Place the front page of Resident Permit inside the frame and take the photo" })
-            this.setState({titleMessage:"Front Resident Permit"})
+            this.setState({ titleMessage: "Front Resident Permit" })
         }
     }
     requestUserMedia() {
@@ -90,61 +90,66 @@ class IDDocCamera extends Component {
         console.error(this.captureRef.current.width, this.captureRef.current.height)
         var height = this.webcamRef.current.videoRef.current.videoHeight * (this.captureRef.current.width / this.webcamRef.current.videoRef.current.videoWidth);
         context.drawImage(this.webcamRef.current.videoRef.current, 0, 0, this.captureRef.current.width, height);
-        var data = this.captureRef.current.toDataURL('image/jpeg');     
+        var data = this.captureRef.current.toDataURL('image/jpeg');
 
         ImageQuality(data, (total, progress) => {
         }).then(res => {
             var response = res.data;
             console.log(response, response.message, response.errorList);
             alert(response.statusCode);
-            this.setState({ previewImageStatuse: true })
-            this.setState({ frontCard: true })
-            this.setState({ IDDocImgURL: data })
-            let { IDTarget } = this.state
-            if (IDTarget == "frontIDCard") {
-                this.setState({ titleMessage: "Image preview" })
-                this.setState({message:"Make sure the ID Docment image is clear to read"})
-            } else if (IDTarget == "passport") {
-                this.setState({ titleMessage: "Image preview" })
-                this.setState({message:"Make sure the ID Docment image is clear to read"})
-            } else if (IDTarget == "frontResident") {
-                this.setState({ titleMessage: "Image preview" })
-                this.setState({message:"Make sure the ID Docment image is clear to read"})
-            } else if (IDTarget == "backIDCard") {
-                this.setState({ titleMessage: "Image preview" })
-                this.setState({message:"Make sure the ID Docment image is clear to read"})
-            } else if (IDTarget == "backResident") {
-                this.setState({ titleMessage: "Image preview" })
-                this.setState({message:"Make sure the ID Docment image is clear to read"})        
+            if (response.statusCode == "200") {
+                this.setState({ previewImageStatuse: true })
+                this.setState({ frontCard: true })
+                this.setState({ IDDocImgURL: data })
+                let { IDTarget } = this.state
+                if (IDTarget == "frontIDCard") {
+                    this.setState({ titleMessage: "Image preview" })
+                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                } else if (IDTarget == "passport") {
+                    this.setState({ titleMessage: "Image preview" })
+                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                } else if (IDTarget == "frontResident") {
+                    this.setState({ titleMessage: "Image preview" })
+                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                } else if (IDTarget == "backIDCard") {
+                    this.setState({ titleMessage: "Image preview" })
+                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                } else if (IDTarget == "backResident") {
+                    this.setState({ titleMessage: "Image preview" })
+                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                }
+            } else {
+                alert(response.statusCode);
             }
+
 
         }).catch(e => {
 
-            alert("image checking failed");           
-            
-        })        
+            alert("image checking failed");
+
+        })
     }
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
         let { IDTarget } = this.state
         if (IDTarget == "frontIDCard") {
-            this.setState({ message: "Place the front page of ID Card inside the frame and take the photo" }) 
-            this.setState({titleMessage:"Front ID Card"})           
+            this.setState({ message: "Place the front page of ID Card inside the frame and take the photo" })
+            this.setState({ titleMessage: "Front ID Card" })
         } else if (IDTarget == "passport") {
             this.setState({ message: "Place the Passport inside the frame and take the photo" })
-            this.setState({titleMessage:"Passport"})
+            this.setState({ titleMessage: "Passport" })
         } else if (IDTarget == "frontResident") {
-            this.setState({ message: "Place the front page of Resident Permit inside the frame and take the photo" }) 
-            this.setState({titleMessage:"Front Resident Permit"})
+            this.setState({ message: "Place the front page of Resident Permit inside the frame and take the photo" })
+            this.setState({ titleMessage: "Front Resident Permit" })
         } else if (IDTarget == "backIDCard") {
-            this.setState({ message: "Place the back page of ID Card inside the frame and take the photo" }) 
-            this.setState({titleMessage:"Back ID Card"})
+            this.setState({ message: "Place the back page of ID Card inside the frame and take the photo" })
+            this.setState({ titleMessage: "Back ID Card" })
         } else if (IDTarget == "backResident") {
-            this.setState({ message: "Place the back page of Resident Permit inside the frame and take the photo" }) 
-            this.setState({titleMessage:"Back Resident Permit"})
+            this.setState({ message: "Place the back page of Resident Permit inside the frame and take the photo" })
+            this.setState({ titleMessage: "Back Resident Permit" })
         }
     }
-    
+
     render() {
         return (
             <div>
@@ -158,13 +163,13 @@ class IDDocCamera extends Component {
                 <div className="frame-container">
                     <img src={this.state.frameSrc} style={{ width: "100%", height: window.innerHeight }} />
                 </div>
-                <p className="messageTitle" style = {{bottom:"10px"}}>powerd by BIOMIID</p>
-                
+                <p className="messageTitle" style={{ bottom: "10px" }}>powerd by BIOMIID</p>
+
                 {(!this.state.previewImageStatuse) && <div className="captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
-                </div>} 
+                </div>}
                 <div className="message-container" style={{ bottom: window.innerHeight * 0.35 }}>
-                    <p style = {{textAlign:"center",color:"white",fontSize:"20px",fontWeight:"bold"}}>{this.state.idTitle}</p>
+                    <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold" }}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
                 </div>
                 <div className="top-container">
@@ -182,9 +187,9 @@ class IDDocCamera extends Component {
                             let { IDTarget } = this.state
                             if (IDTarget == "frontIDCard") {
                                 this.setState({ IDTarget: "backIDCard" })
-                                this.setState({titleMessage:"Back ID Card"})
-                                this.setState({idTitle:"Back ID Card"})
-                                this.setState({message:"Place the back page of ID Card inside the frame and take the photo"})
+                                this.setState({ titleMessage: "Back ID Card" })
+                                this.setState({ idTitle: "Back ID Card" })
+                                this.setState({ message: "Place the back page of ID Card inside the frame and take the photo" })
                                 this.setState({ previewImageStatuse: false })
                                 window.FrontIDCardPath = this.state.IDDocImgURL
                             } else if (IDTarget == "passport") {
@@ -192,9 +197,9 @@ class IDDocCamera extends Component {
                                 window.PassportPath = this.state.IDDocImgURL
                             } else if (IDTarget == "frontResident") {
                                 this.setState({ IDTarget: "backResident" })
-                                this.setState({titleMessage:"Back Resident Permit"})
-                                this.setState({idTitle:"Back Resident Permit"})
-                                this.setState({message:"Place the back page of Resident Permit inside the frame and take the photo"})
+                                this.setState({ titleMessage: "Back Resident Permit" })
+                                this.setState({ idTitle: "Back Resident Permit" })
+                                this.setState({ message: "Place the back page of Resident Permit inside the frame and take the photo" })
                                 this.setState({ previewImageStatuse: false })
                                 window.FrontResidentPath = this.state.IDDocImgURL
                             } else if (IDTarget == "backIDCard") {
