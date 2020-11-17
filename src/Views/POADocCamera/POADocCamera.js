@@ -101,6 +101,7 @@ class POADocCamera extends Component {
     render() {
         return (
             <div>
+                <Header headerText="POA Document" />
                 <div className="camera-container">
                     <Webcam src={this.state.src} ref={this.webcamRef} />
                     <canvas ref={this.captureRef} width="320" height="240" id="canvas" style={{ display: "none" }}></canvas>
@@ -108,9 +109,9 @@ class POADocCamera extends Component {
                 {(this.state.previewImageStatuse) && <div className="preview-container">
                     <img src={this.state.ImageURL} style={{ width: "100%", height: window.innerHeight }} />
                 </div>}
-                {/* <div className="frame-container">
+                <div className="frame-container">
                     <img src={this.state.frameSrc} style={{ width: "100%", height: window.innerHeight }} />
-                </div> */}
+                </div>
                 {(!this.state.previewImageStatuse) && <div className="POA-captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
@@ -126,7 +127,8 @@ class POADocCamera extends Component {
                         onClick={() => {
                             window.cameraMode = "front"
                             this.props.history.push('faceliveness')
-                            // this.props.history.push('faceliveness')                            
+                            // this.props.history.push('faceliveness')
+                            
                         }}
                     />
                     <Button

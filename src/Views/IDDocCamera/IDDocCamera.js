@@ -91,47 +91,40 @@ class IDDocCamera extends Component {
         var height = this.webcamRef.current.videoRef.current.videoHeight * (this.captureRef.current.width / this.webcamRef.current.videoRef.current.videoWidth);
         context.drawImage(this.webcamRef.current.videoRef.current, 0, 0, this.captureRef.current.width, height);
         var data = this.captureRef.current.toDataURL('image/jpeg');
-        this.setState({ IDDocImgURL: data })
-        this.setState({ previewImageStatuse: true })
-        this.setState({ frontCard: true })
+        
 
         ImageQuality(data, (total, progress) => {
 
         }).then(res => {
             var data = res.data;
             console.log(data, data.message, data.errorList);
-            alert(data);
+            alert(data.message);
+            this.setState({ previewImageStatuse: true })
+            this.setState({ frontCard: true })
+            this.setState({ IDDocImgURL: data })
+            let { IDTarget } = this.state
+            if (IDTarget == "frontIDCard") {
+                this.setState({ titleMessage: "Image preview" })
+                this.setState({message:"Make sure the ID Docment image is clear to read"})
+            } else if (IDTarget == "passport") {
+                this.setState({ titleMessage: "Image preview" })
+                this.setState({message:"Make sure the ID Docment image is clear to read"})
+            } else if (IDTarget == "frontResident") {
+                this.setState({ titleMessage: "Image preview" })
+                this.setState({message:"Make sure the ID Docment image is clear to read"})
+            } else if (IDTarget == "backIDCard") {
+                this.setState({ titleMessage: "Image preview" })
+                this.setState({message:"Make sure the ID Docment image is clear to read"})
+            } else if (IDTarget == "backResident") {
+                this.setState({ titleMessage: "Image preview" })
+                this.setState({message:"Make sure the ID Docment image is clear to read"})        
+            }
 
         }).catch(e => {
 
         console.error(e)            ;
             
-        })
-        // let { IDTarget } = this.state
-        // if (IDTarget == "frontIDCard") {
-        //     this.setState({ titleMessage: "Image preview" })
-        //     this.setState({message:"Make sure the ID Docment image is clear to read"})
-        // } else if (IDTarget == "passport") {
-        //     this.setState({ titleMessage: "Image preview" })
-        //     this.setState({message:"Make sure the ID Docment image is clear to read"})
-        // } else if (IDTarget == "frontResident") {
-        //     this.setState({ titleMessage: "Image preview" })
-        //     this.setState({message:"Make sure the ID Docment image is clear to read"})
-        // } else if (IDTarget == "backIDCard") {
-        //     this.setState({ titleMessage: "Image preview" })
-        //     this.setState({message:"Make sure the ID Docment image is clear to read"})
-        // } else if (IDTarget == "backResident") {
-        //     this.setState({ titleMessage: "Image preview" })
-        //     this.setState({message:"Make sure the ID Docment image is clear to read"})        
-        // }
-        
-    }
-    onGetToken = () => {
-
-        
-
-        
-        
+        })        
     }
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
@@ -171,7 +164,7 @@ class IDDocCamera extends Component {
 
                 {(!this.state.previewImageStatuse) && <div className="captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
-                </div>}
+                </div>} 
                 <div className="message-container" style={{ bottom: window.innerHeight * 0.35 }}>
                     <p style = {{textAlign:"center",color:"white",fontSize:"20px",fontWeight:"bold"}}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
