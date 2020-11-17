@@ -96,7 +96,7 @@ function getToken() {
     var tokenTime = localStorage.getItem('time')
     var token = localStorage.getItem('token')
 
-    if (token && new Date().getTime() - tokenTime < 25 * 60 * 1000) {
+    if (token && new Date().getTime() - tokenTime < 1 * 60 * 1000) {
       console.log('token', token)
       return r(token)
     }

@@ -7,6 +7,8 @@ import frameURL from "../../assets/ic_background2.png"
 import Button from "../../Components/button/button"
 import backURL from "../../assets/ic_back.png"
 import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
+import { ImageQuality } from '../../lib/AppUtils';
+import datauritoblob from 'datauritoblob'
 import './IDDocCamera.css';
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -92,25 +94,40 @@ class IDDocCamera extends Component {
         this.setState({ IDDocImgURL: data })
         this.setState({ previewImageStatuse: true })
         this.setState({ frontCard: true })
-        let { IDTarget } = this.state
-        if (IDTarget == "frontIDCard") {
-            this.setState({ titleMessage: "Image preview" })
-            this.setState({message:"Make sure the ID Docment image is clear to read"})
-        } else if (IDTarget == "passport") {
-            this.setState({ titleMessage: "Image preview" })
-            this.setState({message:"Make sure the ID Docment image is clear to read"})
-        } else if (IDTarget == "frontResident") {
-            this.setState({ titleMessage: "Image preview" })
-            this.setState({message:"Make sure the ID Docment image is clear to read"})
-        } else if (IDTarget == "backIDCard") {
-            this.setState({ titleMessage: "Image preview" })
-            this.setState({message:"Make sure the ID Docment image is clear to read"})
-        } else if (IDTarget == "backResident") {
-            this.setState({ titleMessage: "Image preview" })
-            this.setState({message:"Make sure the ID Docment image is clear to read"})        }
+
+        ImageQuality(data, (total, progress) => {
+
+        }).then(r => {
+
+            console.log(r)
+        }).catch(e => {
+        console.error(e)            ;
+            
+        })
+        // let { IDTarget } = this.state
+        // if (IDTarget == "frontIDCard") {
+        //     this.setState({ titleMessage: "Image preview" })
+        //     this.setState({message:"Make sure the ID Docment image is clear to read"})
+        // } else if (IDTarget == "passport") {
+        //     this.setState({ titleMessage: "Image preview" })
+        //     this.setState({message:"Make sure the ID Docment image is clear to read"})
+        // } else if (IDTarget == "frontResident") {
+        //     this.setState({ titleMessage: "Image preview" })
+        //     this.setState({message:"Make sure the ID Docment image is clear to read"})
+        // } else if (IDTarget == "backIDCard") {
+        //     this.setState({ titleMessage: "Image preview" })
+        //     this.setState({message:"Make sure the ID Docment image is clear to read"})
+        // } else if (IDTarget == "backResident") {
+        //     this.setState({ titleMessage: "Image preview" })
+        //     this.setState({message:"Make sure the ID Docment image is clear to read"})        
+        // }
         
     }
     onGetToken = () => {
+
+        
+
+        
         
     }
     onReTake = () => {

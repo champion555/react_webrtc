@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e40c123e.chunk.css",
+    "main.js": "/static/js/main.3429accf.chunk.js",
+    "main.js.map": "/static/js/main.3429accf.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.b660b64d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.b660b64d.js.map",
+    "static/js/2.c968ea30.chunk.js": "/static/js/2.c968ea30.chunk.js",
+    "static/js/2.c968ea30.chunk.js.map": "/static/js/2.c968ea30.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.30be88e42d7f5c14b8a0c8499a65d8b7.js": "/precache-manifest.30be88e42d7f5c14b8a0c8499a65d8b7.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.e40c123e.chunk.css.map": "/static/css/main.e40c123e.chunk.css.map",
+    "static/js/2.c968ea30.chunk.js.LICENSE.txt": "/static/js/2.c968ea30.chunk.js.LICENSE.txt",
+    "static/media/ic_addressproof_purple.png": "/static/media/ic_addressproof_purple.681a46d7.png",
+    "static/media/ic_background2.png": "/static/media/ic_background2.698f8cdd.png",
+    "static/media/ic_detected.png": "/static/media/ic_detected.e90b9d09.png",
+    "static/media/ic_failed.png": "/static/media/ic_failed.6ecccf1e.png",
+    "static/media/ic_idcard_purple.png": "/static/media/ic_idcard_purple.18bf2d4c.png",
+    "static/media/ic_identity_purple.png": "/static/media/ic_identity_purple.6606226e.png",
+    "static/media/ic_logo1.png": "/static/media/ic_logo1.d2570ae9.png",
+    "static/media/ic_passport_purple.png": "/static/media/ic_passport_purple.20d7eeac.png",
+    "static/media/ic_poadoc.png": "/static/media/ic_poadoc.886573be.png",
+    "static/media/ic_residence_purple.png": "/static/media/ic_residence_purple.2131a9fb.png",
+    "static/media/VideoPage.css": "/static/media/ic_undetected.563de94b.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b660b64d.js",
+    "static/js/2.c968ea30.chunk.js",
+    "static/css/main.e40c123e.chunk.css",
+    "static/js/main.3429accf.chunk.js"
+  ]
+}
