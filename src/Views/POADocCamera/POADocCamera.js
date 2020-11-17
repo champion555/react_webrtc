@@ -126,8 +126,7 @@ class POADocCamera extends Component {
                         onClick={() => {
                             window.cameraMode = "front"
                             this.props.history.push('faceliveness')
-                            // this.props.history.push('faceliveness')
-                            
+                            // this.props.history.push('faceliveness')                            
                         }}
                     />
                     <Button

@@ -97,9 +97,11 @@ class IDDocCamera extends Component {
 
         ImageQuality(data, (total, progress) => {
 
-        }).then(r => {
+        }).then(res => {
 
-            console.log(r)
+            var data = res.data;
+            console.log(data, data.message, data.errorList);
+            alert(res);
 
         }).catch(e => {
 
