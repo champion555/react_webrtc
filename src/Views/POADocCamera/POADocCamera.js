@@ -98,19 +98,9 @@ class POADocCamera extends Component {
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
     }
-    // onSetMessage = () => {
-    //     if (window.IDType == "idcard") {
-    //         this.setState({ message: "front of ID Card" })
-    //     } else if (window.IDType == "passport") {
-    //         this.setState({ message: "passport" })
-    //     } else if (window.IDType == "resident") {
-    //         this.setState({ message: "front of Resident Permit" })
-    //     }
-    // }
     render() {
         return (
             <div>
-                {/* <Header headerText="Photo Face Liveness" /> */}
                 <div className="camera-container">
                     <Webcam src={this.state.src} ref={this.webcamRef} />
                     <canvas ref={this.captureRef} width="320" height="240" id="canvas" style={{ display: "none" }}></canvas>
@@ -118,9 +108,9 @@ class POADocCamera extends Component {
                 {(this.state.previewImageStatuse) && <div className="preview-container">
                     <img src={this.state.ImageURL} style={{ width: "100%", height: window.innerHeight }} />
                 </div>}
-                <div className="frame-container">
+                {/* <div className="frame-container">
                     <img src={this.state.frameSrc} style={{ width: "100%", height: window.innerHeight }} />
-                </div>
+                </div> */}
                 {(!this.state.previewImageStatuse) && <div className="POA-captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
