@@ -94,11 +94,10 @@ class IDDocCamera extends Component {
         
 
         ImageQuality(data, (total, progress) => {
-
         }).then(res => {
-            var data = res.data;
-            console.log(data, data.message, data.errorList);
-            alert(data.message);
+            var response = res.data;
+            console.log(response, response.message, response.errorList);
+            alert(response.message);
             this.setState({ previewImageStatuse: true })
             this.setState({ frontCard: true })
             this.setState({ IDDocImgURL: data })
