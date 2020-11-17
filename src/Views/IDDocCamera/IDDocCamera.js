@@ -90,14 +90,13 @@ class IDDocCamera extends Component {
         console.error(this.captureRef.current.width, this.captureRef.current.height)
         var height = this.webcamRef.current.videoRef.current.videoHeight * (this.captureRef.current.width / this.webcamRef.current.videoRef.current.videoWidth);
         context.drawImage(this.webcamRef.current.videoRef.current, 0, 0, this.captureRef.current.width, height);
-        var data = this.captureRef.current.toDataURL('image/jpeg');
-        
+        var data = this.captureRef.current.toDataURL('image/jpeg');     
 
         ImageQuality(data, (total, progress) => {
         }).then(res => {
             var response = res.data;
             console.log(response, response.message, response.errorList);
-            alert(response.message);
+            alert(response.statusCode);
             this.setState({ previewImageStatuse: true })
             this.setState({ frontCard: true })
             this.setState({ IDDocImgURL: data })
