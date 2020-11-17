@@ -70,14 +70,19 @@ class POADocCamera extends Component {
             var response = res.data;
             console.log(response, response.message, response.errorList);
             alert(response.statusCode);
-            this.setState({ previewImageStatuse: true })
-            this.setState({ frontCard: true })
-            this.setState({ ImageURL: data })
-            
+            if (response.statusCode == "200") {
+                this.setState({ previewImageStatuse: true })
+                this.setState({ frontCard: true })
+                this.setState({ ImageURL: data })
+            } else {
+                alert("image quality is very low")
+            }
+
+
         }).catch(e => {
 
-            alert("image checking failed");           
-            
+            alert("image checking failed");
+
         })
 
     }
@@ -111,7 +116,7 @@ class POADocCamera extends Component {
                             window.cameraMode = "front"
                             this.props.history.push('faceliveness')
                             // this.props.history.push('faceliveness')
-                            
+
                         }}
                     />
                     <Button

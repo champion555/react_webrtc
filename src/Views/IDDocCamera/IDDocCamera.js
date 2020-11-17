@@ -28,7 +28,8 @@ class IDDocCamera extends Component {
             IDTarget: "",
             message: "",
             titleMessage: "",
-            idTitle: ""
+            idTitle: "",
+            isErrorStatus: false,
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.webcamRef = React.createRef()
@@ -119,18 +120,17 @@ class IDDocCamera extends Component {
                     this.setState({ message: "Make sure the ID Docment image is clear to read" })
                 }
             } else {
-                alert(response.statusCode);
+                alert("image quality is very low")
+                this.setState({ isErrorStatus: true })
             }
 
-
         }).catch(e => {
-
-            alert("image checking failed");
-
+            alert("image checking failed, Please try again.");
         })
     }
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
+        this.setState({isErrorStatus:false})
         let { IDTarget } = this.state
         if (IDTarget == "frontIDCard") {
             this.setState({ message: "Place the front page of ID Card inside the frame and take the photo" })
@@ -168,10 +168,10 @@ class IDDocCamera extends Component {
                 {(!this.state.previewImageStatuse) && <div className="captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
-                <div className="message-container" style={{ bottom: window.innerHeight * 0.35 }}>
+                {(!this.state.isErrorStatus) && <div className="message-container" style={{ bottom: window.innerHeight * 0.35 }}>
                     <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold" }}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
-                </div>
+                </div>}
                 <div className="top-container">
                     <img src={this.state.ImageSrcs} style={{ width: "20px", height: "20px", marginLeft: "10px" }}
                         onClick={() => {
@@ -181,7 +181,7 @@ class IDDocCamera extends Component {
                     {(!this.state.previewImageStatuse) && <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>}
                 </div>
                 {(this.state.previewImageStatuse) && <div className="preview-button-container">
-                    <Button
+                {(!this.state.isErrorStatus) && <Button
                         label="My photo is clear"
                         onClick={() => {
                             let { IDTarget } = this.state
@@ -210,7 +210,7 @@ class IDDocCamera extends Component {
                                 window.BackResidentPath = this.state.IDDocImgURL
                             }
                         }}
-                    />
+                    />}
                     <Button
                         label="Re-take"
                         onClick={this.onReTake}
