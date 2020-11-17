@@ -87,12 +87,13 @@
 }
 .errorMessage .title p {
     margin-left: 10px;
+    font-size: 18px;
 }
 
 .errorMessage .message {
     color: white;
     margin: 0px;
-    font-size: 16px;
+    font-size: 10px;
     width: 100%;
     padding-left: 16px;
     text-align: left;
