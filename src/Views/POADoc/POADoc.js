@@ -26,35 +26,35 @@ class POADoc extends Component {
     componentDidMount = () => {
         console.log("countries:", this.options)
     }
-    onSelectNextURL = (link) => {
-        this.setState({ selectCountryStatus: true })
-        this.setState({ nextUrl: link })
-    }
-    onSelectCountry = (CountryName) => {
-        window.cameraMode = "back"
-        this.props.history.push('poadoccam')
-        window.countryName = CountryName
+    // onSelectNextURL = (link) => {
+    //     this.setState({ selectCountryStatus: true })
+    //     this.setState({ nextUrl: link })
+    // }
+    // onSelectCountry = (CountryName) => {
+    //     window.cameraMode = "back"
+    //     this.props.history.push('poadoccam')
+    //     window.countryName = CountryName
         
-    }
-    onSearch = (e) => {
-        let searchWord = e.target.value;
-        if (searchWord.length > 0) {
-            let NewSearchUpperCase = e.target.value[0].toUpperCase() + e.target.value.slice(1, e.target.value.length)
-            console.log("NewSearchUpperCase:", NewSearchUpperCase)
-            let { options } = this.state;
-            let NewSearchCountry = [];
-            this.options.map((Country, key) => {
-                let NewACountry = {};
-                if (Country.label.includes(NewSearchUpperCase)) {
-                    NewACountry.value = Country.value
-                    NewACountry.label = Country.label
-                    NewSearchCountry.push(NewACountry)
-                }
-            })
-            options = NewSearchCountry;
-            this.setState({ options })
-        }
-    }
+    // }
+    // onSearch = (e) => {
+    //     let searchWord = e.target.value;
+    //     if (searchWord.length > 0) {
+    //         let NewSearchUpperCase = e.target.value[0].toUpperCase() + e.target.value.slice(1, e.target.value.length)
+    //         console.log("NewSearchUpperCase:", NewSearchUpperCase)
+    //         let { options } = this.state;
+    //         let NewSearchCountry = [];
+    //         this.options.map((Country, key) => {
+    //             let NewACountry = {};
+    //             if (Country.label.includes(NewSearchUpperCase)) {
+    //                 NewACountry.value = Country.value
+    //                 NewACountry.label = Country.label
+    //                 NewSearchCountry.push(NewACountry)
+    //             }
+    //         })
+    //         options = NewSearchCountry;
+    //         this.setState({ options })
+    //     }
+    // }
 
 
     render() {
@@ -72,7 +72,10 @@ class POADoc extends Component {
                             <IDDocButton
                                 label="POA Document"
                                 imgURL={this.state.POADocSrc}
-                                onClick={this.onSelectNextURL.bind(this, "POADoc")}
+                                onClick={() => {
+                                    this.props.history.push('poadoccam')
+                                }}
+                                // onClick={this.onSelectNextURL.bind(this, "POADoc")}
                             />
                         </div>
 

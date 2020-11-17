@@ -72,7 +72,6 @@ class POADocCamera extends Component {
         }).then(res => {
             var response = res.data;
             console.log(response, response.message, response.errorList);
-            alert(response.statusCode);
             this.setState({ previewImageStatuse: true })
             this.setState({ frontCard: true })
             this.setState({ ImageURL: data })
@@ -117,15 +116,12 @@ class POADocCamera extends Component {
                 {(!this.state.previewImageStatuse) && <div className="POA-captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
-
                 {(this.state.previewImageStatuse) && <div className="preview-button-container">
                 {(!this.state.isErrorStatus) && <Button
                         label="My photo is clear"
                         onClick={() => {
                             window.cameraMode = "front"
                             this.props.history.push('faceliveness')
-                            // this.props.history.push('faceliveness')
-
                         }}
                     />}
                     <Button
