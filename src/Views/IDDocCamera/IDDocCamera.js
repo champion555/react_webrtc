@@ -120,7 +120,7 @@ class IDDocCamera extends Component {
 
         }).catch(e => {
 
-            alert("image checking failed");           ;
+            alert("image checking failed");           
             
         })        
     }
