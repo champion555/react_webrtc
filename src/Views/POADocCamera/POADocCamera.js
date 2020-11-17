@@ -77,8 +77,6 @@ class POADocCamera extends Component {
             } else {
                 alert("image quality is very low")
             }
-
-
         }).catch(e => {
 
             alert("image checking failed");
@@ -100,15 +98,21 @@ class POADocCamera extends Component {
                 {(this.state.previewImageStatuse) && <div className="preview-container">
                     <img src={this.state.ImageURL} style={{ width: "100%", height: window.innerHeight }} />
                 </div>}
+                 <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.35 }}>
+                    <div className = "container">
+                        <div className = "title">   
+                            <img src={this.state.errorIconURL} />
+                            <p>The image quality is very low</p>
+                        </div>
+                        <div className = "message">
+                            <p>- Make sure the image is not blurry or contains blares!</p>
+                        </div>
+                    </div>
+                </div>
                 {(!this.state.previewImageStatuse) && <div className="POA-captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
-                {/* <div>
-                    <p className="messageTitle" style={{ marginTop: window.innerHeight * 0.12 }}>powerd by BIOMIID</p>
-                </div> */}
-                {/* <div className="message-container" style={{ bottom: window.innerHeight * 0.35 }}>
-                    <p style={{ color: "white", }} className="message">Place the {this.state.message} inside the frame and take the photo </p>
-                </div> */}
+
                 {(this.state.previewImageStatuse) && <div className="preview-button-container">
                     <Button
                         label="My photo is clear"

@@ -121,7 +121,6 @@ class IDDocCamera extends Component {
                     this.setState({ message: "Make sure the ID Docment image is clear to read" })
                 }
             } else {
-                alert("image quality is very low")
                 this.setState({ isErrorStatus: true })
             }
 
