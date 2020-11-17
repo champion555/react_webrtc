@@ -65,7 +65,7 @@
     z-index: 1000;    
     padding-left: 16px;
     padding-right: 16px;        
-    width: 90%;
+    width: 93%;
 }
 
 .errorMessage .container {
@@ -93,7 +93,6 @@
     color: white;
     margin: 0px;
     font-size: 16px;
-    font-weight: 200;
     width: 100%;
     padding-left: 16px;
     text-align: left;

@@ -179,7 +179,7 @@ class IDDocCamera extends Component {
                             <p>The image quality is very low</p>
                         </div>
                         <div className = "message">
-                            <p>-Make sure the iamnge is not blurry or contains blares!</p>
+                            <p>- Make sure the image is not blurry or contains blares!</p>
                         </div>
                     </div>
                 </div>}
