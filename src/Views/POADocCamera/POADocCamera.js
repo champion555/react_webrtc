@@ -6,7 +6,7 @@ import Webcam from '../../Components/Webcam.react';
 import frameURL from "../../assets/ic_poadoc.png"
 import Button from "../../Components/button/button"
 import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
-
+import { ImageQuality } from '../../lib/AppUtils';
 import './POADocCamera.css';
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -56,7 +56,6 @@ class POADocCamera extends Component {
     }
     getImage() {
         console.log("buttong clicked")
-        // this.setState({ response: '', uploadProgress: '', uploading: true })
         this.captureRef.current.setAttribute('width', this.webcamRef.current.videoRef.current.videoWidth)
         this.captureRef.current.setAttribute('height', this.webcamRef.current.videoRef.current.videoHeight)
         var context = this.captureRef.current.getContext('2d');
@@ -65,34 +64,21 @@ class POADocCamera extends Component {
         var height = this.webcamRef.current.videoRef.current.videoHeight * (this.captureRef.current.width / this.webcamRef.current.videoRef.current.videoWidth);
         context.drawImage(this.webcamRef.current.videoRef.current, 0, 0, this.captureRef.current.width, height);
         var data = this.captureRef.current.toDataURL('image/jpeg');
-        this.setState({ ImageURL: data })
-        this.setState({ previewImageStatuse: true })
-        this.setState({ frontCard: true })
-        // alert(data);
-        // VideoUpload(data, false, (total, progress) => {
-        //     // this.setState({ uploadProgress: parseInt(progress * 100 / total) + '  %' });
-        // })
-        //     .then(r => {
-        //         console.log(r)
-        //         try {
-        //             this.props.history.push({
-        //                 pathname: '/result',
-        //                 state: {
-        //                     score: parseFloat(r.data.score),
-        //                     threshold: parseFloat(r.data.threshold),
-        //                     message: r.data.message
-        //                 }
-        //             });
-        //         } catch (e) {
-        //             console.error(e)
-        //             this.setState({ uploading: false })
-        //         }
-        //     })
-        //     .catch(e => {
-        //         this.setState({ uploading: false })
-        //         console.error(e)
-        //     })
-        // this.imgRef.current.setAttribute('src', data);
+
+        ImageQuality(data, (total, progress) => {
+        }).then(res => {
+            var response = res.data;
+            console.log(response, response.message, response.errorList);
+            alert(response.statusCode);
+            this.setState({ previewImageStatuse: true })
+            this.setState({ frontCard: true })
+            this.setState({ ImageURL: data })
+            
+        }).catch(e => {
+
+            alert("image checking failed");           
+            
+        })
 
     }
     onReTake = () => {
@@ -109,9 +95,6 @@ class POADocCamera extends Component {
                 {(this.state.previewImageStatuse) && <div className="preview-container">
                     <img src={this.state.ImageURL} style={{ width: "100%", height: window.innerHeight }} />
                 </div>}
-                {/* <div className="frame-container">
-                    <img src={this.state.frameSrc} style={{ width: "100%", height: window.innerHeight }} />
-                </div> */}
                 {(!this.state.previewImageStatuse) && <div className="POA-captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}

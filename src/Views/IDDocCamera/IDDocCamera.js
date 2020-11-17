@@ -159,7 +159,7 @@ class IDDocCamera extends Component {
                     <img src={this.state.frameSrc} style={{ width: "100%", height: window.innerHeight }} />
                 </div>
                 <p className="messageTitle" style = {{bottom:"10px"}}>powerd by BIOMIID</p>
-
+                
                 {(!this.state.previewImageStatuse) && <div className="captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>} 
