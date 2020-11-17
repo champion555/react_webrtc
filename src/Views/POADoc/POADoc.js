@@ -1,62 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { withRouter } from "react-router";
 import Header from "../../Components/header/header"
 import IDDocButton from "../../Components/idDocButton/idDocButton"
-import IDCardURL from "../../assets/ic_idcard_purple.png"
-import PassportURL from "../../assets/ic_passport_purple.png"
-import ResidentURL from "../../assets/ic_residence_purple.png"
-import IdentityURL from "../../assets/ic_identity_purple.png"
 import POADocURL from "../../assets/ic_addressproof_purple.png"
 import countryList from 'react-select-country-list'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import './POADoc.css';
 
 class POADoc extends Component {
     constructor(props) {
         super(props);
         this.options = countryList().getData()
         this.state = {
-            POADocSrc:POADocURL,
+            POADocSrc: POADocURL,
             sendHeaderText: 'POA Document',
             selectCountryStatus: false,
             options: this.options,
             value: null,
             nextUrl: '',
+            startDate: new Date(),
         }
+    }
+    setStartDate(date){
+        this.setState({startDate:date})
     }
 
     componentDidMount = () => {
         console.log("countries:", this.options)
     }
-    // onSelectNextURL = (link) => {
-    //     this.setState({ selectCountryStatus: true })
-    //     this.setState({ nextUrl: link })
-    // }
-    // onSelectCountry = (CountryName) => {
-    //     window.cameraMode = "back"
-    //     this.props.history.push('poadoccam')
-    //     window.countryName = CountryName
-        
-    // }
-    // onSearch = (e) => {
-    //     let searchWord = e.target.value;
-    //     if (searchWord.length > 0) {
-    //         let NewSearchUpperCase = e.target.value[0].toUpperCase() + e.target.value.slice(1, e.target.value.length)
-    //         console.log("NewSearchUpperCase:", NewSearchUpperCase)
-    //         let { options } = this.state;
-    //         let NewSearchCountry = [];
-    //         this.options.map((Country, key) => {
-    //             let NewACountry = {};
-    //             if (Country.label.includes(NewSearchUpperCase)) {
-    //                 NewACountry.value = Country.value
-    //                 NewACountry.label = Country.label
-    //                 NewSearchCountry.push(NewACountry)
-    //             }
-    //         })
-    //         options = NewSearchCountry;
-    //         this.setState({ options })
-    //     }
-    // }
-
-
     render() {
         return (
             <div style={{ background: 'black' }}>
@@ -69,13 +41,21 @@ class POADoc extends Component {
                                     <img src={this.state.POADocSrc} className="identityIcon" />
                                 </div>
                             </div>
+                            <div className="issuDateView" onClick={this.props.onClick}>
+                                <p style={{ marginLeft: "16px", fontWeight: "bold", fontSize: "18px", paddingRight: "30px" }}>Issue Date</p>
+                                <DatePicker 
+                                    selected={this.state.startDate}
+                                    onChange={date => this.setStartDate(date)}
+                                    isClearable
+                                    placeholderText="mm/dd/yyyy" />
+                            </div>
                             <IDDocButton
                                 label="POA Document"
                                 imgURL={this.state.POADocSrc}
                                 onClick={() => {
                                     this.props.history.push('poadoccam')
                                 }}
-                                // onClick={this.onSelectNextURL.bind(this, "POADoc")}
+                            // onClick={this.onSelectNextURL.bind(this, "POADoc")}
                             />
                         </div>
 

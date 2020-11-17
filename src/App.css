@@ -35,3 +35,6 @@ Webcam {
   margin: auto;
   bottom: 50px;
 }
+input{
+  height: 30px;
+}
