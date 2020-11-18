@@ -101,7 +101,8 @@ class IDDocCamera extends Component {
             this.setState({ previewImageStatuse: true })
             this.setState({ frontCard: true })
             this.setState({ IDDocImgURL: data })
-            if (response.statusCode == "200") {                
+            if (response.statusCode == "200") {
+
                 let { IDTarget } = this.state
                 if (IDTarget == "frontIDCard") {
                     this.setState({ titleMessage: "Image preview" })
@@ -119,14 +120,15 @@ class IDDocCamera extends Component {
                     this.setState({ titleMessage: "Image preview" })
                     this.setState({ message: "Make sure the ID Docment image is clear to read" })
                 }
+
             } else {
                  this.setState({ titleMessage: "Image preview" })
+                 this.setState({ message: "Make sure the ID Docment image is clear to read" })
                 this.setState({ isErrorStatus: true })
             }
 
         }).catch(e => {
-            alert("the server is not working, Please try again.");
-            this.setState({ message: "Make sure the ID Docment image is clear to read" })
+            alert("the server is not working, Please try again.");            
         })
     }
     onReTake = () => {
