@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import Header from "../../Components/header/header"
 import captureImg from "../../assets/camera_take.png"
 import Webcam from '../../Components/Webcam.react';
-import frameURL from "../../assets/ic_background2.png"
+import frameURL from "../../assets/ic_background.png"
 import errorURL from "../../assets/ic_error.png"
 import Button from "../../Components/button/button"
 import backURL from "../../assets/ic_back.png"
