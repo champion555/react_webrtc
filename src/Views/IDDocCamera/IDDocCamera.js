@@ -53,9 +53,9 @@ class IDDocCamera extends Component {
     onSetMessage = () => {
         if (window.IDType == "idcard") {
             this.setState({ IDTarget: "frontIDCard" })
-            this.setState({ message: "Place the front page of ID Card inside the frame and take the photo" })
+            this.setState({ message: "Place the front of National ID Card inside the frame and take the photo" })
             this.setState({ titleMessage: "National ID Card" })
-            this.setState({ idTitle: "Front National ID Card" })
+            this.setState({ idTitle: "Front of National ID Card" })
         } else if (window.IDType == "passport") {
             this.setState({ IDTarget: "passport" })
             this.setState({ idTitle: "Passport" })
@@ -63,8 +63,8 @@ class IDDocCamera extends Component {
             this.setState({ titleMessage: "Passport" })
         } else if (window.IDType == "resident") {
             this.setState({ IDTarget: "frontResident" })
-            this.setState({ idTitle: "Front of Resident Permit" })
-            this.setState({ message: "Place the front page of Resident Permit inside the frame and take the photo" })
+            this.setState({ idTitle: "Front of Resident Permit Card" })
+            this.setState({ message: "Place the front of Resident Permit Card inside the frame and take the photo" })
             this.setState({ titleMessage: "Resident Permit" })
         }
     }
@@ -138,20 +138,20 @@ class IDDocCamera extends Component {
         this.setState({isErrorStatus:false})
         let { IDTarget } = this.state
         if (IDTarget == "frontIDCard") {
-            this.setState({ message: "Place the front page of ID Card inside the frame and take the photo" })
-            this.setState({ titleMessage: "National ID Card" })
+            this.setState({ message: "Place the front of National ID Card inside the frame and take the photo" })
+            this.setState({ titleMessage: "National of ID Card" })
         } else if (IDTarget == "passport") {
             this.setState({ message: "Place the Passport inside the frame and take the photo" })
             this.setState({ titleMessage: "Passport" })
         } else if (IDTarget == "frontResident") {
-            this.setState({ message: "Place the front page of Resident Permit inside the frame and take the photo" })
-            this.setState({ titleMessage: "Resident Permit" })
+            this.setState({ message: "Place the front page of Resident Permit Card inside the frame and take the photo" })
+            this.setState({ titleMessage: "Resident Permit Card" })
         } else if (IDTarget == "backIDCard") {
-            this.setState({ message: "Place the back page of ID Card inside the frame and take the photo" })
-            this.setState({ titleMessage: "National ID Card" })
+            this.setState({ message: "Place the back of National ID Card inside the frame and take the photo" })
+            this.setState({ titleMessage: "National of ID Card" })
         } else if (IDTarget == "backResident") {
-            this.setState({ message: "Place the back page of Resident Permit inside the frame and take the photo" })
-            this.setState({ titleMessage: "Resident Permit" })
+            this.setState({ message: "Place the back page of Resident Permit Card inside the frame and take the photo" })
+            this.setState({ titleMessage: "Resident Permit Card" })
         }
     }
 
@@ -172,11 +172,11 @@ class IDDocCamera extends Component {
                 {(!this.state.previewImageStatuse) && <div className="captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
-                <div className="message-container" style={{ bottom: window.innerHeight * 0.36 }}>
+                <div className="message-container" style={{ bottom: window.innerHeight * 0.34 }}>
                     <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold", marginBottom:"0px" }}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
                 </div>
-                {(this.state.isErrorStatus) && <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.23 }}>
+                {(this.state.isErrorStatus) && <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.21 }}>
                     <div className = "container">
                         <div className = "title">   
                             <img src={this.state.errorIconURL} />
@@ -192,7 +192,7 @@ class IDDocCamera extends Component {
                         onClick={() => {
                             this.props.history.goBack()
                         }} />
-                    <p style={{ color: "white", marginLeft: "20px" }}>{this.state.titleMessage}</p>
+                    <p style={{ color: "white", marginLeft: "20px",fontWeight:"bold",fontSize:"20px" }}>{this.state.titleMessage}</p>
                     {(!this.state.previewImageStatuse) && <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>}
                 </div>
                 {(this.state.previewImageStatuse) && <div className="preview-button-container">
