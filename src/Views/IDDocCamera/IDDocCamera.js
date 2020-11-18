@@ -168,10 +168,10 @@ class IDDocCamera extends Component {
                 {(!this.state.previewImageStatuse) && <div className="captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
-                {(!this.state.isErrorStatus) && <div className="message-container" style={{ bottom: window.innerHeight * 0.35 }}>
+                <div className="message-container" style={{ bottom: window.innerHeight * 0.35 }}>
                     <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold", marginBottom:"0px" }}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
-                </div>}
+                </div>
                 {(this.state.isErrorStatus) && <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.3 }}>
                     <div className = "container">
                         <div className = "title">   
