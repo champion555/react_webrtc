@@ -27,6 +27,7 @@ class IDMain extends Component {
             options: this.options,
             value: null,
             nextUrl: '',
+            clickFlag: 0
         }
     }
 
@@ -38,16 +39,28 @@ class IDMain extends Component {
         this.setState({ nextUrl: link })
     }
     onSelectCountry = (CountryName) => {
-        if (this.state.nextUrl == "idcard"){
-            window.IDType = "idcard"            
-        }else if (this.state.nextUrl == "passport"){
-            window.IDType = "passport"
-        }else if (this.state.nextUrl == "resident"){
-            window.IDType = "resident"
+        if(this.state.clickFlag === 0) {
+            this.setState({
+                clickFlag: 1
+            })
+            const element = document.getElementById("search-text");
+            element.blur();
+        } else if(this.state.clickFlag === 1) {
+            this.setState({
+                clickFlag: 0
+            });
+            if (this.state.nextUrl == "idcard"){
+                window.IDType = "idcard"            
+            }else if (this.state.nextUrl == "passport"){
+                window.IDType = "passport"
+            }else if (this.state.nextUrl == "resident"){
+                window.IDType = "resident"
+            }
+            window.cameraMode = "back"
+            this.props.history.push('iddoccam')
+            window.countryName = CountryName
         }
-        window.cameraMode = "back"
-        this.props.history.push('iddoccam')
-        window.countryName = CountryName
+        
         
     }
     onSearch = (e) => {

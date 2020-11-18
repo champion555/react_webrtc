@@ -24,7 +24,6 @@ class FaceLiveness extends Component {
 
         }
     }
-
     componentDidMount = () => {
     }
 
