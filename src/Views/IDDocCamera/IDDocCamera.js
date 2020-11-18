@@ -6,6 +6,7 @@ import Webcam from '../../Components/Webcam.react';
 import frameURL from "../../assets/ic_background.png"
 import errorURL from "../../assets/ic_error.png"
 import Button from "../../Components/button/button"
+import BottomButton from "../../Components/bottomButton/bottomButton"
 import backURL from "../../assets/ic_back.png"
 import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
 import { ImageQuality } from '../../lib/AppUtils';
@@ -62,7 +63,7 @@ class IDDocCamera extends Component {
             this.setState({ titleMessage: "Passport" })
         } else if (window.IDType == "resident") {
             this.setState({ IDTarget: "frontResident" })
-            this.setState({ idTitle: "Front Resident Permit" })
+            this.setState({ idTitle: "Front of Resident Permit" })
             this.setState({ message: "Place the front page of Resident Permit inside the frame and take the photo" })
             this.setState({ titleMessage: "Resident Permit" })
         }
@@ -120,7 +121,7 @@ class IDDocCamera extends Component {
                     this.setState({ titleMessage: "Image preview" })
                     this.setState({ message: "Make sure the ID Docment image is clear to read" })
                 }
-
+                
             } else {
                  this.setState({ titleMessage: "Image preview" })
                  this.setState({ message: "Make sure the ID Docment image is clear to read" })
@@ -128,7 +129,8 @@ class IDDocCamera extends Component {
             }
 
         }).catch(e => {
-            alert("the server is not working, Please try again.");            
+            alert("the server is not working, Please try again.");
+            
         })
     }
     onReTake = () => {
@@ -174,7 +176,7 @@ class IDDocCamera extends Component {
                     <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold", marginBottom:"0px" }}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
                 </div>
-                {(this.state.isErrorStatus) && <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.28 }}>
+                {(this.state.isErrorStatus) && <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.23 }}>
                     <div className = "container">
                         <div className = "title">   
                             <img src={this.state.errorIconURL} />
@@ -211,7 +213,7 @@ class IDDocCamera extends Component {
                             } else if (IDTarget == "frontResident") {
                                 this.setState({ IDTarget: "backResident" })
                                 this.setState({ titleMessage: "Resident Permit" })
-                                this.setState({ idTitle: "Back Resident Permit" })
+                                this.setState({ idTitle: "Back of Resident Permit" })
                                 this.setState({ message: "Place the back page of Resident Permit inside the frame and take the photo" })
                                 this.setState({ previewImageStatuse: false })
                                 window.FrontResidentPath = this.state.IDDocImgURL
@@ -224,7 +226,7 @@ class IDDocCamera extends Component {
                             }
                         }}
                     />}
-                    <Button
+                    <BottomButton
                         label="Re-take"
                         onClick={this.onReTake}
                     />

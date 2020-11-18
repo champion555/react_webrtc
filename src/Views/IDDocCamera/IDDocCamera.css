@@ -39,6 +39,11 @@
     position: absolute;
     z-index: 6;
 }
+
+.bottomButton {
+    position: absolute;
+    bottom: 10px;
+}
 .top-container{
     position: absolute;
     display: flex;
