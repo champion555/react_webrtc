@@ -120,6 +120,7 @@ class IDDocCamera extends Component {
                     this.setState({ message: "Make sure the ID Docment image is clear to read" })
                 }
             } else {
+                this.setState({ titleMessage: "Image preview" })
                 this.setState({ isErrorStatus: true })
             }
 
