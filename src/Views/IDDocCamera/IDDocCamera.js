@@ -65,7 +65,7 @@ class IDDocCamera extends Component {
             this.setState({ IDTarget: "frontResident" })
             this.setState({ idTitle: "Front of Resident Permit Card" })
             this.setState({ message: "Place the front of Resident Permit Card inside the frame and take the photo" })
-            this.setState({ titleMessage: "Resident Permit" })
+            this.setState({ titleMessage: "Resident Permit Card" })
         }
     }
     requestUserMedia() {
