@@ -120,12 +120,13 @@ class IDDocCamera extends Component {
                     this.setState({ message: "Make sure the ID Docment image is clear to read" })
                 }
             } else {
-                this.setState({ titleMessage: "Image preview" })
+                 this.setState({ titleMessage: "Image preview" })
                 this.setState({ isErrorStatus: true })
             }
 
         }).catch(e => {
             alert("the server is not working, Please try again.");
+            this.setState({ message: "Make sure the ID Docment image is clear to read" })
         })
     }
     onReTake = () => {
@@ -163,15 +164,15 @@ class IDDocCamera extends Component {
                 <div className="frame-container">
                     <img src={this.state.frameSrc} style={{ width: "100%", height: window.innerHeight }} />
                 </div>
-                <p className="messageTitle" style={{ bottom: "5px" }}>powerd by BIOMIID</p>
+                {(this.state.isErrorStatus) && <p className="messageTitle" style={{ bottom: "5px" }}>powerd by BIOMIID</p>}
                 {(!this.state.previewImageStatuse) && <div className="captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
-                {(!this.state.isErrorStatus) && <div className="message-container" style={{ bottom: window.innerHeight * 0.32 }}>
+                {(!this.state.isErrorStatus) && <div className="message-container" style={{ bottom: window.innerHeight * 0.35 }}>
                     <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold", marginBottom:"0px" }}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
                 </div>}
-                {(this.state.isErrorStatus) && <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.32 }}>
+                {(this.state.isErrorStatus) && <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.3 }}>
                     <div className = "container">
                         <div className = "title">   
                             <img src={this.state.errorIconURL} />
