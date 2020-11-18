@@ -63,9 +63,9 @@ class IDDocCamera extends Component {
             this.setState({ titleMessage: "Passport" })
         } else if (window.IDType == "resident") {
             this.setState({ IDTarget: "frontResident" })
-            this.setState({ idTitle: "Front of Resident Permit Card" })
-            this.setState({ message: "Place the front of Resident Permit Card inside the frame and take the photo" })
-            this.setState({ titleMessage: "Resident Permit Card" })
+            this.setState({ idTitle: "Front of Residence Permit Card" })
+            this.setState({ message: "Place the front of Residence Permit Card inside the frame and take the photo" })
+            this.setState({ titleMessage: "Residence Permit Card" })
         }
     }
     requestUserMedia() {
@@ -144,14 +144,14 @@ class IDDocCamera extends Component {
             this.setState({ message: "Place the Passport inside the frame and take the photo" })
             this.setState({ titleMessage: "Passport" })
         } else if (IDTarget == "frontResident") {
-            this.setState({ message: "Place the front page of Resident Permit Card inside the frame and take the photo" })
-            this.setState({ titleMessage: "Resident Permit Card" })
+            this.setState({ message: "Place the front page of Residencd Permit Card inside the frame and take the photo" })
+            this.setState({ titleMessage: "Residencd Permit Card" })
         } else if (IDTarget == "backIDCard") {
             this.setState({ message: "Place the back of National ID Card inside the frame and take the photo" })
             this.setState({ titleMessage: "National of ID Card" })
         } else if (IDTarget == "backResident") {
-            this.setState({ message: "Place the back page of Resident Permit Card inside the frame and take the photo" })
-            this.setState({ titleMessage: "Resident Permit Card" })
+            this.setState({ message: "Place the back page of Residence Permit Card inside the frame and take the photo" })
+            this.setState({ titleMessage: "Residence Permit Card" })
         }
     }
 
@@ -212,9 +212,9 @@ class IDDocCamera extends Component {
                                 window.PassportPath = this.state.IDDocImgURL
                             } else if (IDTarget == "frontResident") {
                                 this.setState({ IDTarget: "backResident" })
-                                this.setState({ titleMessage: "Resident Permit Card" })
-                                this.setState({ idTitle: "Back of Resident Permit" })
-                                this.setState({ message: "Place the back of Resident Permit Card inside the frame and take the photo" })
+                                this.setState({ titleMessage: "Residence Permit Card" })
+                                this.setState({ idTitle: "Back of Residence Permit" })
+                                this.setState({ message: "Place the back of Residence Permit Card inside the frame and take the photo" })
                                 this.setState({ previewImageStatuse: false })
                                 window.FrontResidentPath = this.state.IDDocImgURL
                             } else if (IDTarget == "backIDCard") {
