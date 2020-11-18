@@ -49,19 +49,19 @@ class IDMain extends Component {
             this.setState({
                 clickFlag: 0
             });
-            if (this.state.nextUrl == "idcard"){
+            if (this.state.nextUrl === "idcard"){
                 window.IDType = "idcard"            
-            }else if (this.state.nextUrl == "passport"){
+            }else if (this.state.nextUrl === "passport"){
                 window.IDType = "passport"
-            }else if (this.state.nextUrl == "resident"){
+            }else if (this.state.nextUrl === "resident"){
                 window.IDType = "resident"
             }
-            window.cameraMode = "back"
             this.props.history.push('iddoccam')
             window.countryName = CountryName
         }
-        
-        
+    }
+    onBlur = () => {
+
     }
     onSearch = (e) => {
         let searchWord = e.target.value;
@@ -117,7 +117,7 @@ class IDMain extends Component {
                 {(this.state.selectCountryStatus) &&
                     <div style={{ background: 'white' }}>
                         <Header headerText="Select the country" />
-                        <input type="text" placeholder="Search the country" style={{ width: '100%', height: '30px' }} onChange={this.onSearch} />
+                        <input id="search-text" type="text" placeholder="Search the country" style={{ width: '100%', height: '30px' }} onChange={this.onSearch} onBlur={this.onBlur} />
                         {this.state.options.map(CountryItem => {
                             let CountryFlag = "https://www.countryflags.io/" + CountryItem.value + "/flat/64.png";
                             return (
