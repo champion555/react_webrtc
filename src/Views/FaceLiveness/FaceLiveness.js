@@ -28,12 +28,12 @@ class FaceLiveness extends Component {
     }
 
     toggleDetection = () => {
-        console.log("capturebutton on clicked")
+        // console.log("capturebutton on clicked")
         this.setState({
             detectorActive: !this.state.detectorActive
         })
         // console.log("IMage URL:", this.state.ComeImage)
-        this.props.history.push('iddocresult')
+        // this.props.history.push('iddocresult')
     }
     captureImage = (GetImage) => {
         console.log("GetImage Data",GetImage)

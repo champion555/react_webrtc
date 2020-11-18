@@ -124,7 +124,7 @@ class IDDocCamera extends Component {
             }
 
         }).catch(e => {
-            alert("image checking failed, Please try again.");
+            alert("the server is not working, Please try again.");
         })
     }
     onReTake = () => {
@@ -166,11 +166,11 @@ class IDDocCamera extends Component {
                 {(!this.state.previewImageStatuse) && <div className="captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
-                {(!this.state.isErrorStatus) && <div className="message-container" style={{ bottom: window.innerHeight * 0.35 }}>
+                {(!this.state.isErrorStatus) && <div className="message-container" style={{ bottom: window.innerHeight * 0.3 }}>
                     <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold" }}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
                 </div>}
-                {(this.state.isErrorStatus) && <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.35 }}>
+                {(this.state.isErrorStatus) && <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.3 }}>
                     <div className = "container">
                         <div className = "title">   
                             <img src={this.state.errorIconURL} />
