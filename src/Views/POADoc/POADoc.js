@@ -5,6 +5,7 @@ import IDDocButton from "../../Components/idDocButton/idDocButton"
 import POADocURL from "../../assets/ic_addressproof_purple.png"
 import countryList from 'react-select-country-list'
 import DatePicker from "react-datepicker";
+import Button from "../../Components/POAButton/POAButton"
 import "react-datepicker/dist/react-datepicker.css";
 import './POADoc.css';
 
@@ -22,8 +23,8 @@ class POADoc extends Component {
             startDate: new Date(),
         }
     }
-    setStartDate(date){
-        this.setState({startDate:date})
+    setStartDate(date) {
+        this.setState({ startDate: date })
     }
 
     componentDidMount = () => {
@@ -42,16 +43,15 @@ class POADoc extends Component {
                                 </div>
                             </div>
                             <div className="issuDateView" onClick={this.props.onClick}>
-                                <p style={{ marginLeft: "16px", fontWeight: "bold", fontSize: "18px", paddingRight: "30px" }}>Issue Date</p>
-                                <DatePicker 
+                                <p style={{ marginLeft: "16px", fontSize: "18px", paddingRight: "30px" }}>Issue Date</p>
+                                <DatePicker
                                     selected={this.state.startDate}
                                     onChange={date => this.setStartDate(date)}
                                     isClearable
                                     placeholderText="mm/dd/yyyy" />
                             </div>
-                            <IDDocButton
-                                label="POA Document"
-                                imgURL={this.state.POADocSrc}
+                            <Button
+                                label="Scan PoA Document"
                                 onClick={() => {
                                     this.props.history.push('poadoccam')
                                 }}

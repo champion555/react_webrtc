@@ -7,4 +7,17 @@
     border-style: solid;
     border-width: 0px;
     border-bottom-width: 1px;
+    margin-bottom: 25px;
+}
+.POAButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 80%;
+    background: #7f00ff;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
 }

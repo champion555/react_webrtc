@@ -1,0 +1,26 @@
+.POAButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    background: #7f00ff;
+    color: white;
+    margin-top: 25px;
+    margin-left: 40px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+.imgIcon {
+    display: flex;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.black {
+    background: #CCCCCC;
+    color: #000;
+}
