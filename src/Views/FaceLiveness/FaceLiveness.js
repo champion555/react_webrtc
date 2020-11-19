@@ -28,7 +28,7 @@ class FaceLiveness extends Component {
     }
 
     toggleDetection = () => {
-        // console.log("capturebutton on clicked")
+        console.log("capturebutton on clicked")
         this.setState({
             detectorActive: !this.state.detectorActive
         })
@@ -56,7 +56,8 @@ class FaceLiveness extends Component {
 
     render() {
         const videoConstraints = {
-            facingMode: "user"
+            // facingMode: "user"
+            facingMode: "environment",
         };
         let { faceDetectStatus, ImgSrc, detectorActive,captureSrc,faceDetect } = this.state
         return (
@@ -82,7 +83,7 @@ class FaceLiveness extends Component {
                                 }
                             } else {
                                 if (30 < faceX && faceX < 60 && 35 < faceY && faceY < 60) {
-                                    faceDetectStatus = "Please mover closer the face"
+                                    faceDetectStatus = "Please move closer the face"
                                     ImgSrc = UndetectImgURL
                                     faceDetect = "false"
                                 } else {
@@ -101,7 +102,7 @@ class FaceLiveness extends Component {
                                     <p className="face-txtMessage">{faceDetectStatus}</p>
                                 </div>
                                 {(faceDetect) == "true" && <div className = "face-capture-container"
-                                    onClick={this.toggleDetection}>
+                                    onClick={this.onCapture}>
                                     <img src={captureSrc} style = {{width:"50px",height:"50px"}}/>
                                 </div>}
                             </div>

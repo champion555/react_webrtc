@@ -57,10 +57,6 @@ export default class FaceDetector extends Component {
       this.setState({
         imageVerified : false
       });
-      // this.setState({
-      //   imageURL: imgURL
-      // })
-      // console.log("img url_Child : ", this.state.imageURL)
       this.props.onSelectImage(imgURL);
     }
   }
@@ -93,7 +89,7 @@ export default class FaceDetector extends Component {
 
     if (!this.workQueue.length) return
 
-    console.log("here : ", this.workQueue)
+    // console.log("here : ", this.workQueue)
 
     // requestIdleCallback(deadline => {
     //   if (!this.taskTimes[this.workQueue[0].tag]) this.taskTimes[this.workQueue[0].tag] = 1
