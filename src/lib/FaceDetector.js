@@ -7,17 +7,17 @@ export default class FaceDetector extends Component {
 
     this.ctx = null
     this.imageData = null
-    // this.video = document.createElement("video")
+    this.video = document.createElement("video")
     this.baseFaceSize = 100
 
     this.workQueue = []
     this.taskTimes = {}
     this.carryOverData = null
 
-    this.state = { 
+    this.state = {
       currentCanvasSizeIndex: 100,
       facesData: {},
-      faceScale: 1, 
+      faceScale: 1,
       first: null,
       height: this.maxHeight,
       noFaceFrames: 0,
@@ -28,25 +28,28 @@ export default class FaceDetector extends Component {
   }
 
   async componentDidMount() {
-  //   const options = {
-  //     audio: false,
-  //     video: {
-  //         facingMode: 'environment', // Or 'environment'
-  //     },
-  // };
-    // const stream = await navigator
-    //   .mediaDevices.getUserMedia({ audio: false,video:{facingMode:{ exact: 'user' },video: true} })
+    //   const options = {
+    //     audio: false,
+    //     video: {
+    //         facingMode: 'environment', // Or 'environment'
+    //     },
+    // };
+    setTimeout(() => {
+      const stream = await navigator
+        .mediaDevices.getUserMedia({ audio: false, video: { facingMode: { exact: 'user' }, video: true } })
 
-    // this.video.srcObject = stream
-    // this.video.play()
-    // this.ctx = this.canvas.getContext('2d', { alpha: false })
-		
-    pico.picoInit()
+      this.video.srcObject = stream
+      this.video.play()
+      this.ctx = this.canvas.getContext('2d', { alpha: false })
 
-    if (this.props.active) {
-      this.newWorkQueue()
-      this.detectionLoop()
-    }
+      pico.picoInit()
+
+      if (this.props.active) {
+        this.newWorkQueue()
+        this.detectionLoop()
+      }
+    }, 2000)
+
   }
 
   componentDidUpdate() {
@@ -61,31 +64,24 @@ export default class FaceDetector extends Component {
     // console.log('get image : ', imgURL)
     if (this.props.detectorActiveflag && this.state.imageVerified) {
       this.setState({
-        imageVerified : false
+        imageVerified: false
       });
       this.props.onSelectImage(imgURL);
     }
   }
 
   render() {
-    this.video = document.createElement("video")
-    const stream = navigator
-      .mediaDevices.getUserMedia({ audio: false,video:{facingMode:{ exact: 'user' },video: true} })
-
-    this.video.srcObject = stream
-    this.video.play()
-    this.ctx = this.canvas.getContext('2d', { alpha: false })
     const { facesData } = this.state
-    const relativeFacesData = facesData.length ? 
+    const relativeFacesData = facesData.length ?
       facesData.map(face => this.relativeFaceLocation(face)) :
-      [{x: null, y: null, size: null, strength: null}]
+      [{ x: null, y: null, size: null, strength: null }]
 
     return (
       <React.Fragment>
-        <canvas 
-          className = "FaceDetect-camera"
-          ref={ref => this.canvas = ref} 
-          style={{ display: this.props.showCanvas ? 'inline' : 'none', transform: 'rotateY(180deg)' }} 
+        <canvas
+          className="FaceDetect-camera"
+          ref={ref => this.canvas = ref}
+          style={{ display: this.props.showCanvas ? 'inline' : 'none', transform: 'rotateY(180deg)' }}
         />
         {this.props.children && this.props.children(relativeFacesData)}
       </React.Fragment>
@@ -124,11 +120,11 @@ export default class FaceDetector extends Component {
         tag: 'updateCanvas'
       },
       {
-        action: () => { 
+        action: () => {
           this.imageData = this.ctx.getImageData(
             0,
-            0, 
-            this.state.currentCanvasSizeIndex * 4, 
+            0,
+            this.state.currentCanvasSizeIndex * 4,
             this.state.currentCanvasSizeIndex * 3
           ).data
         },
@@ -137,15 +133,15 @@ export default class FaceDetector extends Component {
       {
         tag: 'detectAndSetState',
         action: () => {
-          const { 
+          const {
             newFacesData,
             newFaceScale,
             newCanvasSizeIndex,
             newNoFaceFrames,
             newHighFaceFrames
           } = this.detect(this.imageData)
-  
-          this.setState(() => ({ 
+
+          this.setState(() => ({
             facesData: newFacesData[0] ? newFacesData : this.state.facesData,
             faceScale: newFaceScale,
             currentCanvasSizeIndex: newCanvasSizeIndex,
@@ -167,46 +163,46 @@ export default class FaceDetector extends Component {
       let { x, y, size, strength } = faceData
 
       size = Math.round(size / widthIndex)
-      y = Math.round(y / heightIndex) 
+      y = Math.round(y / heightIndex)
       x = 100 - Math.round(x / widthIndex)
 
       x = Math.min(Math.max(x, 0), 100)
       y = Math.min(Math.max(y, 0), 100)
       this.getImage()
       strength = Math.round(strength)
-      return {x, y, size, strength}
-    } 
+      return { x, y, size, strength }
+    }
   }
 
   calculateFaceSizeScale = detectionStrength => {
     const s = detectionStrength
 
     if (s > 1000) {
-        return 1.2
+      return 1.2
     } else if (s < 1000 && s > 900) {
-        return 1.1
+      return 1.1
     } else if (s < 900 && s > 800) {
-        return 1.075
+      return 1.075
     } else if (s < 800 && s > 700) {
-        return 1.05
+      return 1.05
     } else if (s < 700 && s > 600) {
-        return 1.03
+      return 1.03
     } else if (s < 600 && s > 500) {
-        return 1.01
+      return 1.01
     } else if (s < 500 && s > 400) {
-        return 1.005
+      return 1.005
     } else if (s < 400 && s > 300) {
-        return 0.995 
+      return 0.995
     } else if (s < 300 && s > 200) {
-        return 0.99 
+      return 0.99
     } else if (s < 200 && s > 100) {
-        return 0.95 
+      return 0.95
     } else if (s < 100 && s > 50) {
-        return 0.9 
+      return 0.9
     } else {
-        return 0.8
-    } 
-}
+      return 0.8
+    }
+  }
 
   updatePerformanceQueue = (detectionStart, detectionEnd, queue) => {
     queue.push(detectionEnd - detectionStart)
@@ -234,84 +230,84 @@ export default class FaceDetector extends Component {
   }
 
   detect = (imageData = 1) => {
-      const detectedFacesData = pico.processfn(
-        imageData, 
-        this.baseFaceSize * this.state.faceScale,
-        this.state.currentCanvasSizeIndex * 3,
-        this.state.currentCanvasSizeIndex * 4
-      ).filter(face => face[3] > 20)
+    const detectedFacesData = pico.processfn(
+      imageData,
+      this.baseFaceSize * this.state.faceScale,
+      this.state.currentCanvasSizeIndex * 3,
+      this.state.currentCanvasSizeIndex * 4
+    ).filter(face => face[3] > 20)
 
-      let newFacesData = []
-      let bestDetectionData = [0, 0]
+    let newFacesData = []
+    let bestDetectionData = [0, 0]
 
-      if (detectedFacesData.length) {
-        detectedFacesData.map((detectedFaceData, index) => {
-          const newFaceData = {}
-          const [y, x, size, strength] = detectedFaceData
+    if (detectedFacesData.length) {
+      detectedFacesData.map((detectedFaceData, index) => {
+        const newFaceData = {}
+        const [y, x, size, strength] = detectedFaceData
 
-          newFaceData.y = y
-          newFaceData.x = x
-          newFaceData.size = size
-          newFaceData.strength = strength
+        newFaceData.y = y
+        newFaceData.x = x
+        newFaceData.size = size
+        newFaceData.strength = strength
 
-          if (bestDetectionData[0] < strength) {
-            bestDetectionData = [strength, index]
-          }
-
-          newFacesData.push(newFaceData)
-        })
-      }
-
-      const { 
-        faceScale, 
-        currentCanvasSizeIndex, 
-        noFaceFrames,
-        highFaceFrames 
-      } = this.state
-
-      let newCanvasSizeIndex = currentCanvasSizeIndex
-      let newNoFaceFrames = noFaceFrames
-      let newHighFaceFrames = highFaceFrames
-      const [bestDetection] = bestDetectionData
-      let newFaceScale = Math.max(this.calculateFaceSizeScale(bestDetection), 0.01) 
-        || faceScale
-
-      if (bestDetection > 250) {
-        if (newHighFaceFrames < 1) {
-          newHighFaceFrames = newHighFaceFrames + 1
-        } else {
-          newCanvasSizeIndex = newCanvasSizeIndex - 2
-          newHighFaceFrames = 0
+        if (bestDetectionData[0] < strength) {
+          bestDetectionData = [strength, index]
         }
+
+        newFacesData.push(newFaceData)
+      })
+    }
+
+    const {
+      faceScale,
+      currentCanvasSizeIndex,
+      noFaceFrames,
+      highFaceFrames
+    } = this.state
+
+    let newCanvasSizeIndex = currentCanvasSizeIndex
+    let newNoFaceFrames = noFaceFrames
+    let newHighFaceFrames = highFaceFrames
+    const [bestDetection] = bestDetectionData
+    let newFaceScale = Math.max(this.calculateFaceSizeScale(bestDetection), 0.01)
+      || faceScale
+
+    if (bestDetection > 250) {
+      if (newHighFaceFrames < 1) {
+        newHighFaceFrames = newHighFaceFrames + 1
       } else {
+        newCanvasSizeIndex = newCanvasSizeIndex - 2
         newHighFaceFrames = 0
       }
+    } else {
+      newHighFaceFrames = 0
+    }
 
-      if (!newFacesData.length) {
-          if (newNoFaceFrames < 1) {
-            newNoFaceFrames = newNoFaceFrames + 1
-          } else {
-            newCanvasSizeIndex = Math.min(
-              newCanvasSizeIndex + 2,
-              200
-            )
-            newNoFaceFrames = 0
-          }
+    if (!newFacesData.length) {
+      if (newNoFaceFrames < 1) {
+        newNoFaceFrames = newNoFaceFrames + 1
       } else {
+        newCanvasSizeIndex = Math.min(
+          newCanvasSizeIndex + 2,
+          200
+        )
         newNoFaceFrames = 0
       }
-      
-      return { 
-        newFacesData,
-        newFaceScale,
-        newCanvasSizeIndex,
-        newNoFaceFrames,
-        newHighFaceFrames
-      }
+    } else {
+      newNoFaceFrames = 0
+    }
+
+    return {
+      newFacesData,
+      newFaceScale,
+      newCanvasSizeIndex,
+      newNoFaceFrames,
+      newHighFaceFrames
+    }
   }
 }
 
-FaceDetector.defaultProps = { 
+FaceDetector.defaultProps = {
   active: true,
-  showCanvas: false 
+  showCanvas: false
 }
