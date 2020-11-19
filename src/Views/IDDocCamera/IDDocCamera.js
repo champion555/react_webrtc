@@ -39,7 +39,7 @@ class IDDocCamera extends Component {
         this.captureRef = React.createRef()
     }
 
-    componentDidMount = () => {
+  componentDidMount = async () => {
         console.log(window.countryName)
         console.log(window.IDType)
         console.log(window.cameraMode)
@@ -47,8 +47,8 @@ class IDDocCamera extends Component {
             alert("Your browser cannot stream from your webcam. Please switch to Chrome or Firefox.");
             return;
         }
-        this.requestUserMedia();
-        this.onSetMessage();
+        await this.requestUserMedia();
+        await this.onSetMessage();
     }
     onSetMessage = () => {
         if (window.IDType == "idcard") {
@@ -76,6 +76,7 @@ class IDDocCamera extends Component {
         });
 
         setInterval(() => {
+
             if (this.startTime) {
                 var duration = new Date().getTime() - this.startTime;
                 this.setState({ recordDuration: durationFormat(duration) });

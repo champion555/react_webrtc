@@ -28,6 +28,7 @@ export default class FaceDetector extends Component {
   }
 
   async componentDidMount() {
+
       const stream = await navigator
         .mediaDevices.getUserMedia({ audio: false, video: { facingMode: { exact: 'user' }, video: true } })
 
@@ -42,6 +43,9 @@ export default class FaceDetector extends Component {
         this.detectionLoop()
       }
 
+  }
+  componentWillUnmount(){
+    this.video.srcObject = null
   }
 
   componentDidUpdate() {
