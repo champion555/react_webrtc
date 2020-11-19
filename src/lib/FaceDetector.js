@@ -28,13 +28,6 @@ export default class FaceDetector extends Component {
   }
 
   async componentDidMount() {
-    //   const options = {
-    //     audio: false,
-    //     video: {
-    //         facingMode: 'environment', // Or 'environment'
-    //     },
-    // };
-    setTimeout(async () => {
       const stream = await navigator
         .mediaDevices.getUserMedia({ audio: false, video: { facingMode: { exact: 'user' }, video: true } })
 
@@ -48,7 +41,6 @@ export default class FaceDetector extends Component {
         this.newWorkQueue()
         this.detectionLoop()
       }
-    }, 2000)
 
   }
 
