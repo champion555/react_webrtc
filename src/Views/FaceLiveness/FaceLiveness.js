@@ -55,6 +55,7 @@ class FaceLiveness extends Component {
 
 
     render() {
+        console.error("FaceLiveness-----");
         let { faceDetectStatus, ImgSrc, detectorActive,captureSrc,faceDetect } = this.state
         return (
             <div>

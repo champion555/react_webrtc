@@ -69,7 +69,7 @@ class IDDocCamera extends Component {
         }
     }
     requestUserMedia() {
-        console.log('requestUserMedia')
+        console.log('-------requestUserMedia')
         localStorage.setItem("cameraMode", "back")
         captureUserMedia((stream, data) => {
             this.setState({ src: stream });
