@@ -59,6 +59,9 @@ class FaceLiveness extends Component {
             // facingMode: "user"
             facingMode: "environment",
         };
+        // var videoConstraints = {
+        //     facingMode: { exact: "environment" }
+        //   };
         let { faceDetectStatus, ImgSrc, detectorActive,captureSrc,faceDetect } = this.state
         return (
             <div>

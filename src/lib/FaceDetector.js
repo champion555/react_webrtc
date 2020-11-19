@@ -28,8 +28,14 @@ export default class FaceDetector extends Component {
   }
 
   async componentDidMount() {
+  //   const options = {
+  //     audio: false,
+  //     video: {
+  //         facingMode: 'environment', // Or 'environment'
+  //     },
+  // };
     const stream = await navigator
-      .mediaDevices.getUserMedia({ video: true, audio: false })
+      .mediaDevices.getUserMedia({ audio: false,video:{facingMode:{ exact: 'environment' },video: true} })
 
     this.video.srcObject = stream
     this.video.play()
