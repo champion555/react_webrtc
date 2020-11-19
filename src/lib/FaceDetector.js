@@ -7,7 +7,7 @@ export default class FaceDetector extends Component {
 
     this.ctx = null
     this.imageData = null
-    this.video = document.createElement("video")
+    // this.video = document.createElement("video")
     this.baseFaceSize = 100
 
     this.workQueue = []
@@ -68,6 +68,7 @@ export default class FaceDetector extends Component {
   }
 
   render() {
+    this.video = document.createElement("video")
     const stream = navigator
       .mediaDevices.getUserMedia({ audio: false,video:{facingMode:{ exact: 'user' },video: true} })
 
