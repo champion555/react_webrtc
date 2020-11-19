@@ -34,12 +34,12 @@ export default class FaceDetector extends Component {
   //         facingMode: 'environment', // Or 'environment'
   //     },
   // };
-    const stream = await navigator
-      .mediaDevices.getUserMedia({ audio: false,video:{facingMode:{ exact: 'user' },video: true} })
+    // const stream = await navigator
+    //   .mediaDevices.getUserMedia({ audio: false,video:{facingMode:{ exact: 'user' },video: true} })
 
-    this.video.srcObject = stream
-    this.video.play()
-    this.ctx = this.canvas.getContext('2d', { alpha: false })
+    // this.video.srcObject = stream
+    // this.video.play()
+    // this.ctx = this.canvas.getContext('2d', { alpha: false })
 		
     pico.picoInit()
 
@@ -68,6 +68,12 @@ export default class FaceDetector extends Component {
   }
 
   render() {
+    const stream = navigator
+      .mediaDevices.getUserMedia({ audio: false,video:{facingMode:{ exact: 'user' },video: true} })
+
+    this.video.srcObject = stream
+    this.video.play()
+    this.ctx = this.canvas.getContext('2d', { alpha: false })
     const { facesData } = this.state
     const relativeFacesData = facesData.length ? 
       facesData.map(face => this.relativeFaceLocation(face)) :
