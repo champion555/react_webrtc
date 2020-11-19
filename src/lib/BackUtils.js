@@ -1,17 +1,16 @@
 import Axios from '../api';
 import datauritoblob from 'datauritoblob'
 // handle user media capture
-export function captureUserMedia(callback, deviceId) {
-  
+export function captureUserMedia(callback, deviceId) {  
     var params = {
       audio: false, video: {
         deviceId: deviceId ? { deviceId: { exact: deviceId } } : null,
         width: { exact: 1280 },
         height: { exact: 720 },
         facingMode: "environment",
+        // facingMode: { exact: 'user' },
       }
     }; 
-
   navigator.getUserMedia(params, callback, (error) => {
     // alert(JSON.stringify(error));
   });
@@ -52,6 +51,7 @@ export function changeCamera(deviceId) {
       height: { exact: 720 },
 
       facingMode: "environment"
+      // facingMode:  { exact: 'user' },
     },
 
   };
