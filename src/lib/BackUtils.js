@@ -7,7 +7,7 @@ export function captureUserMedia(callback, deviceId) {
         deviceId: deviceId ? { deviceId: { exact: deviceId } } : null,
         width: { exact: 1280 },
         height: { exact: 720 },
-        facingMode: "environment",
+        facingMode: "user",
         // facingMode: { exact: 'user' },
       }
     }; 
@@ -50,7 +50,7 @@ export function changeCamera(deviceId) {
       width: { exact: 1280 },
       height: { exact: 720 },
 
-      facingMode: "environment"
+      facingMode: "user"
       // facingMode:  { exact: 'user' },
     },
 
