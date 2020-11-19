@@ -34,8 +34,8 @@ export default class FaceDetector extends Component {
     //         facingMode: 'environment', // Or 'environment'
     //     },
     // };
-    setTimeout(() => {
-      const stream = navigator
+    setTimeout(async () => {
+      const stream = await navigator
         .mediaDevices.getUserMedia({ audio: false, video: { facingMode: { exact: 'user' }, video: true } })
 
       this.video.srcObject = stream
