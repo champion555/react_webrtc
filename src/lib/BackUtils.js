@@ -50,7 +50,7 @@ export function changeCamera(deviceId) {
       width: { exact: 1280 },
       height: { exact: 720 },
 
-      facingMode: "user"
+      facingMode: "environment"
       // facingMode:  { exact: 'user' },
     },
 
