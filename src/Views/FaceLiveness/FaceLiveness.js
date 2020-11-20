@@ -56,17 +56,19 @@ class FaceLiveness extends Component {
             PhotoUpload(GetImage, (total, progress) => {
             }).then(res => {
                 var response = res.data;                
-                if (response.statusCode == "200") {
-                    alert("apicall sucess")
+                if (response.result === "LIVENESS") {
+                    alert(response.result + response.score)
                     
-                } else {
-                    alert("api call failed")
-                    this.setState({
-                        detectorActive: true
-                    })
-                    this.setState({
-                        DontReceve:false
-                    })
+                } else  if (response.result ==="SPOOF"){
+                    alert(response.result)
+                    // this.setState({
+                    //     detectorActive: true
+                    // })
+                    // this.setState({
+                    //     DontReceve:false
+                    // })
+                }else {
+                    alert(response.result)
                 }
     
             }).catch(e => {
