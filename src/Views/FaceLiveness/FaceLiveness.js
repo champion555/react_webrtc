@@ -24,11 +24,16 @@ class FaceLiveness extends Component {
             captureImg: null,
             DontReceve: false,
             apiFlag: false,
+            reloadflag:false,
 
         }
     }
     componentDidMount = () => {
-        window.location.reload(false);
+        if(this.state.reloadflag === false){
+            window.location.reload(false);
+            this.setState({reloadflag:true})
+        }
+        
         localStorage.getItem("FrontIDCardPath")
         localStorage.getItem("BackIDCardPath")
         localStorage.getItem("PassportPath")
