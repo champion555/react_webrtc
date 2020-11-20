@@ -82,8 +82,7 @@ class IDDocCamera extends Component {
 
         }, 1000);
     }
-
-    captureUserMedia(callback, deviceId, facingMode) { 
+    captureUserMedia(callback) { 
           var params = {
             audio: false, video: {
               width: { exact: 1280 },

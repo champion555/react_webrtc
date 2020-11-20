@@ -6,7 +6,7 @@ import Webcam from '../../Components/Webcam.react';
 import frameURL from "../../assets/ic_undetected.png"
 import Button from "../../Components/button/button"
 // import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
-import { ImageQuality } from '../../lib/AppUtils';
+import { PhotoUpload } from '../../lib/AppUtils';
 import './PhotoLiveness.css';
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -53,7 +53,7 @@ class PhotoLiveness extends Component {
         }, 1000);
     }
 
-    captureUserMedia(callback, deviceId, facingMode) { 
+    captureUserMedia(callback) { 
         var params = {
           audio: false, video: {
             width: { exact: 1280 },
@@ -101,6 +101,26 @@ class PhotoLiveness extends Component {
         var height = this.webcamRef.current.videoRef.current.videoHeight * (this.captureRef.current.width / this.webcamRef.current.videoRef.current.videoWidth);
         context.drawImage(this.webcamRef.current.videoRef.current, 0, 0, this.captureRef.current.width, height);
         var data = this.captureRef.current.toDataURL('image/jpeg');
+
+
+        PhotoUpload(data, (total, progress) => {
+        }).then(res => {
+            var response = res.data;                
+            if (response.result === "LIVENESS") {
+                alert(response.result + response.score)
+                
+            } else  if (response.result ==="SPOOF"){
+                alert(response.result)
+                
+            }else {
+                alert(response.result)
+            }
+
+        }).catch(e => {
+            alert("the server is not working, Please try again.");
+            
+        })
+
 
         // ImageQuality(data, (total, progress) => {
         // }).then(res => {
