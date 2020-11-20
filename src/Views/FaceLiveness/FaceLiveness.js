@@ -52,6 +52,11 @@ class FaceLiveness extends Component {
         alert(this.state.apiFlag);
         this.setState({ captureImg: GetImage });
         console.log("imageData : ", this.state.captureImg)
+        if(this.state.apiFlag === false){
+            alert(GetImage)
+            
+            
+        }   
         // this.onAPICall()
     }
     onCapture = () => {
@@ -61,7 +66,6 @@ class FaceLiveness extends Component {
         this.setState({
             DontReceve:true
         })    
-        alert(this.state.captureImg)
     }
     onAPICall=()=>{
         // console.log("imageData : ", this.state.captureImg)
