@@ -77,17 +77,21 @@ class PhotoLiveness extends Component {
 
             if (response.result === "LIVENESS") {
                 alert(response.result + response.score)
+                this.props.history.push('iddocresult')
 
             } else if (response.result === "SPOOF") {
                 alert(response.result)
+                this.setState({ ImgSrc: UndetectImgURL })
 
             } else {
                 alert(response.result)
+                this.setState({ ImgSrc: UndetectImgURL })
             }
 
         }).catch(e => {
             alert("the server is not working, Please try again.");
             this.setState({ apiFlage: false })
+            this.setState({ ImgSrc: UndetectImgURL })
         })
 
     }
