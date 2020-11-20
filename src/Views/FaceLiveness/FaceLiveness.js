@@ -28,6 +28,7 @@ class FaceLiveness extends Component {
         }
     }
     componentDidMount = () => {
+        window.location.reload(false);
         localStorage.getItem("FrontIDCardPath")
         localStorage.getItem("BackIDCardPath")
         localStorage.getItem("PassportPath")
