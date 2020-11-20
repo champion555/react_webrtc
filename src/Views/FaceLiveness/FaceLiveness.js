@@ -51,7 +51,7 @@ class FaceLiveness extends Component {
         console.log("GetImage Data",GetImage)
         this.setState({ captureImg: GetImage });
         console.log("imageData : ", this.state.captureImg)
-        if(this.state.apiFlag == false){
+        if(this.state.apiFlag === false){
             alert(GetImage)
             this.setState({apiFlag: true})
         }
