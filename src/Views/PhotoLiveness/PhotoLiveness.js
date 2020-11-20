@@ -76,7 +76,7 @@ class PhotoLiveness extends Component {
             var response = res.data;
 
             if (response.result === "LIVENESS") {
-                alert(response.result + response.score)
+                // alert(response.result + response.score)
                 this.props.history.push('iddocresult')
 
             } else if (response.result === "SPOOF") {
