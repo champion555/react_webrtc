@@ -94,7 +94,7 @@ class POADocCamera extends Component {
     render() {
         return (
             <div>
-                <Header headerText="Face Liveness" />
+                <Header headerText="Scan PoA Document" />
                 <div className="camera-container">
                     <Webcam src={this.state.src} ref={this.webcamRef} />
                     <canvas ref={this.captureRef} width="320" height="240" id="canvas" style={{ display: "none" }}></canvas>
