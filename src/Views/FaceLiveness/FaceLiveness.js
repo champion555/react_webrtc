@@ -46,6 +46,7 @@ class FaceLiveness extends Component {
         localStorage.getItem("poaDocPath")
         // alert(localStorage.getItem("FrontIDCardPath"))
     }
+    
 
     toggleDetection = () => {
         console.log("capturebutton on clicked")

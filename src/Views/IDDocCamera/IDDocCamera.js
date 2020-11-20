@@ -32,14 +32,14 @@ class IDDocCamera extends Component {
             titleMessage: "",
             idTitle: "",
             isErrorStatus: false,
-            errorIconURL:errorURL,
+            errorIconURL: errorURL,
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.webcamRef = React.createRef()
         this.captureRef = React.createRef()
     }
 
-  componentDidMount = () => {
+    componentDidMount = () => {
         console.log(window.countryName)
         console.log(window.IDType)
         console.log(window.cameraMode)
@@ -69,9 +69,24 @@ class IDDocCamera extends Component {
         }
     }
     requestUserMedia() {
-        this.captureUserMedia((stream, data, backCam) => {
+
+        this.captureUserMedia((stream) => {
+            // this.setState({ src: stream });
+
+            var track = stream.getVideoTracks()[0];
+            let supported = navigator.mediaDevices.getSupportedConstraints();
+            console.error('supported', supported)
+            track.applyConstraints({
+                advanced: [
+                    { focusMode: 'manual', focusDistance: 0.33 }
+                ]
+            }).then(r => {
+                console.log('r', r)
+            }).catch(e => {
+                console.error(e)
+            })
             this.setState({ src: stream });
-        });
+        }, null, { exact: "environment" }, false);
 
         setInterval(() => {
 
@@ -82,41 +97,63 @@ class IDDocCamera extends Component {
 
         }, 1000);
     }
-    captureUserMedia(callback) { 
-          var params = {
-            audio: false, video: {
-              width: { exact: 1280 },
-              height: { exact: 720 },
-              facingMode: { exact: 'environment' },
-            }
-          }; 
-        navigator.getUserMedia(params, callback, (error) => {
-          // alert(JSON.stringify(error));
-        });
-      }
+    captureUserMedia(callback, deviceId, defaultFaceingMode = 'user') {
+        // var params = {
+        //     audio: false, video: {
+        //         width: { exact: 1280 },
+        //         height: { exact: 720 },
+        //         facingMode: { exact: 'environment' },
+        //     }
+        // };
+        // navigator.getUserMedia(params, callback, (error) => {
+        //     // alert(JSON.stringify(error));
+        // });
+        const videoConstraints = {
+            width: { exact: 1280 },
+            height: { exact: 720 },
+        };
+        if (deviceId) {
+            videoConstraints.deviceId = { exact: deviceId };
+        }
+        const constraints = {
+            video: videoConstraints,
+            // focusMode: 'manual',
+            // focusDistance: 0.33
+        };
 
-      durationFormat(mili) {
+        return navigator.mediaDevices.getUserMedia(constraints).then(stream => {
+            window.currentStream = stream;
+            callback(stream);
+            return navigator.mediaDevices.enumerateDevices();
+        })
+            .then(devices => {
+                var cameraList = devices.filter(d => d.kind === 'videoinput')
+                return cameraList;
+            })
+    }
+
+    durationFormat(mili) {
         var fixedNum = (num) => {
             return ("0" + num).slice(-2);
-          };
+        };
         let x = mili > 0 ? mili : 0;
         x = x / 1000;
         x = Math.floor(x);
         const secs = x % 60;
-      
+
         x = x / 60;
         x = Math.floor(x);
         const mins = x % 60;
-      
+
         x = x / 60;
         x = Math.floor(x);
-      
+
         let h = x % 24;
         x = x / 24
         x = Math.floor(x);
-      
+
         return `${fixedNum(h)}:${fixedNum(mins)}:${fixedNum(secs)}`
-      }
+    }
 
     getImage() {
         console.log("buttong clicked")
@@ -156,21 +193,21 @@ class IDDocCamera extends Component {
                     this.setState({ titleMessage: "Image preview" })
                     this.setState({ message: "Make sure the ID Docment image is clear to read" })
                 }
-                
+
             } else {
-                 this.setState({ titleMessage: "Image preview" })
-                 this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                this.setState({ titleMessage: "Image preview" })
+                this.setState({ message: "Make sure the ID Docment image is clear to read" })
                 this.setState({ isErrorStatus: true })
             }
 
         }).catch(e => {
             alert("the server is not working, Please try again.");
-            
+
         })
     }
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
-        this.setState({isErrorStatus:false})
+        this.setState({ isErrorStatus: false })
         let { IDTarget } = this.state
         if (IDTarget == "frontIDCard") {
             this.setState({ message: "Place the front of National ID Card inside the frame and take the photo" })
@@ -208,16 +245,16 @@ class IDDocCamera extends Component {
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>}
                 <div className="message-container" style={{ bottom: window.innerHeight * 0.34 }}>
-                    <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold", marginBottom:"0px" }}>{this.state.idTitle}</p>
+                    <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold", marginBottom: "0px" }}>{this.state.idTitle}</p>
                     <p style={{ color: "white", }} className="message">{this.state.message}</p>
                 </div>
-                {(this.state.isErrorStatus) && <div className = "errorMessage" style={{ bottom: window.innerHeight * 0.21 }}>
-                    <div className = "container">
-                        <div className = "title">   
+                {(this.state.isErrorStatus) && <div className="errorMessage" style={{ bottom: window.innerHeight * 0.21 }}>
+                    <div className="container">
+                        <div className="title">
                             <img src={this.state.errorIconURL} />
                             <p>The image quality is very low</p>
                         </div>
-                        <div className = "message">
+                        <div className="message">
                             <p>- Make sure the image is not blurry or contains blares!</p>
                         </div>
                     </div>
@@ -227,11 +264,11 @@ class IDDocCamera extends Component {
                         onClick={() => {
                             this.props.history.goBack()
                         }} />
-                    <p style={{ color: "white", marginLeft: "20px",fontWeight:"bold",fontSize:"20px" }}>{this.state.titleMessage}</p>
+                    <p style={{ color: "white", marginLeft: "20px", fontWeight: "bold", fontSize: "20px" }}>{this.state.titleMessage}</p>
                     {(!this.state.previewImageStatuse) && <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>}
                 </div>
                 {(this.state.previewImageStatuse) && <div className="preview-button-container">
-                {(!this.state.isErrorStatus) && <Button
+                    {(!this.state.isErrorStatus) && <Button
                         label="My photo is clear"
                         onClick={() => {
                             let { IDTarget } = this.state
@@ -242,12 +279,12 @@ class IDDocCamera extends Component {
                                 this.setState({ message: "Place the back page of ID Card inside the frame and take the photo" })
                                 this.setState({ previewImageStatuse: false })
                                 // window.FrontIDCardPath = this.state.IDDocImgURL
-                                localStorage.setItem("FrontIDCardPath", this.state.IDDocImgURL)                    
+                                localStorage.setItem("FrontIDCardPath", this.state.IDDocImgURL)
                             } else if (IDTarget == "passport") {
                                 this.props.history.push('idmain')
                                 // window.PassportPath = this.state.IDDocImgURL
                                 localStorage.setItem("PassportPath", this.state.IDDocImgURL)
-                                localStorage.setItem("passportCountry",window.countryName)
+                                localStorage.setItem("passportCountry", window.countryName)
                             } else if (IDTarget == "frontResident") {
                                 this.setState({ IDTarget: "backResident" })
                                 this.setState({ titleMessage: "Residence Permit Card" })
@@ -255,17 +292,17 @@ class IDDocCamera extends Component {
                                 this.setState({ message: "Place the back of Residence Permit Card inside the frame and take the photo" })
                                 this.setState({ previewImageStatuse: false })
                                 // window.FrontResidentPath = this.state.IDDocImgURL
-                                localStorage.setItem("FrontResidentPath", this.state.IDDocImgURL)                                
+                                localStorage.setItem("FrontResidentPath", this.state.IDDocImgURL)
                             } else if (IDTarget == "backIDCard") {
                                 this.props.history.push('idmain')
                                 // window.BackIDCardPath = this.state.IDDocImgURL
                                 localStorage.setItem("BackIDCardPath", this.state.IDDocImgURL)
-                                localStorage.setItem("idCardCountry",window.countryName)
+                                localStorage.setItem("idCardCountry", window.countryName)
                             } else if (IDTarget == "backResident") {
                                 this.props.history.push('poadoc')
                                 // window.BackResidentPath = this.state.IDDocImgURL
                                 localStorage.setItem("BackResidentPath", this.state.IDDocImgURL)
-                                localStorage.setItem("residentCountry",window.countryName)
+                                localStorage.setItem("residentCountry", window.countryName)
                             }
                         }}
                     />}
