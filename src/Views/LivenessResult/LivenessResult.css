@@ -1,0 +1,34 @@
+.result-body-container{
+    width: 100%;
+    height: calc(100vh - 50px);
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    background: #7f00ff;
+}
+.resultMark{
+    width: 100px;
+    height: 100px;
+    margin-top: 180px;
+}
+.txtLivnessResult{
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+.txtErrorMessage{
+    font-size: 18px;
+    margin-top: 0px;
+    color: white;
+}
+.spoof-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.spoofMark{
+    width: 20px;
+    height: 20px;
+    margin-right: 40px;
+}

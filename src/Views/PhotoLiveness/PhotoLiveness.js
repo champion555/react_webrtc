@@ -80,12 +80,16 @@ class PhotoLiveness extends Component {
                 this.props.history.push('iddocresult')
 
             } else if (response.result === "SPOOF") {
-                alert(response.result)
+                // alert(response.result)
+                window.livenessResult = response.result
                 this.setState({ ImgSrc: UndetectImgURL })
+                this.props.history.push('livenessresult')
 
             } else {
-                alert(response.result)
+                // alert(response.result)
+                window.livenessResult = response.result
                 this.setState({ ImgSrc: UndetectImgURL })
+                this.props.history.push('livenessresult')
             }
 
         }).catch(e => {
