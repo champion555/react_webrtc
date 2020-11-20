@@ -7,24 +7,6 @@ function stopMediaTracks(stream) {
     track.stop();
   });
 }
-// handle user media capture
-// export function captureUserMedia(callback, deviceId, facingMode) { 
-//   alert(facingMode) 
-//     var params = {
-//       audio: false, video: {
-//         deviceId: deviceId ? { deviceId: { exact: deviceId } } : null,
-//         width: { exact: 1280 },
-//         height: { exact: 720 },
-//         facingMode: facingMode,
-//         // facingMode: { exact: 'environment' },
-//       }
-//     }; 
-//   navigator.getUserMedia(params, callback, (error) => {
-//     // alert(JSON.stringify(error));
-//   });
-// };
-
-
 export function captureUserMedia(callback, deviceId, defaultFaceingMode = 'user', audio = true,) {
 
   const videoConstraints = {

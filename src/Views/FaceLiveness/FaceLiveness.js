@@ -60,8 +60,6 @@ class FaceLiveness extends Component {
 
         if(this.state.apiFlag === false){
             this.setState({apiFlag:true})
-            alert("-------------")
-
             PhotoUpload(GetImage, (total, progress) => {
             }).then(res => {
                 var response = res.data;                

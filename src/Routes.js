@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Home from './Views/Home/Home'
 import VideoPage from './Views/Video/VideoPage'
-import PhotoPage from './Views/Photo/PhotoPage'
 import IDMainPage from './Views/IDMain/IDMain'
 import IDDocCam from './Views/IDDocCamera/IDDocCamera'
 import Result from './Views/Result/Result'
@@ -19,7 +18,6 @@ const Routes = () => {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/video" component={VideoPage} />
-                <Route exact path="/photo" component={PhotoPage} />
                 <Route exact path="/result" component={Result} />
                 <Route exact path="/idmain" component={IDMainPage} />
                 <Route exact path="/iddoccam" component={IDDocCam} />

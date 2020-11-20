@@ -3,10 +3,13 @@ import { withRouter } from "react-router";
 import Header from "../../Components/header/header"
 import captureImg from "../../assets/camera_take.png"
 import Webcam from '../../Components/Webcam.react';
-import frameURL from "../../assets/ic_undetected.png"
+import UndetectImgURL from "../../assets/ic_undetected.png"
+import DetectImgURL from "../../assets/ic_detected.png"
 import Button from "../../Components/button/button"
 import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
 import { PhotoUpload } from '../../lib/AppUtils';
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './PhotoLiveness.css';
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -19,8 +22,9 @@ class PhotoLiveness extends Component {
             frameHeight: window.innerHeight,
             captureImgSrc: captureImg,
             ImageURL: null,
-            frameSrc: frameURL,
-            message: "",
+            ImgSrc: UndetectImgURL,
+            apiFlage:false
+
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.webcamRef = React.createRef()
@@ -41,7 +45,7 @@ class PhotoLiveness extends Component {
         let frontCam = this.state.facingMode
         captureUserMedia((stream) => {
             this.setState({ src: stream });
-          });
+        });
 
         setInterval(() => {
             if (this.startTime) {
@@ -52,6 +56,7 @@ class PhotoLiveness extends Component {
         }, 1000);
     }
     getImage() {
+        this.setState({ ImgSrc: DetectImgURL })
         console.log("buttong clicked")
         this.captureRef.current.setAttribute('width', this.webcamRef.current.videoRef.current.videoWidth)
         this.captureRef.current.setAttribute('height', this.webcamRef.current.videoRef.current.videoHeight)
@@ -62,43 +67,26 @@ class PhotoLiveness extends Component {
         context.drawImage(this.webcamRef.current.videoRef.current, 0, 0, this.captureRef.current.width, height);
         var data = this.captureRef.current.toDataURL('image/jpeg');
 
-
+        this.setState({apiFlage: true})
         PhotoUpload(data, (total, progress) => {
         }).then(res => {
-            var response = res.data;                
+            this.setState({apiFlage: false})
+            var response = res.data;
+            
             if (response.result === "LIVENESS") {
                 alert(response.result + response.score)
-                
-            } else  if (response.result ==="SPOOF"){
+
+            } else if (response.result === "SPOOF") {
                 alert(response.result)
 
-            }else {
+            } else {
                 alert(response.result)
             }
 
         }).catch(e => {
             alert("the server is not working, Please try again.");
-            
+
         })
-
-
-        // ImageQuality(data, (total, progress) => {
-        // }).then(res => {
-        //     var response = res.data;
-        //     console.log(response, response.message, response.errorList);
-        //     this.setState({ previewImageStatuse: true })
-        //     this.setState({ frontCard: true })
-        //     this.setState({ ImageURL: data })
-        //     if (response.statusCode == "200") {
-        //         this.setState({ isErrorStatus: false })
-        //     } else {
-        //         this.setState({ isErrorStatus: true })
-        //     }
-        // }).catch(e => {
-
-        //     alert("image checking failed, Please try again.");
-
-        // })
 
     }
     render() {
@@ -110,11 +98,22 @@ class PhotoLiveness extends Component {
                     <canvas ref={this.captureRef} width="320" height="240" id="canvas" style={{ display: "none" }}></canvas>
                 </div>
                 <div className="frame-view">
-                    <img src={this.state.frameSrc} style={{ width: "100%", height: window.innerHeight }} />
+                    <img src={this.state.ImgSrc} style={{ width: "100%", height: window.innerHeight }} />
                 </div>
                 <div className="liveness-captureButton" onClick={() => this.getImage()}>
+                    <p style={{ font: "18px", color: "white", textAlign: "center" }}>Please place your face on the oval and take the photo </p>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>
+                {(this.state.apiFlage) &&<div className = "loadingView">
+                    <Loader
+                        type="Puff"
+                        color="#00BFFF"
+                        height={100}
+                        width={100}
+                        // timeout={3000} //3 secs
+                    />
+                </div>}
+
             </div>
         )
     }
