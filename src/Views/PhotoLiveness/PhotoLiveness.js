@@ -85,7 +85,7 @@ class PhotoLiveness extends Component {
 
         }).catch(e => {
             alert("the server is not working, Please try again.");
-
+            this.setState({apiFlage: false})
         })
 
     }
