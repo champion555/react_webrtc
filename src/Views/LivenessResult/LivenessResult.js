@@ -42,6 +42,7 @@ class LivenessResult extends Component {
                         <p style={{marginLeft:'40px'}} > Face Liveness Confirmed</p>
                         <img src = {this.state.imgSrc} className = "spoofMark"/>
                     </div> */}
+                    
                  </div>
             </div>
         )
