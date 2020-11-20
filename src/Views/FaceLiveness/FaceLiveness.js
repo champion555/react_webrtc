@@ -28,9 +28,6 @@ class FaceLiveness extends Component {
 
         }
     }
-    componentWillMount = () =>{
-        window.location.reload(false);  
-    }
     componentDidMount = () => {
         // if(this.state.reloadflag === false){
         //     window.location.reload(false);

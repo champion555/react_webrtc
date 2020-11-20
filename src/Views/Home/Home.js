@@ -39,6 +39,7 @@ class Home extends Component {
                         label="Photo Face Liveness"
                         onClick={() => {
                             window.cameraMode = "front"
+                            window.location.reload(false);
                             // this.props.history.push('photo');
                             this.props.history.push('faceliveness');
                             // this.props.history.push('photoliveness');
