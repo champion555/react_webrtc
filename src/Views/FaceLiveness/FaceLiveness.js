@@ -48,12 +48,13 @@ class FaceLiveness extends Component {
         // this.props.history.push('iddocresult')
     }
     captureImage = (GetImage) => {
-        console.log("GetImage Data",GetImage)
+        alert(this.state.apiFlag);
         this.setState({ captureImg: GetImage });
         console.log("imageData : ", this.state.captureImg)
         if(this.state.apiFlag === false){
-            alert(GetImage)
             this.setState({apiFlag: true})
+            alert(GetImage)
+            alert(this.state.apiFlag);
         }
         
         // this.onAPICall()
