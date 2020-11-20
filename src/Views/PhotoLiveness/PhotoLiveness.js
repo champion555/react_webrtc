@@ -113,7 +113,7 @@ class PhotoLiveness extends Component {
                 {(this.state.apiFlage) && <div style={{ width: "100%", height: window.innerHeight, zIndex: 20, background: "#7f00ff", position: "absolute",textAlign:"center" }}>
                     <img src={this.state.logoSrc} style = {{width:"100px",marginTop:window.innerHeight - 100}}/>
                 </div>}
-                {(this.state.apiFlage) && <div className="loadingView">
+                {(this.state.apiFlage) && <div className="loadingView" style = {{bottom:window.innerHeight * 0.5}}>
                     <Loader
                         type="Circles"
                         color="#ffffff"
