@@ -3,6 +3,7 @@ import Header from "../../Components/header/header"
 import SuccessURL from "../../assets/ic_success.png"
 import FailedURL from "../../assets/ic_failed.png"
 import UnableURL from "../../assets/ic_unable.png"
+import Button from "../../Components/button/button"
 
 import './LivenessResult.css'
 
@@ -42,7 +43,13 @@ class LivenessResult extends Component {
                         <p style={{marginLeft:'40px'}} > Face Liveness Confirmed</p>
                         <img src = {this.state.imgSrc} className = "spoofMark"/>
                     </div> */}
-                    
+                    <Button
+                        label="Retry"
+                        onClick={() => {
+                            this.props.history.push('photoliveness');
+                        }}
+                    />
+
                  </div>
             </div>
         )
