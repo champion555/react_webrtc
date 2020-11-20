@@ -40,8 +40,8 @@ class PhotoLiveness extends Component {
     }
     requestUserMedia() {
         console.log('requestUserMedia')
-        localStorage.setItem("cameraMode", "back")
-        captureUserMedia((stream) => {
+        let frontCam = this.state.facingMode
+        captureUserMedia((stream, frontCam) => {
             this.setState({ src: stream });
         });
 

@@ -26,6 +26,7 @@ class POADocCamera extends Component {
             message: "",
             isErrorStatus: false,
             errorIconURL: errorURL,
+            facingMode:"environment"
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.webcamRef = React.createRef()
@@ -45,7 +46,8 @@ class POADocCamera extends Component {
     requestUserMedia() {
         console.log('requestUserMedia')
         localStorage.setItem("cameraMode", "back")
-        captureUserMedia((stream) => {
+        let backCam = this.state.facingMode
+        captureUserMedia((stream,backCam) => {
             this.setState({ src: stream });
         });
 
