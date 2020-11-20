@@ -28,11 +28,14 @@ class FaceLiveness extends Component {
 
         }
     }
+    componentWillUnmount{
+        window.location.reload(false);  
+    }
     componentDidMount = () => {
-        if(this.state.reloadflag === false){
-            window.location.reload(false);
-            this.setState({reloadflag:true})
-        }
+        // if(this.state.reloadflag === false){
+        //     window.location.reload(false);
+        //     this.setState({reloadflag:true})
+        // }
         
         localStorage.getItem("FrontIDCardPath")
         localStorage.getItem("BackIDCardPath")
