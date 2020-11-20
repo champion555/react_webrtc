@@ -25,11 +25,11 @@ function stopMediaTracks(stream) {
 // };
 
 
-export function captureUserMedia(callback, deviceId, defaultFaceingMode = 'user', audio = true, videoSizeW, videoH) {
+export function captureUserMedia(callback, deviceId, defaultFaceingMode = 'user', audio = true,) {
 
   const videoConstraints = {
-    width: { exact: videoSizeW ? videoSizeW : 1280 },
-    height: { exact: videoH ? videoH : 720 },
+    width: { exact: 1280 },
+    height: { exact: 720 },
   };
   if (deviceId) {
     videoConstraints.deviceId = { exact: deviceId };

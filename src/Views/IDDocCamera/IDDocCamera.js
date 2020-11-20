@@ -72,10 +72,7 @@ class IDDocCamera extends Component {
     requestUserMedia() {
         console.log('requestUserMedia')
         // localStorage.setItem("cameraMode", "back")
-        var frameW = 1080
-        var marginW = 38
-        var fContentW = frameW - 2 * marginW;
-        var fContentH = 1075 - 285
+    
         captureUserMedia((stream) => {
             var track = stream.getVideoTracks()[0];
 
@@ -91,7 +88,7 @@ class IDDocCamera extends Component {
                 console.error(e)
             })
             this.setState({ src: stream });
-        }, null, { exact: "environment" }, false, 1280, fContentW / 1280 * fContentH);
+        }, null, { exact: "environment" }, false,);
 
         setInterval(() => {
             if (this.startTime) {
