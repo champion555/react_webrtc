@@ -3,6 +3,7 @@ import { withRouter } from "react-router";
 import Header from "../../Components/header/header"
 import Button from "../../Components/button/button"
 import ImageURL from "../../assets/ic_logo1.png"
+// import { Checkbox } from '@progress/kendo-react-inputs';
 
 import './Home.css';
 
@@ -33,7 +34,22 @@ class Home extends Component {
                             this.props.history.push('idmain');
                             
                         }}
-                    />   
+                    />
+                    {/* <Checkbox defaultChecked={this.state.flag} label={'I accepted the geneal condition and policy'}
+                        onChange={() => {
+                            if(this.state.flag) {
+                                this.setState({
+                                    flag: false
+                                })
+                            } else {
+                                this.setState({
+                                    flag: true
+                                })
+                            }
+                           
+                        }}
+                        style ={{marginTop:"20px"}}
+                    />    */}
 
                     <Button
                         label="Photo Face Liveness"

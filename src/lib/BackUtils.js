@@ -27,8 +27,8 @@ export function captureUserMedia(callback, deviceId, defaultFaceingMode = 'user'
   const constraints = {
     video: videoConstraints,
     audio: isMobile ? audio : false,
-    // focusMode: 'manual',
-    // focusDistance: 0.33
+    focusMode: 'manual',
+    focusDistance: 0.33
   };
 
   if (typeof window.currentStream !== 'undefined') {
