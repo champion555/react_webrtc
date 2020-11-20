@@ -72,6 +72,7 @@ class IDDocCamera extends Component {
     requestUserMedia() {
         console.log('-------requestUserMedia')
         let backCam = this.state.facingMode
+        alert(backCam)
         captureUserMedia((stream, data, backCam) => {
             this.setState({ src: stream });
         });
