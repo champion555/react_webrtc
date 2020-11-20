@@ -58,9 +58,6 @@ export default class FaceDetector extends Component {
     this.canvas.getContext('2d', { alpha: false })
     imgURL = this.canvas.toDataURL()
     // console.log('get image : ', imgURL)
-    if(this.state.imageVerified === false){
-      this.setState({imageVerified:true})
-    }
     if (this.props.detectorActiveflag && this.state.imageVerified) {
       await this.setState({
         imageVerified: false
