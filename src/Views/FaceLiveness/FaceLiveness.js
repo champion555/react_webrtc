@@ -25,6 +25,17 @@ class FaceLiveness extends Component {
         }
     }
     componentDidMount = () => {
+        localStorage.getItem("FrontIDCardPath")
+        localStorage.getItem("BackIDCardPath")
+        localStorage.getItem("PassportPath")
+        localStorage.getItem("FrontResidentPath")
+        localStorage.getItem("BackResidentPath")
+        localStorage.getItem("idCardCountry")
+        localStorage.getItem("passportCountry")
+        localStorage.getItem("residentCountry")
+        localStorage.getItem("poaDate")
+        localStorage.getItem("poaDocPath")
+        alert(localStorage.getItem("FrontIDCardPath"))
     }
 
     toggleDetection = () => {
