@@ -123,7 +123,7 @@ class IDMain extends Component {
                             return (
                                 <div onClick={this.onSelectCountry.bind(this, CountryItem.label)} style={{ display: 'flex', float: 'left', width: '100%', boxShadow: '0 1px' }}>
                                     <img src={CountryFlag} />
-                                    <span style={{ textAlign: 'center', marginTop: '20px', marginLeft: '10px' }}>{CountryItem.label}</span>
+                                    <p style={{ textAlign: 'center', marginTop: '20px', marginLeft: '10px' }}>{CountryItem.label}</p>
                                     <br />
                                     <br />
                                 </div>
