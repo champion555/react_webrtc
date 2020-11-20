@@ -92,7 +92,7 @@ class PhotoLiveness extends Component {
     render() {
         return (
             <div>
-                {(this.state.apiFlage) && <Header headerText="Face Liveness" />}
+                {(!this.state.apiFlage) && <Header headerText="Face Liveness" />}
                 <div className="camera-container">
                     <Webcam src={this.state.src} ref={this.webcamRef} />
                     <canvas ref={this.captureRef} width="320" height="240" id="canvas" style={{ display: "none" }}></canvas>
