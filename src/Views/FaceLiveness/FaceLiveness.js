@@ -11,6 +11,7 @@ import './FaceLiveness.css';
 class FaceLiveness extends Component {
     constructor(props) {
         super(props);
+        this.captureImage = this.captureImage.bind(this);
         this.state = {
             sendHeaderText: "Face Liveness",
             ImgSrc: UndetectImgURL,
@@ -78,7 +79,7 @@ class FaceLiveness extends Component {
         return (
             <div>
                 <Header headerText={this.state.sendHeaderText} />
-                <FaceDetector onSelectImage={this.captureImage} detectorActiveflag={this.state.DontReceve} active={detectorActive}>
+                <FaceDetector onSelectImage={this.captureImage()} detectorActiveflag={this.state.DontReceve} active={detectorActive}>
                     {facesData => {
                         facesData.map(face => {
                             var faceX = face.x
