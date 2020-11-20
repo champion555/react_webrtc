@@ -124,7 +124,7 @@ class POADocCamera extends Component {
                         onClick={() => {
                             window.cameraMode = "front"
                             localStorage.setItem("poaDocPath", this.state.ImageURL)
-                            this.props.history.push('faceliveness')
+                            this.props.history.push('photoliveness')
                         }}
                     />}
                     <Button
