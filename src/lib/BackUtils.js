@@ -1,7 +1,8 @@
 import Axios from '../api';
 import datauritoblob from 'datauritoblob'
 // handle user media capture
-export function captureUserMedia(callback, deviceId, facingMode) {  
+export function captureUserMedia(callback, deviceId, facingMode) { 
+  alert(facingMode) 
     var params = {
       audio: false, video: {
         deviceId: deviceId ? { deviceId: { exact: deviceId } } : null,
