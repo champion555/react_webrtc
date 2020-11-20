@@ -21,6 +21,7 @@ class PhotoLiveness extends Component {
             ImageURL: null,
             frameSrc: frameURL,
             message: "",
+            facingMode:"user"
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.webcamRef = React.createRef()

@@ -33,6 +33,7 @@ class IDDocCamera extends Component {
             idTitle: "",
             isErrorStatus: false,
             errorIconURL:errorURL,
+            facingMode:"user"
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.webcamRef = React.createRef()
@@ -70,8 +71,8 @@ class IDDocCamera extends Component {
     }
     requestUserMedia() {
         console.log('-------requestUserMedia')
-        localStorage.setItem("cameraMode", "back")
-        captureUserMedia((stream, data) => {
+        let back = this.state.facingMode
+        captureUserMedia((stream, data, back) => {
             this.setState({ src: stream });
         });
 
