@@ -14,7 +14,7 @@ class Home extends Component {
         this.state = {
             ImageSrcs: ImageURL,
             sendHeaderText: 'Home',
-            checkSrc:CheckURL,
+            checkSrc: CheckURL,
             flag: false,
         }
     }
@@ -33,27 +33,30 @@ class Home extends Component {
                     <Button
                         label="Start"
                         onClick={() => {
-                            if(this.state.flag)
+                            if (this.state.flag)
                                 this.props.history.push('idmain');
                             else
                                 alert('Please the General Condition and Policy')
                         }}
                     />
-                    <Checkbox
-                        icon={<img src={this.state.checkSrc} style={{ width: 14 }} />}
-                        name="my-input"
-                        checked={false}
-                        onChange={(value) => {
-                            this.setState({flag:value})
-                            let p = {
-                                isTrue: value,
-                            };
-                            return value;
-                        }}
-                        borderColor="#ffffff"
-                        labelStyle={{ marginLeft: 5, userSelect: "none", borderColor: "white" }}
-                        label="I accept the General Condition and Policy"
-                    />
+                    <div style = {{marginTop: "50px"}}>
+                        <Checkbox
+                            icon={<img src={this.state.checkSrc} style={{ width: 14 }} />}
+                            name="my-input"
+                            checked={false}
+                            onChange={(value) => {
+                                this.setState({ flag: value })
+                                let p = {
+                                    isTrue: value,
+                                };
+                                return value;
+                            }}
+                            borderColor="#ffffff"
+                            labelStyle={{ marginLeft: 5, userSelect: "none", borderColor: "white" }}
+                            label="I accept the General Condition and Policy"
+                        />
+                    </div>
+
 
                     {/* <Button
                         label="Photo Face Liveness"
