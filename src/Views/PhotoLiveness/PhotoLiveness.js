@@ -66,7 +66,7 @@ class PhotoLiveness extends Component {
         var height = this.webcamRef.current.videoRef.current.videoHeight * (this.captureRef.current.width / this.webcamRef.current.videoRef.current.videoWidth);
         context.drawImage(this.webcamRef.current.videoRef.current, 0, 0, this.captureRef.current.width, height);
         var data = this.captureRef.current.toDataURL('image/jpeg');
-
+        
         this.setState({apiFlage: true})
         PhotoUpload(data, (total, progress) => {
         }).then(res => {
