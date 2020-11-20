@@ -5,6 +5,7 @@ import Header from '../../Components/header/header'
 import UndetectImgURL from "../../assets/ic_undetected.png"
 import captureURL from '../../assets/camera_take.png'
 import DetectImgURL from "../../assets/ic_detected.png"
+import { PhotoUpload } from '../../lib/AppUtils';
 
 import './FaceLiveness.css';
 
@@ -56,8 +57,24 @@ class FaceLiveness extends Component {
             alert(GetImage)
             this.setState({apiFlag:true})
 
-        }   
-        // this.onAPICall()
+            PhotoUpload(GetImage, (total, progress) => {
+            }).then(res => {
+                var response = res.data;
+                // console.log(response, response.message, response.errorList);
+                
+                if (response.statusCode == "200") {
+                    alert("apicall sucess")
+                    
+                } else {
+                    alert("api call failed")
+                }
+    
+            }).catch(e => {
+                alert("the server is not working, Please try again.");
+                
+            })
+
+        }
     }
     onCapture = () => {
         this.setState({
