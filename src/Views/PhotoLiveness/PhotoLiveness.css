@@ -1,0 +1,20 @@
+.frame-view{
+    z-index: 3;
+    position: absolute;
+    width: 100%;
+}
+.message-container{
+    z-index: 4;
+    position: absolute;
+    width: 95%;
+    justify-content: center;
+}
+.liveness-captureButton{
+    position: absolute;
+    z-index: 5;
+    bottom: 30px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    
+}

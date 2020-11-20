@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import Header from "../../Components/header/header"
 import captureImg from "../../assets/camera_take.png"
 import Webcam from '../../Components/Webcam.react';
-import frameURL from "../../assets/ic_poadoc.png"
+import frameURL from "../../assets/ic_undetected.png"
 import Button from "../../Components/button/button"
 import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
 import { ImageQuality } from '../../lib/AppUtils';
@@ -90,9 +90,12 @@ class PhotoLiveness extends Component {
                     <Webcam src={this.state.src} ref={this.webcamRef} />
                     <canvas ref={this.captureRef} width="320" height="240" id="canvas" style={{ display: "none" }}></canvas>
                 </div>
-                {(!this.state.previewImageStatuse) && <div className="POA-captureButton" onClick={() => this.getImage()}>
+                <div className="frame-view">
+                    <img src={this.state.frameSrc} style={{ width: "100%", height: window.innerHeight }} />
+                </div>
+                <div className="liveness-captureButton" onClick={() => this.getImage()}>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
-                </div>}
+                </div>
             </div>
         )
     }
