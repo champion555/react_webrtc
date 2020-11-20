@@ -7,8 +7,8 @@ export function captureUserMedia(callback, deviceId, facingMode) {
         deviceId: deviceId ? { deviceId: { exact: deviceId } } : null,
         width: { exact: 1280 },
         height: { exact: 720 },
-        facingMode: facingMode,
-        // facingMode: { exact: 'user' },
+        // facingMode: facingMode,
+        facingMode: { exact: facingMode },
       }
     }; 
   navigator.getUserMedia(params, callback, (error) => {
