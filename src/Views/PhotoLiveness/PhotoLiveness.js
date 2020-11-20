@@ -110,19 +110,17 @@ class PhotoLiveness extends Component {
                     <p style={{ font: "18px", color: "white", textAlign: "center" }}>Please place your face on the oval and take the photo </p>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>
-                {(this.state.apiFlage) &&<div style={{ width: "100%", height: window.innerHeight, zIndex: 20, background: "#7f00ff", position: "absolute",textAlign:"center" }}>
+                {(this.state.apiFlage) && <div style={{ width: "100%", height: window.innerHeight, zIndex: 20, background: "#7f00ff", position: "absolute",textAlign:"center" }}>
                     <img src={this.state.logoSrc} style = {{width:"100px",marginTop:window.innerHeight - 100}}/>
                 </div>}
                 {(this.state.apiFlage) && <div className="loadingView">
                     <Loader
-                        type="Puff"
-                        color="#00BFFF"
-                        height={100}
-                        width={100}
-                    // timeout={3000} //3 secs
+                        type="Circles"
+                        color="#ffffff"
+                        height={80}
+                        width={80}
                     />
                 </div>}
-
             </div>
         )
     }
