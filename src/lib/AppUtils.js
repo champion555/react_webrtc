@@ -1,18 +1,62 @@
 import Axios from '../api';
 import datauritoblob from 'datauritoblob'
-// handle user media capture
-export function captureUserMedia(callback, deviceId) {
-    var params = {
-      audio: false, video: {
-        deviceId: deviceId ? { deviceId: { exact: deviceId } } : null,
-        width: { exact: 1280 },
-        height: { exact: 720 },
-      }
-    };  
-
-  navigator.getUserMedia(params, callback, (error) => {
-    // alert(JSON.stringify(error));
+import { isMobile } from 'react-device-detect'
+function stopMediaTracks(stream) {
+  stream.getTracks().forEach(track => {
+    track.stop();
   });
+}
+// handle user media capture
+// export function captureUserMedia(callback, deviceId) {
+//     var params = {
+//       audio: false, video: {
+//         deviceId: deviceId ? { deviceId: { exact: deviceId } } : null,
+//         width: { exact: 1280 },
+//         height: { exact: 720 },
+//       }
+//     };  
+
+//   navigator.getUserMedia(params, callback, (error) => {
+//     // alert(JSON.stringify(error));
+//   });
+// };
+export function captureUserMedia(callback, deviceId, defaultFaceingMode = 'user', audio = true, videoSizeW, videoH) {
+
+  const videoConstraints = {
+    width: { exact: videoSizeW ? videoSizeW : 1280 },
+    height: { exact: videoH ? videoH : 720 },
+  };
+  if (deviceId) {
+    videoConstraints.deviceId = { exact: deviceId };
+  } else {
+    if (isMobile)
+      videoConstraints.facingMode = defaultFaceingMode;
+
+    // width: { exact: 1280 },
+    // height: { exact: 720 },
+    // facingMode: 'user'
+  }
+
+  const constraints = {
+    video: videoConstraints,
+    audio: isMobile ? audio : false,
+    // focusMode: 'manual',
+    // focusDistance: 0.33
+  };
+
+  if (typeof window.currentStream !== 'undefined') {
+    stopMediaTracks(window.currentStream);
+  }
+
+  return navigator.mediaDevices.getUserMedia(constraints).then(stream => {
+    window.currentStream = stream;
+    callback(stream);
+    return navigator.mediaDevices.enumerateDevices();
+  })
+    .then(devices => {
+      var cameraList = devices.filter(d => d.kind === 'videoinput')
+      return cameraList;
+    })
 };
 
 var fixedNum = (num) => {
