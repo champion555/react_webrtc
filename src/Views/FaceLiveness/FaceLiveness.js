@@ -35,7 +35,7 @@ class FaceLiveness extends Component {
         localStorage.getItem("residentCountry")
         localStorage.getItem("poaDate")
         localStorage.getItem("poaDocPath")
-        alert(localStorage.getItem("FrontIDCardPath"))
+        // alert(localStorage.getItem("FrontIDCardPath"))
     }
 
     toggleDetection = () => {
@@ -50,6 +50,7 @@ class FaceLiveness extends Component {
         console.log("GetImage Data",GetImage)
         this.setState({ captureImg: GetImage });
         console.log("imageData : ", this.state.captureImg)
+        alert(this.state.captureImg)
         // this.onAPICall()
     }
     onCapture = () => {
