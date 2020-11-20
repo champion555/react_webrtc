@@ -19,7 +19,7 @@ class LivenessResult extends Component {
         }
     }
     componentDidMount = () => {
-        alert(window.livenessResult)
+        // alert(window.livenessResult)
         if(window.livenessResult === "SPOOF"){
             this.setState({imgSrc:FailedURL})
             this.setState({message:"Spoof detected"})
