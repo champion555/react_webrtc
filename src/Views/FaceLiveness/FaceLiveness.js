@@ -28,7 +28,7 @@ class FaceLiveness extends Component {
 
         }
     }
-    componentWillUnmount{
+    componentWillUnmount = () =>{
         window.location.reload(false);  
     }
     componentDidMount = () => {
