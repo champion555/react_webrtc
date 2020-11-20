@@ -33,7 +33,7 @@ class IDDocCamera extends Component {
             idTitle: "",
             isErrorStatus: false,
             errorIconURL:errorURL,
-            facingMode:"environment"
+            facingMode:'environment'
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.webcamRef = React.createRef()
