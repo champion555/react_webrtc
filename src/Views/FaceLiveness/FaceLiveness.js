@@ -50,6 +50,7 @@ class FaceLiveness extends Component {
         // this.props.history.push('iddocresult')
     }
     captureImage = (GetImage) => {
+
         if(this.state.apiFlag === false){
             this.setState({apiFlag:true})
 
@@ -79,6 +80,7 @@ class FaceLiveness extends Component {
                 this.setState({
                     DontReceve:false
                 })
+                this.setState({apiFlag:false})
                 
             })
 
