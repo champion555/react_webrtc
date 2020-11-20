@@ -48,20 +48,20 @@ class Home extends Component {
                             let p = {
                                 isTrue: value,
                             };
-                            return alert(value);
+                            return value;
                         }}
                         borderColor="#ffffff"
                         labelStyle={{ marginLeft: 5, userSelect: "none", borderColor: "white" }}
                         label="I accept the General Condition and Policy"
                     />
 
-                    <Button
+                    {/* <Button
                         label="Photo Face Liveness"
                         onClick={() => {
                             window.cameraMode = "front"
                             this.props.history.push('photoliveness');
                         }}
-                    />
+                    /> */}
                     {/* <Button
                         label="Video Face Liveness"
                         className="belowBtn"

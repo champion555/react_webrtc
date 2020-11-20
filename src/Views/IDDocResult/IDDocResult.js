@@ -13,9 +13,9 @@ class Result extends Component {
             imgSrc:SuccessURL
         }
     }
-    // ComponentDidamount = () => {
-    //     console.log("home")
-    // }
+    componentDidMount = () => {
+        
+    }
     render() {
         return (
             <div>
