@@ -50,18 +50,12 @@ class FaceLiveness extends Component {
         // this.props.history.push('iddocresult')
     }
     captureImage = (GetImage) => {
-        alert(this.state.apiFlag);
-        this.setState({ captureImg: GetImage });
-        console.log("imageData : ", this.state.captureImg)
         if(this.state.apiFlag === false){
-            alert(GetImage)
             this.setState({apiFlag:true})
 
             PhotoUpload(GetImage, (total, progress) => {
             }).then(res => {
-                var response = res.data;
-                // console.log(response, response.message, response.errorList);
-                
+                var response = res.data;                
                 if (response.statusCode == "200") {
                     alert("apicall sucess")
                     
