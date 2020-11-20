@@ -61,10 +61,22 @@ class FaceLiveness extends Component {
                     
                 } else {
                     alert("api call failed")
+                    this.setState({
+                        detectorActive: true
+                    })
+                    this.setState({
+                        DontReceve:false
+                    })
                 }
     
             }).catch(e => {
                 alert("the server is not working, Please try again.");
+                this.setState({
+                    detectorActive: true
+                })
+                this.setState({
+                    DontReceve:false
+                })
                 
             })
 
