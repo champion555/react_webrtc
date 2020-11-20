@@ -11,6 +11,7 @@ import POADocCam from './Views/POADocCamera/POADocCamera'
 import IDDocResult from './Views/IDDocResult/IDDocResult'
 import POADoc from './Views/POADoc/POADoc'
 import FaceLiveness from './Views/FaceLiveness/FaceLiveness'
+import PhotoLiveness from './Views/PhotoLiveness/PhotoLiveness'
 
 const Routes = () => {
     return (
@@ -26,6 +27,7 @@ const Routes = () => {
                 <Route exact path="/iddocresult" component={IDDocResult} />
                 <Route exact path="/poadoc" component={POADoc} />
                 <Route exact path="/faceliveness" component={FaceLiveness} />
+                <Route exact path="/photoliveness" component={PhotoLiveness} />
             </Switch>
         </BrowserRouter>
     )
