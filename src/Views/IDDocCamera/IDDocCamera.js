@@ -33,7 +33,6 @@ class IDDocCamera extends Component {
             idTitle: "",
             isErrorStatus: false,
             errorIconURL:errorURL,
-            facingMode:'environment'
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.webcamRef = React.createRef()
@@ -70,9 +69,6 @@ class IDDocCamera extends Component {
         }
     }
     requestUserMedia() {
-        console.log('-------requestUserMedia')
-        let backCam = this.state.facingMode
-        alert(backCam)
         this.captureUserMedia((stream, data, backCam) => {
             this.setState({ src: stream });
         });
@@ -94,8 +90,7 @@ class IDDocCamera extends Component {
               deviceId: deviceId ? { deviceId: { exact: deviceId } } : null,
               width: { exact: 1280 },
               height: { exact: 720 },
-              facingMode: facingMode,
-              // facingMode: { exact: 'environment' },
+              facingMode: { exact: 'environment' },
             }
           }; 
         navigator.getUserMedia(params, callback, (error) => {
