@@ -8,7 +8,7 @@ import errorURL from "../../assets/ic_error.png"
 import Button from "../../Components/button/button"
 import BottomButton from "../../Components/bottomButton/bottomButton"
 import backURL from "../../assets/ic_back.png"
-import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
+// import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
 import { ImageQuality } from '../../lib/AppUtils';
 import datauritoblob from 'datauritoblob'
 import './IDDocCamera.css';
@@ -73,19 +73,59 @@ class IDDocCamera extends Component {
         console.log('-------requestUserMedia')
         let backCam = this.state.facingMode
         alert(backCam)
-        // captureUserMedia((stream, data, backCam) => {
-        //     this.setState({ src: stream });
-        // });
+        this.captureUserMedia((stream, data, backCam) => {
+            this.setState({ src: stream });
+        });
 
         setInterval(() => {
 
             if (this.startTime) {
                 var duration = new Date().getTime() - this.startTime;
-                this.setState({ recordDuration: durationFormat(duration) });
+                this.setState({ recordDuration: this.durationFormat(duration) });
             }
 
         }, 1000);
     }
+
+    captureUserMedia(callback, deviceId, facingMode) { 
+        alert(facingMode) 
+          var params = {
+            audio: false, video: {
+              deviceId: deviceId ? { deviceId: { exact: deviceId } } : null,
+              width: { exact: 1280 },
+              height: { exact: 720 },
+              facingMode: facingMode,
+              // facingMode: { exact: 'environment' },
+            }
+          }; 
+        navigator.getUserMedia(params, callback, (error) => {
+          // alert(JSON.stringify(error));
+        });
+      }
+
+      durationFormat(mili) {
+        var fixedNum = (num) => {
+            return ("0" + num).slice(-2);
+          };
+        let x = mili > 0 ? mili : 0;
+        x = x / 1000;
+        x = Math.floor(x);
+        const secs = x % 60;
+      
+        x = x / 60;
+        x = Math.floor(x);
+        const mins = x % 60;
+      
+        x = x / 60;
+        x = Math.floor(x);
+      
+        let h = x % 24;
+        x = x / 24
+        x = Math.floor(x);
+      
+        return `${fixedNum(h)}:${fixedNum(mins)}:${fixedNum(secs)}`
+      }
+
     getImage() {
         console.log("buttong clicked")
         // this.setState({ response: '', uploadProgress: '', uploading: true })
