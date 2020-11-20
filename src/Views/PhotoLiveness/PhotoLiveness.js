@@ -92,7 +92,7 @@ class PhotoLiveness extends Component {
     render() {
         return (
             <div>
-                <Header headerText="Face Liveness" />
+                {(this.state.apiFlage) && <Header headerText="Face Liveness" />}
                 <div className="camera-container">
                     <Webcam src={this.state.src} ref={this.webcamRef} />
                     <canvas ref={this.captureRef} width="320" height="240" id="canvas" style={{ display: "none" }}></canvas>
@@ -104,6 +104,7 @@ class PhotoLiveness extends Component {
                     <p style={{ font: "18px", color: "white", textAlign: "center" }}>Please place your face on the oval and take the photo </p>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>
+                <div style={{width:"100%",height:window.innerHeight,zIndex:20,background:"#7f00ff"}}></div>
                 {(this.state.apiFlage) &&<div className = "loadingView">
                     <Loader
                         type="Puff"

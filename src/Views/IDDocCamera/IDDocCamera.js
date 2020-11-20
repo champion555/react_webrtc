@@ -268,31 +268,34 @@ class IDDocCamera extends Component {
                                 this.setState({ idTitle: "Back of National ID Card" })
                                 this.setState({ message: "Place the back page of ID Card inside the frame and take the photo" })
                                 this.setState({ previewImageStatuse: false })
-                                // window.FrontIDCardPath = this.state.IDDocImgURL
-                                localStorage.setItem("FrontIDCardPath", this.state.IDDocImgURL)                    
+                                window.FrontIDCardPath = this.state.IDDocImgURL
+                                // localStorage.setItem("FrontIDCardPath", this.state.IDDocImgURL)                    
                             } else if (IDTarget == "passport") {
                                 this.props.history.push('idmain')
-                                // window.PassportPath = this.state.IDDocImgURL
-                                localStorage.setItem("PassportPath", this.state.IDDocImgURL)
-                                localStorage.setItem("passportCountry",window.countryName)
+                                window.PassportPath = this.state.IDDocImgURL
+                                window.PassportCountry = window.countryName
+                                // localStorage.setItem("PassportPath", this.state.IDDocImgURL)
+                                // localStorage.setItem("passportCountry",window.countryName)
                             } else if (IDTarget == "frontResident") {
                                 this.setState({ IDTarget: "backResident" })
                                 this.setState({ titleMessage: "Residence Permit Card" })
                                 this.setState({ idTitle: "Back of Residence Permit" })
                                 this.setState({ message: "Place the back of Residence Permit Card inside the frame and take the photo" })
                                 this.setState({ previewImageStatuse: false })
-                                // window.FrontResidentPath = this.state.IDDocImgURL
-                                localStorage.setItem("FrontResidentPath", this.state.IDDocImgURL)                                
+                                window.FrontResidentPath = this.state.IDDocImgURL
+                                // localStorage.setItem("FrontResidentPath", this.state.IDDocImgURL)                                
                             } else if (IDTarget == "backIDCard") {
                                 this.props.history.push('idmain')
-                                // window.BackIDCardPath = this.state.IDDocImgURL
-                                localStorage.setItem("BackIDCardPath", this.state.IDDocImgURL)
-                                localStorage.setItem("idCardCountry",window.countryName)
+                                window.BackIDCardPath = this.state.IDDocImgURL
+                                window.IDCardCountry = window.countryName
+                                // localStorage.setItem("BackIDCardPath", this.state.IDDocImgURL)
+                                // localStorage.setItem("idCardCountry",window.countryName)
                             } else if (IDTarget == "backResident") {
                                 this.props.history.push('poadoc')
-                                // window.BackResidentPath = this.state.IDDocImgURL
-                                localStorage.setItem("BackResidentPath", this.state.IDDocImgURL)
-                                localStorage.setItem("residentCountry",window.countryName)
+                                window.BackResidentPath = this.state.IDDocImgURL
+                                window.ResidentCountry = window.countryName
+                                // localStorage.setItem("BackResidentPath", this.state.IDDocImgURL)
+                                // localStorage.setItem("residentCountry",window.countryName)
                             }
                         }}
                     />}

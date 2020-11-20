@@ -38,3 +38,6 @@ Webcam {
 input{
   height: 30px;
 }
+span{
+  color: white;
+}

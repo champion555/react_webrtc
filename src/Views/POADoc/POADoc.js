@@ -53,7 +53,8 @@ class POADoc extends Component {
                             <Button
                                 label="Scan PoA Document"
                                 onClick={() => {
-                                    localStorage.setItem("poaDate",this.state.startDate)
+                                    // localStorage.setItem("poaDate",this.state.startDate)
+                                    window.POADate = this.state.startDate
                                     this.props.history.push('poadoccam')
                                     
                                 }}

@@ -123,7 +123,8 @@ class POADocCamera extends Component {
                         label="My photo is clear"
                         onClick={() => {
                             window.cameraMode = "front"
-                            localStorage.setItem("poaDocPath", this.state.ImageURL)
+                            window.POADocPath = this.state.ImageURL
+                            // localStorage.setItem("poaDocPath", this.state.ImageURL)
                             this.props.history.push('photoliveness')
                         }}
                     />}
