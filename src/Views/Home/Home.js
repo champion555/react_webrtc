@@ -42,8 +42,8 @@ class Home extends Component {
                             // window.location.reload(false);
                             // this.props.history.push('photo');
                             // this.props.history.push('faceliveness');
-                            this.props.history.replace("faceliveness")
-                            // this.props.history.push('photoliveness');
+                            // this.props.history.replace("faceliveness")
+                            this.props.history.push('photoliveness');
 
                             
                             

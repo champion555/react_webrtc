@@ -5,7 +5,7 @@ import captureImg from "../../assets/camera_take.png"
 import Webcam from '../../Components/Webcam.react';
 import frameURL from "../../assets/ic_undetected.png"
 import Button from "../../Components/button/button"
-// import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
+import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
 import { PhotoUpload } from '../../lib/AppUtils';
 import './PhotoLiveness.css';
 
@@ -35,14 +35,13 @@ class PhotoLiveness extends Component {
             return;
         }
         this.requestUserMedia();
-        // this.onSetMessage();
     }
     requestUserMedia() {
         console.log('requestUserMedia')
         let frontCam = this.state.facingMode
-        this.captureUserMedia((stream, frontCam) => {
+        captureUserMedia((stream) => {
             this.setState({ src: stream });
-        });
+          });
 
         setInterval(() => {
             if (this.startTime) {
@@ -52,45 +51,6 @@ class PhotoLiveness extends Component {
 
         }, 1000);
     }
-
-    captureUserMedia(callback) { 
-        var params = {
-          audio: false, video: {
-            width: { exact: 1280 },
-            height: { exact: 720 },
-            facingMode: { exact: 'user' },
-          }
-        }; 
-      navigator.getUserMedia(params, callback, (error) => {
-        // alert(JSON.stringify(error));
-      });
-    }
-
-    durationFormat(mili) {
-      var fixedNum = (num) => {
-          return ("0" + num).slice(-2);
-        };
-      let x = mili > 0 ? mili : 0;
-      x = x / 1000;
-      x = Math.floor(x);
-      const secs = x % 60;
-    
-      x = x / 60;
-      x = Math.floor(x);
-      const mins = x % 60;
-    
-      x = x / 60;
-      x = Math.floor(x);
-    
-      let h = x % 24;
-      x = x / 24
-      x = Math.floor(x);
-    
-      return `${fixedNum(h)}:${fixedNum(mins)}:${fixedNum(secs)}`
-    }
-
-
-
     getImage() {
         console.log("buttong clicked")
         this.captureRef.current.setAttribute('width', this.webcamRef.current.videoRef.current.videoWidth)
@@ -111,7 +71,7 @@ class PhotoLiveness extends Component {
                 
             } else  if (response.result ==="SPOOF"){
                 alert(response.result)
-                
+
             }else {
                 alert(response.result)
             }
