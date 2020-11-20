@@ -78,15 +78,6 @@ class IDDocCamera extends Component {
 
             let supported = navigator.mediaDevices.getSupportedConstraints();
             console.error('supported', supported)
-            track.applyConstraints({
-                advanced: [
-                    { focusMode: 'manual', focusDistance: 0.33 }
-                ]
-            }).then(r => {
-                console.log('r', r)
-            }).catch(e => {
-                console.error(e)
-            })
             this.setState({ src: stream });
         }, null, { exact: "environment" }, false,);
 
