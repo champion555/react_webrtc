@@ -55,9 +55,8 @@ class FaceLiveness extends Component {
         if(this.state.apiFlag === false){
             this.setState({apiFlag: true})
             alert(GetImage)
-            alert(this.state.apiFlag);
         }
-        
+        alert("end" + this.state.apiFlag);     
         // this.onAPICall()
     }
     onCapture = () => {

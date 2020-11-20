@@ -53,16 +53,16 @@ export default class FaceDetector extends Component {
       this.newWorkQueue()
     }
   }
-  getImage = () => {
+  getImage = async () => {
     var imgURL
     this.canvas.getContext('2d', { alpha: false })
     imgURL = this.canvas.toDataURL()
     // console.log('get image : ', imgURL)
     if (this.props.detectorActiveflag && this.state.imageVerified) {
-      this.setState({
+      await this.setState({
         imageVerified: false
       });
-      this.props.onSelectImage(imgURL);
+      await this.props.onSelectImage(imgURL);
     }
   }
 
