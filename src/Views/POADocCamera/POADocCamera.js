@@ -47,9 +47,13 @@ class POADocCamera extends Component {
         console.log('requestUserMedia')
         localStorage.setItem("cameraMode", "back")
         let backCam = this.state.facingMode
-        captureUserMedia((stream,backCam) => {
+        captureUserMedia((stream) => {
+            var track = stream.getVideoTracks()[0];
+
+            let supported = navigator.mediaDevices.getSupportedConstraints();
+            console.error('supported', supported)
             this.setState({ src: stream });
-        });
+        }, null, { exact: "environment" }, false,);
 
         setInterval(() => {
             if (this.startTime) {
