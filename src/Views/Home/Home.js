@@ -73,7 +73,7 @@ class Home extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div class='termsOfService'>
+                        <div className='termsOfService'>
                             By click on <strong>Start</strong> button you agree to our <a href="#">Terms of Service</a>. For more information see our <a href="#">Privacy Policy</a>
                         </div>
                     </div>
