@@ -19,3 +19,95 @@
     width: 50%;
     height: 60px;
 }
+
+.header .companyName {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.header .companyDesc {
+    text-align: center;
+    font-size: 16px;
+    color: white;
+}
+
+.content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.content p{
+    margin: 5px;
+}
+
+.content .info .heading {
+    font-size: 25px;
+    color:  rgb(43, 247, 43);
+    font-weight: 600;
+    text-align: center;
+}
+
+.content .info .desc {
+    font-size: 16px;
+    color: white;
+    text-align: center;
+}
+
+.personal_data_list .personal_data {
+    margin-left: 32px;
+}
+
+.personal_data .title_panel {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.personal_data .title_panel .number {
+    width: 30px;
+    height: 30px;
+    border: 2px solid white;
+    background-color: rgb(43, 247, 43);
+    color: indigo;    
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.personal_data .title_panel .title p {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.personal_data .title_panel .title span {
+    font-size: 14px;
+    font-weight: 200;
+}
+
+.personal_data .data ul {
+    margin: 4px;
+}
+
+.content .termsOfService {
+    color: white;
+    padding: 0px 8px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 8px;
+}
+li{
+    color: white;
+}
+
+.content .termsOfService a {
+    color: white;
+    font-weight: bold;
+}
