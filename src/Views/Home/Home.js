@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
-import Header from "../../Components/header/header"
 import Button from "../../Components/startButton/startButton"
 import ImageURL from "../../assets/ic_logo1.png"
 import CheckURL from "../../assets/ic_check.png"
-import Checkbox from "react-custom-checkbox";
-import Icon, { FontAwesome, Feather } from 'react-web-vector-icons';
 import './Home.css';
 
 class Home extends Component {
@@ -18,8 +15,8 @@ class Home extends Component {
             flag: false,
         }
     }
-
     componentDidMount = () => {
+        
     }
 
 
