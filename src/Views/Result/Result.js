@@ -13,7 +13,6 @@ class Result extends Component {
             var score = props.location.state.score;
             // var threshold = props.location.state.threshold;
             var threshold = 0.9
-
             var message = score >= threshold ? 'Liveness confirmed' : 'Spoofing Detected';
             var img = score >= threshold ? SuccessURL : FailedURL
             var hideRetry = false;

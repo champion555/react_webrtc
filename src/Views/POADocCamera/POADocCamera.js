@@ -6,7 +6,7 @@ import Webcam from '../../Components/Webcam.react';
 import frameURL from "../../assets/ic_poadoc.png"
 import errorURL from "../../assets/ic_error.png"
 import Button from "../../Components/button/button"
-import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
+import { captureUserMedia, durationFormat } from '../../lib/BackUtils';
 import { ImageQuality } from '../../lib/AppUtils';
 import './POADocCamera.css';
 
@@ -46,10 +46,7 @@ class POADocCamera extends Component {
     requestUserMedia() {
         console.log('requestUserMedia')
         localStorage.setItem("cameraMode", "back")
-        let backCam = this.state.facingMode
         captureUserMedia((stream) => {
-            var track = stream.getVideoTracks()[0];
-
             let supported = navigator.mediaDevices.getSupportedConstraints();
             console.error('supported', supported)
             this.setState({ src: stream });

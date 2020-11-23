@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from "../../Components/header/header"
 import SuccessURL from "../../assets/ic_success.png"
-import FailedURL from "../../assets/ic_failed.png"
 
 import './IDDocResult.css'
 

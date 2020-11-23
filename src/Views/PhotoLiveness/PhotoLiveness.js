@@ -7,7 +7,7 @@ import UndetectImgURL from "../../assets/ic_undetected.png"
 import DetectImgURL from "../../assets/ic_detected.png"
 import LogoURL from "../../assets/ic_logo1.png"
 import Button from "../../Components/button/button"
-import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
+import { captureUserMedia} from '../../lib/BackUtils';
 import { PhotoUpload } from '../../lib/AppUtils';
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -44,7 +44,6 @@ class PhotoLiveness extends Component {
     }
     requestUserMedia() {
         console.log('requestUserMedia')
-        let frontCam = this.state.facingMode
         captureUserMedia((stream) => {
             this.setState({ src: stream });
         });
