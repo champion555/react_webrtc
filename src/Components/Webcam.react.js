@@ -29,7 +29,7 @@ class Webcam extends React.Component {
 
   render() {
     return (
-      <video ref={this.videoRef}  autoplay loop muted playsinline width="100%" style={{ height: this.state.frameHeight, transform:`${this.state.faceMode == 'front'?'rotateY(180deg)':''}` }} />
+      <video ref={this.videoRef}  loop autoplay controls="true" width="100%" style={{ height: this.state.frameHeight, transform:`${this.state.faceMode == 'front'?'rotateY(180deg)':''}` }} />
     )
   }
 }

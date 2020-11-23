@@ -44,10 +44,10 @@ class IDDocCamera extends Component {
         console.log(window.countryName)
         console.log(window.IDType)
         console.log(window.cameraMode)
-        if (!hasGetUserMedia) {
-            alert("Your browser cannot stream from your webcam. Please switch to Chrome or Firefox.");
-            return;
-        }
+        // if (!hasGetUserMedia) {
+        //     alert("Your browser cannot stream from your webcam. Please switch to Chrome or Firefox.");
+        //     return;
+        // }
         this.requestUserMedia();
         this.onSetMessage();
     }
