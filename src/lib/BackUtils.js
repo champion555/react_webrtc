@@ -18,10 +18,6 @@ export function captureUserMedia(callback, deviceId, defaultFaceingMode = 'user'
   } else {
     if (isMobile)
       videoConstraints.facingMode = defaultFaceingMode;
-
-    // width: { exact: 1280 },
-    // height: { exact: 720 },
-    // facingMode: 'user'
   }
 
   const constraints = {
