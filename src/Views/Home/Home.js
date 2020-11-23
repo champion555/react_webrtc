@@ -72,7 +72,7 @@ class Home extends Component {
                                 <div className="personal_data">
                                     <div className="title_panel">
                                         <div className="number">3</div>
-                                        <div className="title"><p>Self Photo</p></div>
+                                        <div className="title"><p>Selfie Photo</p></div>
                                     </div>
                                 </div>
                             </div>
@@ -90,6 +90,7 @@ class Home extends Component {
                                 //     alert('Please the General Condition and Policy')
                             }}
                         />
+                        <div style ={{fontStyle:"italic", color:"#7f00ff",marginTop:"20px"}}>Powerd by BIOMIID</div>
                         {/* <div style = {{marginTop: "10px"}}>
                         <Checkbox
                             icon={<img src={this.state.checkSrc} style={{ width: 14 }} />}

@@ -45,7 +45,7 @@
 
 .content .info .heading {
     font-size: 25px;
-    color:  rgb(43, 247, 43);
+    color:  #7f00ff;
     font-weight: 600;
     text-align: center;
 }
@@ -69,10 +69,10 @@
 .personal_data .title_panel .number {
     width: 30px;
     height: 30px;
-    border: 2px solid #7f00ff;
-    background-color: rgb(43, 247, 43);
+    border: 2px solid white;
+    background-color:white;
     color: #7f00ff;    
-    font-size: 16px;
+    font-size: 25px;
     font-weight: bold;
     border-radius: 50%;
     display: flex;
