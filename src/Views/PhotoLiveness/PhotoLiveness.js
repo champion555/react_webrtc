@@ -108,7 +108,7 @@ class PhotoLiveness extends Component {
                     <canvas ref={this.captureRef} width="320" height="240" id="canvas" style={{ display: "none" }}></canvas>
                 </div>
                 <div className="frame-view">
-                    <img src={this.state.ImgSrc} style={{ width: "100%", height: window.innerHeight - 50 }} />
+                    <img src={this.state.ImgSrc} style={{ width: "100%", height: window.innerHeight}} />
                 </div>
                 <div className="liveness-captureButton" onClick={() => this.getImage()}>
                     <p style={{ font: "18px", color: "white", textAlign: "center" }}>Please place your face on the oval and take the photo </p>
