@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
-import Header from "../../Components/header/header"
 import captureImg from "../../assets/camera_take.png"
 import Webcam from '../../Components/Webcam.react';
 import frameURL from "../../assets/ic_background.png"
@@ -10,7 +9,6 @@ import BottomButton from "../../Components/bottomButton/bottomButton"
 import backURL from "../../assets/ic_back.png"
 import { captureUserMedia, VideoUpload, changeCamera, durationFormat } from '../../lib/BackUtils';
 import { ImageQuality } from '../../lib/AppUtils';
-import datauritoblob from 'datauritoblob'
 import './IDDocCamera.css';
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -89,25 +87,6 @@ class IDDocCamera extends Component {
 
         }, 1000);
     }
-
-
-
-    // requestUserMedia() {
-    //     console.log('-------requestUserMedia')
-    //     this.captureUserMedia((stream, data, backCam) => {
-    //         this.setState({ src: stream });
-    //     });
-
-    //     setInterval(() => {
-
-    //         if (this.startTime) {
-    //             var duration = new Date().getTime() - this.startTime;
-    //             this.setState({ recordDuration: this.durationFormat(duration) });
-    //         }
-
-    //     }, 1000);
-    // }
-
     captureUserMedia(callback, deviceId, facingMode) { 
           var params = {
             audio: false, video: {
@@ -147,7 +126,6 @@ class IDDocCamera extends Component {
 
     getImage() {
         console.log("buttong clicked")
-        // this.setState({ response: '', uploadProgress: '', uploading: true })
         this.captureRef.current.setAttribute('width', this.webcamRef.current.videoRef.current.videoWidth)
         this.captureRef.current.setAttribute('height', this.webcamRef.current.videoRef.current.videoHeight)
         var context = this.captureRef.current.getContext('2d');

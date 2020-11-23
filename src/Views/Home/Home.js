@@ -84,47 +84,9 @@ class Home extends Component {
                             label="Start"
                             onClick={() => {
                                 this.props.history.push('idmain');
-                                // if (this.state.flag)
-                                // this.props.history.push('idmain');
-                                // else
-                                //     alert('Please the General Condition and Policy')
                             }}
                         />
                         <div style ={{fontStyle:"italic", color:"#7f00ff",marginTop:"20px"}}>Powerd by BIOMIID</div>
-                        {/* <div style = {{marginTop: "10px"}}>
-                        <Checkbox
-                            icon={<img src={this.state.checkSrc} style={{ width: 14 }} />}
-                            name="my-input"
-                            checked={false}
-                            onChange={(value) => {
-                                this.setState({ flag: value })
-                                let p = {
-                                    isTrue: value,
-                                };
-                                return value;
-                            }}
-                            borderColor="#ffffff"
-                            labelStyle={{ marginLeft: 5, userSelect: "none", borderColor: "white" }}
-                            label="I accept the General Condition and Policy"
-                        />
-                    </div> */}
-
-
-                        {/* <Button
-                        label="Photo Face Liveness"
-                        onClick={() => {
-                            window.cameraMode = "front"
-                            this.props.history.push('photoliveness');
-                        }}
-                    /> */}
-                        {/* <Button
-                        label="Video Face Liveness"
-                        className="belowBtn"
-                        onClick={() => {
-                            window.cameraMode = "front"
-                            this.props.history.push('video');
-                        }}
-                    /> */}
                     </div>
 
 
