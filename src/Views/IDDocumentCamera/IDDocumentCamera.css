@@ -46,6 +46,7 @@
 .errorMessageView { 
     padding-left: 16px;
     padding-right: 16px; 
+    margin-top: 10px;
 }
 
 .errorMessageView .container {
