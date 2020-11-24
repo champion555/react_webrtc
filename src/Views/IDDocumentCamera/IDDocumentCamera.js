@@ -52,7 +52,7 @@ class IDDocumentCamera extends Component {
                         forceScreenshotSourceSize="false"
                     /> */}
                      <Camera
-                     facingMode = "ENVIRONMENT"
+                     facingMode = "USER"
                      
                      />
                 </div>
