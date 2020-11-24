@@ -15,8 +15,8 @@
 
 video {
   width: 100%;
-  object-fit: cover;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .parent {

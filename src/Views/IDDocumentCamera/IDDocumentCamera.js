@@ -28,7 +28,7 @@ class IDDocumentCamera extends Component {
             facingMode: "environment"
         };
         return (
-            <div style={{ width: "100%", height: "100vh", background: "#7f00ff", opacity: "0.8" }}>
+            <div style={{ width: "100%", height: "100vh", background: "#7f00ff"}}>
                 <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex" }}>
                     <img src={this.state.backButtonSRC} style={{ width: "20px", height: "20px", marginLeft: "10px" }}
                         onClick={() => {
@@ -38,7 +38,7 @@ class IDDocumentCamera extends Component {
                     <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>country</p>
                 </div>
                 <div className="IDCamera-Container" style={{ height: window.innerHeight * 0.5 }}>
-                    {/* <Webcam
+                    <Webcam
                         audio={false}
                         height={window.innerHeight*0.5}
                         mirrored={true}
@@ -50,11 +50,7 @@ class IDDocumentCamera extends Component {
                         screenshotQuality = {1.0}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="false"
-                    /> */}
-                     <Camera
-                     facingMode = "USER"
-                     
-                     />
+                    />
                 </div>
                 <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.2 }}>
                     <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold", marginBottom: "0px" }}>this is id title</p>
