@@ -41,6 +41,7 @@ class IDDocumentCamera extends Component {
                         audio={false}
                         height={window.innerHeight*0.5}
                         mirrored={true}
+                        mirrored = {true}
                         ref={this.setRef}
                         screenshotFormat="image/jpeg"
                         width={"100%"}
