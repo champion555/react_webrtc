@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import backURL from "../../assets/ic_back.png"
 import Webcam from "react-webcam";
+import { Camera } from 'react-cam';
 import './IDDocumentCamera.css'
 
 class IDDocumentCamera extends Component {
@@ -37,17 +38,27 @@ class IDDocumentCamera extends Component {
                     <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>country</p>
                 </div>
                 <div className="IDCamera-Container" style={{ height: window.innerHeight * 0.5 }}>
-                    <Webcam
+                    {/* <Webcam
                         audio={false}
                         height={window.innerHeight*0.5}
                         mirrored={true}
                         mirrored = {false}
                         ref={this.setRef}
                         screenshotFormat="image/jpeg"
-                        imageSmoothing = {false}
+                        imageSmoothing = {true}
                         width={"100%"}
+                        screenshotQuality = {1.0}
                         videoConstraints={videoConstraints}
-                        forceScreenshotSourceSize="true"
+                        forceScreenshotSourceSize="false"
+                    /> */}
+                    <Camera
+                        showFocus={false}
+                        front={false}
+                        height= {Window.innerHeight*0.5}
+                        width="100%"
+                        focusWidth="80%"
+                        focusHeight="60%"
+                        btnColor="white"
                     />
                 </div>
                 <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.2 }}>
