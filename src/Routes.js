@@ -11,6 +11,7 @@ import IDDocResult from './Views/IDDocResult/IDDocResult'
 import POADoc from './Views/POADoc/POADoc'
 import PhotoLiveness from './Views/PhotoLiveness/PhotoLiveness'
 import LivenessResult from './Views/LivenessResult/LivenessResult'
+import IDDocumentCamera from './Views/IDDocumentCamera/IDDocumentCamera'
 
 const Routes = () => {
     return (
@@ -21,6 +22,7 @@ const Routes = () => {
                 <Route exact path="/result" component={Result} />
                 <Route exact path="/idmain" component={IDMainPage} />
                 <Route exact path="/iddoccam" component={IDDocCam} />
+                <Route exact path="/iddocumentcamera" component={IDDocumentCamera} />
                 <Route exact path="/poadoccam" component={POADocCam} />
                 <Route exact path="/iddocresult" component={IDDocResult} />
                 <Route exact path="/poadoc" component={POADoc} />
