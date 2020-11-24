@@ -3,6 +3,7 @@ import { withRouter } from "react-router";
 import backURL from "../../assets/ic_back.png"
 import captureURL from "../../assets/camera_take.png"
 import errorURL from "../../assets/ic_error.png"
+import Button from "../../Components/button/button"
 import Webcam from "react-webcam";
 import Camera from 'react-dom-camera';
 import './IDDocumentCamera.css'
@@ -13,8 +14,8 @@ class IDDocumentCamera extends Component {
         super(props);
         this.state = {
             backButtonSRC: backURL,
-            captureButtonSRC:captureURL,
-            errorSRC:errorURL,
+            captureButtonSRC: captureURL,
+            errorSRC: errorURL,
 
 
         }
@@ -61,20 +62,30 @@ class IDDocumentCamera extends Component {
                     <p className="IDTitle" >this is id title</p>
                     <p className="IDDocCamMeassage">Place the front of National ID Card inside the frame and take the photo</p>
                 </div>
-                <div className = "errorMessageView" style={{ bottom: window.innerHeight * 0.13 }}>
-                    <div className = "container">
-                        <div className = "errortitle">   
+                <div className="errorMessageView" style={{ bottom: window.innerHeight * 0.13 }}>
+                    <div className="container">
+                        <div className="errortitle">
                             <img src={this.state.errorSRC} />
                             <p>The image quality is very low</p>
                         </div>
-                        <div className = "errormessage">
+                        <div className="errormessage">
                             <p>- Make sure the image is not blurry or contains blares!</p>
                         </div>
                     </div>
                 </div>
                 <div className="IDCapture-Container">
-                    <img className = "IDCaptureButton" src={this.state.captureButtonSRC} />
+                    <img className="IDCaptureButton" src={this.state.captureButtonSRC} />
                     <p>powerd by BIOMIID</p>
+                </div>
+                <div className="ButtonPreview">
+                    <Button
+                        label="My photo is clear"
+                    />
+
+                    <Button
+                        label="Re-take"
+                    />
+
                 </div>
             </div>
         )
