@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import backURL from "../../assets/ic_back.png"
 import Webcam from "react-webcam";
-import { Camera } from 'react-cam';
+import Camera from 'react-dom-camera';
 import './IDDocumentCamera.css'
 
 class IDDocumentCamera extends Component {
@@ -51,15 +51,10 @@ class IDDocumentCamera extends Component {
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="false"
                     /> */}
-                    <Camera
-                        showFocus={false}
-                        front={false}
-                        height= {Window.innerHeight*0.5}
-                        width="100%"
-                        focusWidth="80%"
-                        focusHeight="60%"
-                        btnColor="white"
-                    />
+                     <Camera
+                     facingMode = "ENVIRONMENT"
+                     
+                     />
                 </div>
                 <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.2 }}>
                     <p style={{ textAlign: "center", color: "white", fontSize: "20px", fontWeight: "bold", marginBottom: "0px" }}>this is id title</p>
