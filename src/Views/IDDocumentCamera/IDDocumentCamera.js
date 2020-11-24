@@ -36,10 +36,10 @@ class IDDocumentCamera extends Component {
                     <p style={{ color: "white", marginLeft: "20px", fontWeight: "bold", fontSize: "20px" }}>title message</p>
                     <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>country</p>
                 </div>
-                <div className="IDCamera-Container" style={{ height: window.innerHeight * 0.4 }}>
+                <div className="IDCamera-Container" style={{ height: window.innerHeight * 0.5 }}>
                     <Webcam
                         audio={false}
-                        height={window.innerHeight*0.4}
+                        height={window.innerHeight*0.5}
                         mirrored={true}
                         ref={this.setRef}
                         screenshotFormat="image/jpeg"
