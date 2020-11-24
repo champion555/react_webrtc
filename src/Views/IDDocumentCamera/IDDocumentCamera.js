@@ -44,6 +44,7 @@ class IDDocumentCamera extends Component {
                         mirrored = {false}
                         ref={this.setRef}
                         screenshotFormat="image/jpeg"
+                        imageSmoothing = {false}
                         width={"100%"}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="true"
