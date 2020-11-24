@@ -57,7 +57,7 @@ class IDDocumentCamera extends Component {
                         forceScreenshotSourceSize="false"
                     />
                 </div>
-                <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.2 }}>
+                <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
                     <p className="IDTitle" >this is id title</p>
                     <p className="IDDocCamMeassage">Place the front of National ID Card inside the frame and take the photo</p>
                 </div>

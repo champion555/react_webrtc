@@ -14,6 +14,7 @@
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 0px;
+    margin-top: 0px;
 }
 .IDMessage-Container .IDDocCamMeassage{
     color: white;
@@ -21,6 +22,7 @@
     overflow-wrap: break-word;
     width: 96%;
     font-size: 18px;
+    margin-top: 5px;
     margin-bottom: 5px;
 }
 .IDCapture-Container{
