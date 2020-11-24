@@ -24,7 +24,7 @@ class IDDocumentCamera extends Component {
 
     render() {
         const videoConstraints = {
-            facingMode: "user"
+            facingMode: "environment"
         };
         return (
             <div style={{ width: "100%", height: "100vh", background: "#7f00ff", opacity: "0.8" }}>
