@@ -28,7 +28,7 @@ class IDDocumentCamera extends Component {
             facingMode: "environment"
         };
         return (
-            <div style={{ width: "100%", height: "100vh", background: "#7f00ff"}}>
+            <div style={{ width: "100%", height:window.inn, background: "#7f00ff"}}>
                 <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex" }}>
                     <img src={this.state.backButtonSRC} style={{ width: "20px", height: "20px", marginLeft: "10px" }}
                         onClick={() => {
