@@ -27,3 +27,13 @@
     width: 100%;
     text-align: center;
 }
+.topBar{
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+}

@@ -5,13 +5,14 @@ import captureImg from "../../assets/camera_take.png"
 import Webcam from '../../Components/Webcam.react';
 import UndetectImgURL from "../../assets/ic_undetected.png"
 import DetectImgURL from "../../assets/ic_detected.png"
+import BackURL from "../../assets/ic_back.png"
 import LogoURL from "../../assets/ic_logo1.png"
-import Button from "../../Components/button/button"
-import { captureUserMedia} from '../../lib/BackUtils';
+import { captureUserMedia } from '../../lib/BackUtils';
 import { PhotoUpload } from '../../lib/AppUtils';
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './PhotoLiveness.css';
+import { within } from '@testing-library/react';
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia || navigator.msGetUserMedia);
@@ -24,8 +25,9 @@ class PhotoLiveness extends Component {
             captureImgSrc: captureImg,
             ImageURL: null,
             ImgSrc: UndetectImgURL,
-            logoSrc:LogoURL,
-            apiFlage: false
+            logoSrc: LogoURL,
+            apiFlage: false,
+            backButtonSrc: BackURL
 
         };
         this.requestUserMedia = this.requestUserMedia.bind(this);
@@ -58,7 +60,7 @@ class PhotoLiveness extends Component {
     }
     getImage() {
         this.setState({ ImgSrc: DetectImgURL })
-        console.log("buttong clicked")
+        console.log("button clicked")
         this.captureRef.current.setAttribute('width', this.webcamRef.current.videoRef.current.videoWidth)
         this.captureRef.current.setAttribute('height', this.webcamRef.current.videoRef.current.videoHeight)
         var context = this.captureRef.current.getContext('2d');
@@ -75,17 +77,12 @@ class PhotoLiveness extends Component {
             var response = res.data;
 
             if (response.result === "LIVENESS") {
-                // alert(response.result + response.score)
                 this.props.history.push('iddocresult')
-
             } else if (response.result === "SPOOF") {
-                // alert(response.result)
                 window.livenessResult = response.result
                 this.setState({ ImgSrc: UndetectImgURL })
                 this.props.history.push('livenessresult')
-
             } else {
-                // alert(response.result)
                 window.livenessResult = response.result
                 this.setState({ ImgSrc: UndetectImgURL })
                 this.props.history.push('livenessresult')
@@ -101,22 +98,26 @@ class PhotoLiveness extends Component {
     render() {
         return (
             <div>
-                {(!this.state.apiFlage) && <Header headerText="Face Liveness" />}
+                {/* {(!this.state.apiFlage) && <Header headerText="Face Liveness" />} */}
+
                 <div className="camera-container">
                     <Webcam src={this.state.src} ref={this.webcamRef} />
                     <canvas ref={this.captureRef} width="320" height="240" id="canvas" style={{ display: "none" }}></canvas>
                 </div>
-                <div className="frame-view">
-                    <img src={this.state.ImgSrc} style={{ width: "100%", height: window.innerHeight}} />
+                <div className="frame-view" style={{ height: "100vh", backgroundImage: `url(${this.state.ImgSrc})`, backgroundSize: "100% 100%" }} />
+                <div className="topBar">
+                    <img src={this.state.backButtonSrc} onClick={() => this.props.history.push('poadoc')} className="btnBack" />
+                    <h2 className="txtTitle">Face Liveness</h2>
+                    <div style={{ width: '10px' }}></div>
                 </div>
                 <div className="liveness-captureButton" onClick={() => this.getImage()}>
                     <p style={{ font: "18px", color: "white", textAlign: "center" }}>Please place your face on the oval and take the photo </p>
                     <img src={this.state.captureImgSrc} className="captureIcon" />
                 </div>
-                {(this.state.apiFlage) && <div style={{ width: "100%", height: window.innerHeight, zIndex: 20, background: "#7f00ff", position: "absolute",textAlign:"center" }}>
-                    <img src={this.state.logoSrc} style = {{width:"100px",marginTop:window.innerHeight - 100}}/>
+                {(this.state.apiFlage) && <div style={{ width: "100%", height: window.innerHeight, zIndex: 20, background: "#7f00ff", position: "absolute", textAlign: "center" }}>
+                    <img src={this.state.logoSrc} style={{ width: "100px", marginTop: window.innerHeight - 100 }} />
                 </div>}
-                {(this.state.apiFlage) && <div className="loadingView" style = {{bottom:window.innerHeight * 0.5}}>
+                {(this.state.apiFlage) && <div className="loadingView" style={{ bottom: window.innerHeight * 0.5 }}>
                     <Loader
                         type="Circles"
                         color="#ffffff"
