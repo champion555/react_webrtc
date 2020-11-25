@@ -8,8 +8,8 @@ import Webcam from "react-webcam";
 import { ImageQuality } from '../../lib/AppUtils';
 import './IDDocumentCamera.css'
 
-const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia || navigator.msGetUserMedia);
+// const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+//     navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
 class IDDocumentCamera extends Component {
     constructor(props) {
@@ -31,10 +31,10 @@ class IDDocumentCamera extends Component {
         console.log(window.countryName)
         console.log(window.IDType)
         console.log(window.cameraMode)
-        if (!hasGetUserMedia) {
-            alert("Your browser cannot stream from your webcam. Please switch to Chrome or Firefox.");
-            return;
-        }
+        // if (!hasGetUserMedia) {
+        //     alert("Your browser cannot stream from your webcam. Please switch to Chrome or Firefox.");
+        //     return;
+        // }
         this.onSetMessage()
     }
     onSetMessage = () => {
