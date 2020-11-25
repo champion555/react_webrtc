@@ -85,10 +85,12 @@ class IDDocumentCamera extends Component {
                 this.setState({ titleMessage: "Image preview" })
                 this.setState({ message: "Make sure the ID Docment image is clear to read" })
                 this.setState({ isErrorStatus: true })
+                
             }
 
         }).catch(e => {
             alert("the server is not working, Please try again.");
+            this.setState({isLoading: false})
         })
 
     };

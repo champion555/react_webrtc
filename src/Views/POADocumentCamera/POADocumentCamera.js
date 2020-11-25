@@ -41,9 +41,8 @@ class POADocumentCamera extends Component {
                 this.setState({ isErrorStatus: true })
             }
         }).catch(e => {
-
             alert("image checking failed, Please try again.");
-
+            this.setState({isLoading: true})
         })
     };
     onReTake = () => {
