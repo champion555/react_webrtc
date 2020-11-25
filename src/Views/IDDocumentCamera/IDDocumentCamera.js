@@ -135,7 +135,7 @@ class IDDocumentCamera extends Component {
                     {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height:this.state.screenshot.innerHeight}} />}
                 </div>
                 <div style={{ zIndex: "2", position: "absolute", width: "100%", height: "100vh" }}>
-                    <div style={{ height: window.innerHeight * 0.07, background: "#7f00ff",opacity:"0.8" }}>
+                    <div style={{ height: window.innerHeight * 0.07, background: "#7f00ff" }}>
                         <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex", background: "" }}>
                             <img src={this.state.backButtonSRC} style={{ width: "20px", height: "20px", marginLeft: "10px" }}
                                 onClick={() => {
@@ -145,8 +145,8 @@ class IDDocumentCamera extends Component {
                             <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
                         </div>
                     </div>
-                    <div style={{ height: window.innerHeight * 0.4}}></div>
-                    <div style={{ height: window.innerHeight * 0.5,background:"#7f00ff",opacity:"0.8" }}>
+                    <div style={{ height: window.innerHeight * 0.43}}></div>
+                    <div style={{ height: window.innerHeight * 0.5,background:"#7f00ff" }}>
                         <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
                             <p className="IDTitle" >{this.state.idTitle}</p>
                             <p className="IDDocCamMeassage">{this.state.message}</p>
