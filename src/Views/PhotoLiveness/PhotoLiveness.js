@@ -84,16 +84,18 @@ class PhotoLiveness extends Component {
                         forceScreenshotSourceSize="flase"
                     />
                 </div>
-                <div className="frame-view" style={{ height: "100vh", backgroundImage: `url(${this.state.ImgSrc})`, backgroundSize: "100% 100%" }} />
-                <div className="topBar">
-                    <img src={this.state.backButtonSrc} onClick={() => this.props.history.push('poadoc')} className="btnBack" />
-                    <h2 className="txtTitle">Face Liveness</h2>
-                    <div style={{ width: '10px' }}></div>
+                <div className="frame-view" style={{ height: "100vh", backgroundImage: `url(${this.state.ImgSrc})`, backgroundSize: "100% 100%" }} >
+                    <div className="topBar">
+                        <img src={this.state.backButtonSrc} onClick={() => this.props.history.push('poadoc')} className="btnBack" />
+                        <h2 className="txtTitle">Face Liveness</h2>
+                        <div style={{ width: '10px' }}></div>
+                    </div>
+                    <div className="liveness-captureButton" onClick={() => this.getImage()}>
+                        <p style={{ font: "18px", color: "white", textAlign: "center" }}>Please place your face on the oval and take the photo </p>
+                        <img src={this.state.captureImgSrc} className="captureIcon" />
+                    </div>
                 </div>
-                <div className="liveness-captureButton" onClick={() => this.getImage()}>
-                    <p style={{ font: "18px", color: "white", textAlign: "center" }}>Please place your face on the oval and take the photo </p>
-                    <img src={this.state.captureImgSrc} className="captureIcon" />
-                </div>
+
                 {(this.state.apiFlage) && <div style={{ width: "100%", height: window.innerHeight, zIndex: 20, background: "#7f00ff", position: "absolute", textAlign: "center" }}>
                     <img src={this.state.logoSrc} style={{ width: "100px", marginTop: window.innerHeight - 100 }} />
                 </div>}
