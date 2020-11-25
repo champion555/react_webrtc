@@ -38,6 +38,7 @@ class POADocumentCamera extends Component {
                         screenshotFormat="image/jpeg"
                         imageSmoothing={true}
                         width={"100%"}
+                        height = {window.innerHeight*0.9}
                         screenshotQuality={1.0}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase" />
