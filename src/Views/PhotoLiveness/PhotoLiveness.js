@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import captureImg from "../../assets/camera_take.png"
-import UndetectImgURL from "../../assets/ic_undetected.png"
-import DetectImgURL from "../../assets/ic_detected.png"
+import UndetectImgURL from "../../assets/ic_undetected1.png"
+import DetectImgURL from "../../assets/ic_detected1.png"
 import BackURL from "../../assets/ic_back.png"
 import Button from "../../Components/button/button"
 import LogoURL from "../../assets/ic_logo1.png"
@@ -85,7 +85,7 @@ class PhotoLiveness extends Component {
                         <h2 className="txtTitle">Face Liveness</h2>
                         <div style={{ width: '10px' }}></div>
                     </div>
-                    <div style={{ width: "100%", height: window.innerHeight * 0.68 }}></div>
+                    <div style={{ width: "100%", height: window.innerHeight * 0.68,backgroundImage:`url(${this.state.ImgSrc})`,backgroundSize:"100% 100%" }}></div>
                     <div className="liveness-captureButton" style={{ height: window.innerHeight * 0.25 }}>
                         <p style={{ font: "18px", color: "white", textAlign: "center", marginBottom: "5px" }}>Please place your face on the oval and take the photo </p>
                         <Button
