@@ -3,7 +3,8 @@ import { withRouter } from "react-router";
 import backURL from "../../assets/ic_back.png"
 import captureURL from "../../assets/camera_take.png"
 import errorURL from "../../assets/ic_error.png"
-import Button from "../../Components/button/button"
+import ClearButton from "../../Components/button/button"
+import ReTakeButton from "../../Components/bottomButton/bottomButton"
 import Webcam from "react-webcam";
 import { ImageQuality } from '../../lib/AppUtils';
 import './IDDocumentCamera.css'
@@ -167,7 +168,7 @@ class IDDocumentCamera extends Component {
                             <p>powerd by BIOMIID</p>
                         </div>}
                         {(this.state.previewImageStatuse) && <div className="ButtonPreview">
-                            {(!this.state.isErrorStatus) && <Button
+                            {(!this.state.isErrorStatus) && <ClearButton
                                 label="My photo is clear"
                                 onClick={() => {
                                     let { IDTarget } = this.state
@@ -208,7 +209,7 @@ class IDDocumentCamera extends Component {
                                     }
                                 }}
                             />}
-                            <Button
+                            <ReTakeButton
                                 label="Re-take"
                                 onClick={this.onReTake}
                             />
