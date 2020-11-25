@@ -172,7 +172,7 @@ class IDDocumentCamera extends Component {
                         <div style = {{height:window.innerHeight*0.03,background:"#7f00ff",opacity:"0.6"}}></div>
                         <div style = {{height:window.innerHeight*0.42,display:"flex",flexDirection:"row"}}>
                             <div style = {{width:"3%",height:window.innerHeight*0.42, background:"#7f00ff",opacity:"0.6"}}></div>
-                            <div style = {{width:"94%",height:window.innerHeight*0.42 - 6,border:"solid", borderColor:"white"}}></div>
+                            <div style = {{width:"94%",height:window.innerHeight*0.42 - 4,border:"solid", borderColor:"white"}}></div>
                             <div style = {{width:"3%",height:window.innerHeight*0.42,background:"#7f00ff",opacity:"0.6"}}></div>
                         </div>
                         <div style = {{height:window.innerHeight*0.03,background:"#7f00ff",opacity:"0.6"}}></div>
