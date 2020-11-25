@@ -118,7 +118,7 @@ class IDDocumentCamera extends Component {
             facingMode: "environment"
         };
         return (
-            <div style={{ width: "100%", height: "100vh" }}>
+            <div style={{ width: "100%", height:window.innerHeight}}>
                 <div className="IDCamera-Container">
                 {(!this.state.previewImageStatuse) && <Webcam
                         audio={false}
