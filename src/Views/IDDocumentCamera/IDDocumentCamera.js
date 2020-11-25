@@ -53,39 +53,39 @@ class IDDocumentCamera extends Component {
         this.setState({ previewImageStatuse: true })
         this.setState({ screenshot: imageSrc })
         console.log(imageSrc)
-        // ImageQuality(imageSrc, (total, progress) => {
-        // }).then(res => {
-        //     var response = res.data;
-        //     console.log(response, response.message, response.errorList);
-        //     this.setState({ previewImageStatuse: true })
-        //     this.setState({ frontCard: true })
-        //     if (response.statusCode == "200") {
-        //         let { IDTarget } = this.state
-        //         if (IDTarget == "frontIDCard") {
-        //             this.setState({ titleMessage: "Image preview" })
-        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         } else if (IDTarget == "passport") {
-        //             this.setState({ titleMessage: "Image preview" })
-        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         } else if (IDTarget == "frontResident") {
-        //             this.setState({ titleMessage: "Image preview" })
-        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         } else if (IDTarget == "backIDCard") {
-        //             this.setState({ titleMessage: "Image preview" })
-        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         } else if (IDTarget == "backResident") {
-        //             this.setState({ titleMessage: "Image preview" })
-        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         }
-        //     } else {
-        //         this.setState({ titleMessage: "Image preview" })
-        //         this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         this.setState({ isErrorStatus: true })
-        //     }
+        ImageQuality(imageSrc, (total, progress) => {
+        }).then(res => {
+            var response = res.data;
+            console.log(response, response.message, response.errorList);
+            // this.setState({ previewImageStatuse: true })
+            this.setState({ frontCard: true })
+            if (response.statusCode == "200") {
+                let { IDTarget } = this.state
+                if (IDTarget == "frontIDCard") {
+                    this.setState({ titleMessage: "Image preview" })
+                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                } else if (IDTarget == "passport") {
+                    this.setState({ titleMessage: "Image preview" })
+                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                } else if (IDTarget == "frontResident") {
+                    this.setState({ titleMessage: "Image preview" })
+                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                } else if (IDTarget == "backIDCard") {
+                    this.setState({ titleMessage: "Image preview" })
+                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                } else if (IDTarget == "backResident") {
+                    this.setState({ titleMessage: "Image preview" })
+                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                }
+            } else {
+                this.setState({ titleMessage: "Image preview" })
+                this.setState({ message: "Make sure the ID Docment image is clear to read" })
+                this.setState({ isErrorStatus: true })
+            }
 
-        // }).catch(e => {
-        //     alert("the server is not working, Please try again.");
-        // })
+        }).catch(e => {
+            alert("the server is not working, Please try again.");
+        })
 
     };
     onReTake = () => {
