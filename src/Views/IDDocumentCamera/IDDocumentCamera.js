@@ -174,7 +174,7 @@ class IDDocumentCamera extends Component {
                             <p className="IDTitle" >{this.state.idTitle}</p>
                             <p className="IDDocCamMeassage">{this.state.message}</p>
                         </div>
-                        {(this.state.isErrorStatus) && <div className="errorMessageView" style={{ bottom: window.innerHeight * 0.13 }}>
+                        {/* {(this.state.isErrorStatus) && <div className="errorMessageView" style={{ bottom: window.innerHeight * 0.13 }}>
                             <div className="container">
                                 <div className="errortitle">
                                     <img src={this.state.errorSRC} />
@@ -184,16 +184,16 @@ class IDDocumentCamera extends Component {
                                     <p>- Make sure the image is not blurry or contains blares!</p>
                                 </div>
                             </div>
-                        </div>}
+                        </div>} */}
                         {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ height: window.innerHeight * 0.35 }}>
-                            {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginBottom: "20px", textAlign: "center" }}>
+                            {/* {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginBottom: "20px", textAlign: "center" }}>
                                 <Loader
                                     type="Circles"
                                     color="#ffffff"
                                     height={40}
                                     width={40}
                                 />
-                            </div>}
+                            </div>} */}
                             {(!this.state.isLoading) && <Button
                                 label="Take A Picture"
                                 onClick={this.onCapture}

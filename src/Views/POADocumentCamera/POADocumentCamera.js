@@ -77,7 +77,7 @@ class POADocumentCamera extends Component {
                     {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight - 50 }} />}
                 </div>
                 <div style={{ width: "100%", height: window.innerHeight - 50, position: "absolute", zIndex: "2" }}>
-                    {(this.state.isErrorStatus) && <div className="POAErrorMessageView" style={{ marginTop: window.innerHeight * 0.5 }}>
+                    {/* {(this.state.isErrorStatus) && <div className="POAErrorMessageView" style={{ marginTop: window.innerHeight * 0.5 }}>
                         <div className="container">
                             <div className="errortitle">
                                 <img src={this.state.errorIconURL} />
@@ -87,15 +87,15 @@ class POADocumentCamera extends Component {
                                 <p>- Make sure the image is not blurry or contains blares!</p>
                             </div>
                         </div>
-                    </div>}
-                    {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginTop: window.innerHeight * 0.6, textAlign: "center" }}>
+                    </div>} */}
+                    {/* {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginTop: window.innerHeight * 0.6, textAlign: "center" }}>
                         <Loader
                             type="Circles"
                             color="#ffffff"
                             height={40}
                             width={40}
                         />
-                    </div>}
+                    </div>} */}
                     {(!this.state.previewImageStatuse) && <div className="POACapture-Container">
                         {(!this.state.isLoading) && <Button
                             label="POA Document Scan"
