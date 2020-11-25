@@ -78,7 +78,7 @@ class Home extends Component {
                         </div>
 
                     </div>
-                    <div style = {{width:"100%", flexDirection:"column",alignItems:"center", display:"flex",marginTop:"20px"}}>
+                    <div style = {{width:"100%", flexDirection:"column",alignItems:"center", display:"flex"}}>
                         <div className="startButton"
                             onClick={() => {
                                 this.props.history.push('idmain');
