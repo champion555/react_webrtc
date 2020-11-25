@@ -17,7 +17,7 @@ class POADocumentCamera extends Component {
             errorIconURL: errorURL,
             previewImageStatuse: false,
             isErrorStatus: false,
-            isLoading:false
+            isLoading: false
         }
     }
     componentDidMount = () => {
@@ -27,23 +27,25 @@ class POADocumentCamera extends Component {
         const imageSrc = this.webcam.getScreenshot();
         this.setState({ screenshot: imageSrc })
         console.log(this.state.screenshot)
-        this.setState({isLoading: true})
+        this.setState({ isLoading: true })
+        this.setState({ previewImageStatuse: true })
+        this.setState({ isLoading: false })
 
-        ImageQuality(imageSrc, (total, progress) => {
-        }).then(res => {
-            var response = res.data;
-            console.log(response, response.message, response.errorList);
-            this.setState({ previewImageStatuse: true })
-            this.setState({isLoading: false})
-            if (response.statusCode == "200") {
-                this.setState({ isErrorStatus: false })
-            } else {
-                this.setState({ isErrorStatus: true })
-            }
-        }).catch(e => {
-            alert("The server is not working or the network error, Please try again.");
-            this.setState({isLoading: false})
-        })
+        // ImageQuality(imageSrc, (total, progress) => {
+        // }).then(res => {
+        //     var response = res.data;
+        //     console.log(response, response.message, response.errorList);
+        //     this.setState({ previewImageStatuse: true })
+        //     this.setState({ isLoading: false })
+        //     if (response.statusCode == "200") {
+        //         this.setState({ isErrorStatus: false })
+        //     } else {
+        //         this.setState({ isErrorStatus: true })
+        //     }
+        // }).catch(e => {
+        //     alert("The server is not working or the network error, Please try again.");
+        //     this.setState({ isLoading: false })
+        // })
     };
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
@@ -86,7 +88,7 @@ class POADocumentCamera extends Component {
                             </div>
                         </div>
                     </div>}
-                    {(this.state.isLoading) &&  <div style={{ height: "50px", width: "100%",marginTop:window.innerHeight*0.6, textAlign: "center" }}>
+                    {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginTop: window.innerHeight * 0.6, textAlign: "center" }}>
                         <Loader
                             type="Circles"
                             color="#ffffff"

@@ -56,42 +56,60 @@ class IDDocumentCamera extends Component {
         const imageSrc = this.webcam.getScreenshot();
         this.setState({ screenshot: imageSrc })
         console.log(imageSrc)
-        this.setState({isLoading: true})
-        ImageQuality(imageSrc, (total, progress) => {
-        }).then(res => {
-            var response = res.data;
-            console.log(response, response.message, response.errorList);
-            this.setState({ previewImageStatuse: true })
-            this.setState({isLoading: false})
-            if (response.statusCode == "200") {
-                let { IDTarget } = this.state
-                if (IDTarget == "frontIDCard") {
-                    this.setState({ titleMessage: "Image preview" })
-                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                } else if (IDTarget == "passport") {
-                    this.setState({ titleMessage: "Image preview" })
-                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                } else if (IDTarget == "frontResident") {
-                    this.setState({ titleMessage: "Image preview" })
-                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                } else if (IDTarget == "backIDCard") {
-                    this.setState({ titleMessage: "Image preview" })
-                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                } else if (IDTarget == "backResident") {
-                    this.setState({ titleMessage: "Image preview" })
-                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                }
-            } else {
-                this.setState({ titleMessage: "Image preview" })
-                this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                this.setState({ isErrorStatus: true })
-                
-            }
+        // this.setState({isLoading: true})
+        this.setState({ previewImageStatuse: true })
+        let { IDTarget } = this.state
+        if (IDTarget == "frontIDCard") {
+            this.setState({ titleMessage: "Image preview" })
+            this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        } else if (IDTarget == "passport") {
+            this.setState({ titleMessage: "Image preview" })
+            this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        } else if (IDTarget == "frontResident") {
+            this.setState({ titleMessage: "Image preview" })
+            this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        } else if (IDTarget == "backIDCard") {
+            this.setState({ titleMessage: "Image preview" })
+            this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        } else if (IDTarget == "backResident") {
+            this.setState({ titleMessage: "Image preview" })
+            this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        }
+        // ImageQuality(imageSrc, (total, progress) => {
+        // }).then(res => {
+        //     var response = res.data;
+        //     console.log(response, response.message, response.errorList);
+        //     this.setState({ previewImageStatuse: true })
+        //     this.setState({ isLoading: false })
+        //     if (response.statusCode == "200") {
+        //         let { IDTarget } = this.state
+        //         if (IDTarget == "frontIDCard") {
+        //             this.setState({ titleMessage: "Image preview" })
+        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         } else if (IDTarget == "passport") {
+        //             this.setState({ titleMessage: "Image preview" })
+        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         } else if (IDTarget == "frontResident") {
+        //             this.setState({ titleMessage: "Image preview" })
+        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         } else if (IDTarget == "backIDCard") {
+        //             this.setState({ titleMessage: "Image preview" })
+        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         } else if (IDTarget == "backResident") {
+        //             this.setState({ titleMessage: "Image preview" })
+        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         }
+        //     } else {
+        //         this.setState({ titleMessage: "Image preview" })
+        //         this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         this.setState({ isErrorStatus: true })
 
-        }).catch(e => {
-            alert("The server is not working or the network error, Please try again.");
-            this.setState({isLoading: false})
-        })
+        //     }
+
+        // }).catch(e => {
+        //     alert("The server is not working or the network error, Please try again.");
+        //     this.setState({ isLoading: false })
+        // })
 
     };
     onReTake = () => {
@@ -168,7 +186,7 @@ class IDDocumentCamera extends Component {
                             </div>
                         </div>}
                         {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ height: window.innerHeight * 0.35 }}>
-                            {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginBottom: "20px",textAlign:"center"}}>
+                            {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginBottom: "20px", textAlign: "center" }}>
                                 <Loader
                                     type="Circles"
                                     color="#ffffff"
