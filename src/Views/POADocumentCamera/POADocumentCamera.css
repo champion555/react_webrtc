@@ -6,12 +6,11 @@
 }
 .POADocumentCamera-Container .PreviewImage{
     width: 100%;
-    margin-top: 25px;
     
 }
 .POADocumentCamera-Container video{
     width: 100%;
-    object-fit: none;
+    object-fit: fill;
 }
 .POAErrorMessageView { 
     padding-left: 16px;

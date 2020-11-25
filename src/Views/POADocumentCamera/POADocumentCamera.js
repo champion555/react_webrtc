@@ -72,7 +72,7 @@ class POADocumentCamera extends Component {
                         screenshotQuality={1.0}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase" />}
-                    {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight - 120 }} />}
+                    {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight - 50 }} />}
                 </div>
                 <div style={{ width: "100%", height: window.innerHeight - 50, position: "absolute", zIndex: "2" }}>
                     {(this.state.isErrorStatus) && <div className="POAErrorMessageView" style={{ marginTop: window.innerHeight * 0.5 }}>
