@@ -168,16 +168,16 @@ class IDDocumentCamera extends Component {
                             <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
                         </div>
                     </div>
-                    <div style={{ height: window.innerHeight * 0.43,position:"relative"}}>
+                    <div style={{ height: window.innerHeight * 0.48,position:"relative"}}>
                         <div style = {{height:window.innerHeight*0.05,background:"#7f00ff",opacity:"0.6"}}></div>
-                        <div style = {{height:window.innerHeight*0.33,display:"flex",flexDirection:"row"}}>
-                            <div style = {{width:"2%",height:window.innerHeight*0.33, background:"#7f00ff",opacity:"0.6"}}></div>
-                            <div style = {{width:"96%",height:window.innerHeight*0.33}}></div>
-                            <div style = {{width:"2%",height:window.innerHeight*0.33,background:"#7f00ff",opacity:"0.6"}}></div>
+                        <div style = {{height:window.innerHeight*0.38,display:"flex",flexDirection:"row"}}>
+                            <div style = {{width:"2%",height:window.innerHeight*0.38, background:"#7f00ff",opacity:"0.6"}}></div>
+                            <div style = {{width:"96%",height:window.innerHeight*0.38}}></div>
+                            <div style = {{width:"2%",height:window.innerHeight*0.38,background:"#7f00ff",opacity:"0.6"}}></div>
                         </div>
                         <div style = {{height:window.innerHeight*0.05,background:"#7f00ff",opacity:"0.6"}}></div>
                     </div>
-                    <div style={{ height: window.innerHeight * 0.5, background: "#7f00ff" }}>
+                    <div style={{ height: window.innerHeight * 0.45, background: "#7f00ff" }}>
                         <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
                             <p className="IDTitle" >{this.state.idTitle}</p>
                             <p className="IDDocCamMeassage">{this.state.message}</p>
