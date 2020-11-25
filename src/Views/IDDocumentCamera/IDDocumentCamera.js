@@ -146,7 +146,7 @@ class IDDocumentCamera extends Component {
                         </div>
                     </div>
                     <div style={{ height: window.innerHeight * 0.43}}></div>
-                    <div style={{ height: window.innerHeight * 0.45,background:"#7f00ff" }}>
+                    <div style={{ height: window.innerHeight * 0.5,background:"#7f00ff" }}>
                         <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
                             <p className="IDTitle" >{this.state.idTitle}</p>
                             <p className="IDDocCamMeassage">{this.state.message}</p>
@@ -162,7 +162,7 @@ class IDDocumentCamera extends Component {
                                 </div>
                             </div>
                         </div>}
-                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container">
+                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{height:window.innerHeight*0.35}}>
                             <img className="IDCaptureButton" src={this.state.captureButtonSRC} onClick={this.onCapture} />
                             <p>powerd by BIOMIID</p>
                         </div>}
