@@ -126,7 +126,6 @@ class IDDocumentCamera extends Component {
                 <div className="IDCamera-Container">
                     {(!this.state.previewImageStatuse) && <Webcam
                         audio={false}
-                        mirrored={true}
                         mirrored={false}
                         ref={this.setRef}
                         screenshotFormat="image/jpeg"

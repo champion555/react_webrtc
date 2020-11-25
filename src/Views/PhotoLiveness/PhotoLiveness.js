@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
-import Header from "../../Components/header/header"
 import captureImg from "../../assets/camera_take.png"
-import Webcam from '../../Components/Webcam.react';
 import UndetectImgURL from "../../assets/ic_undetected.png"
 import DetectImgURL from "../../assets/ic_detected.png"
 import BackURL from "../../assets/ic_back.png"
 import LogoURL from "../../assets/ic_logo1.png"
-import { captureUserMedia } from '../../lib/BackUtils';
 import { PhotoUpload } from '../../lib/AppUtils';
 import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './PhotoLiveness.css';
+import Webcam from "react-webcam";
 import { within } from '@testing-library/react';
-
-const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
 class PhotoLiveness extends Component {
     constructor(props) {
@@ -30,34 +25,9 @@ class PhotoLiveness extends Component {
             backButtonSrc: BackURL
 
         };
-        this.requestUserMedia = this.requestUserMedia.bind(this);
-        this.webcamRef = React.createRef()
-        this.captureRef = React.createRef()
 
     }
-    componentDidMount = () => {
-        console.log(window.countryName)
-        console.log(window.IDType)
-        if (!hasGetUserMedia) {
-            alert("Your browser cannot stream from your webcam. Please switch to Chrome or Firefox.");
-            return;
-        }
-        this.requestUserMedia();
-    }
-    requestUserMedia() {
-        console.log('requestUserMedia')
-        captureUserMedia((stream) => {
-            this.setState({ src: stream });
-        });
 
-        setInterval(() => {
-            if (this.startTime) {
-                var duration = new Date().getTime() - this.startTime;
-                this.setState({ recordDuration: this.durationFormat(duration) });
-            }
-
-        }, 1000);
-    }
     getImage() {
         this.setState({ ImgSrc: DetectImgURL })
         console.log("button clicked")
@@ -96,13 +66,23 @@ class PhotoLiveness extends Component {
 
     }
     render() {
+        const videoConstraints = {
+            facingMode: "user"
+        };
         return (
             <div>
-                {/* {(!this.state.apiFlage) && <Header headerText="Face Liveness" />} */}
-
                 <div className="camera-container">
-                    <Webcam src={this.state.src} ref={this.webcamRef} />
-                    <canvas ref={this.captureRef} width="320" height="240" id="canvas" style={{ display: "none" }}></canvas>
+                    <Webcam
+                        audio={false}
+                        mirrored={true}
+                        ref={this.setRef}
+                        screenshotFormat="image/jpeg"
+                        imageSmoothing={true}
+                        width={"100%"}
+                        screenshotQuality={1.0}
+                        videoConstraints={videoConstraints}
+                        forceScreenshotSourceSize="flase"
+                    />
                 </div>
                 <div className="frame-view" style={{ height: "100vh", backgroundImage: `url(${this.state.ImgSrc})`, backgroundSize: "100% 100%" }} />
                 <div className="topBar">
