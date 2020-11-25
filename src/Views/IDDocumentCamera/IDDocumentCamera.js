@@ -50,14 +50,14 @@ class IDDocumentCamera extends Component {
     }
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
-        this.setState({ previewImageStatuse: true })
+        // this.setState({ previewImageStatuse: true })
         this.setState({ screenshot: imageSrc })
         console.log(imageSrc)
         ImageQuality(imageSrc, (total, progress) => {
         }).then(res => {
             var response = res.data;
             console.log(response, response.message, response.errorList);
-            // this.setState({ previewImageStatuse: true })
+            this.setState({ previewImageStatuse: true })
             this.setState({ frontCard: true })
             if (response.statusCode == "200") {
                 let { IDTarget } = this.state
