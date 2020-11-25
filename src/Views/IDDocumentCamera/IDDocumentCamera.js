@@ -7,6 +7,8 @@ import Button from "../../Components/button/button"
 import ReTakeButton from "../../Components/bottomButton/bottomButton"
 import Webcam from "react-webcam";
 import { ImageQuality } from '../../lib/AppUtils';
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './IDDocumentCamera.css'
 
 class IDDocumentCamera extends Component {
@@ -23,6 +25,7 @@ class IDDocumentCamera extends Component {
             previewImageStatuse: false,
             isErrorStatus: false,
             screenshot: null,
+            isLoading: false,
         }
     }
     componentDidMount = () => {
@@ -53,12 +56,13 @@ class IDDocumentCamera extends Component {
         const imageSrc = this.webcam.getScreenshot();
         this.setState({ screenshot: imageSrc })
         console.log(imageSrc)
+        this.setState({isLoading: true})
         ImageQuality(imageSrc, (total, progress) => {
         }).then(res => {
             var response = res.data;
             console.log(response, response.message, response.errorList);
             this.setState({ previewImageStatuse: true })
-            this.setState({ frontCard: true })
+            this.setState({isLoading: false})
             if (response.statusCode == "200") {
                 let { IDTarget } = this.state
                 if (IDTarget == "frontIDCard") {
@@ -163,11 +167,19 @@ class IDDocumentCamera extends Component {
                             </div>
                         </div>}
                         {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ height: window.innerHeight * 0.35 }}>
+                            {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginBottom: "20px",textAlign:"center"}}>
+                                <Loader
+                                    type="Circles"
+                                    color="#ffffff"
+                                    height={40}
+                                    width={40}
+                                />
+                            </div>}
                             <Button
                                 label="Take A Picture"
                                 onClick={this.onCapture}
                             />
-                            <p className = "bottomTitle">powerd by BIOMIID</p>
+                            <p className="bottomTitle">powerd by BIOMIID</p>
                         </div>}
                         {(this.state.previewImageStatuse) && <div className="ButtonPreview">
                             {(!this.state.isErrorStatus) && <Button
