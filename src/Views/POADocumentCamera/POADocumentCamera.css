@@ -3,3 +3,62 @@
     position: absolute;
     z-index: 1;
 }
+.POADocumentCamera-Container .PreviewImage{
+    width: 100%;
+}
+.POADocumentCamera-Container video{
+    width: 100%;
+    object-fit: cover;
+}
+.POAErrorMessageView { 
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.POAErrorMessageView .container {
+    border: 1px solid yellow;
+    border-radius: 5px;
+}
+
+.POAErrorMessageView .errortitle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 16px;
+    color: white;
+    height: 30px;
+}
+
+.POAErrorMessageView .errortitle img {
+    width: 16px;
+}
+.POAErrorMessageView .errortitle p {
+    margin-left: 10px;
+    font-size: 16px;
+}
+.POAErrorMessageView .container .errormessage p{
+    color: white;
+    margin-top: 0px;
+    margin-left: 16px;
+    font-size: 14px;
+}
+.POACapture-Container{
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+}.POACapture-Container .bottomTitle{
+    color: white;
+    margin-top: 5px;
+    font-style: italic;
+}
+.POAPreviewButton-Container{
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+}
