@@ -84,7 +84,7 @@ class PhotoLiveness extends Component {
                         forceScreenshotSourceSize="flase"
                     />
                 </div>
-                <div className="frame-view" style={{ height: "100vh", backgroundImage: `url(${this.state.ImgSrc})`, backgroundSize: "100% 100%" }} >
+                <div className="frame-view" style={{ height: window.innerHeight, backgroundImage: `url(${this.state.ImgSrc})`, backgroundSize: "100% 100%" }} >
                     <div className="topBar">
                         <img src={this.state.backButtonSrc} onClick={() => this.props.history.push('poadoc')} className="btnBack" />
                         <h2 className="txtTitle">Face Liveness</h2>
