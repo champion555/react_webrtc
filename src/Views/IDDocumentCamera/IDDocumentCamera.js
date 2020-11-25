@@ -8,9 +8,6 @@ import Webcam from "react-webcam";
 import { ImageQuality } from '../../lib/AppUtils';
 import './IDDocumentCamera.css'
 
-// const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-//     navigator.mozGetUserMedia || navigator.msGetUserMedia);
-
 class IDDocumentCamera extends Component {
     constructor(props) {
         super(props);
@@ -31,10 +28,6 @@ class IDDocumentCamera extends Component {
         console.log(window.countryName)
         console.log(window.IDType)
         console.log(window.cameraMode)
-        // if (!hasGetUserMedia) {
-        //     alert("Your browser cannot stream from your webcam. Please switch to Chrome or Firefox.");
-        //     return;
-        // }
         this.onSetMessage()
     }
     onSetMessage = () => {
@@ -57,41 +50,42 @@ class IDDocumentCamera extends Component {
     }
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
+        this.setState({ previewImageStatuse: true })
         this.setState({ screenshot: imageSrc })
         console.log(imageSrc)
-        ImageQuality(imageSrc, (total, progress) => {
-        }).then(res => {
-            var response = res.data;
-            console.log(response, response.message, response.errorList);
-            this.setState({ previewImageStatuse: true })
-            this.setState({ frontCard: true })
-            if (response.statusCode == "200") {
-                let { IDTarget } = this.state
-                if (IDTarget == "frontIDCard") {
-                    this.setState({ titleMessage: "Image preview" })
-                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                } else if (IDTarget == "passport") {
-                    this.setState({ titleMessage: "Image preview" })
-                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                } else if (IDTarget == "frontResident") {
-                    this.setState({ titleMessage: "Image preview" })
-                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                } else if (IDTarget == "backIDCard") {
-                    this.setState({ titleMessage: "Image preview" })
-                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                } else if (IDTarget == "backResident") {
-                    this.setState({ titleMessage: "Image preview" })
-                    this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                }
-            } else {
-                this.setState({ titleMessage: "Image preview" })
-                this.setState({ message: "Make sure the ID Docment image is clear to read" })
-                this.setState({ isErrorStatus: true })
-            }
+        // ImageQuality(imageSrc, (total, progress) => {
+        // }).then(res => {
+        //     var response = res.data;
+        //     console.log(response, response.message, response.errorList);
+        //     this.setState({ previewImageStatuse: true })
+        //     this.setState({ frontCard: true })
+        //     if (response.statusCode == "200") {
+        //         let { IDTarget } = this.state
+        //         if (IDTarget == "frontIDCard") {
+        //             this.setState({ titleMessage: "Image preview" })
+        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         } else if (IDTarget == "passport") {
+        //             this.setState({ titleMessage: "Image preview" })
+        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         } else if (IDTarget == "frontResident") {
+        //             this.setState({ titleMessage: "Image preview" })
+        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         } else if (IDTarget == "backIDCard") {
+        //             this.setState({ titleMessage: "Image preview" })
+        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         } else if (IDTarget == "backResident") {
+        //             this.setState({ titleMessage: "Image preview" })
+        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         }
+        //     } else {
+        //         this.setState({ titleMessage: "Image preview" })
+        //         this.setState({ message: "Make sure the ID Docment image is clear to read" })
+        //         this.setState({ isErrorStatus: true })
+        //     }
 
-        }).catch(e => {
-            alert("the server is not working, Please try again.");
-        })
+        // }).catch(e => {
+        //     alert("the server is not working, Please try again.");
+        // })
 
     };
     onReTake = () => {
