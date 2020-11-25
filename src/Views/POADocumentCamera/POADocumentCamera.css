@@ -2,13 +2,15 @@
     width: 100%;
     position: absolute;
     z-index: 1;
+    text-align: center;
 }
 .POADocumentCamera-Container .PreviewImage{
-    width: 100%;
+    width: 95%;
+    margin-top: 10px;
     
 }
 .POADocumentCamera-Container video{
-    width: 100%;
+    width: 95%;
     object-fit: none;
 }
 .POAErrorMessageView { 
