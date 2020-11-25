@@ -89,7 +89,7 @@ class IDDocumentCamera extends Component {
             }
 
         }).catch(e => {
-            alert("the server is not working, Please try again.");
+            alert("The server is not working or the network error, Please try again.");
             this.setState({isLoading: false})
         })
 
