@@ -95,10 +95,10 @@ class POADocumentCamera extends Component {
                         />
                     </div>}
                     {(!this.state.previewImageStatuse) && <div className="POACapture-Container">
-                        <Button
+                        {(!this.state.isLoading) && <Button
                             label="POA Document Scan"
                             onClick={this.onCapture}
-                        />
+                        />}
                         <p className="bottomTitle">powerd by BIOMIID</p>
                     </div>}
                     {(this.state.previewImageStatuse) && <div className="POAPreviewButton-Container">
