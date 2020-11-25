@@ -9,7 +9,7 @@
 }
 .POADocumentCamera-Container video{
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 .POAErrorMessageView { 
     padding-left: 16px;
