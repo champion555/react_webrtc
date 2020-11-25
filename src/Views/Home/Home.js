@@ -78,14 +78,14 @@ class Home extends Component {
                         </div>
 
                     </div>
-                    <div>
+                    <div style = {{width:"100%", flexDirection:"column",alignItems:"center", display:"flex"}}>
                         <div className="startButton"
                             onClick={() => {
                                 this.props.history.push('idmain');
                             }}>
                             <p style={{ marginBottom: "0px", marginTop: "0px" }}>Start</p>
                         </div>
-                        <div style={{ fontStyle: "italic", color: "#7f00ff", marginTop: "20px" }}>Powerd by BIOMIID</div>
+                        <div style={{ fontStyle: "italic", color: "#7f00ff", marginTop: "10px" }}>Powerd by BIOMIID</div>
                     </div>
 
 
