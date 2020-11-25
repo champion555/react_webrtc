@@ -3,7 +3,7 @@
     position: absolute;    
 }
 .IDCamera-Container .PreviewImage{
-    width: 100%;
+    width: 120%;
 }
 .IDMessage-Container{
     display: flex;
