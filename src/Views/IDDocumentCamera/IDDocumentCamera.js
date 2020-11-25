@@ -119,7 +119,21 @@ class IDDocumentCamera extends Component {
         };
         return (
             <div style={{ width: "100%", height: "100vh", background: "#7f00ff" }}>
-                <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex" }}>
+                <div>
+                <Webcam
+                        audio={false}
+                        mirrored={true}
+                        mirrored={false}
+                        ref={this.setRef}
+                        screenshotFormat="image/jpeg"
+                        imageSmoothing={true}
+                        width={"100%"}
+                        screenshotQuality={1.0}
+                        videoConstraints={videoConstraints}
+                        forceScreenshotSourceSize="false"
+                    />
+                </div>
+                {/* <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex" }}>
                     <img src={this.state.backButtonSRC} style={{ width: "20px", height: "20px", marginLeft: "10px" }}
                         onClick={() => {
                             this.props.history.goBack()
@@ -209,8 +223,7 @@ class IDDocumentCamera extends Component {
                         label="Re-take"
                         onClick={this.onReTake}
                     />
-
-                </div>}
+                </div>} */}
             </div>
         )
     }

@@ -15,7 +15,7 @@
 
 video {
   width: 100%;
-  border-radius: 10px;
+  height: 100vh;
   object-fit: cover;
 }
 
