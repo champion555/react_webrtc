@@ -80,7 +80,7 @@ class Home extends Component {
                             onClick={() => {
                                 this.props.history.push('idmain');
                             }}>
-                            <p>Start</p>
+                            <p style = {{marginBottom:"0px",marginTop:"0px"}}>Start</p>
                         </div>
                         <div style={{ fontStyle: "italic", color: "#7f00ff", marginTop: "20px" }}>Powerd by BIOMIID</div>
                     </div>
