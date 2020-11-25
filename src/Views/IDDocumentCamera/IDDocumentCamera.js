@@ -169,13 +169,13 @@ class IDDocumentCamera extends Component {
                         </div>
                     </div>
                     <div style={{ height: window.innerHeight * 0.48,position:"relative"}}>
-                        <div style = {{height:window.innerHeight*0.05,background:"#7f00ff",opacity:"0.6"}}></div>
-                        <div style = {{height:window.innerHeight*0.38,display:"flex",flexDirection:"row"}}>
-                            <div style = {{width:"5%",height:window.innerHeight*0.38, background:"#7f00ff",opacity:"0.6"}}></div>
-                            <div style = {{width:"90%",height:window.innerHeight*0.37,border:"solid", borderColor:"white"}}></div>
-                            <div style = {{width:"5%",height:window.innerHeight*0.38,background:"#7f00ff",opacity:"0.6"}}></div>
+                        <div style = {{height:window.innerHeight*0.02,background:"#7f00ff",opacity:"0.6"}}></div>
+                        <div style = {{height:window.innerHeight*0.44,display:"flex",flexDirection:"row"}}>
+                            <div style = {{width:"3%",height:window.innerHeight*0.44, background:"#7f00ff",opacity:"0.6"}}></div>
+                            <div style = {{width:"94%",height:window.innerHeight*0.44,border:"solid", borderColor:"white"}}></div>
+                            <div style = {{width:"3%",height:window.innerHeight*0.44,background:"#7f00ff",opacity:"0.6"}}></div>
                         </div>
-                        <div style = {{height:window.innerHeight*0.05,background:"#7f00ff",opacity:"0.6"}}></div>
+                        <div style = {{height:window.innerHeight*0.02,background:"#7f00ff",opacity:"0.6"}}></div>
                     </div>
                     <div style={{ height: window.innerHeight * 0.45, background: "#7f00ff" }}>
                         <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
