@@ -2,6 +2,10 @@
     padding: 10px;
     
 }
+.IDCamera-Container .PreviewImage{
+    width: 100%;
+    border-radius: 15px;
+}
 .IDMessage-Container{
     display: flex;
     justify-content: flex-end;

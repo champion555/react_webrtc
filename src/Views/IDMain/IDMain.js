@@ -56,7 +56,7 @@ class IDMain extends Component {
             }else if (this.state.nextUrl === "resident"){
                 window.IDType = "resident"
             }
-            this.props.history.push('iddoccam')
+            this.props.history.push('iddocumentcamera')
             window.countryName = CountryName
         }
     }
