@@ -1,6 +1,6 @@
 .IDCamera-Container{
-    padding: 10px;
-    
+    z-index: 1;
+    position: absolute;    
 }
 .IDCamera-Container .PreviewImage{
     width: 100%;
@@ -37,6 +37,7 @@
     flex-direction: column;
     align-items: center;
     display: flex;
+    background: #7f00ff;
 }
 .IDCapture-Container .IDCaptureButton{
     width: 60px;

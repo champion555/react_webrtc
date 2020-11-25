@@ -118,33 +118,10 @@ class IDDocumentCamera extends Component {
             facingMode: "environment"
         };
         return (
-            <div style={{ width: "100%", height: "100vh", background: "#7f00ff" }}>
-                <div>
-                <Webcam
+            <div style={{ width: "100%", height: "100vh" }}>
+                <div className="IDCamera-Container">
+                {(!this.state.previewImageStatuse) && <Webcam
                         audio={false}
-                        mirrored={true}
-                        mirrored={false}
-                        ref={this.setRef}
-                        screenshotFormat="image/jpeg"
-                        imageSmoothing={true}
-                        width={"100%"}
-                        screenshotQuality={1.0}
-                        videoConstraints={videoConstraints}
-                        forceScreenshotSourceSize="false"
-                    />
-                </div>
-                {/* <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex" }}>
-                    <img src={this.state.backButtonSRC} style={{ width: "20px", height: "20px", marginLeft: "10px" }}
-                        onClick={() => {
-                            this.props.history.goBack()
-                        }} />
-                    <p style={{ color: "white", marginLeft: "20px", fontWeight: "bold", fontSize: "20px" }}>{this.state.titleMessage}</p>
-                    <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
-                </div>
-                <div className="IDCamera-Container" style={{ height: window.innerHeight * 0.4 }}>
-                    {(!this.state.previewImageStatuse) && <Webcam
-                        audio={false}
-                        height={window.innerHeight * 0.4}
                         mirrored={true}
                         mirrored={false}
                         ref={this.setRef}
@@ -155,75 +132,168 @@ class IDDocumentCamera extends Component {
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="false"
                     />}
-                    {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight * 0.4 }} />}
-
+                    {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: "100vh"}} />}
                 </div>
-                <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
-                    <p className="IDTitle" >{this.state.idTitle}</p>
-                    <p className="IDDocCamMeassage">{this.state.message}</p>
-                </div>
-                {(this.state.isErrorStatus) && <div className="errorMessageView" style={{ bottom: window.innerHeight * 0.13 }}>
-                    <div className="container">
-                        <div className="errortitle">
-                            <img src={this.state.errorSRC} />
-                            <p>The image quality is very low</p>
-                        </div>
-                        <div className="errormessage">
-                            <p>- Make sure the image is not blurry or contains blares!</p>
+                <div style={{ zIndex: "2", position: "absolute", width: "100%", height: "100vh" }}>
+                    <div style={{ height: window.innerHeight * 0.07, background: "#7f00ff",opacity:"0.8" }}>
+                        <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex", background: "" }}>
+                            <img src={this.state.backButtonSRC} style={{ width: "20px", height: "20px", marginLeft: "10px" }}
+                                onClick={() => {
+                                    this.props.history.goBack()
+                                }} />
+                            <p style={{ color: "white", marginLeft: "20px", fontWeight: "bold", fontSize: "20px" }}>{this.state.titleMessage}</p>
+                            <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
                         </div>
                     </div>
-                </div>}
-                {(!this.state.previewImageStatuse) && <div className="IDCapture-Container">
-                    <img className="IDCaptureButton" src={this.state.captureButtonSRC} onClick={this.onCapture} />
-                    <p>powerd by BIOMIID</p>
-                </div>}
-                {(this.state.previewImageStatuse) && <div className="ButtonPreview">
-                    {(!this.state.isErrorStatus) && <Button
-                        label="My photo is clear"
-                        onClick={() => {
-                            let { IDTarget } = this.state
-                            if (IDTarget == "frontIDCard") {
-                                this.setState({ IDTarget: "backIDCard" })
-                                this.setState({ titleMessage: "National ID Card" })
-                                this.setState({ idTitle: "Back of National ID Card" })
-                                this.setState({ message: "Place the back page of ID Card inside the frame and take the photo" })
-                                this.setState({ previewImageStatuse: false })
-                                window.FrontIDCardPath = this.state.IDDocImgURL
-                                // localStorage.setItem("FrontIDCardPath", this.state.IDDocImgURL)                    
-                            } else if (IDTarget == "passport") {
-                                this.props.history.push('idmain')
-                                window.PassportPath = this.state.IDDocImgURL
-                                window.PassportCountry = window.countryName
-                                // localStorage.setItem("PassportPath", this.state.IDDocImgURL)
-                                // localStorage.setItem("passportCountry",window.countryName)
-                            } else if (IDTarget == "frontResident") {
-                                this.setState({ IDTarget: "backResident" })
-                                this.setState({ titleMessage: "Residence Permit Card" })
-                                this.setState({ idTitle: "Back of Residence Permit" })
-                                this.setState({ message: "Place the back of Residence Permit Card inside the frame and take the photo" })
-                                this.setState({ previewImageStatuse: false })
-                                window.FrontResidentPath = this.state.IDDocImgURL
-                                // localStorage.setItem("FrontResidentPath", this.state.IDDocImgURL)                                
-                            } else if (IDTarget == "backIDCard") {
-                                this.props.history.push('idmain')
-                                window.BackIDCardPath = this.state.IDDocImgURL
-                                window.IDCardCountry = window.countryName
-                                // localStorage.setItem("BackIDCardPath", this.state.IDDocImgURL)
-                                // localStorage.setItem("idCardCountry",window.countryName)
-                            } else if (IDTarget == "backResident") {
-                                this.props.history.push('poadoc')
-                                window.BackResidentPath = this.state.IDDocImgURL
-                                window.ResidentCountry = window.countryName
-                                // localStorage.setItem("BackResidentPath", this.state.IDDocImgURL)
-                                // localStorage.setItem("residentCountry",window.countryName)
-                            }
-                        }}
-                    />}
-                    <Button
-                        label="Re-take"
-                        onClick={this.onReTake}
-                    />
-                </div>} */}
+                    <div style={{ height: window.innerHeight * 0.4}}></div>
+                    <div style={{ height: window.innerHeight * 0.5,background:"#7f00ff",opacity:"0.8" }}>
+                        <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
+                            <p className="IDTitle" >{this.state.idTitle}</p>
+                            <p className="IDDocCamMeassage">{this.state.message}</p>
+                        </div>
+                        {(this.state.isErrorStatus) && <div className="errorMessageView" style={{ bottom: window.innerHeight * 0.13 }}>
+                            <div className="container">
+                                <div className="errortitle">
+                                    <img src={this.state.errorSRC} />
+                                    <p>The image quality is very low</p>
+                                </div>
+                                <div className="errormessage">
+                                    <p>- Make sure the image is not blurry or contains blares!</p>
+                                </div>
+                            </div>
+                        </div>}
+                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container">
+                            <img className="IDCaptureButton" src={this.state.captureButtonSRC} onClick={this.onCapture} />
+                            <p>powerd by BIOMIID</p>
+                        </div>}
+                        {(this.state.previewImageStatuse) && <div className="ButtonPreview">
+                            {(!this.state.isErrorStatus) && <Button
+                                label="My photo is clear"
+                                onClick={() => {
+                                    let { IDTarget } = this.state
+                                    if (IDTarget == "frontIDCard") {
+                                        this.setState({ IDTarget: "backIDCard" })
+                                        this.setState({ titleMessage: "National ID Card" })
+                                        this.setState({ idTitle: "Back of National ID Card" })
+                                        this.setState({ message: "Place the back page of ID Card inside the frame and take the photo" })
+                                        this.setState({ previewImageStatuse: false })
+                                        window.FrontIDCardPath = this.state.IDDocImgURL
+                                        // localStorage.setItem("FrontIDCardPath", this.state.IDDocImgURL)                    
+                                    } else if (IDTarget == "passport") {
+                                        this.props.history.push('idmain')
+                                        window.PassportPath = this.state.IDDocImgURL
+                                        window.PassportCountry = window.countryName
+                                        // localStorage.setItem("PassportPath", this.state.IDDocImgURL)
+                                        // localStorage.setItem("passportCountry",window.countryName)
+                                    } else if (IDTarget == "frontResident") {
+                                        this.setState({ IDTarget: "backResident" })
+                                        this.setState({ titleMessage: "Residence Permit Card" })
+                                        this.setState({ idTitle: "Back of Residence Permit" })
+                                        this.setState({ message: "Place the back of Residence Permit Card inside the frame and take the photo" })
+                                        this.setState({ previewImageStatuse: false })
+                                        window.FrontResidentPath = this.state.IDDocImgURL
+                                        // localStorage.setItem("FrontResidentPath", this.state.IDDocImgURL)                                
+                                    } else if (IDTarget == "backIDCard") {
+                                        this.props.history.push('idmain')
+                                        window.BackIDCardPath = this.state.IDDocImgURL
+                                        window.IDCardCountry = window.countryName
+                                        // localStorage.setItem("BackIDCardPath", this.state.IDDocImgURL)
+                                        // localStorage.setItem("idCardCountry",window.countryName)
+                                    } else if (IDTarget == "backResident") {
+                                        this.props.history.push('poadoc')
+                                        window.BackResidentPath = this.state.IDDocImgURL
+                                        window.ResidentCountry = window.countryName
+                                        // localStorage.setItem("BackResidentPath", this.state.IDDocImgURL)
+                                        // localStorage.setItem("residentCountry",window.countryName)
+                                    }
+                                }}
+                            />}
+                            <Button
+                                label="Re-take"
+                                onClick={this.onReTake}
+                            />
+                        </div>}
+                    </div>
+                    {/* <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex",background:"" }}>
+                        <img src={this.state.backButtonSRC} style={{ width: "20px", height: "20px", marginLeft: "10px" }}
+                            onClick={() => {
+                                this.props.history.goBack()
+                            }} />
+                        <p style={{ color: "white", marginLeft: "20px", fontWeight: "bold", fontSize: "20px" }}>{this.state.titleMessage}</p>
+                        <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
+                    </div>
+                    <div className="IDCamera-Container" style={{ height: window.innerHeight * 0.4 }}>
+
+
+                    </div>
+                    <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
+                        <p className="IDTitle" >{this.state.idTitle}</p>
+                        <p className="IDDocCamMeassage">{this.state.message}</p>
+                    </div>
+                    {(this.state.isErrorStatus) && <div className="errorMessageView" style={{ bottom: window.innerHeight * 0.13 }}>
+                        <div className="container">
+                            <div className="errortitle">
+                                <img src={this.state.errorSRC} />
+                                <p>The image quality is very low</p>
+                            </div>
+                            <div className="errormessage">
+                                <p>- Make sure the image is not blurry or contains blares!</p>
+                            </div>
+                        </div>
+                    </div>}
+                    {(!this.state.previewImageStatuse) && <div className="IDCapture-Container">
+                        <img className="IDCaptureButton" src={this.state.captureButtonSRC} onClick={this.onCapture} />
+                        <p>powerd by BIOMIID</p>
+                    </div>}
+                    {(this.state.previewImageStatuse) && <div className="ButtonPreview">
+                        {(!this.state.isErrorStatus) && <Button
+                            label="My photo is clear"
+                            onClick={() => {
+                                let { IDTarget } = this.state
+                                if (IDTarget == "frontIDCard") {
+                                    this.setState({ IDTarget: "backIDCard" })
+                                    this.setState({ titleMessage: "National ID Card" })
+                                    this.setState({ idTitle: "Back of National ID Card" })
+                                    this.setState({ message: "Place the back page of ID Card inside the frame and take the photo" })
+                                    this.setState({ previewImageStatuse: false })
+                                    window.FrontIDCardPath = this.state.IDDocImgURL
+                                    // localStorage.setItem("FrontIDCardPath", this.state.IDDocImgURL)                    
+                                } else if (IDTarget == "passport") {
+                                    this.props.history.push('idmain')
+                                    window.PassportPath = this.state.IDDocImgURL
+                                    window.PassportCountry = window.countryName
+                                    // localStorage.setItem("PassportPath", this.state.IDDocImgURL)
+                                    // localStorage.setItem("passportCountry",window.countryName)
+                                } else if (IDTarget == "frontResident") {
+                                    this.setState({ IDTarget: "backResident" })
+                                    this.setState({ titleMessage: "Residence Permit Card" })
+                                    this.setState({ idTitle: "Back of Residence Permit" })
+                                    this.setState({ message: "Place the back of Residence Permit Card inside the frame and take the photo" })
+                                    this.setState({ previewImageStatuse: false })
+                                    window.FrontResidentPath = this.state.IDDocImgURL
+                                    // localStorage.setItem("FrontResidentPath", this.state.IDDocImgURL)                                
+                                } else if (IDTarget == "backIDCard") {
+                                    this.props.history.push('idmain')
+                                    window.BackIDCardPath = this.state.IDDocImgURL
+                                    window.IDCardCountry = window.countryName
+                                    // localStorage.setItem("BackIDCardPath", this.state.IDDocImgURL)
+                                    // localStorage.setItem("idCardCountry",window.countryName)
+                                } else if (IDTarget == "backResident") {
+                                    this.props.history.push('poadoc')
+                                    window.BackResidentPath = this.state.IDDocImgURL
+                                    window.ResidentCountry = window.countryName
+                                    // localStorage.setItem("BackResidentPath", this.state.IDDocImgURL)
+                                    // localStorage.setItem("residentCountry",window.countryName)
+                                }
+                            }}
+                        />}
+                        <Button
+                            label="Re-take"
+                            onClick={this.onReTake}
+                        />
+                    </div>} */}
+                </div>
+
             </div>
         )
     }
