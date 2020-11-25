@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
-import Button from "../../Components/startButton/startButton"
 import ImageURL from "../../assets/ic_logo1.png"
 import CheckURL from "../../assets/ic_check.png"
 import './Home.css';
@@ -16,7 +15,7 @@ class Home extends Component {
         }
     }
     componentDidMount = () => {
-        
+
     }
 
 
@@ -77,13 +76,13 @@ class Home extends Component {
                                 By click on <strong>Start</strong> button you agree to our <a href="#">Terms of Service</a>. For more information see our <a href="#">Privacy Policy</a>
                             </div>
                         </div>
-                        <Button
-                            label="Start"
+                        <div className="startButton"
                             onClick={() => {
                                 this.props.history.push('idmain');
-                            }}
-                        />
-                        <div style ={{fontStyle:"italic", color:"#7f00ff",marginTop:"20px"}}>Powerd by BIOMIID</div>
+                            }}>
+                            <p>Start</p>
+                        </div>
+                        <div style={{ fontStyle: "italic", color: "#7f00ff", marginTop: "20px" }}>Powerd by BIOMIID</div>
                     </div>
 
 

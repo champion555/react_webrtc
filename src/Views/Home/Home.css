@@ -111,3 +111,16 @@ li{
     color: #7f00ff;
     font-weight: bold;
 }
+.startButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 60%;
+    background: #7f00ff;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    flex: 1;
+}
