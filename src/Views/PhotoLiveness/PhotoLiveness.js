@@ -4,6 +4,7 @@ import captureImg from "../../assets/camera_take.png"
 import UndetectImgURL from "../../assets/ic_undetected.png"
 import DetectImgURL from "../../assets/ic_detected.png"
 import BackURL from "../../assets/ic_back.png"
+import Button from "../../Components/button/button"
 import LogoURL from "../../assets/ic_logo1.png"
 import { PhotoUpload } from '../../lib/AppUtils';
 import Loader from 'react-loader-spinner'
@@ -22,26 +23,18 @@ class PhotoLiveness extends Component {
             ImgSrc: UndetectImgURL,
             logoSrc: LogoURL,
             apiFlage: false,
-            backButtonSrc: BackURL
+            backButtonSrc: BackURL,
+            screenshot: null,
 
         };
 
     }
-
-    getImage() {
-        this.setState({ ImgSrc: DetectImgURL })
-        console.log("button clicked")
-        this.captureRef.current.setAttribute('width', this.webcamRef.current.videoRef.current.videoWidth)
-        this.captureRef.current.setAttribute('height', this.webcamRef.current.videoRef.current.videoHeight)
-        var context = this.captureRef.current.getContext('2d');
-        console.log(this.webcamRef.current.videoRef.current.videoWidth, this.webcamRef.current.videoRef.current.videoHeight);
-        console.error(this.captureRef.current.width, this.captureRef.current.height)
-        var height = this.webcamRef.current.videoRef.current.videoHeight * (this.captureRef.current.width / this.webcamRef.current.videoRef.current.videoWidth);
-        context.drawImage(this.webcamRef.current.videoRef.current, 0, 0, this.captureRef.current.width, height);
-        var data = this.captureRef.current.toDataURL('image/jpeg');
+    onCapture = () => {
+        const imageSrc = this.webcam.getScreenshot();
+        this.setState({ screenshot: imageSrc })
 
         this.setState({ apiFlage: true })
-        PhotoUpload(data, (total, progress) => {
+        PhotoUpload(imageSrc, (total, progress) => {
         }).then(res => {
             this.setState({ apiFlage: false })
             var response = res.data;
@@ -63,15 +56,17 @@ class PhotoLiveness extends Component {
             this.setState({ apiFlage: false })
             this.setState({ ImgSrc: UndetectImgURL })
         })
-
-    }
+    };
+    setRef = webcam => {
+        this.webcam = webcam;
+    };
     render() {
         const videoConstraints = {
             facingMode: "user"
         };
         return (
             <div>
-                <div className="camera-container">
+                <div className="LivenessCamera-Container">
                     <Webcam
                         audio={false}
                         mirrored={true}
@@ -84,15 +79,20 @@ class PhotoLiveness extends Component {
                         forceScreenshotSourceSize="flase"
                     />
                 </div>
-                <div className="frame-view" style={{ height: window.innerHeight, backgroundImage: `url(${this.state.ImgSrc})`, backgroundSize: "100% 100%" }} >
-                    <div className="topBar">
+                <div style={{ position: "absolute", zIndex: "2", width: "100%", height: window.innerHeight }}>
+                    <div className="LivenessTopBar" style={{ height: window.innerHeight * 0.07 }}>
                         <img src={this.state.backButtonSrc} onClick={() => this.props.history.push('poadoc')} className="btnBack" />
                         <h2 className="txtTitle">Face Liveness</h2>
                         <div style={{ width: '10px' }}></div>
                     </div>
-                    <div className="liveness-captureButton" onClick={() => this.getImage()}>
-                        <p style={{ font: "18px", color: "white", textAlign: "center" }}>Please place your face on the oval and take the photo </p>
-                        <img src={this.state.captureImgSrc} className="captureIcon" />
+                    <div style={{ width: "100%", height: window.innerHeight * 0.7 }}></div>
+                    <div className="liveness-captureButton" style={{ height: window.innerHeight * 0.23 }}>
+                        <p style={{ font: "18px", color: "white", textAlign: "center", marginBottom: "5px" }}>Please place your face on the oval and take the photo </p>
+                        <Button
+                            label="Take A Picture"
+                            onClick={() => this.onCapture()}
+                        />
+
                     </div>
                 </div>
 

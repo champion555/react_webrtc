@@ -1,3 +1,8 @@
+.LivenessCamera-Container{
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
 .frame-view{
     z-index: 3;
     position: absolute;
@@ -11,14 +16,13 @@
 }
 .liveness-captureButton{
     position: absolute;
-    z-index: 5;
-    bottom: 10px;
+    bottom: 0px;
     width: 100%;
     justify-content: center;
-    display: flex;
-    
+    display: flex;    
     flex-direction: column;
     align-items: center;
+    background: #7f00ff;
     
 }
 .loadingView{
@@ -27,13 +31,11 @@
     width: 100%;
     text-align: center;
 }
-.topBar{
-    position: absolute;
-    z-index: 5;
+.LivenessTopBar{
     width: 100%;
     justify-content: space-between;
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 50px;
+    background: #7f00ff;
 }
