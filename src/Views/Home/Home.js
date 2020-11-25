@@ -76,11 +76,14 @@ class Home extends Component {
                                 By click on <strong>Start</strong> button you agree to our <a href="#">Terms of Service</a>. For more information see our <a href="#">Privacy Policy</a>
                             </div>
                         </div>
+
+                    </div>
+                    <div>
                         <div className="startButton"
                             onClick={() => {
                                 this.props.history.push('idmain');
                             }}>
-                            <p style = {{marginBottom:"0px",marginTop:"0px"}}>Start</p>
+                            <p style={{ marginBottom: "0px", marginTop: "0px" }}>Start</p>
                         </div>
                         <div style={{ fontStyle: "italic", color: "#7f00ff", marginTop: "20px" }}>Powerd by BIOMIID</div>
                     </div>
