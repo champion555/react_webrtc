@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import backURL from "../../assets/ic_back.png"
 import captureURL from "../../assets/camera_take.png"
 import errorURL from "../../assets/ic_error.png"
-import ClearButton from "../../Components/button/button"
+import Button from "../../Components/button/button"
 import ReTakeButton from "../../Components/bottomButton/bottomButton"
 import Webcam from "react-webcam";
 import { ImageQuality } from '../../lib/AppUtils';
@@ -51,7 +51,6 @@ class IDDocumentCamera extends Component {
     }
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
-        // this.setState({ previewImageStatuse: true })
         this.setState({ screenshot: imageSrc })
         console.log(imageSrc)
         ImageQuality(imageSrc, (total, progress) => {
@@ -119,9 +118,9 @@ class IDDocumentCamera extends Component {
             facingMode: "environment"
         };
         return (
-            <div style={{ width: "100%", height:window.innerHeight}}>
+            <div style={{ width: "100%", height: window.innerHeight }}>
                 <div className="IDCamera-Container">
-                {(!this.state.previewImageStatuse) && <Webcam
+                    {(!this.state.previewImageStatuse) && <Webcam
                         audio={false}
                         mirrored={true}
                         mirrored={false}
@@ -133,7 +132,7 @@ class IDDocumentCamera extends Component {
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase"
                     />}
-                    {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height:this.state.screenshot.innerHeight}} />}
+                    {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: this.state.screenshot.innerHeight }} />}
                 </div>
                 <div style={{ zIndex: "2", position: "absolute", width: "100%", height: window.innerHeight }}>
                     <div style={{ height: window.innerHeight * 0.07, background: "#7f00ff" }}>
@@ -146,8 +145,8 @@ class IDDocumentCamera extends Component {
                             <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
                         </div>
                     </div>
-                    <div style={{ height: window.innerHeight * 0.43}}></div>
-                    <div style={{ height: window.innerHeight * 0.5,background:"#7f00ff" }}>
+                    <div style={{ height: window.innerHeight * 0.43 }}></div>
+                    <div style={{ height: window.innerHeight * 0.5, background: "#7f00ff" }}>
                         <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
                             <p className="IDTitle" >{this.state.idTitle}</p>
                             <p className="IDDocCamMeassage">{this.state.message}</p>
@@ -163,12 +162,15 @@ class IDDocumentCamera extends Component {
                                 </div>
                             </div>
                         </div>}
-                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{height:window.innerHeight*0.35}}>
-                            <img className="IDCaptureButton" src={this.state.captureButtonSRC} onClick={this.onCapture} />
-                            <p>powerd by BIOMIID</p>
+                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ height: window.innerHeight * 0.35 }}>
+                            <Button
+                                label="Take A Picture"
+                                onClick={this.onCapture}
+                            />
+                            <p className = "bottomTitle">powerd by BIOMIID</p>
                         </div>}
                         {(this.state.previewImageStatuse) && <div className="ButtonPreview">
-                            {(!this.state.isErrorStatus) && <ClearButton
+                            {(!this.state.isErrorStatus) && <Button
                                 label="My photo is clear"
                                 onClick={() => {
                                     let { IDTarget } = this.state
@@ -215,84 +217,6 @@ class IDDocumentCamera extends Component {
                             />
                         </div>}
                     </div>
-                    {/* <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex",background:"" }}>
-                        <img src={this.state.backButtonSRC} style={{ width: "20px", height: "20px", marginLeft: "10px" }}
-                            onClick={() => {
-                                this.props.history.goBack()
-                            }} />
-                        <p style={{ color: "white", marginLeft: "20px", fontWeight: "bold", fontSize: "20px" }}>{this.state.titleMessage}</p>
-                        <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
-                    </div>
-                    <div className="IDCamera-Container" style={{ height: window.innerHeight * 0.4 }}>
-
-
-                    </div>
-                    <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
-                        <p className="IDTitle" >{this.state.idTitle}</p>
-                        <p className="IDDocCamMeassage">{this.state.message}</p>
-                    </div>
-                    {(this.state.isErrorStatus) && <div className="errorMessageView" style={{ bottom: window.innerHeight * 0.13 }}>
-                        <div className="container">
-                            <div className="errortitle">
-                                <img src={this.state.errorSRC} />
-                                <p>The image quality is very low</p>
-                            </div>
-                            <div className="errormessage">
-                                <p>- Make sure the image is not blurry or contains blares!</p>
-                            </div>
-                        </div>
-                    </div>}
-                    {(!this.state.previewImageStatuse) && <div className="IDCapture-Container">
-                        <img className="IDCaptureButton" src={this.state.captureButtonSRC} onClick={this.onCapture} />
-                        <p>powerd by BIOMIID</p>
-                    </div>}
-                    {(this.state.previewImageStatuse) && <div className="ButtonPreview">
-                        {(!this.state.isErrorStatus) && <Button
-                            label="My photo is clear"
-                            onClick={() => {
-                                let { IDTarget } = this.state
-                                if (IDTarget == "frontIDCard") {
-                                    this.setState({ IDTarget: "backIDCard" })
-                                    this.setState({ titleMessage: "National ID Card" })
-                                    this.setState({ idTitle: "Back of National ID Card" })
-                                    this.setState({ message: "Place the back page of ID Card inside the frame and take the photo" })
-                                    this.setState({ previewImageStatuse: false })
-                                    window.FrontIDCardPath = this.state.IDDocImgURL
-                                    // localStorage.setItem("FrontIDCardPath", this.state.IDDocImgURL)                    
-                                } else if (IDTarget == "passport") {
-                                    this.props.history.push('idmain')
-                                    window.PassportPath = this.state.IDDocImgURL
-                                    window.PassportCountry = window.countryName
-                                    // localStorage.setItem("PassportPath", this.state.IDDocImgURL)
-                                    // localStorage.setItem("passportCountry",window.countryName)
-                                } else if (IDTarget == "frontResident") {
-                                    this.setState({ IDTarget: "backResident" })
-                                    this.setState({ titleMessage: "Residence Permit Card" })
-                                    this.setState({ idTitle: "Back of Residence Permit" })
-                                    this.setState({ message: "Place the back of Residence Permit Card inside the frame and take the photo" })
-                                    this.setState({ previewImageStatuse: false })
-                                    window.FrontResidentPath = this.state.IDDocImgURL
-                                    // localStorage.setItem("FrontResidentPath", this.state.IDDocImgURL)                                
-                                } else if (IDTarget == "backIDCard") {
-                                    this.props.history.push('idmain')
-                                    window.BackIDCardPath = this.state.IDDocImgURL
-                                    window.IDCardCountry = window.countryName
-                                    // localStorage.setItem("BackIDCardPath", this.state.IDDocImgURL)
-                                    // localStorage.setItem("idCardCountry",window.countryName)
-                                } else if (IDTarget == "backResident") {
-                                    this.props.history.push('poadoc')
-                                    window.BackResidentPath = this.state.IDDocImgURL
-                                    window.ResidentCountry = window.countryName
-                                    // localStorage.setItem("BackResidentPath", this.state.IDDocImgURL)
-                                    // localStorage.setItem("residentCountry",window.countryName)
-                                }
-                            }}
-                        />}
-                        <Button
-                            label="Re-take"
-                            onClick={this.onReTake}
-                        />
-                    </div>} */}
                 </div>
 
             </div>
