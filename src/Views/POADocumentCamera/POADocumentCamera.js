@@ -4,6 +4,7 @@ import Webcam from "react-webcam";
 import Button from "../../Components/button/button"
 import Header from "../../Components/header/header"
 import errorURL from "../../assets/ic_error.png"
+import poaURL from "../../assets/ic_poadocument.png"
 import Loader from 'react-loader-spinner'
 import { ImageQuality } from '../../lib/AppUtils';
 import './POADocumentCamera.css'
@@ -17,7 +18,9 @@ class POADocumentCamera extends Component {
             errorIconURL: errorURL,
             previewImageStatuse: false,
             isErrorStatus: false,
-            isLoading: false
+            isLoading: false,
+            poaSRC: poaURL,
+
         }
     }
     componentDidMount = () => {
@@ -76,7 +79,7 @@ class POADocumentCamera extends Component {
                         forceScreenshotSourceSize="flase" />}
                     {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight - 50 }} />}
                 </div>
-                <div style={{ width: "100%", height: window.innerHeight - 50, position: "absolute", zIndex: "2" }}>
+                <div style={{ width: "100%", height: window.innerHeight - 50, position: "absolute", zIndex: "2",backgroundImage:`url(${this.state.poaSRC})`,backgroundSize:"100% 100%" }}>
                     {/* {(this.state.isErrorStatus) && <div className="POAErrorMessageView" style={{ marginTop: window.innerHeight * 0.5 }}>
                         <div className="container">
                             <div className="errortitle">
