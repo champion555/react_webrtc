@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import Webcam from "react-webcam";
 import Button from "../../Components/button/button"
-import PreviewButton from "../../Components/POAButton/POAButton"
+import PreviewButton from "../../Components/POAPreveiwButton/POAPreviewButton"
 import Header from "../../Components/header/header"
 import errorURL from "../../assets/ic_error.png"
 import poaURL from "../../assets/ic_poadocument.png"
@@ -28,11 +28,11 @@ class POADocumentCamera extends Component {
     }
     componentDidMount = () => {
         this.onSetMessage()
-        this.setState({poaSRC:poaframeURL})
+        this.setState({ poaSRC: poaframeURL })
     }
-    onSetMessage = () =>{
-        this.setState({POAMessage:"Place the  Proof of address  document  inside of frame  and capture  the document"})
-    } 
+    onSetMessage = () => {
+        this.setState({ POAMessage: "Place the  Proof of address  document  inside of frame  and capture  the document" })
+    }
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
         this.setState({ screenshot: imageSrc })
@@ -40,8 +40,8 @@ class POADocumentCamera extends Component {
         this.setState({ isLoading: true })
         this.setState({ previewImageStatuse: true })
         this.setState({ isLoading: false })
-        this.setState({poaSRC:poaURL})
-        this.setState({POAMessage:"Make sure  the  document  is clear  to read"})
+        this.setState({ poaSRC: poaURL })
+        this.setState({ POAMessage: "Make sure  the  document  is clear  to read" })
 
         // ImageQuality(imageSrc, (total, progress) => {
         // }).then(res => {
@@ -62,8 +62,8 @@ class POADocumentCamera extends Component {
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
         this.setState({ isErrorStatus: false })
-        this.setState({poaSRC:poaframeURL})
-        this.setState({POAMessage:"Place the  Proof of address  document  inside of frame  and capture  the document"})
+        this.setState({ poaSRC: poaframeURL })
+        this.setState({ POAMessage: "Place the  Proof of address  document  inside of frame  and capture  the document" })
     }
     setRef = webcam => {
         this.webcam = webcam;
@@ -91,8 +91,8 @@ class POADocumentCamera extends Component {
                     {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight - 50 }} />}
                 </div>
                 <div style={{ width: "100%", height: window.innerHeight - 50, position: "absolute", zIndex: "2", backgroundImage: `url(${this.state.poaSRC})`, backgroundSize: "100% 100%" }}>
-                    <div className="POAMessage-Container" style={{ height: window.innerHeight * 0.15, marginTop:window.innerHeight*0.6 }}>
-                    <p className="POACamMeassage">{this.state.POAMessage}</p>
+                    <div className="POAMessage-Container" style={{ height: window.innerHeight * 0.15, marginTop: window.innerHeight * 0.6 }}>
+                        <p className="POACamMeassage">{this.state.POAMessage}</p>
                     </div>
                     {/* {(this.state.isErrorStatus) && <div className="POAErrorMessageView" style={{ marginTop: window.innerHeight * 0.5 }}>
                         <div className="container">
@@ -120,17 +120,18 @@ class POADocumentCamera extends Component {
                         />}
                     </div>}
                     {(this.state.previewImageStatuse) && <div className="POAPreviewButton-Container">
+                        <PreviewButton
+                            label="RE-TAKE"
+                            onClick={this.onReTake}
+                        />
                         {(!this.state.isErrorStatus) && <PreviewButton
-                            label="Take"
+                            label="CONTINUE"
                             onClick={() => {
                                 window.POADocPath = this.state.ImageURL
                                 this.props.history.push('photoliveness')
                             }}
                         />}
-                        <PreviewButton
-                            label="Re-take"
-                            onClick={this.onReTake}
-                        />
+
                     </div>}
                 </div>
 

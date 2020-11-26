@@ -36,7 +36,7 @@ class POADoc extends Component {
                 {(!this.state.selectCountryStatus) &&
                     <>
                         <Header headerText={this.state.sendHeaderText} url="idmain" />
-                        <div className="idmain_body-container">
+                        <div className="idmain_body-container" style = {{alignItems:"center"}}>
                             <div className="mark-container">
                                 <div className="markView">
                                     <img src={this.state.POADocSrc} className="identityIcon" />
