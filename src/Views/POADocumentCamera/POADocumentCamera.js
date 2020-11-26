@@ -5,6 +5,7 @@ import Button from "../../Components/POAButton/POAButton"
 import Header from "../../Components/header/header"
 import errorURL from "../../assets/ic_error.png"
 import poaURL from "../../assets/ic_poadocument.png"
+import poaframeURL from "../../assets/ic_poaframe.png"
 import Loader from 'react-loader-spinner'
 import { ImageQuality } from '../../lib/AppUtils';
 import './POADocumentCamera.css'
@@ -19,13 +20,14 @@ class POADocumentCamera extends Component {
             previewImageStatuse: false,
             isErrorStatus: false,
             isLoading: false,
-            poaSRC: poaURL,
+            poaSRC: poaframeURL,
             POAMessage: null,
 
         }
     }
     componentDidMount = () => {
         this.onSetMessage()
+        this.setState({poaSRC:poaframeURL})
     }
     onSetMessage = () =>{
         this.setState({POAMessage:"Place the  Proof of address  document  inside of frame  and capture  the document"})
@@ -37,6 +39,7 @@ class POADocumentCamera extends Component {
         this.setState({ isLoading: true })
         this.setState({ previewImageStatuse: true })
         this.setState({ isLoading: false })
+        this.setState({poaSRC:poaURL})
         this.setState({POAMessage:"Make sure  the  document  is clear  to read"})
 
         // ImageQuality(imageSrc, (total, progress) => {
@@ -58,6 +61,7 @@ class POADocumentCamera extends Component {
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
         this.setState({ isErrorStatus: false })
+        this.setState({poaSRC:poaframeURL})
         this.setState({POAMessage:"Place the  Proof of address  document  inside of frame  and capture  the document"})
     }
     setRef = webcam => {
