@@ -115,7 +115,7 @@ class POADocumentCamera extends Component {
                     </div>} */}
                     {(!this.state.previewImageStatuse) && <div className="POACapture-Container">
                         {(!this.state.isLoading) && <Button
-                            label="POA Document Scan"
+                            label="TAKE A CAPTURE"
                             onClick={this.onCapture}
                         />}
                     </div>}
