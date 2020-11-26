@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import Webcam from "react-webcam";
-import Button from "../../Components/POAButton/POAButton"
+import Button from "../../Components/button/button"
+import PreviewButton from "../../Components/POAButton/POAButton"
 import Header from "../../Components/header/header"
 import errorURL from "../../assets/ic_error.png"
 import poaURL from "../../assets/ic_poadocument.png"
@@ -119,14 +120,14 @@ class POADocumentCamera extends Component {
                         />}
                     </div>}
                     {(this.state.previewImageStatuse) && <div className="POAPreviewButton-Container">
-                        {(!this.state.isErrorStatus) && <Button
+                        {(!this.state.isErrorStatus) && <PreviewButton
                             label="Take"
                             onClick={() => {
                                 window.POADocPath = this.state.ImageURL
                                 this.props.history.push('photoliveness')
                             }}
                         />}
-                        <Button
+                        <PreviewButton
                             label="Re-take"
                             onClick={this.onReTake}
                         />
