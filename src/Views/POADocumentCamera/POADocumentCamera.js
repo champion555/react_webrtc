@@ -28,7 +28,7 @@ class POADocumentCamera extends Component {
         this.onSetMessage()
     }
     onSetMessage = () =>{
-        this.setState({POAMessage:"Place the  Proof of address  document  inside of  green frame  and capture  the document"})
+        this.setState({POAMessage:"Place the  Proof of address  document  inside of frame  and capture  the document"})
     } 
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
