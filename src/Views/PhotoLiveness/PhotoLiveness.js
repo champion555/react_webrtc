@@ -101,7 +101,7 @@ class PhotoLiveness extends Component {
                 </div>}
                 {(this.state.apiFlage) && <div className="loadingView" style={{ bottom: window.innerHeight * 0.5 }}>
                     <Loader
-                        type="Circles"
+                        type="Puff"
                         color="#ffffff"
                         height={80}
                         width={80}

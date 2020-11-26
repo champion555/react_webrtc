@@ -9,7 +9,7 @@ import ReTakeButton from "../../Components/bottomButton/bottomButton"
 import Webcam from "react-webcam";
 // import { ImageQuality } from '../../lib/AppUtils';
 // import Loader from 'react-loader-spinner'
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './IDDocumentCamera.css'
 
 class IDDocumentCamera extends Component {
