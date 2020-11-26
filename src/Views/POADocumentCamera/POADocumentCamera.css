@@ -70,4 +70,6 @@
 .POAMessage-Container .POACamMeassage{
     text-align: center;
     color: white;
+    padding-left: 16px;
+    padding-right: 16px;
 }
