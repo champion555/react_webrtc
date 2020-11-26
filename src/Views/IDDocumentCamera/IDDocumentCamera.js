@@ -64,19 +64,19 @@ class IDDocumentCamera extends Component {
         let { IDTarget } = this.state
         if (IDTarget == "frontIDCard") {
             this.setState({ titleMessage: "Image preview" })
-            this.setState({ message: "Make sure the ID Docment image is clear to read" })
+            this.setState({ message: "Make sure  the  document  is clear  to read" })
         } else if (IDTarget == "passport") {
             this.setState({ titleMessage: "Image preview" })
-            this.setState({ message: "Make sure the ID Docment image is clear to read" })
+            this.setState({ message: "Make sure  the  document  is clear  to read" })
         } else if (IDTarget == "frontResident") {
             this.setState({ titleMessage: "Image preview" })
-            this.setState({ message: "Make sure the ID Docment image is clear to read" })
+            this.setState({ message: "Make sure  the  document  is clear  to read" })
         } else if (IDTarget == "backIDCard") {
             this.setState({ titleMessage: "Image preview" })
-            this.setState({ message: "Make sure the ID Docment image is clear to read" })
+            this.setState({ message: "Make sure  the  document  is clear  to read" })
         } else if (IDTarget == "backResident") {
             this.setState({ titleMessage: "Image preview" })
-            this.setState({ message: "Make sure the ID Docment image is clear to read" })
+            this.setState({ message: "Make sure  the  document  is clear  to read" })
         }
         // ImageQuality(imageSrc, (total, progress) => {
         // }).then(res => {

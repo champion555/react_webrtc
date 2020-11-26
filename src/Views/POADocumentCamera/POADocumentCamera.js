@@ -20,12 +20,16 @@ class POADocumentCamera extends Component {
             isErrorStatus: false,
             isLoading: false,
             poaSRC: poaURL,
+            POAMessage: null,
 
         }
     }
     componentDidMount = () => {
-
+        this.onSetMessage()
     }
+    onSetMessage = () =>{
+        this.setState({POAMessage:"Place the  Proof of address  document  inside of  green frame  and capture  the document"})
+    } 
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
         this.setState({ screenshot: imageSrc })
@@ -33,6 +37,7 @@ class POADocumentCamera extends Component {
         this.setState({ isLoading: true })
         this.setState({ previewImageStatuse: true })
         this.setState({ isLoading: false })
+        this.setState({POAMessage:"Make sure  the  document  is clear  to read"})
 
         // ImageQuality(imageSrc, (total, progress) => {
         // }).then(res => {
@@ -79,7 +84,10 @@ class POADocumentCamera extends Component {
                         forceScreenshotSourceSize="flase" />}
                     {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight - 50 }} />}
                 </div>
-                <div style={{ width: "100%", height: window.innerHeight - 50, position: "absolute", zIndex: "2",backgroundImage:`url(${this.state.poaSRC})`,backgroundSize:"100% 100%" }}>
+                <div style={{ width: "100%", height: window.innerHeight - 50, position: "absolute", zIndex: "2", backgroundImage: `url(${this.state.poaSRC})`, backgroundSize: "100% 100%" }}>
+                    <div className="POAMessage-Container" style={{ height: window.innerHeight * 0.15, marginTop:window.innerHeight*0.6 }}>
+                    <p className="POACamMeassage">{this.state.POAMessage}</p>
+                    </div>
                     {/* {(this.state.isErrorStatus) && <div className="POAErrorMessageView" style={{ marginTop: window.innerHeight * 0.5 }}>
                         <div className="container">
                             <div className="errortitle">

@@ -64,3 +64,10 @@
     align-items: center;
     display: flex;
 }
+.POAMessage-Container{
+    width: 100%;
+}
+.POAMessage-Container .POACamMeassage{
+    text-align: center;
+    color: white;
+}
