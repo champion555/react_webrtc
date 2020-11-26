@@ -193,7 +193,7 @@ class IDDocumentCamera extends Component {
                                 </div>
                             </div>
                         </div>} */}
-                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ height: window.innerHeight * 0.3}}>
+                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ height: window.innerHeight * 0.3, marginTop: window.innerHeight*0.06}}>
                             {/* {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginBottom: "20px", textAlign: "center" }}>
                                 <Loader
                                     type="Circles"
@@ -206,7 +206,7 @@ class IDDocumentCamera extends Component {
                                 label="Take A Picture"
                                 onClick={this.onCapture}
                             />}
-                            {/* <p className="bottomTitle">powerd by BIOMIID</p> */}
+                            <p className="bottomTitle">powerd by BIOMIID</p>
                         </div>}
                         {(this.state.previewImageStatuse) && <div className="ButtonPreview">
                             {(!this.state.isErrorStatus) && <Button
