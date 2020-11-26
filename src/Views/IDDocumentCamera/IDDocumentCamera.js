@@ -202,11 +202,11 @@ class IDDocumentCamera extends Component {
                                     width={40}
                                 />
                             </div>} */}
-                            {/* {(!this.state.isLoading) && <Button
+                            {(!this.state.isLoading) && <Button
                                 label="Take A Picture"
                                 onClick={this.onCapture}
                             />}
-                            <p className="bottomTitle">powerd by BIOMIID</p> */}
+                            {/* <p className="bottomTitle">powerd by BIOMIID</p> */}
                         </div>}
                         {(this.state.previewImageStatuse) && <div className="ButtonPreview">
                             {(!this.state.isErrorStatus) && <Button
