@@ -3,11 +3,12 @@ import { withRouter } from "react-router";
 import backURL from "../../assets/ic_back.png"
 import captureURL from "../../assets/camera_take.png"
 import errorURL from "../../assets/ic_error.png"
+import idcardURL from "../../assets/ic_idcardframe.png"
 import Button from "../../Components/button/button"
 import ReTakeButton from "../../Components/bottomButton/bottomButton"
 import Webcam from "react-webcam";
-import { ImageQuality } from '../../lib/AppUtils';
-import Loader from 'react-loader-spinner'
+// import { ImageQuality } from '../../lib/AppUtils';
+// import Loader from 'react-loader-spinner'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './IDDocumentCamera.css'
 
@@ -18,6 +19,7 @@ class IDDocumentCamera extends Component {
             backButtonSRC: backURL,
             captureButtonSRC: captureURL,
             errorSRC: errorURL,
+            idCardSRC: idcardURL,
             IDTarget: "",
             message: "",
             titleMessage: "",
@@ -26,6 +28,7 @@ class IDDocumentCamera extends Component {
             isErrorStatus: false,
             screenshot: null,
             isLoading: false,
+            
         }
     }
     componentDidMount = () => {
@@ -168,14 +171,14 @@ class IDDocumentCamera extends Component {
                             <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
                         </div>
                     </div>
-                    <div style={{ height: window.innerHeight * 0.48,position:"relative"}}>
-                        <div style = {{height:window.innerHeight*0.03,background:"#7f00ff",opacity:"0.6"}}></div>
+                    <div style={{ height: window.innerHeight * 0.48,backgroundImage:`url(${this.state.idCardSRC})`,backgroundSize:"100% 100%"}}>
+                        {/* <div style = {{height:window.innerHeight*0.03,background:"#7f00ff",opacity:"0.6"}}></div>
                         <div style = {{height:window.innerHeight*0.42,display:"flex",flexDirection:"row"}}>
                             <div style = {{width:"3%",height:window.innerHeight*0.42, background:"#7f00ff",opacity:"0.6"}}></div>
-                            <div style = {{width:"94%",height:window.innerHeight*0.42 - 4,border:"solid", borderColor:"white",zIndex:"10"}}></div>
+                            <div style = {{width:"94%",height:window.innerHeight*0.42 - 4,border:"solid", borderColor:"white",zIndex:"10",borderRadius:"10px"}}></div>
                             <div style = {{width:"3%",height:window.innerHeight*0.42,background:"#7f00ff",opacity:"0.6"}}></div>
                         </div>
-                        <div style = {{height:window.innerHeight*0.03,background:"#7f00ff",opacity:"0.6"}}></div>
+                        <div style = {{height:window.innerHeight*0.03,background:"#7f00ff",opacity:"0.6"}}></div> */}
                     </div>
                     <div style={{ height: window.innerHeight * 0.45, background: "#7f00ff" }}>
                         <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
