@@ -58,6 +58,7 @@ class POADocumentCamera extends Component {
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
         this.setState({ isErrorStatus: false })
+        this.setState({POAMessage:"Place the  Proof of address  document  inside of frame  and capture  the document"})
     }
     setRef = webcam => {
         this.webcam = webcam;
