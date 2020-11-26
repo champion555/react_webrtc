@@ -34,7 +34,6 @@
     align-items: center;
     display: flex;
     background: #7f00ff;
-    justify-content: flex-end;
 }
 .IDCapture-Container .IDCaptureButton{
     width: 60px;
