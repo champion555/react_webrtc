@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import Webcam from "react-webcam";
-import Button from "../../Components/button/button"
+import Button from "../../Components/POAButton/POAButton"
 import Header from "../../Components/header/header"
 import errorURL from "../../assets/ic_error.png"
 import poaURL from "../../assets/ic_poadocument.png"
@@ -104,11 +104,10 @@ class POADocumentCamera extends Component {
                             label="POA Document Scan"
                             onClick={this.onCapture}
                         />}
-                        <p className="bottomTitle">powerd by BIOMIID</p>
                     </div>}
                     {(this.state.previewImageStatuse) && <div className="POAPreviewButton-Container">
                         {(!this.state.isErrorStatus) && <Button
-                            label="My photo is clear"
+                            label="Take"
                             onClick={() => {
                                 window.POADocPath = this.state.ImageURL
                                 this.props.history.push('photoliveness')
