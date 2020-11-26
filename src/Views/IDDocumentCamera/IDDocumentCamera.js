@@ -193,7 +193,7 @@ class IDDocumentCamera extends Component {
                                 </div>
                             </div>
                         </div>} */}
-                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ height: window.innerHeight * 0.3, marginTop: window.innerHeight*0.06}}>
+                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ height: window.innerHeight * 0.3, marginTop: window.innerHeight*0.11}}>
                             {/* {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginBottom: "20px", textAlign: "center" }}>
                                 <Loader
                                     type="Circles"

@@ -43,6 +43,7 @@
     color: white;
     margin-bottom: 5px;
     font-style: italic;
+    margin-top: 5px;
 }
 .errorMessageView { 
     padding-left: 16px;
