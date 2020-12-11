@@ -40,7 +40,7 @@ class IDDocumentCamera extends Component {
                 x: 5,
                 y: 15,
                 width: 90,
-                height: 60,
+                height: 40,
                 aspect: 16 / 9
             }
         }
