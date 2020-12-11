@@ -175,7 +175,7 @@ class IDDocumentCamera extends Component {
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase"
                     />}
-                    {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: this.state.screenshot.innerHeight }} />}
+                    {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight }} />}
                 </div>
                 <div style={{ zIndex: "2", position: "absolute", width: "100%", height: window.innerHeight }}>
                     <div style={{ height: window.innerHeight * 0.07, background: "#7f00ff" }}>
