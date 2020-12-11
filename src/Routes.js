@@ -19,6 +19,7 @@ const Routes = () => {
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/client_id=:client_id&applicantId=:applicantId&checkId=:checkId&env=:env" component={Home} />
                 <Route exact path="/video" component={VideoPage} />
                 <Route exact path="/result" component={Result} />
                 <Route exact path="/idmain" component={IDMainPage} />

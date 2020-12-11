@@ -7,6 +7,11 @@ import idcardURL from "../../assets/ic_idcardframe.png"
 import Button from "../../Components/button/button"
 import ReTakeButton from "../../Components/bottomButton/bottomButton"
 import Webcam from "react-webcam";
+
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+
+import { check_blur, check_glare, check_face } from "../../lib/ImgQualityLib/imageCheck"
 // import { ImageQuality } from '../../lib/AppUtils';
 // import Loader from 'react-loader-spinner'
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -28,7 +33,17 @@ class IDDocumentCamera extends Component {
             isErrorStatus: false,
             screenshot: null,
             isLoading: false,
-            
+            blurResult: null,
+            glareResult: null,
+            faceResult: null,
+            crop: {
+                unit: '%',
+                x: 0,
+                y: 0,
+                width: 100,
+                height: 100,
+                aspect: 16 / 9
+              }
         }
     }
     componentDidMount = () => {
@@ -36,6 +51,7 @@ class IDDocumentCamera extends Component {
         console.log(window.IDType)
         console.log(window.cameraMode)
         this.onSetMessage()
+        window.console_hmjhh = true;
     }
     onSetMessage = () => {
         if (window.IDType == "idcard") {
@@ -58,6 +74,18 @@ class IDDocumentCamera extends Component {
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
         this.setState({ screenshot: imageSrc })
+        
+        imageSrc.onload = async () => {
+            var blured = check_blur(imageSrc);
+            var glared = check_glare(imageSrc);
+            var faced = await check_face(imageSrc);
+
+            this.setState({ blurResult: "- Blur: " + blured })
+            this.setState({ glareResult: "- Glare: " + glared })
+            this.setState({ faceResult: "- Face: " + faced })
+        }
+
+
         console.log(imageSrc)
         // this.setState({isLoading: true})
         this.setState({ previewImageStatuse: true })
@@ -171,7 +199,7 @@ class IDDocumentCamera extends Component {
                             <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
                         </div>
                     </div>
-                    <div style={{ height: window.innerHeight * 0.48,backgroundImage:`url(${this.state.idCardSRC})`,backgroundSize:"100% 100%"}}>
+                    <div style={{ height: window.innerHeight * 0.48, backgroundImage: `url(${this.state.idCardSRC})`, backgroundSize: "100% 100%" }}>
                         {/* <div style = {{height:window.innerHeight*0.03,background:"#7f00ff",opacity:"0.6"}}></div>
                         <div style = {{height:window.innerHeight*0.42,display:"flex",flexDirection:"row"}}>
                             <div style = {{width:"3%",height:window.innerHeight*0.42, background:"#7f00ff",opacity:"0.6"}}></div>
@@ -196,7 +224,7 @@ class IDDocumentCamera extends Component {
                                 </div>
                             </div>
                         </div>} */}
-                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ height: window.innerHeight * 0.3, marginTop: window.innerHeight*0.11}}>
+                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ height: window.innerHeight * 0.3, marginTop: window.innerHeight * 0.11 }}>
                             {/* {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginBottom: "20px", textAlign: "center" }}>
                                 <Loader
                                     type="Circles"

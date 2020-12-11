@@ -16,6 +16,18 @@ class Home extends Component {
     }
     componentDidMount = () => {
 
+        
+        console.log("window function : ", window.console_hmj)
+
+        console.log(window.location.href)
+        var pieces = window.location.href.split("/");
+        console.log(pieces)
+        
+        console.log("url_valuclient_id:", this.props.match.params.client_id)
+        console.log("applicantId:", this.props.match.params.applicantId)
+        console.log("checkId:", this.props.match.params.checkId)
+        console.log("env:", this.props.match.params.env)
+        
     }
 
 
@@ -81,7 +93,8 @@ class Home extends Component {
                     <div style = {{width:"100%", flexDirection:"column",alignItems:"center", display:"flex"}}>
                         <div className="startButton"
                             onClick={() => {
-                                this.props.history.push('idmain');
+                                // this.props.history.push('idmain');
+                                window.location.href="idmain"
                             }}>
                             <p style={{ marginBottom: "0px", marginTop: "0px" }}>Start</p>
                         </div>

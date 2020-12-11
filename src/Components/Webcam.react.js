@@ -34,3 +34,4 @@ class Webcam extends React.Component {
 }
 
 export default Webcam;
+

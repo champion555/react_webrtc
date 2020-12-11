@@ -1,4 +1,5 @@
 import Axios from '../api';
+import SelfAxios from '../selfService';
 import datauritoblob from 'datauritoblob'
 import { isMobile } from 'react-device-detect'
 function stopMediaTracks(stream) {
@@ -135,16 +136,12 @@ export function changeCamera(deviceId) {
 
 function getToken() {
   return new Promise((r, reject) => {
-
-
     var tokenTime = localStorage.getItem('time')
     var token = localStorage.getItem('token')
-
     if (token && new Date().getTime() - tokenTime < 1 * 60 * 1000) {
       console.log('token', token)
       return r(token)
     }
-
     console.log('getting token ...')
     const data = new FormData();
     data.append('api_key', 'Mzc0MTExMjUtNTBmMS00ZTA3LWEwNjktZjQxM2UwNjA3ZGEw');
@@ -157,7 +154,6 @@ function getToken() {
       else throw Error("Auth Error")
     }).then(token => {
       console.error(token)
-
       localStorage.setItem('time', new Date().getTime())
       localStorage.setItem('token', token)
 
@@ -233,6 +229,24 @@ export function VideoUpload(blobData, isVideo = true, prCallback) { //parameters
       headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
       onUploadProgress: progressEvent => {
         // console.log('progressEvent:' + progressEvent.loaded);
+        if (prCallback) prCallback(blobData.size, progressEvent.loaded)
+      }
+    })
+  })
+}
+export function GetClientDetail(blobData, prCallback) { //parameters: { type, data, id }
+
+  const data = new FormData();
+  data.append('api_key', 'Mzc0MTExMjUtNTBmMS00ZTA3LWEwNjktZjQxM2UwNjA3ZGEw');
+  data.append('secret_key', 'YTE4YmM5YmYtZjZhYS00MTU5LWI4Y2EtYjQyYTRkNzAxOWZj');
+
+  return getToken().then(token => {
+    var data = {
+      'clientId': '517414793516'
+    }
+    return SelfAxios.get("getClientDetails", data, {
+      // headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
+      onUploadProgress: progressEvent => {
         if (prCallback) prCallback(blobData.size, progressEvent.loaded)
       }
     })
