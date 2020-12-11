@@ -38,9 +38,9 @@ class IDDocumentCamera extends Component {
             crop: {
                 unit: '%',
                 x: 5,
-                y: 10,
+                y: 15,
                 width: 90,
-                height: 80,
+                height: 60,
                 aspect: 16 / 9
             }
         }
