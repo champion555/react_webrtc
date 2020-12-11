@@ -37,10 +37,10 @@ class IDDocumentCamera extends Component {
             faceResult: null,
             crop: {
                 unit: '%',
-                x: 0,
-                y: 0,
-                width: 100,
-                height: 100,
+                x: 5,
+                y: 10,
+                width: 90,
+                height: 80,
                 aspect: 16 / 9
             }
         }
