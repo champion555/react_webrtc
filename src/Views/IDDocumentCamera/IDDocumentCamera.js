@@ -43,7 +43,7 @@ class IDDocumentCamera extends Component {
                 height: 55,
                 aspect: 16 / 9
             },
-            croppedImageUrl:null
+            croppedImageUrl: null
         }
     }
     componentDidMount = () => {
@@ -158,59 +158,59 @@ class IDDocumentCamera extends Component {
     };
     onImageLoaded = (image) => {
         this.imageRef = image;
-      };
-      onCropComplete = (crop) => {
+    };
+    onCropComplete = (crop) => {
         this.makeClientCrop(crop);
-      };
-      onCropChange = (crop, percentCrop) => {
+    };
+    onCropChange = (crop, percentCrop) => {
         // You could also use percentCrop:
         // this.setState({ crop: percentCrop });
         this.setState({ crop });
-      };
-      async makeClientCrop(crop) {
+    };
+    async makeClientCrop(crop) {
         if (this.imageRef && crop.width && crop.height) {
-          const croppedImageUrl = await this.getCroppedImg(
-            this.imageRef,
-            crop,
-            "newFile.jpeg"
-          );
-          this.setState({ croppedImageUrl:croppedImageUrl });
+            const croppedImageUrl = await this.getCroppedImg(
+                this.imageRef,
+                crop,
+                "newFile.jpeg"
+            );
+            this.setState({ croppedImageUrl: croppedImageUrl });
         }
-      }
-      getCroppedImg(image, crop, fileName) {
+    }
+    getCroppedImg(image, crop, fileName) {
         const canvas = document.createElement("canvas");
         const scaleX = image.naturalWidth / image.width;
         const scaleY = image.naturalHeight / image.height;
         canvas.width = crop.width;
         canvas.height = crop.height;
         const ctx = canvas.getContext("2d");
-    
+
         ctx.drawImage(
-          image,
-          crop.x * scaleX,
-          crop.y * scaleY,
-          crop.width * scaleX,
-          crop.height * scaleY,
-          0,
-          0,
-          crop.width,
-          crop.height
+            image,
+            crop.x * scaleX,
+            crop.y * scaleY,
+            crop.width * scaleX,
+            crop.height * scaleY,
+            0,
+            0,
+            crop.width,
+            crop.height
         );
-    
+
         return new Promise((resolve, reject) => {
-          canvas.toBlob((blob) => {
-            if (!blob) {
-              //reject(new Error('Canvas is empty'));
-              console.error("Canvas is empty");
-              return;
-            }
-            blob.name = fileName;
-            window.URL.revokeObjectURL(this.fileUrl);
-            this.fileUrl = window.URL.createObjectURL(blob);
-            resolve(this.fileUrl);
-          }, "image/jpeg");
+            canvas.toBlob((blob) => {
+                if (!blob) {
+                    //reject(new Error('Canvas is empty'));
+                    console.error("Canvas is empty");
+                    return;
+                }
+                blob.name = fileName;
+                window.URL.revokeObjectURL(this.fileUrl);
+                this.fileUrl = window.URL.createObjectURL(blob);
+                resolve(this.fileUrl);
+            }, "image/jpeg");
         });
-      }
+    }
 
     render() {
         const videoConstraints = {
@@ -237,7 +237,7 @@ class IDDocumentCamera extends Component {
                         ruleOfThirds
                         onImageLoaded={this.onImageLoaded}
                         onComplete={this.onCropComplete}
-                        onChange={this.onCropChange}                        
+                        onChange={this.onCropChange}
                     />}
                 </div>
                 <div style={{ zIndex: "2", position: "absolute", width: "100%", height: window.innerHeight }}>
@@ -339,7 +339,12 @@ class IDDocumentCamera extends Component {
                                 onClick={this.onReTake}
                             />
                         </div>}
+
                     </div>
+                    <div style = {{textAlign:"center"}}>
+                        <img src={this.state.croppedImageUrl} />
+                    </div>
+
                 </div>
             </div>
         )
