@@ -1,6 +1,8 @@
 .IDCamera-Container{
+    width: 100%;
     z-index: 1;
-    position: absolute;    
+    position: absolute;
+    text-align: center;    
 }
 .IDCamera-Container video{
     width: 100%;

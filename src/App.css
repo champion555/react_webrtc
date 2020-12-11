@@ -39,3 +39,7 @@ input{
 span{
   color: white;
 }
+video{
+  width: 100%;
+    object-fit: fill;
+}

@@ -11,7 +11,6 @@ import Webcam from "react-webcam";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
-import { check_blur, check_glare, check_face } from "../../lib/ImgQualityLib/imageCheck"
 // import { ImageQuality } from '../../lib/AppUtils';
 // import Loader from 'react-loader-spinner'
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -74,17 +73,6 @@ class IDDocumentCamera extends Component {
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
         this.setState({ screenshot: imageSrc })
-        
-        imageSrc.onload = async () => {
-            var blured = check_blur(imageSrc);
-            var glared = check_glare(imageSrc);
-            var faced = await check_face(imageSrc);
-
-            this.setState({ blurResult: "- Blur: " + blured })
-            this.setState({ glareResult: "- Glare: " + glared })
-            this.setState({ faceResult: "- Face: " + faced })
-        }
-
 
         console.log(imageSrc)
         // this.setState({isLoading: true})
@@ -174,7 +162,7 @@ class IDDocumentCamera extends Component {
         };
         return (
             <div style={{ width: "100%", height: window.innerHeight }}>
-                <div className="IDCamera-Container">
+                <div className="IDCamera-Container" style = {{height:window.innerHeight}}>
                     {(!this.state.previewImageStatuse) && <Webcam
                         audio={false}
                         mirrored={false}
@@ -182,6 +170,7 @@ class IDDocumentCamera extends Component {
                         screenshotFormat="image/jpeg"
                         imageSmoothing={true}
                         width={"100%"}
+                        height = {window.innerHeight}
                         screenshotQuality={1.0}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase"
@@ -224,7 +213,7 @@ class IDDocumentCamera extends Component {
                                 </div>
                             </div>
                         </div>} */}
-                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ height: window.innerHeight * 0.3, marginTop: window.innerHeight * 0.11 }}>
+                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ marginTop: window.innerHeight * 0.11 }}>
                             {/* {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginBottom: "20px", textAlign: "center" }}>
                                 <Loader
                                     type="Circles"
