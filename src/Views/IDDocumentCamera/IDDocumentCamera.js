@@ -38,11 +38,12 @@ class IDDocumentCamera extends Component {
             crop: {
                 unit: '%',
                 x: 5,
-                y: 15,
+                y: 13,
                 width: 90,
-                height: 40,
+                height: 60,
                 aspect: 16 / 9
-            }
+            },
+            croppedImageUrl:null
         }
     }
     componentDidMount = () => {
@@ -173,7 +174,7 @@ class IDDocumentCamera extends Component {
             crop,
             "newFile.jpeg"
           );
-          this.setState({ croppedImageUrl });
+          this.setState({ croppedImageUrl:croppedImageUrl });
         }
       }
       getCroppedImg(image, crop, fileName) {
@@ -339,7 +340,6 @@ class IDDocumentCamera extends Component {
                         </div>}
                     </div>
                 </div>
-
             </div>
         )
     }
