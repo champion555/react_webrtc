@@ -42,7 +42,7 @@ class IDDocumentCamera extends Component {
                 width: 100,
                 height: 100,
                 aspect: 16 / 9
-              }
+            }
         }
     }
     componentDidMount = () => {
@@ -155,6 +155,61 @@ class IDDocumentCamera extends Component {
     setRef = webcam => {
         this.webcam = webcam;
     };
+    onImageLoaded = (image) => {
+        this.imageRef = image;
+      };
+      onCropComplete = (crop) => {
+        this.makeClientCrop(crop);
+      };
+      onCropChange = (crop, percentCrop) => {
+        // You could also use percentCrop:
+        // this.setState({ crop: percentCrop });
+        this.setState({ crop });
+      };
+      async makeClientCrop(crop) {
+        if (this.imageRef && crop.width && crop.height) {
+          const croppedImageUrl = await this.getCroppedImg(
+            this.imageRef,
+            crop,
+            "newFile.jpeg"
+          );
+          this.setState({ croppedImageUrl });
+        }
+      }
+      getCroppedImg(image, crop, fileName) {
+        const canvas = document.createElement("canvas");
+        const scaleX = image.naturalWidth / image.width;
+        const scaleY = image.naturalHeight / image.height;
+        canvas.width = crop.width;
+        canvas.height = crop.height;
+        const ctx = canvas.getContext("2d");
+    
+        ctx.drawImage(
+          image,
+          crop.x * scaleX,
+          crop.y * scaleY,
+          crop.width * scaleX,
+          crop.height * scaleY,
+          0,
+          0,
+          crop.width,
+          crop.height
+        );
+    
+        return new Promise((resolve, reject) => {
+          canvas.toBlob((blob) => {
+            if (!blob) {
+              //reject(new Error('Canvas is empty'));
+              console.error("Canvas is empty");
+              return;
+            }
+            blob.name = fileName;
+            window.URL.revokeObjectURL(this.fileUrl);
+            this.fileUrl = window.URL.createObjectURL(blob);
+            resolve(this.fileUrl);
+          }, "image/jpeg");
+        });
+      }
 
     render() {
         const videoConstraints = {
@@ -162,7 +217,7 @@ class IDDocumentCamera extends Component {
         };
         return (
             <div style={{ width: "100%", height: window.innerHeight }}>
-                <div className="IDCamera-Container" style = {{height:window.innerHeight}}>
+                <div className="IDCamera-Container">
                     {(!this.state.previewImageStatuse) && <Webcam
                         audio={false}
                         mirrored={false}
@@ -170,12 +225,19 @@ class IDDocumentCamera extends Component {
                         screenshotFormat="image/jpeg"
                         imageSmoothing={true}
                         width={"100%"}
-                        height = {window.innerHeight}
                         screenshotQuality={1.0}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase"
                     />}
-                    {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight }} />}
+                    {/* {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight }} />} */}
+                    {(this.state.previewImageStatuse) && <ReactCrop
+                        src={this.state.screenshot}
+                        crop={this.state.crop}
+                        ruleOfThirds
+                        onImageLoaded={this.onImageLoaded}
+                        onComplete={this.onCropComplete}
+                        onChange={this.onCropChange}                        
+                    />}
                 </div>
                 <div style={{ zIndex: "2", position: "absolute", width: "100%", height: window.innerHeight }}>
                     <div style={{ height: window.innerHeight * 0.07, background: "#7f00ff" }}>

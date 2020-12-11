@@ -4,10 +4,6 @@
     position: absolute;
     text-align: center;    
 }
-.IDCamera-Container video{
-    width: 100%;
-    object-fit: fill;
-}
 .IDCamera-Container .PreviewImage{
     width: 100%;
 }
