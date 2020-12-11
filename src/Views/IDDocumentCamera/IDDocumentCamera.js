@@ -302,11 +302,12 @@ class IDDocumentCamera extends Component {
                                         this.setState({ idTitle: "Back of National ID Card" })
                                         this.setState({ message: "Place the back page of ID Card inside the frame and take the photo" })
                                         this.setState({ previewImageStatuse: false })
-                                        window.FrontIDCardPath = this.state.IDDocImgURL
+                                        // window.FrontIDCardPath = this.state.IDDocImgURL
+                                        window.FrontIDCardPath = this.state.croppedImageUrl
                                         // localStorage.setItem("FrontIDCardPath", this.state.IDDocImgURL)                    
                                     } else if (IDTarget == "passport") {
                                         this.props.history.push('idmain')
-                                        window.PassportPath = this.state.IDDocImgURL
+                                        window.PassportPath = this.state.croppedImageUrl
                                         window.PassportCountry = window.countryName
                                         // localStorage.setItem("PassportPath", this.state.IDDocImgURL)
                                         // localStorage.setItem("passportCountry",window.countryName)
@@ -316,17 +317,17 @@ class IDDocumentCamera extends Component {
                                         this.setState({ idTitle: "Back of Residence Permit" })
                                         this.setState({ message: "Place the back of Residence Permit Card inside the frame and take the photo" })
                                         this.setState({ previewImageStatuse: false })
-                                        window.FrontResidentPath = this.state.IDDocImgURL
+                                        window.FrontResidentPath = this.state.croppedImageUrl
                                         // localStorage.setItem("FrontResidentPath", this.state.IDDocImgURL)                                
                                     } else if (IDTarget == "backIDCard") {
                                         this.props.history.push('idmain')
-                                        window.BackIDCardPath = this.state.IDDocImgURL
+                                        window.BackIDCardPath = this.state.croppedImageUrl
                                         window.IDCardCountry = window.countryName
                                         // localStorage.setItem("BackIDCardPath", this.state.IDDocImgURL)
                                         // localStorage.setItem("idCardCountry",window.countryName)
                                     } else if (IDTarget == "backResident") {
                                         this.props.history.push('poadoc')
-                                        window.BackResidentPath = this.state.IDDocImgURL
+                                        window.BackResidentPath = this.state.croppedImageUrl
                                         window.ResidentCountry = window.countryName
                                         // localStorage.setItem("BackResidentPath", this.state.IDDocImgURL)
                                         // localStorage.setItem("residentCountry",window.countryName)
