@@ -40,7 +40,7 @@ class IDDocumentCamera extends Component {
                 x: 5,
                 y: 13,
                 width: 90,
-                height: 55,
+                height: 30,
                 aspect: 16 / 9
             },
             croppedImageUrl: null
@@ -226,11 +226,13 @@ class IDDocumentCamera extends Component {
                         screenshotFormat="image/jpeg"
                         imageSmoothing={true}
                         width={"100%"}
+                        height={window.innerHeight}
                         screenshotQuality={1.0}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase"
                     />}
                     {/* {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight }} />} */}
+                    {/* <div style = {{display:"flex",height:window.innerHeight}}> */}
                     {(this.state.previewImageStatuse) && <ReactCrop
                         src={this.state.screenshot}
                         crop={this.state.crop}
@@ -238,7 +240,12 @@ class IDDocumentCamera extends Component {
                         onImageLoaded={this.onImageLoaded}
                         onComplete={this.onCropComplete}
                         onChange={this.onCropChange}
+                        imageStyle ={{height:window.innerHeight}}
+                        // style = {{height:window.innerHeight}}
+
                     />}
+                    {/* </div> */}
+
                 </div>
                 <div style={{ zIndex: "2", position: "absolute", width: "100%", height: window.innerHeight }}>
                     <div style={{ height: window.innerHeight * 0.07, background: "#7f00ff" }}>
@@ -341,7 +348,7 @@ class IDDocumentCamera extends Component {
                         </div>}
 
                     </div>
-                    <div style = {{textAlign:"center"}}>
+                    <div style={{ textAlign: "center" }}>
                         <img src={this.state.croppedImageUrl} />
                     </div>
 

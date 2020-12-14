@@ -7,6 +7,10 @@
 .IDCamera-Container .PreviewImage{
     width: 100%;
 }
+.IDCamera-Container video{
+    width: 100%;
+    object-fit: fill;
+}
 .IDMessage-Container{
     display: flex;
     justify-content: flex-end;
