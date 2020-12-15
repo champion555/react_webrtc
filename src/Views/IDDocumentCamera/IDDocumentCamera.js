@@ -40,7 +40,7 @@ class IDDocumentCamera extends Component {
                 x: 5,
                 y: 11,
                 width: 90,
-                height: 40,
+                height: 40.5,
                 aspect: 16 / 9
             },
             croppedImageUrl: null
