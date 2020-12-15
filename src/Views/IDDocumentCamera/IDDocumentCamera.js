@@ -44,22 +44,30 @@ class IDDocumentCamera extends Component {
                 height: 40.5,
                 aspect: 16 / 9
             },
-            // cropLarge: {
-            //     unit: '%',
-            //     x: 5,
-            //     y: 13,
-            //     width: 90,
-            //     height: 55,
-            //     aspect: 16 / 9
-            // },
-            // croppedImageUrl: null
+            croppedImageUrl: null
         }
     }
     componentDidMount = () => {
         if(window.innerHeight > 700){
             this.setState({isCamSize:true})
+            this.setState({crop:{
+                unit: '%',
+                x: 5,
+                y: 13,
+                width: 90,
+                height: 55,
+                aspect: 16 / 9
+            }})
         }else if(window.innerHeight<600){
             this.setState({isCamSize:false})
+            this.setState({crop:{
+                unit: '%',
+                x: 5,
+                y: 11,
+                width: 90,
+                height: 40.5,
+                aspect: 16 / 9
+            }})
         }
         console.log(window.countryName)
         console.log(window.IDType)
