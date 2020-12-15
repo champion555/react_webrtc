@@ -226,7 +226,7 @@ class IDDocumentCamera extends Component {
                         screenshotFormat="image/jpeg"
                         imageSmoothing={true}
                         width={"100%"}
-                        height={window.innerHeight - 70}
+                        height={window.innerHeight - 50}
                         screenshotQuality={1.0}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase"
@@ -239,7 +239,7 @@ class IDDocumentCamera extends Component {
                         onImageLoaded={this.onImageLoaded}
                         onComplete={this.onCropComplete}
                         onChange={this.onCropChange}
-                        imageStyle ={{height:window.innerHeight - 70}}
+                        imageStyle ={{height:window.innerHeight - 50}}
 
                     />}               
 
