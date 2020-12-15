@@ -35,6 +35,7 @@ class IDDocumentCamera extends Component {
             blurResult: null,
             glareResult: null,
             faceResult: null,
+            isCamSize:null,
             crop: {
                 unit: '%',
                 x: 5,
@@ -43,11 +44,23 @@ class IDDocumentCamera extends Component {
                 height: 40.5,
                 aspect: 16 / 9
             },
-            croppedImageUrl: null
+            // cropLarge: {
+            //     unit: '%',
+            //     x: 5,
+            //     y: 13,
+            //     width: 90,
+            //     height: 55,
+            //     aspect: 16 / 9
+            // },
+            // croppedImageUrl: null
         }
     }
     componentDidMount = () => {
-        alert(window.innerHeight)
+        if(window.innerHeight > 700){
+            this.setState({isCamSize:true})
+        }else if(window.innerHeight<600){
+            this.setState({isCamSize:false})
+        }
         console.log(window.countryName)
         console.log(window.IDType)
         console.log(window.cameraMode)
@@ -218,9 +231,29 @@ class IDDocumentCamera extends Component {
             facingMode: "environment"
         };
         return (
-            <div style={{ width: "100%", height: window.innerHeight }}>
+            <div style={{ width: "100%", height: window.innerHeight }}>                
                 <div className="IDCamera-Container">
-                    {(!this.state.previewImageStatuse) && <Webcam
+                {(!this.state.previewImageStatuse) && (this.state.isCamSize) && <Webcam
+                        audio={false}
+                        mirrored={false}
+                        ref={this.setRef}
+                        screenshotFormat="image/jpeg"
+                        imageSmoothing={true}
+                        width={"100%"}
+                        screenshotQuality={1.0}
+                        videoConstraints={videoConstraints}
+                        forceScreenshotSourceSize="flase"
+                    />}                
+                    {(this.state.previewImageStatuse) && (this.state.isCamSize) && <ReactCrop
+                        src={this.state.screenshot}
+                        crop={this.state.crop}
+                        ruleOfThirds
+                        onImageLoaded={this.onImageLoaded}
+                        onComplete={this.onCropComplete}
+                        onChange={this.onCropChange}
+                    />}
+
+                    {(!this.state.previewImageStatuse) && (!this.state.isCamSize) && <Webcam
                         audio={false}
                         mirrored={false}
                         ref={this.setRef}
@@ -231,9 +264,8 @@ class IDDocumentCamera extends Component {
                         screenshotQuality={1.0}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase"
-                    />}
-                    {/* {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight }} />} */}                
-                    {(this.state.previewImageStatuse) && <ReactCrop
+                    />}             
+                    {(this.state.previewImageStatuse) &&  (!this.state.isCamSize)&& <ReactCrop
                         src={this.state.screenshot}
                         crop={this.state.crop}
                         ruleOfThirds
