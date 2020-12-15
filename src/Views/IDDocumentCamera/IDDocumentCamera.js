@@ -231,8 +231,7 @@ class IDDocumentCamera extends Component {
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase"
                     />}
-                    {/* {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight }} />} */}
-                    {/* <div style = {{display:"flex",height:window.innerHeight}}> */}
+                    {/* {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight }} />} */}                
                     {(this.state.previewImageStatuse) && <ReactCrop
                         src={this.state.screenshot}
                         crop={this.state.crop}
@@ -241,10 +240,8 @@ class IDDocumentCamera extends Component {
                         onComplete={this.onCropComplete}
                         onChange={this.onCropChange}
                         imageStyle ={{height:window.innerHeight - 50}}
-                        // style = {{height:window.innerHeight}}
 
-                    />}
-                    {/* </div> */}
+                    />}               
 
                 </div>
                 <div style={{ zIndex: "2", position: "absolute", width: "100%", height: window.innerHeight }}>
@@ -258,7 +255,7 @@ class IDDocumentCamera extends Component {
                             <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
                         </div>
                     </div>
-                    <div style={{ height: window.innerHeight * 0.48, backgroundImage: `url(${this.state.idCardSRC})`, backgroundSize: "100% 100%" }}>
+                    <div style={{ height: window.innerHeight * 0.44, backgroundImage: `url(${this.state.idCardSRC})`, backgroundSize: "100% 100%" }}>
                         {/* <div style = {{height:window.innerHeight*0.03,background:"#7f00ff",opacity:"0.6"}}></div>
                         <div style = {{height:window.innerHeight*0.42,display:"flex",flexDirection:"row"}}>
                             <div style = {{width:"3%",height:window.innerHeight*0.42, background:"#7f00ff",opacity:"0.6"}}></div>
@@ -267,7 +264,7 @@ class IDDocumentCamera extends Component {
                         </div>
                         <div style = {{height:window.innerHeight*0.03,background:"#7f00ff",opacity:"0.6"}}></div> */}
                     </div>
-                    <div style={{ height: window.innerHeight * 0.45, background: "#7f00ff" }}>
+                    <div style={{ height: window.innerHeight * 0.49, background: "#7f00ff" }}>
                         <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
                             <p className="IDTitle" >{this.state.idTitle}</p>
                             <p className="IDDocCamMeassage">{this.state.message}</p>
