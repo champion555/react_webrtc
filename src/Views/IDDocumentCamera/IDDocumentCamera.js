@@ -47,6 +47,7 @@ class IDDocumentCamera extends Component {
         }
     }
     componentDidMount = () => {
+        alert(window.innerHeight)
         console.log(window.countryName)
         console.log(window.IDType)
         console.log(window.cameraMode)
