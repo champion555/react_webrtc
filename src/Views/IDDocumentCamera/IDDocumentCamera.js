@@ -53,9 +53,9 @@ class IDDocumentCamera extends Component {
             this.setState({crop:{
                 unit: '%',
                 x: 5,
-                y: 15,
+                y: 14,
                 width: 90,
-                height: 50,
+                height: 45,
                 aspect: 16 / 9
             }})
         }else if(window.innerHeight<600){
