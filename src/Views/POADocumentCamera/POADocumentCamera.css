@@ -13,8 +13,8 @@
     object-fit: fill;
 }
 .POAErrorMessageView { 
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 .POAErrorMessageView .container {
@@ -63,6 +63,7 @@
     flex-direction: row;
     align-items: center;
     display: flex;
+    justify-content: center;
 }
 .POAMessage-Container{
     width: 100%;

@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "datauritoblob": "^1.0.0",
+    "image-analitic-lib": "file:image-analitic-lib",
     "react": "^16.14.0",
     "react-bootstrap": "^1.3.0",
     "react-cam": "^1.1.11",

@@ -10,10 +10,8 @@ import Webcam from "react-webcam";
 
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+import { check_blur, check_blur_base64, check_glare_base64, check_face_base64, check_glare, check_face } from 'image-analitic-lib'
 
-// import { ImageQuality } from '../../lib/AppUtils';
-// import Loader from 'react-loader-spinner'
-// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './IDDocumentCamera.css'
 
 class IDDocumentCamera extends Component {
@@ -31,11 +29,7 @@ class IDDocumentCamera extends Component {
             previewImageStatuse: false,
             isErrorStatus: false,
             screenshot: null,
-            isLoading: false,
-            blurResult: null,
-            glareResult: null,
-            faceResult: null,
-            isCamSize:null,
+            isCamSize: null,
             crop: {
                 unit: '%',
                 x: 5,
@@ -48,32 +42,35 @@ class IDDocumentCamera extends Component {
         }
     }
     componentDidMount = () => {
-        if(window.innerHeight > 700){
-            this.setState({isCamSize:true})
-            this.setState({crop:{
-                unit: '%',
-                x: 5,
-                y: 15,
-                width: 90,
-                height: 45,
-                aspect: 16 / 9
-            }})
-        }else if(window.innerHeight<600){
-            this.setState({isCamSize:false})
-            this.setState({crop:{
-                unit: '%',
-                x: 5,
-                y: 11,
-                width: 90,
-                height: 40.5,
-                aspect: 16 / 9
-            }})
+        if (window.innerHeight > 700) {
+            this.setState({ isCamSize: true })
+            this.setState({
+                crop: {
+                    unit: '%',
+                    x: 5,
+                    y: 15,
+                    width: 90,
+                    height: 45,
+                    aspect: 16 / 9
+                }
+            })
+        } else if (window.innerHeight < 600) {
+            this.setState({ isCamSize: false })
+            this.setState({
+                crop: {
+                    unit: '%',
+                    x: 5,
+                    y: 11,
+                    width: 90,
+                    height: 40.5,
+                    aspect: 16 / 9
+                }
+            })
         }
         console.log(window.countryName)
         console.log(window.IDType)
         console.log(window.cameraMode)
         this.onSetMessage()
-        window.console_hmjhh = true;
     }
     onSetMessage = () => {
         if (window.IDType == "idcard") {
@@ -98,7 +95,6 @@ class IDDocumentCamera extends Component {
         this.setState({ screenshot: imageSrc })
 
         console.log(imageSrc)
-        // this.setState({isLoading: true})
         this.setState({ previewImageStatuse: true })
         let { IDTarget } = this.state
         if (IDTarget == "frontIDCard") {
@@ -117,42 +113,6 @@ class IDDocumentCamera extends Component {
             this.setState({ titleMessage: "Image preview" })
             this.setState({ message: "Make sure  the  document  is clear  to read" })
         }
-        // ImageQuality(imageSrc, (total, progress) => {
-        // }).then(res => {
-        //     var response = res.data;
-        //     console.log(response, response.message, response.errorList);
-        //     this.setState({ previewImageStatuse: true })
-        //     this.setState({ isLoading: false })
-        //     if (response.statusCode == "200") {
-        //         let { IDTarget } = this.state
-        //         if (IDTarget == "frontIDCard") {
-        //             this.setState({ titleMessage: "Image preview" })
-        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         } else if (IDTarget == "passport") {
-        //             this.setState({ titleMessage: "Image preview" })
-        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         } else if (IDTarget == "frontResident") {
-        //             this.setState({ titleMessage: "Image preview" })
-        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         } else if (IDTarget == "backIDCard") {
-        //             this.setState({ titleMessage: "Image preview" })
-        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         } else if (IDTarget == "backResident") {
-        //             this.setState({ titleMessage: "Image preview" })
-        //             this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         }
-        //     } else {
-        //         this.setState({ titleMessage: "Image preview" })
-        //         this.setState({ message: "Make sure the ID Docment image is clear to read" })
-        //         this.setState({ isErrorStatus: true })
-
-        //     }
-
-        // }).catch(e => {
-        //     alert("The server is not working or the network error, Please try again.");
-        //     this.setState({ isLoading: false })
-        // })
-
     };
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
@@ -175,6 +135,18 @@ class IDDocumentCamera extends Component {
             this.setState({ titleMessage: "Residence Permit Card" })
         }
     }
+    onLoadedImage() {
+
+        var b = check_blur('imageID');
+        var g = check_glare('imageID')
+        var f = check_face('imageID')
+        if (b.b == true || g == true) {
+            this.setState({ isErrorStatus: true })
+        }
+        console.log(b)
+        console.log(g)
+    }
+
     setRef = webcam => {
         this.webcam = webcam;
     };
@@ -185,8 +157,6 @@ class IDDocumentCamera extends Component {
         this.makeClientCrop(crop);
     };
     onCropChange = (crop, percentCrop) => {
-        // You could also use percentCrop:
-        // this.setState({ crop: percentCrop });
         this.setState({ crop });
     };
     async makeClientCrop(crop) {
@@ -222,7 +192,6 @@ class IDDocumentCamera extends Component {
         return new Promise((resolve, reject) => {
             canvas.toBlob((blob) => {
                 if (!blob) {
-                    //reject(new Error('Canvas is empty'));
                     console.error("Canvas is empty");
                     return;
                 }
@@ -239,9 +208,12 @@ class IDDocumentCamera extends Component {
             facingMode: "environment"
         };
         return (
-            <div style={{ width: "100%", height: window.innerHeight }}>                
+            <div style={{ width: "100%", height: window.innerHeight }}>
+                <div style={{ textAlign: "center", zIndex: "1", position: 'absolute' }}>
+                    <img id="imageID" src={this.state.croppedImageUrl} onLoad={() => this.onLoadedImage()} />
+                </div>
                 <div className="IDCamera-Container">
-                {(!this.state.previewImageStatuse) && (this.state.isCamSize) && <Webcam
+                    {(!this.state.previewImageStatuse) && (this.state.isCamSize) && <Webcam
                         audio={false}
                         mirrored={false}
                         ref={this.setRef}
@@ -251,7 +223,7 @@ class IDDocumentCamera extends Component {
                         screenshotQuality={1.0}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase"
-                    />}                
+                    />}
                     {(this.state.previewImageStatuse) && (this.state.isCamSize) && <ReactCrop
                         src={this.state.screenshot}
                         crop={this.state.crop}
@@ -272,20 +244,20 @@ class IDDocumentCamera extends Component {
                         screenshotQuality={1.0}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase"
-                    />}             
-                    {(this.state.previewImageStatuse) &&  (!this.state.isCamSize)&& <ReactCrop
+                    />}
+                    {(this.state.previewImageStatuse) && (!this.state.isCamSize) && <ReactCrop
                         src={this.state.screenshot}
                         crop={this.state.crop}
                         ruleOfThirds
                         onImageLoaded={this.onImageLoaded}
                         onComplete={this.onCropComplete}
                         onChange={this.onCropChange}
-                        imageStyle ={{height:window.innerHeight - 50}}
+                        imageStyle={{ height: window.innerHeight - 50 }}
 
-                    />}               
+                    />}
 
                 </div>
-                <div style={{ zIndex: "2", position: "absolute", width: "100%", height: window.innerHeight }}>
+                <div style={{ zIndex: "20", position: "absolute", width: "100%", height: window.innerHeight }}>
                     <div style={{ height: window.innerHeight * 0.07, background: "#7f00ff" }}>
                         <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex", background: "" }}>
                             <img src={this.state.backButtonSRC} style={{ width: "20px", height: "20px", marginLeft: "10px" }}
@@ -296,21 +268,14 @@ class IDDocumentCamera extends Component {
                             <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
                         </div>
                     </div>
-                    <div style={{ height: window.innerHeight * 0.44, backgroundImage: `url(${this.state.idCardSRC})`, backgroundSize: "100% 100%" }}>
-                        {/* <div style = {{height:window.innerHeight*0.03,background:"#7f00ff",opacity:"0.6"}}></div>
-                        <div style = {{height:window.innerHeight*0.42,display:"flex",flexDirection:"row"}}>
-                            <div style = {{width:"3%",height:window.innerHeight*0.42, background:"#7f00ff",opacity:"0.6"}}></div>
-                            <div style = {{width:"94%",height:window.innerHeight*0.42 - 4,border:"solid", borderColor:"white",zIndex:"10",borderRadius:"10px"}}></div>
-                            <div style = {{width:"3%",height:window.innerHeight*0.42,background:"#7f00ff",opacity:"0.6"}}></div>
-                        </div>
-                        <div style = {{height:window.innerHeight*0.03,background:"#7f00ff",opacity:"0.6"}}></div> */}
-                    </div>
+                    <div style={{ height: window.innerHeight * 0.44, backgroundImage: `url(${this.state.idCardSRC})`, backgroundSize: "100% 100%" }}/>
+                     
                     <div style={{ height: window.innerHeight * 0.49, background: "#7f00ff" }}>
                         <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
                             <p className="IDTitle" >{this.state.idTitle}</p>
                             <p className="IDDocCamMeassage">{this.state.message}</p>
                         </div>
-                        {/* {(this.state.isErrorStatus) && <div className="errorMessageView" style={{ bottom: window.innerHeight * 0.13 }}>
+                        {(this.state.isErrorStatus) && <div className="errorMessageView" style={{ bottom: window.innerHeight * 0.13 }}>
                             <div className="container">
                                 <div className="errortitle">
                                     <img src={this.state.errorSRC} />
@@ -320,16 +285,8 @@ class IDDocumentCamera extends Component {
                                     <p>- Make sure the image is not blurry or contains blares!</p>
                                 </div>
                             </div>
-                        </div>} */}
-                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ marginTop: window.innerHeight * 0.11 }}>
-                            {/* {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginBottom: "20px", textAlign: "center" }}>
-                                <Loader
-                                    type="Circles"
-                                    color="#ffffff"
-                                    height={40}
-                                    width={40}
-                                />
-                            </div>} */}
+                        </div>}
+                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ marginTop: window.innerHeight * 0.11 }}>                            
                             {(!this.state.isLoading) && <Button
                                 label="Take A Picture"
                                 onClick={this.onCapture}
@@ -386,10 +343,6 @@ class IDDocumentCamera extends Component {
                         </div>}
 
                     </div>
-                    <div style={{ textAlign: "center" }}>
-                        <img src={this.state.croppedImageUrl} />
-                    </div>
-
                 </div>
             </div>
         )

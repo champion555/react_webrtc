@@ -7,9 +7,8 @@ import Header from "../../Components/header/header"
 import errorURL from "../../assets/ic_error.png"
 import poaURL from "../../assets/ic_poadocument.png"
 import poaframeURL from "../../assets/ic_poaframe.png"
-import Loader from 'react-loader-spinner'
-import { ImageQuality } from '../../lib/AppUtils';
 import './POADocumentCamera.css'
+import { check_blur, check_blur_base64, check_glare_base64, check_face_base64, check_glare, check_face } from 'image-analitic-lib'
 
 class POADocumentCamera extends Component {
     constructor(props) {
@@ -33,6 +32,16 @@ class POADocumentCamera extends Component {
     onSetMessage = () => {
         this.setState({ POAMessage: "Place the  Proof of address  document  inside of frame  and capture  the document" })
     }
+    onLoadedImage() {
+        var b = check_blur('poaimageID');
+        var g = check_glare('poaimageID')
+        var f = check_face('poaimageID')
+        if (b.b == true || g == true) {
+            this.setState({ isErrorStatus: true })
+        }
+        console.log(b)
+        console.log(g)
+    }
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
         this.setState({ screenshot: imageSrc })
@@ -42,22 +51,6 @@ class POADocumentCamera extends Component {
         this.setState({ isLoading: false })
         this.setState({ poaSRC: poaURL })
         this.setState({ POAMessage: "Make sure  the  document  is clear  to read" })
-
-        // ImageQuality(imageSrc, (total, progress) => {
-        // }).then(res => {
-        //     var response = res.data;
-        //     console.log(response, response.message, response.errorList);
-        //     this.setState({ previewImageStatuse: true })
-        //     this.setState({ isLoading: false })
-        //     if (response.statusCode == "200") {
-        //         this.setState({ isErrorStatus: false })
-        //     } else {
-        //         this.setState({ isErrorStatus: true })
-        //     }
-        // }).catch(e => {
-        //     alert("The server is not working or the network error, Please try again.");
-        //     this.setState({ isLoading: false })
-        // })
     };
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
@@ -88,13 +81,13 @@ class POADocumentCamera extends Component {
                         screenshotQuality={1.0}
                         videoConstraints={videoConstraints}
                         forceScreenshotSourceSize="flase" />}
-                    {(this.state.previewImageStatuse) && <img className="PreviewImage" src={this.state.screenshot} style={{ height: window.innerHeight - 50 }} />}
+                    {(this.state.previewImageStatuse) && <img className="PreviewImage" id="poaimageID" src={this.state.screenshot} style={{ height: window.innerHeight - 50 }} onLoad={() => this.onLoadedImage()} />}
                 </div>
                 <div style={{ width: "100%", height: window.innerHeight - 50, position: "absolute", zIndex: "2", backgroundImage: `url(${this.state.poaSRC})`, backgroundSize: "100% 100%" }}>
-                    <div className="POAMessage-Container" style={{ height: window.innerHeight * 0.15, marginTop: window.innerHeight * 0.6 }}>
+                {(!this.state.isErrorStatus) && <div className="POAMessage-Container" style={{ height: "60px", marginTop: window.innerHeight * 0.6 }}>
                         <p className="POACamMeassage">{this.state.POAMessage}</p>
-                    </div>
-                    {/* {(this.state.isErrorStatus) && <div className="POAErrorMessageView" style={{ marginTop: window.innerHeight * 0.5 }}>
+                    </div>}
+                    {(this.state.isErrorStatus) && <div className="POAErrorMessageView" style = {{marginTop:window.innerHeight*0.6}}>
                         <div className="container">
                             <div className="errortitle">
                                 <img src={this.state.errorIconURL} />
@@ -104,15 +97,7 @@ class POADocumentCamera extends Component {
                                 <p>- Make sure the image is not blurry or contains blares!</p>
                             </div>
                         </div>
-                    </div>} */}
-                    {/* {(this.state.isLoading) && <div style={{ height: "50px", width: "100%", marginTop: window.innerHeight * 0.6, textAlign: "center" }}>
-                        <Loader
-                            type="Circles"
-                            color="#ffffff"
-                            height={40}
-                            width={40}
-                        />
-                    </div>} */}
+                    </div>}
                     {(!this.state.previewImageStatuse) && <div className="POACapture-Container">
                         {(!this.state.isLoading) && <Button
                             label="TAKE A CAPTURE"
