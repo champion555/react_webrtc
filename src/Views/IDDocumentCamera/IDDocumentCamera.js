@@ -295,8 +295,6 @@ class IDDocumentCamera extends Component {
                                 </div>
                             </div>
                         </div>}
-                        <p>blur Result:{this.state.blurResult ? "true" : "false"} ,  blur value:{this.state.blurValue}</p>
-                        <p>glare Result:{this.state.glareResult ? "true" : "false"}</p>
                         {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ marginTop: window.innerHeight * 0.11 }}>
                             {(!this.state.isLoading) && <Button
                                 label="Take A Picture"
