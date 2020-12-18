@@ -13,7 +13,7 @@ function _check_blur(src, cv = window.cv) {
     cv.Laplacian(gray, dst, cv.CV_64F, 1, 1, 0, cv.BORDER_DEFAULT);
     cv.meanStdDev(dst, menO, men);
 
-    if (men.data64F[0] > 15) {
+    if (men.data64F[0] > 50) {
         blured = true;
     }
     var bValue = men.data64F[0];
