@@ -4,7 +4,7 @@ import captureImg from "../../assets/camera_take.png"
 import UndetectImgURL from "../../assets/ic_undetected1.png"
 import DetectImgURL from "../../assets/ic_detected1.png"
 import BackURL from "../../assets/ic_back.png"
-import Button from "../../Components/button/button"
+import Button from "../../Components/POAPreveiwButton/POAPreviewButton"
 import LogoURL from "../../assets/ic_logo1.png"
 import { PhotoUpload } from '../../lib/AppUtils';
 import Loader from 'react-loader-spinner'
@@ -82,12 +82,12 @@ class PhotoLiveness extends Component {
                 <div style={{ position: "absolute", zIndex: "2", width: "100%", height: window.innerHeight }}>
                     <div className="LivenessTopBar" style={{ height: window.innerHeight * 0.07 }}>
                         <img src={this.state.backButtonSrc} onClick={() => this.props.history.push('poadoc')} className="btnBack" />
-                        <h2 className="txtTitle">Face Liveness</h2>
+                        <h2 className="liveness_txtTitle">Face Liveness</h2>
                         <div style={{ width: '10px' }}></div>
                     </div>
-                    <div style={{ width: "100%", height: window.innerHeight * 0.681,backgroundImage:`url(${this.state.ImgSrc})`,backgroundSize:"100% 100%" }}></div>
-                    <div className="liveness-captureButton" style={{ height: window.innerHeight * 0.25 }}>
-                        <p style={{ font: "18px", color: "white", textAlign: "center", marginBottom: "5px" }}>Please place your face on the oval and take the photo </p>
+                    <div style={{ width: "100%", height: window.innerHeight * 0.731,backgroundImage:`url(${this.state.ImgSrc})`,backgroundSize:"100% 100%" }}></div>
+                    <div className="liveness-captureButton" style={{ height: window.innerHeight * 0.2 }}>
+                        <p style={{ font: "18px", color: "#7f00ff", textAlign: "center", marginBottom: "5px" }}>Please place your face on the oval and take the photo </p>
                         <Button
                             label="Take A Picture"
                             onClick={() => this.onCapture()}
