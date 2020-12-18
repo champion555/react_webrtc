@@ -1,6 +1,7 @@
 .LivenessCamera-Container{
     position: absolute;
     width: 100%;
+    margin-top: 10px;
     z-index: 1;
 }
 .frame-view{
