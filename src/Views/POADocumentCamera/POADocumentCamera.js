@@ -22,6 +22,8 @@ class POADocumentCamera extends Component {
             isLoading: false,
             poaSRC: poaframeURL,
             POAMessage: null,
+            blurResult: null,
+            glareResult: null,
 
         }
     }
@@ -36,6 +38,8 @@ class POADocumentCamera extends Component {
         var b = check_blur('poaimageID');
         var g = check_glare('poaimageID')
         var f = check_face('poaimageID')
+        this.setState({blurResult:b.b})
+        this.setState({glareResult:g})
         if (b.b == true || g == true) {
             this.setState({ isErrorStatus: true })
         }
@@ -94,7 +98,8 @@ class POADocumentCamera extends Component {
                                 <p>The image quality is very low</p>
                             </div>
                             <div className="errormessage">
-                                <p>- Make sure the image is not blurry or contains blares!</p>
+                                {(this.state.blurResult) && <p>- The image  is blurry!</p>}
+                                {(this.state.glareResult) && <p>- The image  contains glares</p>}
                             </div>
                         </div>
                     </div>}
