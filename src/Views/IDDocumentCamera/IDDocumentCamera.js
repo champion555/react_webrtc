@@ -30,6 +30,8 @@ class IDDocumentCamera extends Component {
             isErrorStatus: false,
             screenshot: null,
             isCamSize: null,
+            blurResult: null,
+            glareResult: null,
             crop: {
                 unit: '%',
                 x: 5,
@@ -140,6 +142,8 @@ class IDDocumentCamera extends Component {
         var b = check_blur('imageID');
         var g = check_glare('imageID')
         var f = check_face('imageID')
+        this.setState({blurResult: b.b})
+        this.setState({glareResult:g})
         if (b.b == true || g == true) {
             this.setState({ isErrorStatus: true })
         }
@@ -282,7 +286,8 @@ class IDDocumentCamera extends Component {
                                     <p>The image quality is very low</p>
                                 </div>
                                 <div className="errormessage">
-                                    <p>- Make sure the image is not blurry or contains blares!</p>
+                                    {(this.state.blurResult) && <p>- The image  is blurry!</p>}
+                                    {(this.state.glareResult) && <p>- The image  contains glares </p>}
                                 </div>
                             </div>
                         </div>}
