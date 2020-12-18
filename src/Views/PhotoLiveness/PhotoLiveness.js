@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import captureImg from "../../assets/camera_take.png"
-import UndetectImgURL from "../../assets/ic_undetected1.png"
-import DetectImgURL from "../../assets/ic_detected1.png"
+import UndetectImgURL from "../../assets/ic_undetected2.png"
+import DetectImgURL from "../../assets/ic_detected2.png"
 import BackURL from "../../assets/ic_back.png"
 import Button from "../../Components/POAPreveiwButton/POAPreviewButton"
 import LogoURL from "../../assets/ic_logo1.png"
