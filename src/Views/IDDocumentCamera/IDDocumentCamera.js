@@ -31,6 +31,7 @@ class IDDocumentCamera extends Component {
             screenshot: null,
             isCamSize: null,
             blurResult: null,
+            blurValue: null,
             glareResult: null,
             crop: {
                 unit: '%',
@@ -142,13 +143,16 @@ class IDDocumentCamera extends Component {
         var b = check_blur('imageID');
         var g = check_glare('imageID')
         var f = check_face('imageID')
-        this.setState({blurResult: b.b})
-        this.setState({glareResult:g})
+        this.setState({ blurResult: b.b })
+        this.setState({ blurValue: b.value })
+        this.setState({ glareResult: g })
         if (b.b == true || g == true) {
             this.setState({ isErrorStatus: true })
         }
         console.log(b)
         console.log(g)
+        // alert("blurValue:" + b.value)
+        // alert(g ? "true" : "false")
     }
 
     setRef = webcam => {
@@ -272,8 +276,8 @@ class IDDocumentCamera extends Component {
                             <p style={{ color: "white", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
                         </div>
                     </div>
-                    <div style={{ height: window.innerHeight * 0.44, backgroundImage: `url(${this.state.idCardSRC})`, backgroundSize: "100% 100%" }}/>
-                     
+                    <div style={{ height: window.innerHeight * 0.44, backgroundImage: `url(${this.state.idCardSRC})`, backgroundSize: "100% 100%" }} />
+
                     <div style={{ height: window.innerHeight * 0.49, background: "#7f00ff" }}>
                         <div className="IDMessage-Container" style={{ height: window.innerHeight * 0.15 }}>
                             <p className="IDTitle" >{this.state.idTitle}</p>
@@ -291,7 +295,9 @@ class IDDocumentCamera extends Component {
                                 </div>
                             </div>
                         </div>}
-                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ marginTop: window.innerHeight * 0.11 }}>                            
+                        <p>blur Result:{this.state.blurResult ? "true" : "false"} ,  blur value:{this.state.blurValue}</p>
+                        <p>glare Result:{this.state.glareResult ? "true" : "false"}</p>
+                        {(!this.state.previewImageStatuse) && <div className="IDCapture-Container" style={{ marginTop: window.innerHeight * 0.11 }}>
                             {(!this.state.isLoading) && <Button
                                 label="Take A Picture"
                                 onClick={this.onCapture}
