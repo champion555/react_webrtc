@@ -198,7 +198,7 @@ export function PhotoUpload(blobData, prCallback) { //parameters: { type, data, 
 
     data.append('live_image_file', file);
 
-    return Axios.post("faceLiveness", data, {
+    return Axios.post("faceliveness", data, {
       headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
       onUploadProgress: progressEvent => {
         if (prCallback) prCallback(blobData.size, progressEvent.loaded)
