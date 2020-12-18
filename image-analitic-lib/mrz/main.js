@@ -35,7 +35,9 @@ export function initWorker(Worker, mrz_worker = window.mrz_worker) {
                     break;
 
                 case 'result':
-
+                    function escape(t) {
+                        return t.replace(/</g, '&lt;');
+                    }
                     var html;
                     var info;
                     var result = data.result;
@@ -46,8 +48,21 @@ export function initWorker(Worker, mrz_worker = window.mrz_worker) {
                     } else {
                         info = [];
                     }
+                    var infoClone = JSON.parse(JSON.stringify(info))
                     info = info.join('\n');
                     var cardInfo = parse(info);
+                    if (infoClone) {
+                        console.error(infoClone)
+                        cardInfo.mrz_line1 = infoClone[0];
+                        cardInfo.mrz_line2 = infoClone[1];
+                        cardInfo.mrz_line3 = infoClone[2];
+                    } else {
+                        cardInfo.mrz_line1 = null;
+                        cardInfo.mrz_line2 = null;
+                        cardInfo.mrz_line3 = null;
+                    }
+
+
                     this.emit('result', cardInfo);
 
                     break;
@@ -151,7 +166,7 @@ export function parse(data) {
             card_type = "Residence Permit";
             return get_info(country, card_type);
         } else {
-            card_info = "Recognization Result: FALSE\nInvalid Image or \nNot ID Card, Passport, Resindence Permit";
+            card_info = { recognization: false, type: null, country: null, message: 'Invalid Image or \nNot ID Card, Passport, Resindence Permit' };
             return card_info;
         }
     }
@@ -201,9 +216,9 @@ function get_info(str1, str2) {
     }
 
     if (country_name != '') {
-        card_info = "Recognization Result: TRUE\nType: " + str2 + "\nCountry: " + country_name;
+        card_info = { recognization: true, type: str2, country: country_name }
     } else {
-        card_info = "Recognization Result: FALSE\nInvalid Image or \nNot ID Card, Passport, Resindence Permit";
+        card_info = { recognization: false, type: null, country: null, message: 'Invalid Image or \nNot ID Card, Passport, Resindence Permit' };
     }
 
     return card_info;

@@ -13,7 +13,7 @@ function _check_blur(src, cv = window.cv) {
     cv.Laplacian(gray, dst, cv.CV_64F, 1, 1, 0, cv.BORDER_DEFAULT);
     cv.meanStdDev(dst, menO, men);
 
-    if (men.data64F[0] > 10) {
+    if (men.data64F[0] > 15) {
         blured = true;
     }
     var bValue = men.data64F[0];
@@ -70,11 +70,10 @@ export function check_glare(img_elem, cv = window.cv) {
 }
 
 export async function check_glare_base64(base64text, cv = window.cv) {
-    var img = new Image();
-    img.src = base64text;
+    const base64data = base64text.replace('data:image/jpeg;base64', '').replace('data:image/png;base64', '');//Strip image type prefix
+    const buffer = Buffer.from(base64data, 'base64');
 
-
-    const src = cv.imread(img); //Image is now represented as Mat
+    const src = cv.imdecode(buffer); //Image is now represented as Mat
     return _check_glare(src);
 }
 
