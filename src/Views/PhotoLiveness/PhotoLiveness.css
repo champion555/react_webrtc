@@ -16,7 +16,6 @@
     justify-content: center;
 }
 .liveness-captureButton{
-    position: absolute;
     bottom: 0px;
     width: 100%;
     justify-content: center;
@@ -24,7 +23,7 @@
     flex-direction: column;
     align-items: center;
     background: #fff;
-    
+    position: relative;    
 }
 .loadingView{
     position: absolute;
@@ -42,6 +41,14 @@
 }
 .liveness_txtTitle{
     text-align: center;
-    color: #7f00ff;
     margin-left: -10px;
+    margin-bottom: 0px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.photoLivenessbtnBack{
+    display: flex;
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
 }

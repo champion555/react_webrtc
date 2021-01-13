@@ -1,0 +1,91 @@
+{
+    "rapidCheckfooterTitle": "BIOMIIDRapidCheckを搭載",
+    "scaleCheckfooterTitle": "BIOMIIDScaleCheckを搭載",
+    "errorMessageTitle": "身分証明書エラー",
+    "blurryErrorMes": "- 画像がぼやけています！",
+    "glareErrorMes": "- 画像にはグレアが含まれています",
+    "faceErrorMes":"-このIDドキュメントには顔が含まれていません。有効なIDドキュメントを使用してください",
+    "mrzErrorMes":"-このIDドキュメントには有効なMRZが含まれていません。有効なIDドキュメントを使用して再取得してください",
+    "Home": {
+
+        "companyName":"会社名",
+        "title":"あなたの身元を確認してください",
+        "titleDes":"数秒かかります",
+        "smallTitle":"始める前に、どうぞ",
+        "checkDes1":"有効な政府発行のIDドキュメント（パスポート、IDカード、居住許可）を準備します.",
+        "checkDes2":"自分撮りと身分証明書の写真をキャプチャする準備をしてください.",
+        "checkDes3":"明るい部屋にいることを確認してください.",
+        "policyDes1":" ",
+        "policyDes2":"[スタート]",
+        "policyDes3":"ボタンをクリックすると、",
+        "TermsofServiceTitle":"利用規約に同意したことになります",
+        "policyDes5":"。 詳細については、",
+        "privacyPolicyTitle":"プライバシーポリシーをご覧ください。",
+        "startButtonTitle":"開始"
+    },
+    "PhotoLivness": {
+        "title": "セルフィーキャプチャ",
+        "message": "楕円形のフレームの中に顔を正しく置き、キャプチャしてください",
+        "takeCaptureButton": "キャプチャする"
+    },
+    "documentCountry": {
+        "title": "IDドキュメントコントリー",
+        "message": "政府ID文書の発行国を選択してください",
+        "continueButton": "継続する",
+        "issueTitle": "発行国"
+    },
+    "livenessResult": {
+        "title": "顔の活力の結果",
+        "spoofMessage": "なりすましが検出されました",
+        "unableMessage": "活気が確認できない",
+        "unableMesDes": "画像がぼやけているか、まぶしさを含んでいます！",
+        "retryButton": "リトライ"
+    },
+    "idMain": {
+        "title": "IDドキュメントタイプ",
+        "message": "IDドキュメントタイプを選択してください",
+        "idButton": "国民IDカード",
+        "passportButton": "パスポート",
+        "residentButton": "居住許可証"
+    },
+    "idDocumentCamera": {
+        "idTitle": "国民IDカード",
+        "frontIDTitle": "国民IDカードの前面",
+        "backIDTitle": "国民IDカードの裏面",
+        "frontIDMes": "国民IDカードの前面をフレーム内に置き、写真を撮ります",
+        "backIDMes": "国民IDカードの裏ページをフレームの中に入れて写真を撮ります",
+        "passportTitle": "パスポート",
+        "passportMes": "フレーム内にパスポートを置き、写真を撮ります居住許可カード",
+        "residentTitle": "居住許可カードの前面",
+        "frontResidentTitle": "居住許可の裏側",
+        "backResidentTitle": "居住許可カードの前面をフレーム内に置き、写真を撮ります",
+        "frontResidentMes": "フレーム内に居住許可カードの裏面を置き、写真を撮ります",
+        "backResidentMes": "Place the back of Residence Permit Card inside the frame and take the photo",
+        "previewTitle": "画像プレビュー",
+        "previewMes": "ドキュメントが読みやすいことを確認してください",
+        "takePictureButton": "写真を撮る",
+        "photoClearButton": "私の写真ははっきりしています",
+        "reTakeButton": "再テイク"
+    },
+    "poaDoc": {
+        "title": "POAドキュメント",
+        "message":"書類の種類を選択し、住所証明書の発行日を入力してください。",
+        "selectDocTitle":"ドキュメントの種類を選択します",
+        "issueDate": "発行日",
+        "scanPOAButton": "スキャンPOAドキュメント"
+    },
+    "poaDocumentCamera": {
+        "title": "PoAドキュメントをスキャンする",
+        "message": "住所証明文書をフレーム内に配置し、文書をキャプチャします",
+        "previewMessage": "ドキュメントが読みやすいことを確認してください",
+        "takePictureButton": "キャプチャする",
+        "retakeButton": "再テイク",
+        "continueButton": "継続する"
+    },
+    "idDocResult":{
+        "title":"結果",
+        "resultMessage":"ありがとうございました！",
+        "message":"本人確認プロセスが正常に完了しました",
+        "buttonTitle":"完了"
+    }
+}

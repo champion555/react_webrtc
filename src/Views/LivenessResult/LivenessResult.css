@@ -4,22 +4,22 @@
     align-items: center;
     flex-direction: column;
     display: flex;
-    background: #7f00ff;
+    background: #fff;
 }
 .resultMark{
-    width: 100px;
-    height: 100px;
+    width: 85px;
+    height: 85px;
     margin-top: 180px;
 }
 .txtLivnessResult{
     font-size: 23px;
     font-weight: bold;
-    color: white;
+    margin-top: 50px;
 }
 .txtErrorMessage{
     font-size: 18px;
     margin-top: 0px;
-    color: white;
+    text-align: center;
 }
 .spoof-container{
     width: 100%;

@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "Powerd av BIOMIID RapidCheck",
+    "scaleCheckfooterTitle": "Powerd av BIOMIID ScaleCheck",
+    "errorMessageTitle": "Identitetsdokumentfel",
+    "blurryErrorMes": "- Bilden är suddig!",
+    "glareErrorMes": "- Bilden innehåller bländningar",
+    "faceErrorMes":"- Detta ID-dokument innehåller inte ansikte, använd ett giltigt ID-dokument",
+    "mrzErrorMes":"- Detta ID-dokument innehåller inte giltigt MRZ, använd ett giltigt ID-dokument och gör om",
+    "Home": {
+        "companyName": "Företagsnamn",
+        "title": "VERIFIERA DIN IDENTITET",
+        "titleDes": "det tar några sekunder",
+        "smallTitle": "INNAN DU STARTAR, VÄNLIGEN",
+        "checkDes1": "Förbered ett giltigt ID-dokument från regeringen (pass, ID-kort, uppehållstillstånd).",
+        "checkDes2": "Var redo att fånga din selfie och foton av ditt ID-dokument.",
+        "checkDes3": "Se till att du är i väl upplysta rum.",
+        "policyDes1": "Genom att klicka på",
+        "policyDes2": "START",
+        "policyDes3": "-knappen godkänner du våra ",
+        "TermsofServiceTitle": "användarvillkor",
+        "policyDes5": ". För mer information se vår ",
+        "privacyPolicyTitle": "integritetspolicy.",
+        "startButtonTitle": "START"
+    },
+    "PhotoLivness": {
+        "title": "Selfie Capture",
+        "message": "Vänligen placera ditt ansikte korrekt inuti den ovala ramen och ta ett tag",
+        "takeCaptureButton": "TA EN FANGST"
+    },
+    "documentCountry": {
+        "title": "ID-dokumentöverföring",
+        "message": "Välj det land som utfärdar regerings-ID-dokument",
+        "continueButton": "FORTSÄTTA",
+        "issueTitle": "Utfärdande land"
+    },
+    "livenessResult": {
+        "title": "Resultat för ansiktsliv",
+        "spoofMessage": "Parodi upptäckt",
+        "unableMessage": "Det gick inte att bekräfta livskraft",
+        "unableMesDes": "Bilden är för suddig eller innehåller bländningar!",
+        "retryButton": "FÖRSÖK IGEN"
+    },
+    "idMain": {
+        "title": "ID-dokumenttyp",
+        "message": "Välj din ID-dokumenttyp",
+        "idButton": "Nationellt id-kort",
+        "passportButton": "Pass",
+        "residentButton": "Bosättningstillstånd"
+    },
+    "idDocumentCamera": {
+        "idTitle": "Nationellt id-kort",
+        "frontIDTitle": "Framsidan av det nationella ID-kortet",
+        "backIDTitle": "Baksidan på det nationella ID-kortet",
+        "frontIDMes": "Placera framsidan av det nationella ID-kortet inuti ramen och ta bilden",
+        "backIDMes": "Placera baksidan av det nationella ID-kortet inuti ramen och ta bilden",
+        "passportTitle": "Pass",
+        "passportMes": "Placera passet inuti ramen och ta bilden",
+        "residentTitle": "Uppehållstillståndskort",
+        "frontResidentTitle": "Framsidan av uppehållstillståndskortet",
+        "backResidentTitle": "Tillbaka till uppehållstillstånd",
+        "frontResidentMes": "Placera framsidan av uppehållstillståndskortet inuti ramen och ta bilden",
+        "backResidentMes": "Placera baksidan av uppehållstillståndskortet inuti ramen och ta bilden",
+        "previewTitle": "Förhandsgranskning av bild",
+        "previewMes": "Se till att dokumentet är tydligt att läsa",
+        "takePictureButton": "TA EN BILD",
+        "photoClearButton": "MIN FOTO ÄR KLAR",
+        "reTakeButton": "TA OM"
+    },
+    "poaDoc": {
+        "title": "POA-dokument",
+        "message":"Välj typ av dokument och ange bevis för adressdokumentets utfärdandedatum.",
+        "selectDocTitle":"Välj typ av dokument",
+        "issueDate": "Utgivningsdatum",
+        "scanPOAButton": "SKANNA POA-DOKUMENT"
+    },
+    "poaDocumentCamera": {
+        "title": "Skanna PoA-dokument",
+        "message": "Placera beviset på adressdokumentet inuti ramen och fånga dokumentet",
+        "previewMessage": "Se till att dokumentet är tydligt att läsa",
+        "takePictureButton": "TA EN FANGST",
+        "retakeButton": "TA OM",
+        "continueButton": "FORTSÄTTA"
+    },
+    "idDocResult":{
+        "title":"Resultat",
+        "resultMessage":"Tack!",
+        "message":"Din identitetsverifieringsprocess har slutförts",
+        "buttonTitle":"Gjort"
+    }
+}

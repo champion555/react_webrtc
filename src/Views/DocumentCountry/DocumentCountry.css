@@ -1,0 +1,27 @@
+.documentContry_container{
+    width: 100%;
+}
+.documentContry_messageView{
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+.dropIconView{
+    width: 30px;
+    height: 48px;
+    position: absolute;
+    right: 0px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.selectDrop{
+    width: 70%;
+    height: 50px;
+    position: relative;
+    display: flex;
+    border: solid 1px;
+    border-color: #383838;
+    border-radius: 5px;
+}

@@ -16,3 +16,6 @@ code {
   width: 100%;
   height: calc(100vh - 200px);
 }
+.react-responsive-modal-modal {
+  width: 600px;
+}

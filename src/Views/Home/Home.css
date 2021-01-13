@@ -10,20 +10,18 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    background: #7f00ff;
 
 }
 
 .logoIcon {
-    width: 50%;
-    height: 60px;
+    width: 40%;
+    height: 50px;
 }
 
 .header .companyName {
     text-align: center;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: bold;
-    color: white;
     margin-bottom: 8px;
 }
 
@@ -34,24 +32,22 @@
 }
 
 .content {
-    margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .content p{
     margin: 5px;
+    line-height: 1.2em;
 }
 
 .content .info .heading {
-    font-size: 25px;
-    color:  #7f00ff;
+    font-size: 20px;
     font-weight: 600;
     text-align: center;
 }
 
 .content .info .desc {
     font-size: 16px;
-    color:  #7f00ff;
     text-align: center;
 }
 
@@ -62,16 +58,14 @@
 .personal_data .title_panel {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .personal_data .title_panel .number {
-    width: 30px;
-    height: 30px;
+    height: 24px;
     border: 2px solid white;
-    background-color:white;
-    color: #7f00ff;    
-    font-size: 25px;
+    background-color:white;  
+    font-size: 20px;
     font-weight: bold;
     border-radius: 50%;
     display: flex;
@@ -81,9 +75,8 @@
 }
 
 .personal_data .title_panel .title p {
-    font-size: 20px;
-    color: #7f00ff;
-    font-weight: bold;
+    font-size: 15px;
+    padding-right: 15px;
 }
 
 .personal_data .title_panel .title span {
@@ -95,19 +88,20 @@
     margin: 4px;
 }
 
-.content .termsOfService {
-    color: #7f00ff;
+.termsOfService {
     padding: 0px 8px;
-    font-size: 18px;
+    font-size: 15px;
     text-align: center;
     margin-top: 8px;
+    line-height: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 li{
     color: #7f00ff;
 }
 
-.content .termsOfService a {
-    color: #7f00ff;
+.termsOfService a {
     font-weight: bold;
 }
 .startButton {
@@ -115,10 +109,54 @@ li{
     justify-content: center;
     align-items: center;
     height: 50px;
-    width: 60%;
-    background: #7f00ff;
+    width: 80%;
     color: white;
     margin-top: 5px;
     margin-bottom: 5px;
     border-radius: 10px;
+}
+.languageView{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 0px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.languageView:active{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 0px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px;
+    border-color: #7f00ff;
+}
+.languageArrayText{
+    height: 40px;
+    align-items: center;
+    /* text-align: center; */
+    display: flex;
+    font-size: 18px;
+    padding-left: 15px;
+}
+.languageInclude:active{
+    background-color: #7f00ff;
+}
+.languageInclude{
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px;
+    border-color:rgb(128, 128, 128);
+}
+.languagebtnBack{
+    display: flex;
+    margin-left: 10px;
+    width: 11px;
+    height: 13x;
 }

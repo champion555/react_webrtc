@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "Powerd by BIOMIID RapidCheck",
+    "scaleCheckfooterTitle": "Powerd by BIOMIID ScaleCheck",
+    "errorMessageTitle": "Eroare document de identitate",
+    "blurryErrorMes": "- Imaginea este neclară!",
+    "glareErrorMes": "- Imaginea conține străluciri",
+    "faceErrorMes":"- Acest document de identitate nu conține față, vă rugăm să utilizați un document de identitate valid",
+    "mrzErrorMes":"- Acest document de identitate nu conține MRZ valabil, vă rugăm să utilizați un document de identitate valid și să reluați",
+    "Home": {
+        "companyName": "Numele Companiei",
+        "title": "VERIFICA-TI IDENTITATEA",
+        "titleDes": "va dura câteva secunde",
+        "smallTitle": "ÎNAINTE DE ÎNCEPERE, VĂ RUGĂM",
+        "checkDes1": "Pregătiți un document de identitate valabil emis de Guvern (pașaport, carte de identitate, permis de rezident).",
+        "checkDes2": "Fiți gata să vă capturați selfie-ul și fotografiile din documentul dvs. de identitate.",
+        "checkDes3": "Asigurați-vă că vă aflați într-o cameră bine luminată.",
+        "policyDes1": "Făcând clic pe butonul",
+        "policyDes2": "START",
+        "policyDes3": " sunteți de acord cu",
+        "TermsofServiceTitle": "Termenii și condițiile noastre",
+        "policyDes5": ". Pentru mai multe informații, consultați ",
+        "privacyPolicyTitle": "Politica noastră de confidențialitate.",
+        "startButtonTitle": "START"
+    },
+    "PhotoLivness": {
+        "title": "Selfie Capture",
+        "message": "Vă rugăm să vă așezați corect fața în cadrul oval și să faceți o captură",
+        "takeCaptureButton": "LUAȚI O CAPTURĂ"
+    },
+    "documentCountry": {
+        "title": "Intrare document ID",
+        "message": "Vă rugăm să selectați țara emitentă a documentului de identificare a guvernului",
+        "continueButton": "CONTINUA",
+        "issueTitle": "Țara emitentă"
+    },
+    "livenessResult": {
+        "title": "Rezultat Face Liveness",
+        "spoofMessage": "Spoof detectat",
+        "unableMessage": "Nu se poate confirma vioiciunea",
+        "unableMesDes": "Imaginea este prea neclară sau conține străluciri!",
+        "retryButton": "REÎNCEPE"
+    },
+    "idMain": {
+        "title": "Tip document ID",
+        "message": "Vă rugăm să selectați tipul de document ID",
+        "idButton": "Carte de identitate națională",
+        "passportButton": "Pașaport",
+        "residentButton": "Permis de sedere"
+    },
+    "idDocumentCamera": {
+        "idTitle": "Carte de identitate națională",
+        "frontIDTitle": "Fața cărții de identitate naționale",
+        "backIDTitle": "Spatele cărții de identitate naționale",
+        "frontIDMes": "Așezați fața cărții de identitate naționale în interiorul cadrului și faceți fotografia",
+        "backIDMes": "Plasați pagina din spate a cărții de identitate naționale în interiorul cadrului și faceți fotografia",
+        "passportTitle": "Pașaport",
+        "passportMes": "Așezați pașaportul în interiorul cadrului și faceți fotografia",
+        "residentTitle": "Card de permis de ședere",
+        "frontResidentTitle": "Cardul permisului de ședere din față",
+        "backResidentTitle": "Înapoi la permisul de ședer",
+        "frontResidentMes": "Așezați partea din față a cardului de permis de ședere în cadru și faceți fotografia",
+        "backResidentMes": "Așezați partea din spate a permisului de ședere în cadru și faceți fotografia",
+        "previewTitle": "Previzualizare imagine",
+        "previewMes": "Asigurați-vă că documentul este clar de citit",
+        "takePictureButton": "FA O FOTOGRAFIE",
+        "photoClearButton": "FOTOGRAFIA MEA ESTE CLARĂ",
+        "reTakeButton": "RELUA"
+    },
+    "poaDoc": {
+        "title": "Document POA",
+        "message":"vă rugăm să selectați tipul de document și să introduceți data eliberării documentului de dovadă a adresei.",
+        "selectDocTitle":"selectați tipul de document",
+        "issueDate": "Data emiterii",
+        "scanPOAButton": "SCANARE DOCUMENT POA"
+    },
+    "poaDocumentCamera": {
+        "title": "Scanați documentul PoA",
+        "message": "Plasați documentul Dovada adresei în interiorul cadrului și capturați documentul",
+        "previewMessage": "Asigurați-vă că documentul este clar de citit",
+        "takePictureButton": "LUAȚI O CAPTURĂ",
+        "retakeButton": "RELUA",
+        "continueButton": "CONTINUA"
+    },
+    "idDocResult":{
+        "title":"Rezultat",
+        "resultMessage":"Mulțumesc!",
+        "message":"Procesul dvs. de verificare a identității este finalizat cu succes",
+        "buttonTitle":"Terminat"
+    }
+}

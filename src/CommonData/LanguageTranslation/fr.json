@@ -1,0 +1,24 @@
+{
+    "Home":{
+        "companyName":"Nom de la compagnie",
+        "titil":"VÉRIFIEZ VOTRE IDENTITÉ",
+        "titleDes":"cela prendra quelques secondes.",
+        "smallTitle":"AVANT DE COMMENCER, S'IL VOUS PLAÎT",
+        "checkDes1":"Préparez le document d'identité valide émis par le gouvernement (passeport, carte d'identité, permis de séjour).",
+        "checkDes2":"Soyez prêt à capturer votre selfie et les photos de votre document d'identité.",
+        "checkDes3":"Assurez-vous que vous êtes dans une pièce bien éclairée.",
+        "policyDes1":"En cliquant sur le bouton",
+        "policyDes2":"Démarrer",
+        "policyDes3":", vous acceptez nos ",
+        "TermsofServiceTitle":"Conditions d'utilisation",
+        "policyDes5":". Pour plus d'informations, consultez notre ",
+        "privacyPolicyTitle":"politique de confidentialité." ,
+        "startButtonTitle":"Démarrer",
+        "rapidCheckfooterTitle":"Powerd par BIOMIID RapidCheck"       
+    },
+    "PhotoLivness":{
+        "title":"Capture de selfie",
+        "message":"Veuillez placer votre visage correctement à l'intérieur du cadre ovale et prendre une capture",
+        "footerTitle":"Powerd par BIOMIID RapidCheck"
+    }
+}

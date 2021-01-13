@@ -14,3 +14,9 @@
     width: 40px;
     height: 40px;
 }
+.arrowRight{
+    width: 12px;
+    height: 23px;
+    right: 16px;
+    position: absolute;
+}

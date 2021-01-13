@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "Didukung oleh BIOMIID RapidCheck",
+    "scaleCheckfooterTitle": "Didukung oleh BIOMIID ScaleCheck",
+    "errorMessageTitle": "Kesalahan Dokumen ID",
+    "blurryErrorMes": "- Gambarnya kabur!",
+    "glareErrorMes": "- Gambar mengandung silau",
+    "faceErrorMes":"- Dokumen ID ini tidak mengandung wajah, harap gunakan dokumen ID yang valid",
+    "mrzErrorMes":"- Dokumen ID ini tidak mengandung MRZ yang valid, harap gunakan dokumen ID yang valid dan ambil ulang",
+    "Home": {
+        "companyName":"Nama Perusahaan",
+        "title":"VERIFIKASI IDENTITAS ANDA",
+        "titleDes":"ini akan memakan waktu beberapa detik",
+        "smallTitle":"SEBELUM MULAI, SILAKAN",
+        "checkDes1":"Siapkan dokumen identitas resmi yang dikeluarkan pemerintah (Paspor, KTP, Izin Tinggal).",
+        "checkDes2":"Bersiaplah untuk mengambil foto selfie dan dokumen ID Anda.",
+        "checkDes3":"Pastikan Anda berada di ruangan yang cukup terang.",
+        "policyDes1":"Dengan mengklik tombol",
+        "policyDes2":"MULAILAH",
+        "policyDes3":"Anda menyetujui",
+        "TermsofServiceTitle":"Persyaratan Layanan kami",
+        "policyDes5":". Untuk informasi lebih lanjut lihat",
+        "privacyPolicyTitle":"Kebijakan Privasi kami.",
+        "startButtonTitle":"MULAILAH"
+    },
+    "PhotoLivness": {
+        "title": "Tangkap Selfie",
+        "message": "Tempatkan wajah Anda dengan benar di dalam bingkai oval dan potret.",
+        "takeCaptureButton": "AMBIL TANGKAP"
+    },
+    "documentCountry": {
+        "title": "Negara dokumen identitas",
+        "message": "Pilih negara penerbit dokumen identitas pemerintah",
+        "continueButton": "MENGIKUTI",
+        "issueTitle": "Negara penerbit"
+    },
+    "livenessResult": {
+        "title": "Hasil dari Face Liveness",
+        "spoofMessage": "Spoof terdeteksi",
+        "unableMessage": "Tidak dapat memastikan keaktifan",
+        "unableMesDes": "Gambar terlalu kabur atau mengandung pantulan!",
+        "retryButton": "ULASAN"
+    },
+    "idMain": {
+        "title": "Jenis dokumen identitas",
+        "message": "Pilih jenis dokumen identitas Anda",
+        "idButton": "Kartu identitas nasional",
+        "passportButton": "Paspor",
+        "residentButton": "Ijin tinggal"
+    },
+    "idDocumentCamera": {
+        "idTitle": "Kartu identitas nasional",
+        "frontIDTitle": "Bagian depan KTP",
+        "backIDTitle": "Bagian belakang kartu identitas nasional",
+        "frontIDMes": "Letakkan bagian depan KTP di dalam bingkai dan ambil fotonya",
+        "backIDMes": "Letakkan halaman terakhir KTP di dalam bingkai dan ambil fotonya",
+        "passportTitle": "Paspor",
+        "passportMes": "Letakkan paspor di dalam bingkai dan ambil foto",
+        "residentTitle": "Kartu izin tinggal",
+        "frontResidentTitle": "Bagian depan kartu izin tinggal",
+        "backResidentTitle": "Ijin tinggal",
+        "frontResidentMes": "Tempatkan bagian depan kartu izin tinggal di dalam bingkai dan ambil foto",
+        "backResidentMes": "Tempatkan bagian belakang kartu izin tinggal di dalam bingkai dan ambil foto",
+        "previewTitle": "Pratinjau gambar",
+        "previewMes": "Pastikan dokumen tersebut mudah dibaca",
+        "takePictureButton": "MENGAMBIL FOTO",
+        "photoClearButton": "FOTO SAYA JELAS",
+        "reTakeButton": "MEREBUT KEMBALI"
+    },
+    "poaDoc": {
+        "title": "Dokumen POA",
+        "message":"silahkan pilih jenis dokumen dan masukkan bukti alamat tanggal penerbitan dokumen.",
+        "selectDocTitle":"pilih jenis dokumen",
+        "issueDate": "Tanggal terbit",
+        "scanPOAButton": "PINDAI DOKUMEN POA"
+    },
+    "poaDocumentCamera": {
+        "title": "Pindai dokumen PoA",
+        "message": "Tempatkan bukti dokumen alamat di dalam bingkai dan tangkap dokumennya",
+        "previewMessage": "Pastikan dokumen mudah dibaca",
+        "takePictureButton": "AMBIL TANGKAP",
+        "retakeButton": "MEREBUT KEMBALI",
+        "continueButton": "MENGIKUTI"
+    },
+    "idDocResult":{
+        "title":"Hasil",
+        "resultMessage":"Terima kasih!",
+        "message":"Proses verifikasi identitas Anda berhasil diselesaikan",
+        "buttonTitle":"Selesai"
+    }
+}

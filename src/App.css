@@ -36,10 +36,6 @@ Webcam {
 input{
   height: 30px;
 }
-span{
-  color: white;
-}
 video{
   width: 100%;
-    object-fit: fill;
 }

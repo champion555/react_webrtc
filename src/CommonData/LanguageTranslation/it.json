@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "Powerd by BIOMIID RapidCheck",
+    "scaleCheckfooterTitle": "Powerd di BIOMIID ScaleCheck",
+    "errorMessageTitle": "Errore documento ID",
+    "blurryErrorMes": "- L'immagine è sfocata!",
+    "glareErrorMes": "- L'immagine contiene riflessi",
+    "faceErrorMes":"- Questo documento di identità non contiene il volto, utilizzare un documento di identità valido",
+    "mrzErrorMes":"- Questo documento d'identità non contiene un MRZ valido, si prega di utilizzare un documento d'identità valido e riprenderlo",
+    "Home": {
+        "companyName":"Nome della ditta",
+        "title":"VERIFICA LA TUA IDENTITÀ",
+        "titleDes":"ci vorranno alcuni secondi",
+        "smallTitle":"PRIMA DI INIZIARE, PER FAVORE",
+        "checkDes1":"Preparare un documento d'identità valido rilasciato dal governo (passaporto, carta d'identità, permesso di soggiorno).",
+        "checkDes2":"Preparati a catturare il tuo selfie e le foto del tuo documento d'identità.",
+        "checkDes3":"Assicurati di essere in una stanza ben illuminata.",
+        "policyDes1":"Facendo clic sul pulsante",
+        "policyDes2":"Start",
+        "policyDes3":"accetti i nostri",
+        "TermsofServiceTitle":"Termini di servizio",
+        "policyDes5":". Per ulteriori informazioni consultare la nostra",
+        "privacyPolicyTitle":"Privacy Policy.",
+        "startButtonTitle":"Start"
+    },
+    "PhotoLivness": {
+        "title": "Acquisizione di selfie",
+        "message": "Si prega di posizionare correttamente il viso all'interno della cornice ovale e scattare una foto",
+        "takeCaptureButton": "FAI UNA CATTURA"
+    },
+    "documentCountry": {
+        "title": "Documento d'identità Paese",
+        "message": "Seleziona il paese di emissione del documento di identità del governo",
+        "continueButton": "CONTINUA",
+        "issueTitle": "Paese di emissione"
+    },
+    "livenessResult": {
+        "title": "Risultato di vitalità del viso",
+        "spoofMessage": "Rilevato spoof",
+        "unableMessage": "Impossibile confermare la vivacità",
+        "unableMesDes": "L'immagine è troppo sfocata o contiene riflessi!",
+        "retryButton": "RIPROVA"
+    },
+    "idMain": {
+        "title": "Tipo documento ID",
+        "message": "Seleziona il tipo di documento d'identità",
+        "idButton": "Carta di identità nazionale",
+        "passportButton": "Passaporto",
+        "residentButton": "Permesso di soggiorno"
+    },
+    "idDocumentCamera": {
+        "idTitle": "Carta di identità nazionale",
+        "frontIDTitle": "Parte anteriore della carta d'identità nazionale",
+        "backIDTitle": "Retro della carta d'identità nazionale",
+        "frontIDMes": "Posiziona la parte anteriore della carta d'identità nazionale all'interno della cornice e scatta la foto",
+        "backIDMes": "Posiziona il retro della carta d'identità nazionale all'interno della cornice e scatta la foto",
+        "passportTitle": "Passaporto",
+        "passportMes": "Posiziona il passaporto all'interno della cornice e scatta la foto",
+        "residentTitle": "Carta di permesso di soggiorno",
+        "frontResidentTitle": "Parte anteriore del permesso di soggiorno",
+        "backResidentTitle": "Retro del permesso di soggiorno",
+        "frontResidentMes": "Posiziona la parte anteriore del permesso di soggiorno all'interno della cornice e scatta la foto",
+        "backResidentMes": "Posiziona il retro del Permesso di Soggiorno all'interno della cornice e scatta la foto",
+        "previewTitle": "Anteprima dell'immagine",
+        "previewMes": "Assicurati che il documento sia leggibile",
+        "takePictureButton": "FAI UNA FOTO",
+        "photoClearButton": "LA MIA FOTO È CHIARA",
+        "reTakeButton": "RE-PRENDI"
+    },
+    "poaDoc": {
+        "title": "Documento POA",
+        "message":"selezionare il tipo di documento e inserire la data di emissione del documento di prova dell'indirizzo.",
+        "selectDocTitle":"selezionare il tipo di documento",
+        "issueDate": "Data di rilascio",
+        "scanPOAButton": "SCANSIONE DOCUMENTO POA"
+    },
+    "poaDocumentCamera": {
+        "title": "Scansiona documento PoA",
+        "message": "Posiziona il documento di prova dell'indirizzo all'interno della cornice e acquisisci il documento",
+        "previewMessage": "Assicurati che il documento sia leggibile",
+        "takePictureButton": "FAI UNA CATTURA",
+        "retakeButton": "RE-PRENDI",
+        "continueButton": "CONTINUA"
+    },
+    "idDocResult":{
+        "title":"Risultato",
+        "resultMessage":"Grazie!",
+        "message":"Il tuo processo di verifica dell'identità è stato completato con successo",
+        "buttonTitle":"Fatto"
+    }
+}

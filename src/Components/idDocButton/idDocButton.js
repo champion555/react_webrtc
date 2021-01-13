@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
-import ImageURL from "../../assets/ic_idcard_purple.png"
+import ImageURL from "../../assets/ic_right.png"
 import './idDocButton.css';
 
 class IDDocButton extends Component {
@@ -16,7 +16,8 @@ class IDDocButton extends Component {
         return (            
             <div className="IDDocButton" onClick={this.props.onClick}>
                 <img src={this.props.imgURL} onClick={this.goBack} className="imgIcon" />
-                <p style={{marginLeft:"10px"}}>{this.props.label}</p>
+                <p style={{marginLeft:"30px", marginBottom:"0px",fontSize:"15px",fontWeight:"600",color:'gray'}}>{this.props.label}</p>
+                <img src={this.state.ImageSrcs} className="arrowRight" />
             </div>              
 
         )

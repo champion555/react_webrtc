@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "Powerd bởi BIOMIID RapidCheck",
+    "scaleCheckfooterTitle": "Powerd by BIOMIID ScaleCheck",
+    "errorMessageTitle": "Lỗi tài liệu nhận dạng",
+    "blurryErrorMes": "- Hình ảnh bị mờ!",
+    "glareErrorMes": "- Hình ảnh chứa ánh sáng chói",
+    "faceErrorMes":"- Tài liệu ID này không chứa khuôn mặt, vui lòng sử dụng tài liệu ID hợp lệ",
+    "mrzErrorMes":"- Tài liệu ID này không chứa MRZ hợp lệ, vui lòng sử dụng tài liệu ID hợp lệ và làm lại",
+    "Home": {
+        "companyName": "Tên công ty",
+        "title": "XÁC MINH NHẬN DẠNG CỦA BẠN",
+        "titleDes": "nó sẽ mất vài giây",
+        "smallTitle": "TRƯỚC KHI BẮT ĐẦU, VUI LÒNG",
+        "checkDes1": "Chuẩn bị một Tài liệu ID hợp lệ do Chính phủ cấp (Hộ chiếu, Chứng minh thư, Giấy phép cư trú).",
+        "checkDes2": "Hãy sẵn sàng để chụp ảnh tự sướng và ảnh của tài liệu ID của bạn.",
+        "checkDes3": "Hãy chắc chắn rằng bạn đang ở trong phòng đầy đủ ánh sáng.",
+        "policyDes1": "Bằng cách nhấp vào nút",
+        "policyDes2": "BẮT ĐẦU,",
+        "policyDes3": "bạn đồng ý với Điều khoản dịch vụ",
+        "TermsofServiceTitle": "của chúng tôi",
+        "policyDes5": ". Để biết thêm thông tin, xem chính sách ",
+        "privacyPolicyTitle": "bảo mật của chúng tôi.",
+        "startButtonTitle": "START"
+    },
+    "PhotoLivness": {
+        "title": "Chụp ảnh tự sướng",
+        "message": "Vui lòng đặt chính xác khuôn mặt của bạn vào bên trong khung hình bầu dục và chụp",
+        "takeCaptureButton": "LẤY MỘT CAPTURE"
+    },
+    "documentCountry": {
+        "title": "Kho tài liệu ID",
+        "message": "Vui lòng chọn quốc gia phát hành Tài liệu ID Chính phủ",
+        "continueButton": "TIẾP TỤC",
+        "issueTitle": "Nước phát hành"
+    },
+    "livenessResult": {
+        "title": "Kết quả Trực tiếp khuôn mặt",
+        "spoofMessage": "Phát hiện giả mạo",
+        "unableMessage": "Không thể xác nhận sự sống",
+        "unableMesDes": "Hình ảnh quá mờ hoặc chứa ánh sáng chói!",
+        "retryButton": "THỬ LẠI"
+    },
+    "idMain": {
+        "title": "Loại tài liệu ID",
+        "message": "Vui lòng chọn loại tài liệu ID của bạn",
+        "idButton": "Thẻ chứng minh nhân dân",
+        "passportButton": "Hộ chiếu",
+        "residentButton": "Giấy phép thường trú"
+    },
+    "idDocumentCamera": {
+        "idTitle": "Thẻ chứng minh nhân dân",
+        "frontIDTitle": "Mặt trước của thẻ ID quốc gia",
+        "backIDTitle": "Mặt sau của thẻ ID quốc gia",
+        "frontIDMes": "Đặt mặt trước của Chứng minh nhân dân vào khung và chụp ảnh",
+        "backIDMes": "Đặt trang sau của Chứng minh nhân dân vào trong khung và chụp ảnh",
+        "passportTitle": "Hộ chiếu",
+        "passportMes": "Đặt Hộ chiếu bên trong khung để chụp ảnh",
+        "residentTitle": "Thẻ cư trú",
+        "frontResidentTitle": "Mặt trước của thẻ cư trú",
+        "backResidentTitle": "Mặt sau của Giấy phép cư trú",
+        "frontResidentMes": "Đặt mặt trước của Thẻ cư trú bên trong khung và chụp ảnh",
+        "backResidentMes": "Đặt mặt sau của Thẻ cư trú bên trong khung và chụp ảnh",
+        "previewTitle": "Xem trước hình ảnh",
+        "previewMes": "Đảm bảo rằng tài liệu rõ ràng để đọc",
+        "takePictureButton": "CHỤP ẢNH",
+        "photoClearButton": "ẢNH CỦA TÔI RÕ RÀNG",
+        "reTakeButton": "LẤY LẠI"
+    },
+    "poaDoc": {
+        "title": "Tài liệu POA",
+        "message":"Vui lòng chọn loại tài liệu và nhập ngày phát hành tài liệu bằng chứng địa chỉ.",
+        "selectDocTitle":"Chọn loại tài liệu",
+        "issueDate": "Ngày phát hành",
+        "scanPOAButton": "QUÉT TÀI LIỆU POA"
+    },
+    "poaDocumentCamera": {
+        "title": "Quét tài liệu PoA",
+        "message": "Đặt tài liệu Proof of address bên trong khung và chụp tài liệu",
+        "previewMessage": "Đảm bảo rằng tài liệu rõ ràng để đọc",
+        "takePictureButton": "LẤY MỘT CAPTURE",
+        "retakeButton": "LẤY LẠI",
+        "continueButton": "TIẾP TỤC"
+    },
+    "idDocResult":{
+        "title":"Kết quả",
+        "resultMessage":"Cảm ơn bạn!",
+        "message":"Quá trình xác minh danh tính của bạn đã hoàn tất thành công",
+        "buttonTitle":"Làm xong"
+    }
+}

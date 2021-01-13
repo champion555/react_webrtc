@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "Powerd von BIOMIID RapidCheck",
+    "scaleCheckfooterTitle": "Powerd von BIOMIID ScaleCheck",
+    "errorMessageTitle": "ID-Dokumentfehler",
+    "blurryErrorMes": "- Das Bild ist verschwommen!",
+    "glareErrorMes": "- Das Bild enthält Blendungen",
+    "faceErrorMes":"- Dieses ID-Dokument enthält kein Gesicht. Bitte verwenden Sie ein gültiges ID-Dokument",
+    "mrzErrorMes":"- Dieses ID-Dokument enthält keine gültige MRZ. Bitte verwenden Sie ein gültiges ID-Dokument und wiederholen Sie den Vorgang",
+    "Home": {
+        "companyName": "Name der Firma",
+        "title": "BESTÄTIGEN SIE IHRE IDENTITÄT",
+        "titleDes": "Es dauert einige Sekunden",
+        "smallTitle": "VOR DEM START BITTE",
+        "checkDes1": "Bereiten Sie einen gültigen, von der Regierung ausgestellten Personalausweis vor (Reisepass, Personalausweis, Aufenthaltserlaubnis).",
+        "checkDes2": "Seien Sie bereit, Ihr Selfie und Fotos Ihres Ausweisdokuments aufzunehmen.",
+        "checkDes3": "Stellen Sie sicher, dass Sie sich in einem gut beleuchteten Raum befinden.",
+        "policyDes1": "Durch Klicken auf die Schaltfläche",
+        "policyDes2": "START",
+        "policyDes3": "stimmen Sie unseren",
+        "TermsofServiceTitle": "Nutzungsbedingungen Bedienung",
+        "policyDes5": ". Weitere Informationen finden Sie in unserer ",
+        "privacyPolicyTitle": "Datenschutzerklärung.",
+        "startButtonTitle": "START"
+    },
+    "PhotoLivness": {
+        "title": "Selfie-Aufnahme",
+        "message": "Bitte platzieren Sie Ihr Gesicht richtig im ovalen Rahmen und machen Sie eine Aufnahme.",
+        "takeCaptureButton": "Nehmen Sie eine Aufnahme"
+    },
+    "documentCountry": {
+        "title": "ID Dokument Land",
+        "message": "Bitte wählen Sie das ausstellende Land des Regierungs-ID-Dokuments aus",
+        "continueButton": "FORTSETZEN",
+        "issueTitle": "Ausstellungsland"
+    },
+    "livenessResult": {
+        "title": "Ergebnis der Gesichtslebensdauer",
+        "spoofMessage": "Parodie erkannt",
+        "unableMessage": "Lebendigkeit kann nicht bestätigt werden",
+        "unableMesDes": "Bild ist zu verschwommen oder enthält Blendungen!",
+        "retryButton": "WIEDERHOLEN"
+    },
+    "idMain": {
+        "title": "ID-Dokumenttyp",
+        "message": "Bitte wählen Sie Ihren ID-Dokumenttyp",
+        "idButton": "Personalausweis",
+        "passportButton": "Reisepass",
+        "residentButton": "Aufenthaltsgenehmigung"
+    },
+    "idDocumentCamera": {
+        "idTitle": "Personalausweis",
+        "frontIDTitle": "Vorderseite des Personalausweises",
+        "backIDTitle": "Rückseite des Personalausweises",
+        "frontIDMes": "Legen Sie die Vorderseite des Personalausweises in den Rahmen und machen Sie das Foto",
+        "backIDMes": "Legen Sie die Rückseite des Personalausweises in den Rahmen und machen Sie das Foto",
+        "passportTitle": "Reisepass",
+        "passportMes": "Legen Sie den Reisepass in den Rahmen und machen Sie das Foto",
+        "residentTitle": "Aufenthaltserlaubniskarte",
+        "frontResidentTitle": "Aufenthaltserlaubniskarte",
+        "backResidentTitle": "Aufenthaltserlaubnis",
+        "frontResidentMes": "Legen Sie die Vorderseite der Aufenthaltserlaubniskarte in den Rahmen und machen Sie das Foto",
+        "backResidentMes": "Legen Sie die Rückseite der Aufenthaltserlaubniskarte in den Rahmen und machen Sie das Foto",
+        "previewTitle": "Bildvorschau",
+        "previewMes": "Stellen Sie sicher, dass das Dokument frei lesbar ist",
+        "takePictureButton": "MACHEN SIE EIN FOTO",
+        "photoClearButton": "Mein Foto ist klar",
+        "reTakeButton": "WIEDERHOLUNG"
+    },
+    "poaDoc": {
+        "title": "POA-Dokument",
+        "message":"Bitte wählen Sie den Dokumenttyp aus und geben Sie das Ausstellungsdatum des Adressnachweisdokuments ein.",
+        "selectDocTitle":"Wählen Sie den Dokumenttyp aus",
+        "issueDate": "Ausgabedatum",
+        "scanPOAButton": "SCAN POA DOKUMENT"
+    },
+    "poaDocumentCamera": {
+        "title": "PoA-Dokument scannen",
+        "message": "Legen Sie das Adressnachweisdokument in den Rahmen und erfassen Sie das Dokument",
+        "previewMessage": "Stellen Sie sicher, dass das Dokument frei lesbar ist",
+        "takePictureButton": "Nehmen Sie eine Aufnahme",
+        "retakeButton": "WIEDERHOLUNG",
+        "continueButton": "FORTSETZEN"
+    },
+    "idDocResult":{
+        "title":"Ergebnis",
+        "resultMessage":"Vielen Dank!",
+        "message":"Ihr Identitätsprüfungsprozess wurde erfolgreich abgeschlossen",
+        "buttonTitle":"Getan"
+    }
+}

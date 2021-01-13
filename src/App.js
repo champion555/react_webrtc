@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Routes from './Routes';
+import {MyApp} from './App.style'
 
 class App extends React.Component {
   constructor(props) {
@@ -16,9 +17,9 @@ class App extends React.Component {
     const { component, result } = this.state;
 
     return (
-      <div className="App">
+      <MyApp className="App">
         <Routes />
-      </div>
+      </MyApp>
         
 
     );

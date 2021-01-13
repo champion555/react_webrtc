@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "Aangedreven door BIOMIID RapidCheck",
+    "scaleCheckfooterTitle": "Aangedreven door BIOMIID ScaleCheck",
+    "errorMessageTitle": "Identiteitsdocumentfout",
+    "blurryErrorMes": "- Het beeld is wazig!",
+    "glareErrorMes": "- De afbeelding bevat blikken",
+    "faceErrorMes":"- Dit ID-document bevat geen gezicht, gebruik een geldig ID-document",
+    "mrzErrorMes":"- Dit ID-document bevat geen geldige MRZ, gebruik een geldig ID-document en neem het opnieuw",
+    "Home": {
+        "companyName": "Bedrijfsnaam",
+        "title": "VERIFIEER UW IDENTITEIT",
+        "titleDes": "het duurt een paar seconden",
+        "smallTitle": "VOOR DE BEGIN, GELIEVE",
+        "checkDes1": "Zorg voor een geldig door de overheid uitgegeven identiteitsbewijs (paspoort, identiteitskaart, verblijfsvergunning)",
+        "checkDes2": "Wees klaar om uw selfie en foto's van uw identiteitsbewijs te maken.",
+        "checkDes3": "Zorg ervoor dat u zich in een goed verlichte ruimte bevindt.",
+        "policyDes1": "Door op de",
+        "policyDes2": "START",
+        "policyDes3": " knop te klikken, gaat u akkoord met onze",
+        "TermsofServiceTitle": "Servicevoorwaarden",
+        "policyDes5": ". Zie ons ",
+        "privacyPolicyTitle": "privacybeleid voor meer informatie.",
+        "startButtonTitle": "START"
+    },
+    "PhotoLivness": {
+        "title": "Selfie-opname",
+        "message": "Plaats uw gezicht correct in het ovale frame en maak een opname",
+        "takeCaptureButton": "MAAK EEN OPNAME"
+    },
+    "documentCountry": {
+        "title": "ID-document Contry",
+        "message": "Selecteer het land van uitgifte van het ID-document van de overheid",
+        "continueButton": "DOORGAAN MET",
+        "issueTitle": "Land van uitgifte"
+    },
+    "livenessResult": {
+        "title": "Face Liveness Resultaat",
+        "spoofMessage": "Spoof gedetecteerd",
+        "unableMessage": "Kan levendigheid niet bevestigen",
+        "unableMesDes": "Het beeld is te wazig of bevat schitteringen!",
+        "retryButton": "OPNIEUW PROBEREN"
+    },
+    "idMain": {
+        "title": "ID-documenttype",
+        "message": "Selecteer uw ID-documenttype",
+        "idButton": "Nationale identiteitskaart",
+        "passportButton": "Paspoort",
+        "residentButton": "Verblijfsvergunning"
+    },
+    "idDocumentCamera": {
+        "idTitle": "Nationale identiteitskaart",
+        "frontIDTitle": "Voorzijde van nationale identiteitskaart",
+        "backIDTitle": "Achterkant van nationale identiteitskaart",
+        "frontIDMes": "Plaats de voorkant van de nationale identiteitskaart in het frame en maak de foto",
+        "backIDMes": "Plaats de achterpagina van de nationale identiteitskaart in de lijst en maak de foto",
+        "passportTitle": "Paspoort",
+        "passportMes": "Plaats het paspoort in het frame en maak de foto",
+        "residentTitle": "Verblijfsvergunningkaart",
+        "frontResidentTitle": "Voorkant van de verblijfsvergunningkaart",
+        "backResidentTitle": "Achterkant van verblijfsvergunning",
+        "frontResidentMes": "Plaats de voorkant van de verblijfsvergunningkaart in de lijst en maak de foto",
+        "backResidentMes": "Plaats de achterkant van de verblijfsvergunningkaart in de lijst en maak de foto",
+        "previewTitle": "Voorbeeld van afbeelding",
+        "previewMes": "Zorg ervoor dat het document duidelijk leesbaar is",
+        "takePictureButton": "MAAK EEN FOTO",
+        "photoClearButton": "MIJN FOTO IS DUIDELIJK",
+        "reTakeButton": "HERNEMEN"
+    },
+    "poaDoc": {
+        "title": "POA-document",
+        "message":"selecteer het type document en voer het bewijs van de uitgiftedatum van het document in.",
+        "selectDocTitle":"selecteer het type document",
+        "issueDate": "Datum van publicatie",
+        "scanPOAButton": "SCAN POA-DOCUMENT"
+    },
+    "poaDocumentCamera": {
+        "title": "Scan PoA-document",
+        "message": "Plaats het adresbewijsdocument in het frame en leg het document vast",
+        "previewMessage": "Zorg ervoor dat het document duidelijk leesbaar is",
+        "takePictureButton": "MAAK EEN OPNAME",
+        "retakeButton": "HERNEMEN",
+        "continueButton": "DOORGAAN MET"
+    },
+    "idDocResult":{
+        "title":"Resultaat",
+        "resultMessage":"Dank je!",
+        "message":"Uw identiteitsverificatieproces is met succes voltooid",
+        "buttonTitle":"Gedaan"
+    }
+}

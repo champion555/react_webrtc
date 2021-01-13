@@ -1,0 +1,81 @@
+.POACamera-Container{
+    z-index: 0;
+}
+.POAMain-container{
+    position: absolute;
+    z-index: 40;
+    width: 100%;
+    top: 0px;
+}
+.POAPreviewImage-container{
+    position: absolute;
+    z-index: 30;
+    width: 100%;
+    top: 0px;
+}
+.POATakeButtonView{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+}
+.POAPreviewButtonView{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+.POAMessageView{
+    width: 100%;
+    position: absolute;
+    bottom: 200px;
+}
+.POAMessageView p{
+    color: white;
+    text-align: center;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 18px;
+}
+.POACamErrorMessageView { 
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px; 
+    margin-top: 10px;
+    position: absolute;
+}
+
+.POACamErrorMessageView .container {
+    border: 1px solid #7f00ff;
+    border-radius: 5px;
+    
+}
+
+.POACamErrorMessageView .errortitle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 16px;
+    color: white;
+    height: 30px;
+}
+
+.POACamErrorMessageView .errortitle img {
+    width: 16px;
+}
+.POACamErrorMessageView .errortitle p {
+    margin-left: 10px;
+    padding-right: 10px;
+    font-size: 16px;
+    color: #7f00ff;
+}
+.POACamErrorMessageView .container .errormessage p{
+    color: #7f00ff;
+    margin-top: 0px;
+    margin-left: 16px;
+    font-size: 14px;
+}

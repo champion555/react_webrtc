@@ -186,6 +186,7 @@ class VideoPage extends React.Component {
       this.setState({ recording: false, uploading: true, })
 
       // RecordRTC.invokeSaveAsDialog(this.state.recordVideo.blob, 'test.mp4')
+      console.log(this.state.recordVideo.blob)
 
       VideoUpload(this.state.recordVideo.blob, true,
         (total, progress) => {

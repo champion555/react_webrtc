@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "BIOMIID RapidCheck에 의해 구동",
+    "scaleCheckfooterTitle": "BIOMIID ScaleCheck에 의해 구동",
+    "errorMessageTitle": "신분증 오류",
+    "blurryErrorMes": "- 이미지가 흐릿합니다!",
+    "glareErrorMes": "- 이미지에 눈부심이 있습니다.",
+    "faceErrorMes":"- 이 신분증에는 얼굴이 포함되어 있지 않습니다. 유효한 신분증을 사용하십시오.",
+    "mrzErrorMes":"- 이 신분증에는 유효한 MRZ가 포함되어 있지 않습니다. 유효한 신분증을 사용하고 다시 작성하십시오.",
+    "Home": {
+        "companyName": "Company Name",
+        "title": "신원 확인",
+        "titleDes": "신원 확인하는데 몇 초가 걸릴 것입니다",
+        "smallTitle": "시작하기 전에 다음의것을 보십시오.",
+        "checkDes1": "유효한 정부 발행 신분증 (여권, 신분증, 거주 허가증)을 준비하십시오.",
+        "checkDes2": "와 신분증 사진을 캡처 할 준비를하십시오.",
+        "checkDes3": "밝은 방에 있는지 확인하십시오.",
+        "policyDes1": " ",
+        "policyDes2": "시작",
+        "policyDes3": "버튼을 클릭하면",
+        "TermsofServiceTitle": "서비스 약관에 동의하게됩니다",
+        "policyDes5": ". 자세한 내용은 ",
+        "privacyPolicyTitle": "개인 정보 보호 정책을 참조하십시오.",
+        "startButtonTitle": "시작"
+    },
+    "PhotoLivness": {
+        "title": "셀카 캡처",
+        "message": "타원형 프레임 안에 얼굴을 올바르게 놓고 캡처하십시오.",
+        "takeCaptureButton": "캡처"
+    },
+    "documentCountry": {
+        "title": "ID 문서 국가",
+        "message": "정부 ID 문서 발급 국가를 선택하세요.",
+        "continueButton": "계속",
+        "issueTitle": "발행 국가"
+    },
+    "livenessResult": {
+        "title": "얼굴 생동감 결과",
+        "spoofMessage": "가짜얼굴이 감지 되였습니다.",
+        "unableMessage": "얼굴 상태를 확인할 수 없습니다.",
+        "unableMesDes": "이미지가 너무 흐리거나 눈부심이 있습니다!",
+        "retryButton": "다시하기"
+    },
+    "idMain": {
+        "title": "신분증 문서 유형",
+        "message": "신분증 문서 유형을 선택하십시오",
+        "idButton": "신분증",
+        "passportButton": "여권",
+        "residentButton": "거주허가증"
+    },
+    "idDocumentCamera": {
+        "idTitle": "신분증",
+        "frontIDTitle": "신분증 앞면",
+        "backIDTitle": "신분증 뒷면",
+        "frontIDMes": "신분증 앞면을 프레임 안에 넣고 사진을 찍습니다.",
+        "backIDMes": "신분증 뒷면을 프레임 안에 넣고 사진을 찍습니다.",
+        "passportTitle": "여권",
+        "passportMes": "프레임 안에 여권을 놓고 사진을 찍습니다.",
+        "residentTitle": "거주허가증",
+        "frontResidentTitle": "거주허가증 앞면",
+        "backResidentTitle": "거주허가증 뒷면",
+        "frontResidentMes": "거주허가증 허가증 앞면을 프레임 안에 넣고 사진을 찍습니다.",
+        "backResidentMes": "거주허가증 허가증 뒷면을 프레임 안에 넣고 사진을 찍습니다.",
+        "previewTitle": "이미지 미리보기",
+        "previewMes": "문서를 읽을 수 있는지 확인하십시오.",
+        "takePictureButton": "사진 찍기",
+        "photoClearButton": "사진이 선명합니다",
+        "reTakeButton": "다시 찍기"
+    },
+    "poaDoc": {
+        "title": "주소증명 문서",
+        "message":"문서 유형을 선택하고 주소 증명 문서 발급 날짜를 입력하십시오.",
+        "selectDocTitle":"문서 유형 선택",
+        "issueDate": "발행 날짜",
+        "scanPOAButton": "주소증명 문서 스캔"
+    },
+    "poaDocumentCamera": {
+        "title": "주소증명 문서 스캔",
+        "message": "프레임 안에 주소 증명 문서를 놓고 문서 사진을 찍습니다.",
+        "previewMessage": "문서를 읽을 수 있는지 확인하십시오.",
+        "takePictureButton": "사진 찍기",
+        "retakeButton": "다시 찍기",
+        "continueButton": "계속"
+    },
+    "idDocResult":{
+        "title":"결과",
+        "resultMessage":"감사합니다!",
+        "message":"신원 확인 절차가 성공적으로 완료되었습니다.",
+        "buttonTitle":"완료됨"
+    }
+}

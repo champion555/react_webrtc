@@ -1,13 +1,20 @@
 import React, { Component, useState } from 'react';
 import { withRouter } from "react-router";
-import Header from "../../Components/header/header"
+import Header from "../../Components/whiteHeader/whiteHeader"
 import IDDocButton from "../../Components/idDocButton/idDocButton"
 import POADocURL from "../../assets/ic_addressproof_purple.png"
+import dropURL from '../../assets/ic_drop.png'
+import dateURL from '../../assets/ic_date.png'
 import countryList from 'react-select-country-list'
 import DatePicker from "react-datepicker";
+import DocumentArray from '../../CommonData/DocumentTypeArray';
 import Button from "../../Components/POAButton/POAButton"
 import "react-datepicker/dist/react-datepicker.css";
 import './POADoc.css';
+
+import { setTranslations, setDefaultLanguage, setLanguage, withTranslation, t } from 'react-multi-lang'
+let lan = localStorage.getItem('language');
+setDefaultLanguage(lan)
 
 class POADoc extends Component {
     constructor(props) {
@@ -15,12 +22,19 @@ class POADoc extends Component {
         this.options = countryList().getData()
         this.state = {
             POADocSrc: POADocURL,
-            sendHeaderText: 'POA Document',
+            sendHeaderText: t('poaDoc.title'),
             selectCountryStatus: false,
             options: this.options,
             value: null,
             nextUrl: '',
             startDate: new Date(),
+            txtColor: "gray",
+            dropSrc: dropURL,
+            dateSrc: dateURL,
+            onDocumentType: false,
+            documentTypeArray: DocumentArray,
+            setedDoc: "Electricity Billing",
+
         }
     }
     setStartDate(date) {
@@ -30,60 +44,76 @@ class POADoc extends Component {
     componentDidMount = () => {
         console.log("countries:", this.options)
     }
+    onSelectDocumentType = () => {
+        this.setState({ onDocumentType: true })
+    }
+    onSelectedDocument = (document) => {
+        this.setState({ onDocumentType: false })
+        console.log(document)
+        this.setState({ setedDoc: document })
+    }
     render() {
+        const ExampleCustomInput = ({ value, onClick }) => (
+            <div style={{ fontSize: "16px", display: "flex", alignItems: "center", color: this.state.txtColor }} className="example-custom-input" onClick={onClick}>
+                {value}
+                <img src={this.state.dateSrc} style={{ width: "20px", height: "20px", marginLeft: "16px" }} />
+            </div>
+
+        );
         return (
-            <div style={{ background: 'black' }}>
-                {(!this.state.selectCountryStatus) &&
+            <div style={{ background: this.state.txtColor }}>
+                {(!this.state.selectCountryStatus) && !this.state.onDocumentType &&
                     <>
-                        <Header headerText={this.state.sendHeaderText} url="idmain" />
-                        <div className="idmain_body-container" style = {{alignItems:"center"}}>
-                            <div className="mark-container">
-                                <div className="markView">
-                                    <img src={this.state.POADocSrc} className="identityIcon" />
-                                </div>
+                        <Header headerText={this.state.sendHeaderText} txtColor={this.state.txtColor} />
+                        <div className="idmain_body-container" style={{ alignItems: "center" }}>
+                            <div className="POA-container">
+                                <p style={{ paddingLeft: "16px", paddingRight: "16px", textAlign: "center",fontSize:"16px", color: this.state.txtColor }}>{t('poaDoc.message')}</p>
+                            </div>
+                            <div className = "selectDocTitle" style={{ color: this.state.txtColor }}>{t('poaDoc.selectDocTitle')}</div>
+                            <div className="selectTypeView" onClick={this.onSelectDocumentType}>
+                                <p style={{ paddingLeft: "20px", marginBottom: "0px", fontSize: "16px", color: this.state.txtColor }}>{this.state.setedDoc}</p>
+                                <img style={{ width: "15px", height: "10px", right: "25px", position: "absolute" }} src={this.state.dropSrc} />
+                            </div>
+                            <div style={{ width: "100%", height: "70px", display: "flex", alignItems: "center",position:"relative" }}>
+                                <p className = "issueDate" style={{ color: this.state.txtColor }}>{t('poaDoc.issueDate')}</p>
                             </div>
                             <div className="issuDateView" onClick={this.props.onClick}>
-                                <p style={{ marginLeft: "16px", fontSize: "18px", paddingRight: "30px" }}>Issue Date</p>
                                 <DatePicker
                                     selected={this.state.startDate}
                                     onChange={date => this.setStartDate(date)}
-                                    isClearable
-                                    placeholderText="mm/dd/yyyy" />
+                                    customInput={<ExampleCustomInput />}
+                                />
+
                             </div>
                             <Button
-                                label="Scan PoA Document"
+                                label={t('poaDoc.scanPOAButton')}
                                 onClick={() => {
                                     // localStorage.setItem("poaDate",this.state.startDate)
                                     window.POADate = this.state.startDate
-                                    this.props.history.push('poadocumentcamera')
-                                    
+                                    this.props.history.push('poacamera')
+
                                 }}
-                            // onClick={this.onSelectNextURL.bind(this, "POADoc")}
                             />
                         </div>
 
                     </>}
-                {(this.state.selectCountryStatus) &&
-                    <div style={{ background: 'white' }}>
-                        <Header headerText="Select the country" />
-                        <input type="text" placeholder="Search the country" style={{ width: '100%', height: '30px' }} onChange={this.onSearch} />
-                        {this.state.options.map(CountryItem => {
-                            let CountryFlag = "https://www.countryflags.io/" + CountryItem.value + "/flat/64.png";
+                {this.state.onDocumentType && <div>
+                    <Header headerText="Select POA Document Type" txtColor={this.state.txtColor} />
+                    {
+                        this.state.documentTypeArray.map((data, index) => {
                             return (
-                                <div onClick={this.onSelectCountry.bind(this, CountryItem.label)} style={{ display: 'flex', float: 'left', width: '100%', boxShadow: '0 1px' }}>
-                                    <img src={CountryFlag} />
-                                    <span style={{ textAlign: 'center', marginTop: '20px', marginLeft: '10px' }}>{CountryItem.label}</span>
-                                    <br />
-                                    <br />
+                                <div className="documentInclude" onClick={this.onSelectedDocument.bind(this, data.value)}>
+                                    <div className="documentArrayText" style = {{color:this.state.txtColor}}>{data.value}</div>
                                 </div>
                             )
-                        })}
-                    </div>
-                }
+
+                        })
+                    }
+                </div>}
 
             </div>
         )
     }
 }
 
-export default withRouter(POADoc);
+export default withTranslation(POADoc);

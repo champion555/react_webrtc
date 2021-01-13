@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "Powerd by BIOMIID RapidCheck",
+    "scaleCheckfooterTitle": "Powerd by BIOMIID ScaleCheck",
+    "errorMessageTitle": "ID Document Error",
+    "blurryErrorMes": "- The image  is blurry!",
+    "glareErrorMes": "- The image  contains glares",
+    "faceErrorMes":"- This ID Document don't  contains  face, please use  valid  ID document",
+    "mrzErrorMes":"- This  ID document don't  contains  valid  MRZ, please  use valid ID document  and retake",
+    "Home": {
+        "companyName": "Company Name",
+        "title": "VERIFY YOUR IDENTITY",
+        "titleDes": "it will take a fews seconds",
+        "smallTitle": "BEFORE START, PLEASE",
+        "checkDes1": "Prepare a valid Goverment-issued ID Documemt(Passport, ID Card, Resident Permit).",
+        "checkDes2": "Be ready to capture your selfie and photos of your ID document.",
+        "checkDes3": "Be sure you are in well-lit room.",
+        "policyDes1": "By click on",
+        "policyDes2": "START",
+        "policyDes3": "button you agree to our",
+        "TermsofServiceTitle": "Terms of Service",
+        "policyDes5": ". For more information see our ",
+        "privacyPolicyTitle": "Privacy Policy.",
+        "startButtonTitle": "START"
+    },
+    "PhotoLivness": {
+        "title": "Selfie Capture",
+        "message": "Please place your face correctly inside the oval frame and take a capture",
+        "takeCaptureButton": "TAKE A CAPTURE"
+    },
+    "documentCountry": {
+        "title": "ID Document Country",
+        "message": "Please select the Goverment ID Document issuing country",
+        "continueButton": "CONTINUE",
+        "issueTitle": "Issuing Country"
+    },
+    "livenessResult": {
+        "title": "Face Liveness Result",
+        "spoofMessage": "Spoof detected",
+        "unableMessage": "Unable to confirm liveness",
+        "unableMesDes": "Image is too blurry or contain glares!",
+        "retryButton": "RETRY"
+    },
+    "idMain": {
+        "title": "ID Document Type",
+        "message": "Please select your ID Document type",
+        "idButton": "National ID Card",
+        "passportButton": "Passport",
+        "residentButton": "Residence Permit"
+    },
+    "idDocumentCamera": {
+        "idTitle": "National ID Card",
+        "frontIDTitle": "Front of National ID Card",
+        "backIDTitle": "Back of National ID Card",
+        "frontIDMes": "Place the front of National ID Card inside the frame and take the photo",
+        "backIDMes": "Place the back page of National ID Card inside the frame and take the photo",
+        "passportTitle": "Passport",
+        "passportMes": "Place the Passport inside the frame amd take the photo",
+        "residentTitle": "Residence Permit Card",
+        "frontResidentTitle": "Front of Residence Permit Card",
+        "backResidentTitle": "Back of Residence Permit",
+        "frontResidentMes": "Place the front of Residence Permit Card inside the frame and take the photo",
+        "backResidentMes": "Place the back of Residence Permit Card inside the frame and take the photo",
+        "previewTitle": "Image preview",
+        "previewMes": "Make sure  the  document  is clear  to read",
+        "takePictureButton": "TAKE A PICTURE",
+        "photoClearButton": "MY PHOTO IS CLEAR",
+        "reTakeButton": "RE-TAKE"
+    },
+    "poaDoc": {
+        "title": "POA Document",
+        "message":"Please select the type of document and enter the proof of address document issuing date.",
+        "selectDocTitle":"Select type of document",
+        "issueDate": "Issue Date",
+        "scanPOAButton": "SCAN POA DOCUMENT"
+    },
+    "poaDocumentCamera": {
+        "title": "Scan PoA Document",
+        "message": "Place the  Proof of address  document  inside of frame  and capture  the document",
+        "previewMessage": "Make sure  the  document  is clear  to read",
+        "takePictureButton": "TAKE A CAPTURE",
+        "retakeButton": "RE-TAKE",
+        "continueButton": "CONTINUE"
+    },
+    "idDocResult":{
+        "title":"Result",
+        "resultMessage":"Thank you!",
+        "message":"Your identity verification process is completed successfully",
+        "buttonTitle":"Done"
+    }
+}

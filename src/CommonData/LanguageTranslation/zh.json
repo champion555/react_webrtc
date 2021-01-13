@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "由BIOMIID 提供動力快速檢查",
+    "scaleCheckfooterTitle": "由BIOMIID 規模檢查提供支持",
+    "errorMessageTitle": "身分證明文件錯誤",
+    "blurryErrorMes": "- 圖像模糊！",
+    "glareErrorMes": "- 圖像包含眩光",
+    "faceErrorMes":"-此身分證明文件不含臉孔，請使用有效的身分證明文件",
+    "mrzErrorMes":"- 該身份證件不包含有效的機讀區，請使用有效的身份證件並重新獲取",
+    "Home": {
+        "companyName": "公司名",
+        "title": "驗證您的身份",
+        "titleDes": "這需要幾秒鐘",
+        "smallTitle": "開始之前，請",
+        "checkDes1": "準備政府簽發的有效身份證件（護照，身份證，居留證）。",
+        "checkDes2": "準備好捕獲您的自拍照和ID文檔的照片。",
+        "checkDes3": "確保您在光線充足的房間裡。",
+        "policyDes1": "點擊",
+        "policyDes2": "開始",
+        "policyDes3": "按鈕即表示您同意我",
+        "TermsofServiceTitle": "們的服務條款",
+        "policyDes5": "。 有關更多信息，請參見我們的 ",
+        "privacyPolicyTitle": "隱私政策。",
+        "startButtonTitle": "開始"
+    },
+    "PhotoLivness": {
+        "title": "自拍捕獲",
+        "message": "請將您的臉正確放置在橢圓形框內並進行拍攝",
+        "takeCaptureButton": "捕捉"
+    },
+    "documentCountry": {
+        "title": "身份證件國家",
+        "message": "請選擇政府身份證件的簽發國家",
+        "continueButton": "繼續",
+        "issueTitle": "發行國"
+    },
+    "livenessResult": {
+        "title": "面部表情結果",
+        "spoofMessage": "偵測到惡搞",
+        "unableMessage": "無法確認生命",
+        "unableMesDes": "圖像太模糊或有眩光！",
+        "retryButton": "重試"
+    },
+    "idMain": {
+        "title": "身份證件類型",
+        "message": "請選擇您的身份證件類型",
+        "idButton": "國家身份證",
+        "passportButton": "護照",
+        "residentButton": "居留證"
+    },
+    "idDocumentCamera": {
+        "idTitle": "國家身份證",
+        "frontIDTitle": "國民身份證正面",
+        "backIDTitle": "國民身份證背面",
+        "frontIDMes": "將國民身份證的正面放入框架中並拍照",
+        "backIDMes": "將國民身份證的背面放在框架內並拍照",
+        "passportTitle": "護照",
+        "passportMes": "將護照放在框架內並拍照",
+        "residentTitle": "居留證",
+        "frontResidentTitle": "居留許可卡正面",
+        "backResidentTitle": "居留證背面",
+        "frontResidentMes": "將居留證的正面放在框架內並拍照",
+        "backResidentMes": "將居留證的背面放在框架內並拍照",
+        "previewTitle": "圖片預覽",
+        "previewMes": "確保文檔清晰可讀",
+        "takePictureButton": "拍照",
+        "photoClearButton": "我的照片清晰",
+        "reTakeButton": "重拍"
+    },
+    "poaDoc": {
+        "title": "地址證明文件",
+        "message":"請選擇文件類型並輸入地址證明文件的發行日期。",
+        "selectDocTitle":"選擇文件類型",
+        "issueDate": "發行日期",
+        "scanPOAButton": "掃描點文件"
+    },
+    "poaDocumentCamera": {
+        "title": "掃描PoA文檔",
+        "message": "將地址證明文件放在框架內並捕獲文件",
+        "previewMessage": "確保文檔清晰可讀",
+        "takePictureButton": "捕捉",
+        "retakeButton": "重拍",
+        "continueButton": "繼續"
+    },
+    "idDocResult":{
+        "title":"結果",
+        "resultMessage":"謝謝！",
+        "message":"您的身份驗證過程已成功完成",
+        "buttonTitle":"完成了"
+    }
+}

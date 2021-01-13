@@ -1,0 +1,91 @@
+{
+    "rapidCheckfooterTitle": "Powerd por BIOMIID RapidCheck",
+    "scaleCheckfooterTitle": "Powerd por BIOMIID ScaleCheck",
+    "errorMessageTitle": "Erro de documento de identidade",
+    "blurryErrorMes": "- A imagem está borrada!",
+    "glareErrorMes": "- A imagem contém brilhos",
+    "faceErrorMes":"- Este documento de identidade não contém rosto, use um documento de identidade válido",
+    "mrzErrorMes":"- Este documento de identificação não contém MRZ válido, por favor, use um documento de identificação válido e refaça",
+    "Home": {
+
+        "companyName":"Nome da empresa",
+        "title":"VERIFIQUE SUA IDENTIDADE",
+        "titleDes":"vai demorar alguns segundos.",
+        "smallTitle":"ANTES DE COMEÇAR, POR FAVOR",
+        "checkDes1":"Prepare um documento de identidade válido emitido pelo governo (passaporte, carteira de identidade, autorização de residência).",
+        "checkDes2":"Esteja pronto para capturar sua selfie e fotos de seu documento de identidade.",
+        "checkDes3":"Certifique-se de que você está em uma sala bem iluminada.",
+        "policyDes1":"Ao clicar no botão",
+        "policyDes2":"Iniciar",
+        "policyDes3":", você concorda com nossos",
+        "TermsofServiceTitle":"Termos de Serviço",
+        "policyDes5":". Para mais informação, veja nossa ",
+        "privacyPolicyTitle":"política de privacidade.",
+        "startButtonTitle":"Iniciar"
+    },
+    "PhotoLivness": {
+        "title": "Captura de selfie",
+        "message": "Por favor, coloque seu rosto corretamente dentro da moldura oval e faça uma captura",
+        "takeCaptureButton": "TOME UMA CAPTURA"
+    },
+    "documentCountry": {
+        "title": "Controle de documento de identidade",
+        "message": "Selecione o país de emissão do Documento de Identificação do Governo",
+        "continueButton": "CONTINUAR",
+        "issueTitle": "País emissor"
+    },
+    "livenessResult": {
+        "title": "Resultado de vivacidade do rosto",
+        "spoofMessage": "Falsificação detectada",
+        "unableMessage": "Incapaz de confirmar vivacidade",
+        "unableMesDes": "A imagem está muito borrada ou contém reflexos!",
+        "retryButton": "TENTAR NOVAMENTE"
+    },
+    "idMain": {
+        "title": "Tipo de Documento de Identificação",
+        "message": "Selecione o tipo de documento de identidade",
+        "idButton": "Carteira de identidade nacional",
+        "passportButton": "Passaporte",
+        "residentButton": "Permissão de Residente"
+    },
+    "idDocumentCamera": {
+        "idTitle": "Carteira de identidade nacional",
+        "frontIDTitle": "Frente da carteira de identidade nacional",
+        "backIDTitle": "Verso da carteira de identidade nacional",
+        "frontIDMes": "Coloque a frente do cartão de identidade nacional dentro da moldura e tire a foto",
+        "backIDMes": "Coloque o verso da carteira de identidade nacional dentro da moldura e tire a foto",
+        "passportTitle": "Passaporte",
+        "passportMes": "Coloque o passaporte dentro da moldura e tire a foto",
+        "residentTitle": "Cartão de autorização de residência",
+        "frontResidentTitle": "Cartão de Permissão de Residência",
+        "backResidentTitle": "Autorização de Residência",
+        "frontResidentMes": "Coloque a frente do Cartão de Permissão de Residência dentro da moldura e tire a foto",
+        "backResidentMes": "Coloque o verso do Cartão de Autorização de Residência dentro da moldura e tire a foto",
+        "previewTitle": "Pré-visualização de imagem",
+        "previewMes": "Certifique-se de que o documento esteja claro para leitura",
+        "takePictureButton": "TIRAR UMA FOTO",
+        "photoClearButton": "MINHA FOTO ESTÁ CLARA",
+        "reTakeButton": "RETOMAR"
+    },
+    "poaDoc": {
+        "title": "Documento POA",
+        "message":"selecione o tipo de documento e insira a data de emissão do comprovante de endereço.",
+        "selectDocTitle":"selecione o tipo de documento",
+        "issueDate": "Data de emissão",
+        "scanPOAButton": "SCAN POA DOCUMENT"
+    },
+    "poaDocumentCamera": {
+        "title": "Digitalizar documento PoA",
+        "message": "Coloque o comprovante de endereço dentro da moldura e capture o documento",
+        "previewMessage": "Certifique-se de que o documento esteja claro para leitura",
+        "takePictureButton": "TOME UMA CAPTURA",
+        "retakeButton": "RETOMAR",
+        "continueButton": "CONTINUAR"
+    },
+    "idDocResult":{
+        "title":"Resultado",
+        "resultMessage":"Obrigado!",
+        "message":"Seu processo de verificação de identidade foi concluído com sucesso",
+        "buttonTitle":"Feita"
+    }
+}

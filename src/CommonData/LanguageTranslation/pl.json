@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "Powerd firmy BIOMIID RapidCheck",
+    "scaleCheckfooterTitle": "Powerd by BIOMIID ScaleCheck",
+    "errorMessageTitle": "Błąd dokumentu tożsamości",
+    "blurryErrorMes": "- Obraz jest zamazany!",
+    "glareErrorMes": "- Obraz zawiera odblaski",
+    "faceErrorMes":"- Ten dokument tożsamości nie zawiera twarzy, użyj ważnego dokumentu tożsamości",
+    "mrzErrorMes":"- Ten dokument tożsamości nie zawiera ważnego MRZ, użyj ważnego dokumentu tożsamości i powtórz",
+    "Home": {
+        "companyName": "Nazwa firmy",
+        "title": "ZWERYFIKOWAĆ TWOJĄ TOŻSAMOŚĆ",
+        "titleDes": "zajmie to kilka sekund",
+        "smallTitle": "PROSZĘ PRZED ROZPOCZĘCIEM",
+        "checkDes1": "Przygotuj ważny dokument tożsamości wydany przez rząd (paszport, dowód osobisty, zezwolenie na pobyt)",
+        "checkDes2": "Przygotuj się na zrobienie autoportretów i zdjęć dokumentu tożsamości",
+        "checkDes3": "Upewnij się, że jesteś w dobrze oświetlonym pomieszczeniu.",
+        "policyDes1": "Klikając przycisk",
+        "policyDes2": "START",
+        "policyDes3": ", wyrażasz zgodę na nasze",
+        "TermsofServiceTitle": "Warunki korzystania z usługi",
+        "policyDes5": ". Więcej informacji można znaleźć w naszej ",
+        "privacyPolicyTitle": "Polityce prywatności.",
+        "startButtonTitle": "START"
+    },
+    "PhotoLivness": {
+        "title": "Selfie Capture",
+        "message": "Umieść twarz prawidłowo w owalnej ramce i zrób zdjęcie",
+        "takeCaptureButton": "ZABIERAJ"
+    },
+    "documentCountry": {
+        "title": "Dokument tożsamości Contry",
+        "message": "Wybierz kraj, w którym wydano dokument tożsamości rządu",
+        "continueButton": "KONTYNTYNUJ",
+        "issueTitle": "Państwo wydające"
+    },
+    "livenessResult": {
+        "title": "Efekt ożywienia twarzy",
+        "spoofMessage": "Wykryto fałszerstwo",
+        "unableMessage": "Nie można potwierdzić żywotności",
+        "unableMesDes": "Obraz jest zbyt rozmyty lub zawiera odblaski!",
+        "retryButton": "SPRÓBOWAĆ PONOWNIE"
+    },
+    "idMain": {
+        "title": "Typ dokumentu tożsamości",
+        "message": "Wybierz typ dokumentu tożsamości",
+        "idButton": "Narodowa karta identyfikacyjna",
+        "passportButton": "Paszport",
+        "residentButton": "Pozwolenie na pobyt"
+    },
+    "idDocumentCamera": {
+        "idTitle": "Narodowa karta identyfikacyjna",
+        "frontIDTitle": "Przód dowodu osobistego",
+        "backIDTitle": "Tył dowodu osobistego",
+        "frontIDMes": "Umieść przód krajowego dowodu osobistego w ramce i zrób zdjęcie",
+        "backIDMes": "Umieść tylną stronę dowodu osobistego w ramce i zrób zdjęcie",
+        "passportTitle": "Paszport",
+        "passportMes": "Umieść paszport w ramce i zrób zdjęcie",
+        "residentTitle": "Karta pobytu",
+        "frontResidentTitle": "Karta Przedpłaty Pobytu",
+        "backResidentTitle": "Zezwolenie na pobyt na odwrocie",
+        "frontResidentMes": "Umieść przód karty pobytu w ramce i zrób zdjęcie",
+        "backResidentMes": "Umieść odwrotną stronę karty pobytu w ramce i zrób zdjęcie",
+        "previewTitle": "Podgląd obrazu",
+        "previewMes": "Upewnij się, że dokument jest czytelny",
+        "takePictureButton": "ZROBIĆ ZDJĘCIE",
+        "photoClearButton": "MOJE ZDJĘCIE JEST WYRAŹNE",
+        "reTakeButton": "ODZYSKAĆ"
+    },
+    "poaDoc": {
+        "title": "Dokument POA",
+        "message":"proszę wybrać rodzaj dokumentu i podać datę wystawienia dokumentu potwierdzającego adres.",
+        "selectDocTitle":"wybierz rodzaj dokumentu",
+        "issueDate": "Data wydania",
+        "scanPOAButton": "SKANUJ DOKUMENT POA"
+    },
+    "poaDocumentCamera": {
+        "title": "Skanuj dokument PoA",
+        "message": "Umieść dokument potwierdzający adres wewnątrz ramki i przechwyć dokument",
+        "previewMessage": "Upewnij się, że dokument jest czytelny",
+        "takePictureButton": "ZABIERAJ",
+        "retakeButton": "ODZYSKAĆ",
+        "continueButton": "KONTYNTYNUJ"
+    },
+    "idDocResult":{
+        "title":"Wynik",
+        "resultMessage":"Dziękuję Ci!",
+        "message":"Twój proces weryfikacji tożsamości został pomyślnie zakończony",
+        "buttonTitle":"Gotowe"
+    }
+}

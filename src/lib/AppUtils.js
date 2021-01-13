@@ -1,4 +1,5 @@
 import Axios from '../api';
+import AxiosVideoLiv from '../videolivenessapi'
 import SelfAxios from '../selfService';
 import datauritoblob from 'datauritoblob'
 import { isMobile } from 'react-device-detect'
@@ -7,20 +8,6 @@ function stopMediaTracks(stream) {
     track.stop();
   });
 }
-// handle user media capture
-// export function captureUserMedia(callback, deviceId) {
-//     var params = {
-//       audio: false, video: {
-//         deviceId: deviceId ? { deviceId: { exact: deviceId } } : null,
-//         width: { exact: 1280 },
-//         height: { exact: 720 },
-//       }
-//     };  
-
-//   navigator.getUserMedia(params, callback, (error) => {
-//     // alert(JSON.stringify(error));
-//   });
-// };
 export function captureUserMedia(callback, deviceId, defaultFaceingMode = 'user', audio = true, videoSizeW, videoH) {
 
   const videoConstraints = {
@@ -32,17 +19,11 @@ export function captureUserMedia(callback, deviceId, defaultFaceingMode = 'user'
   } else {
     if (isMobile)
       videoConstraints.facingMode = defaultFaceingMode;
-
-    // width: { exact: 1280 },
-    // height: { exact: 720 },
-    // facingMode: 'user'
   }
 
   const constraints = {
     video: videoConstraints,
     audio: isMobile ? audio : false,
-    // focusMode: 'manual',
-    // focusDistance: 0.33
   };
 
   if (typeof window.currentStream !== 'undefined') {
@@ -109,31 +90,6 @@ export function changeCamera(deviceId) {
   return navigator.mediaDevices.getUserMedia(constraints)
 };
 
-
-// export function getCameraList(callbacl) {
-//   if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-//     console.log("enumerateDevices() not supported.");
-//     return;
-//   }
-
-//   // List cameras and microphones.
-
-//   navigator.mediaDevices.enumerateDevices()
-//     .then(function (devices) {
-//       devices.forEach(function (device) {
-//         console.log(device.kind + ": " + device.label +
-//           " id = " + device.deviceId);
-//       });
-
-//       var cameraList = devices.filter(d => d.kind === 'videoinput')
-
-//       callbacl(cameraList)
-//     })
-//     .catch(function (err) {
-//       console.log(err.name + ": " + err.message);
-//     });
-// }
-
 function getToken() {
   return new Promise((r, reject) => {
     var tokenTime = localStorage.getItem('time')
@@ -158,15 +114,14 @@ function getToken() {
       localStorage.setItem('token', token)
 
       r(token)
-    }).catch(e=>{
+    }).catch(e => {
       reject(e);
     })
 
   })
 
 }
-
-export function ImageQuality(blobData, prCallback) { //parameters: { type, data, id }
+export function ImageQuality(blobData, prCallback) {
 
   const data = new FormData();
   data.append('api_key', 'Mzc0MTExMjUtNTBmMS00ZTA3LWEwNjktZjQxM2UwNjA3ZGEw');
@@ -186,7 +141,7 @@ export function ImageQuality(blobData, prCallback) { //parameters: { type, data,
     })
   })
 }
-export function PhotoUpload(blobData, prCallback) { //parameters: { type, data, id }
+export function PhotoUpload(blobData, prCallback) {
 
   const data = new FormData();
   data.append('api_key', 'Mzc0MTExMjUtNTBmMS00ZTA3LWEwNjktZjQxM2UwNjA3ZGEw');
@@ -196,7 +151,7 @@ export function PhotoUpload(blobData, prCallback) { //parameters: { type, data, 
     var data = new FormData();
     const file = datauritoblob(blobData)
 
-    data.append('live_image_file', file);
+    data.append('live_image_file', file);   
 
     return Axios.post("faceliveness", data, {
       headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
@@ -206,8 +161,32 @@ export function PhotoUpload(blobData, prCallback) { //parameters: { type, data, 
     })
   })
 }
+export function VideoChallenge(blobData,challenge1,challenge2,challenge3, prCallback) {
+  console.log(challenge1,challenge2,challenge3)
+  const data = new FormData();
+  data.append('api_key', 'Mzc0MTExMjUtNTBmMS00ZTA3LWEwNjktZjQxM2UwNjA3ZGEw');
+  data.append('secret_key', 'YTE4YmM5YmYtZjZhYS00MTU5LWI4Y2EtYjQyYTRkNzAxOWZj');
 
-export function VideoUpload(blobData, isVideo = true, prCallback) { //parameters: { type, data, id }
+  return getToken().then(token => {
+    var data = new FormData();
+    data.append('live_video_file', blobData);
+
+    data.append("challenge_1",String(challenge1));
+    data.append("challenge_2",String(challenge2));
+    data.append("challenge_3",String(challenge3));
+
+    return Axios.post( "/biomiid/kyx/client/videoChallenges" , data, {
+      headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
+      onUploadProgress: progressEvent => {
+        // console.log('progressEvent:' + progressEvent.loaded);
+        if (prCallback) prCallback(blobData.size, progressEvent.loaded)
+      }
+    })
+  })
+}
+
+
+export function VideoUpload(blobData, isVideo = true, prCallback) {
 
   const data = new FormData();
   data.append('api_key', 'Mzc0MTExMjUtNTBmMS00ZTA3LWEwNjktZjQxM2UwNjA3ZGEw');

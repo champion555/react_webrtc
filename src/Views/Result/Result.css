@@ -17,7 +17,6 @@
 
 .socre-container {
     width: 100%;
-    /* display: flex; */
     justify-content: space-between;
     text-align: center;
 
@@ -27,8 +26,6 @@
     display: flex;
     padding-top: 20px;
     flex-direction: column;
-    /* height: calc(100vh - 50px); */
-    /* background: #7f00ff; */
     align-items: center;
     justify-content: center;
 }

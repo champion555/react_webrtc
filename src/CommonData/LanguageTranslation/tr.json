@@ -1,0 +1,90 @@
+{
+    "rapidCheckfooterTitle": "BIOMIID RapidCheck tarafından sunulan Powerd",
+    "scaleCheckfooterTitle": "BIOMIID ScaleCheck tarafından sunulan Powerd",
+    "errorMessageTitle": "Kimlik Belgesi Hatası",
+    "blurryErrorMes": "- Görüntü bulanık!",
+    "glareErrorMes": "- Görüntüde parlama var",
+    "faceErrorMes":"- Bu Kimlik Belgesi yüz içermiyor, lütfen geçerli bir kimlik belgesi kullanın",
+    "mrzErrorMes":"- Bu kimlik belgesi geçerli MRZ içermiyor, lütfen geçerli bir kimlik belgesi kullanın ve yeniden alın",
+    "Home": {
+        "companyName": "Şirket Adı",
+        "title": "KİMLİGİNİZİ DOGRULAYİN",
+        "titleDes": "birkaç saniye sürecek",
+        "smallTitle": "BAŞLAMADAN ÖNCE LÜTFEN",
+        "checkDes1": "Devlet tarafından verilmiş geçerli bir Kimlik Belgesi hazırlayın (Pasaport, Kimlik Kartı, Oturma İzni).",
+        "checkDes2": "Özçekiminizi ve kimlik belgenizin fotoğraflarını çekmeye hazır olun.",
+        "checkDes3": "İyi aydınlatılmış bir odada olduğunuzdan emin olun.",
+        "policyDes1": " ",
+        "policyDes2": "BAŞLAT",
+        "policyDes3": "düğmesine tıklayarak",
+        "TermsofServiceTitle": "Hizmet Şartlarımızı kabul etmiş olursunuz",
+        "policyDes5": ". Daha fazla bilgi için Gizlilik ",
+        "privacyPolicyTitle": "Politikamıza bakın.",
+        "startButtonTitle": "BAŞLAT"
+    },
+    "PhotoLivness": {
+        "title": "Selfie Yakalama",
+        "message": "Lütfen yüzünüzü oval çerçevenin içine doğru şekilde yerleştirin ve çekim yapın",
+        "takeCaptureButton": "BİR YAKALAYIN"
+    },
+    "documentCountry": {
+        "title": "Kimlik Belgesi Sözleşmesi",
+        "message": "Lütfen Devlet Kimlik Belgesini düzenleyen ülkeyi seçin",
+        "continueButton": "DEVAM ET",
+        "issueTitle": "Sağlayan ülke"
+    },
+    "livenessResult": {
+        "title": "Yüz Canlılığı Sonucu",
+        "spoofMessage": "Sahte tespit edildi",
+        "unableMessage": "Canlılık teyit edilemiyor",
+        "unableMesDes": "Görüntü çok bulanık veya parlama içeriyor!",
+        "retryButton": "YENİDEN DENE"
+    },
+    "idMain": {
+        "title": "Kimlik Belgesi Türü",
+        "message": "Lütfen Kimlik Belgesi türünüzü seçin",
+        "idButton": "Ulusal kimlik kartı",
+        "passportButton": "Pasaport",
+        "residentButton": "İkamet izni"
+    },
+    "idDocumentCamera": {
+        "idTitle": "Ulusal kimlik kartı",
+        "frontIDTitle": "Ulusal Kimlik Kartı Önü",
+        "backIDTitle": "Ulusal Kimlik Kartının Arkası",
+        "frontIDMes": "Ulusal Kimlik Kartının ön yüzünü çerçevenin içine yerleştirin ve fotoğrafı çekin",
+        "backIDMes": "Nüfus Cüzdanı arka sayfasını çerçevenin içine yerleştirin ve fotoğrafını çekin",
+        "passportTitle": "Pasaport",
+        "passportMes": "Pasaportu çerçevenin içine yerleştirin ve fotoğrafı çekin",
+        "residentTitle": "İkamet İzni Kartı",
+        "frontResidentTitle": "İkamet İzni Kartı Önü",
+        "backResidentTitle": "İkamet İzninin Arkası",
+        "frontResidentMes": "Oturma İzni Kartının ön yüzünü çerçevenin içine yerleştirin ve fotoğrafını çekin",
+        "backResidentMes": "Oturma İzni Kartının arkasını çerçevenin içine yerleştirin ve fotoğrafı çekin",
+        "previewTitle": "IResim Önizleme",
+        "previewMes": "Belgenin okunaklı olduğundan emin olun",
+        "takePictureButton": "BİR FOTOĞRAF ÇEK",
+        "photoClearButton": "FOTOĞRAFIM TEMİZ",
+        "reTakeButton": "YENİDEN AL"
+    },
+    "poaDoc": {
+        "title": "POA Belgesi",
+        "message":"Lütfen belge türünü seçin ve adres kanıtı belgesinin düzenlendiği tarihi girin.",
+        "selectDocTitle":"Belge türünü seçin",
+        "issueDate": "Veriliş tarihi",
+        "scanPOAButton": "TARAMA POA BELGESİ"
+    },
+    "poaDocumentCamera": {
+        "title": "PoA Belgesini Tara",
+        "message": "Adres kanıtı belgesini çerçevenin içine yerleştirin ve belgeyi yakalayın",
+        "previewMessage": "Belgenin okunaklı olduğundan emin olun",
+        "takePictureButton": "BİR YAKALAYIN",
+        "retakeButton": "YENİDEN AL",
+        "continueButton": "DEVAM ET"
+    },
+    "idDocResult":{
+        "title":"Sonuç",
+        "resultMessage":"Teşekkür ederim!",
+        "message":"Kimlik doğrulama süreciniz başarıyla tamamlandı",
+        "buttonTitle":"Bitti"
+    }
+}
