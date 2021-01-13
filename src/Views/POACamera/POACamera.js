@@ -27,7 +27,7 @@ class POACamera extends Component {
         }
     }
     componentDidMount = () => {
-        const ratio = (window.innerWidth * 0.7) / window.innerHeight
+        const ratio = window.innerWidth  / window.innerHeight
         this.setState({ cameraRatio: ratio })
         this.onSetMessage()
     }
