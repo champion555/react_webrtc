@@ -18,8 +18,7 @@ export const MY_COUNTRIES_DATA = [
     { key: 'tr',  value: 'Turkish'},
     { key: 'uk',  value: 'Ukrainian'},    
     { key: 'vi',  value: 'Vietnamese'},
-    { key: 'zh',  value: 'Chinese'},  
-    
+    { key: 'zh',  value: 'Chinese'},     
     
 ]
 export default MY_COUNTRIES_DATA;

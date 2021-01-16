@@ -151,7 +151,7 @@ export function PhotoUpload(blobData, prCallback) {
     var data = new FormData();
     const file = datauritoblob(blobData)
 
-    data.append('live_image_file', file);   
+    data.append('live_image_file_web', file);   
 
     return Axios.post("faceliveness", data, {
       headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
