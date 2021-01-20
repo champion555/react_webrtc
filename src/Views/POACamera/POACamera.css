@@ -50,7 +50,6 @@
 }
 
 .POACamErrorMessageView .container {
-    border: 1px solid #7f00ff;
     border-radius: 5px;
     
 }
@@ -71,10 +70,10 @@
     margin-left: 10px;
     padding-right: 10px;
     font-size: 16px;
-    color: #7f00ff;
+    color: #fff;
 }
 .POACamErrorMessageView .container .errormessage p{
-    color: #7f00ff;
+    color: #fff;
     margin-top: 0px;
     margin-left: 16px;
     font-size: 14px;

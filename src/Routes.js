@@ -14,6 +14,7 @@ import VideoLiveness from './Views/VideoLiveness/VideoLiveness'
 import VideoChallengResult from './Views/VideoChallengeResult/VideoChallengeResult'
 import DocumentCountry from './Views/DocumentCountry/DocumentCountry'
 import POACamera from './Views/POACamera/POACamera'
+import IDDocCamera from './Views/IDDocCammera/IDDocCamera'
 
 const Routes = () => {
     return (
@@ -33,6 +34,7 @@ const Routes = () => {
                 <Route exact path="/videochallengeresult" component={VideoChallengResult} />
                 <Route exact path="/documentcountry" component={DocumentCountry} />
                 <Route exact path="/poacamera" component={POACamera} /> 
+                <Route exact path="/iddoccamera" component={IDDocCamera} /> 
 
             </Switch>
         </BrowserRouter>

@@ -76,7 +76,7 @@ class POACamera extends Component {
                         <p>{this.state.POAMessage}</p>
                     </div>
                     {(this.state.isErrorStatus) && <div className="POACamErrorMessageView" style={{ bottom: window.innerHeight * 0.3 }}>
-                        <div className="container">
+                        <div className="container" style = {{border:"1px solid #fff"}}>
                             <div className="errortitle">
                                 <img src={this.state.errorSRC} />
                                 <p>{t('errorMessageTitle')}</p>

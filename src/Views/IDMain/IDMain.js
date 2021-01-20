@@ -86,7 +86,7 @@ class IDMain extends Component {
         } else if (link === "resident") {
             window.IDType = "resident"
         }
-        this.props.history.push('iddocumentcamera')
+        this.props.history.push('iddoccamera')
     }
     onBlur = () => {
 

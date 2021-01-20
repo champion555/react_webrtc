@@ -5,4 +5,9 @@ export const MyApp = styled.div`
         height: ${height}px;
         // object-fit:fill;
     }
+    .IDDocCamCrop-container{
+        img {
+            height:${height}px;
+        }
+    }
 `
