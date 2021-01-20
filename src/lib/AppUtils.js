@@ -142,7 +142,6 @@ export function ImageQuality(blobData, prCallback) {
   })
 }
 export function PhotoUpload(blobData, prCallback) {
-
   const data = new FormData();
   data.append('api_key', 'Mzc0MTExMjUtNTBmMS00ZTA3LWEwNjktZjQxM2UwNjA3ZGEw');
   data.append('secret_key', 'YTE4YmM5YmYtZjZhYS00MTU5LWI4Y2EtYjQyYTRkNzAxOWZj');

@@ -10,7 +10,6 @@ import POADoc from './Views/POADoc/POADoc'
 import PhotoLiveness from './Views/PhotoLiveness/PhotoLiveness'
 import LivenessResult from './Views/LivenessResult/LivenessResult'
 import IDDocumentCamera from './Views/IDDocumentCamera/IDDocumentCamera'
-import POADocumentCamera from './Views/POADocumentCamera/POADocumentCamera'
 import VideoLiveness from './Views/VideoLiveness/VideoLiveness'
 import VideoChallengResult from './Views/VideoChallengeResult/VideoChallengeResult'
 import DocumentCountry from './Views/DocumentCountry/DocumentCountry'
@@ -26,7 +25,6 @@ const Routes = () => {
                 <Route exact path="/result" component={Result} />
                 <Route exact path="/idmain" component={IDMainPage} />
                 <Route exact path="/iddocumentcamera" component={IDDocumentCamera} />
-                <Route exact path="/poadocumentcamera" component={POADocumentCamera} />
                 <Route exact path="/iddocresult" component={IDDocResult} />
                 <Route exact path="/poadoc" component={POADoc} />
                 <Route exact path="/photoliveness" component={PhotoLiveness} />

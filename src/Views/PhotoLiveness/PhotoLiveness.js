@@ -16,9 +16,9 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './PhotoLiveness.css';
 import Webcam from "react-webcam";
 import { within } from '@testing-library/react';
-import { setTranslations, setDefaultLanguage, setLanguage, withTranslation } from 'react-multi-lang'
+import { setTranslations, setDefaultLanguage, setLanguage,withTranslation } from 'react-multi-lang'
 
-let lan = localStorage.getItem('language');
+let lan =   localStorage.getItem('language'); 
 setDefaultLanguage(lan)
 
 class PhotoLiveness extends Component {
@@ -38,8 +38,8 @@ class PhotoLiveness extends Component {
         };
     }
     componentDidMount = () => {
-        console.log("dadfadfa")
-        console.log(lan)
+        console.log("dadfadfa")        
+      console.log(lan) 
     }
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
@@ -50,24 +50,17 @@ class PhotoLiveness extends Component {
         }).then(res => {
             this.setState({ apiFlage: false })
             var response = res.data;
-            if (response.status === "SUCCESS") {
-                if (response.result === "LIVENESS") {
-                    this.props.history.push('documentcountry')
-                } else if (response.result === "SPOOF") {
-                    window.livenessResult = response.result
-                    this.setState({ ImgSrc: UndetectImgURL })
-                    this.props.history.push('livenessresult')
-                } else {
-                    window.livenessResult = response.result
-                    this.setState({ ImgSrc: UndetectImgURL })
-                    this.props.history.push('livenessresult')
-                }
-            } else {
-                alert("Face Liveness is error, please try again");
-                this.setState({ apiFlage: false })
+            if (response.result === "LIVENESS") {
+                this.props.history.push('documentcountry')
+            } else if (response.result === "SPOOF") {
+                window.livenessResult = response.result
                 this.setState({ ImgSrc: UndetectImgURL })
+                this.props.history.push('livenessresult')
+            } else {
+                window.livenessResult = response.result
+                this.setState({ ImgSrc: UndetectImgURL })
+                this.props.history.push('livenessresult')
             }
-
 
         }).catch(e => {
             alert("the server is not working, Please try again.");
@@ -89,7 +82,7 @@ class PhotoLiveness extends Component {
         this.props.history.push('')
     }
     render() {
-        const { t } = this.props
+        const {t} = this.props
         const videoConstraints = {
             facingMode: "user"
         };
@@ -117,7 +110,7 @@ class PhotoLiveness extends Component {
                     <div style={{ width: "100%", height: window.innerHeight * 0.631, backgroundImage: `url(${this.state.ImgSrc})`, backgroundSize: "100% 100%" }}></div>
                     <div className="liveness-captureButton" style={{ height: window.innerHeight * 0.3 }}>
                         <p style={{ fontSize: "18px", color: this.state.titleColor, textAlign: "center", paddingLeft: "10px", paddingRight: "10px", position: "absolute", top: "5px" }}>{t('PhotoLivness.message')}</p>
-                        <div style={{ position: "absolute", bottom: "35px", width: '100%', display: "flex", justifyContent: "center" }}>
+                        <div style = {{position:"absolute",bottom:"35px",width:'100%',display:"flex",justifyContent:"center"}}>
                             <Button
                                 label={t('PhotoLivness.takeCaptureButton')}
                                 onClick={() => this.onCapture()}
@@ -128,8 +121,8 @@ class PhotoLiveness extends Component {
 
                 </div>
 
-                {(this.state.apiFlage) && <div style={{ width: "100%", height: window.innerHeight, zIndex: 20, background: "#fff", position: "absolute", textAlign: "center", justifyContent: "center", display: "flex" }}>
-                    <p style={{ color: "#383838", fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID RapidCheck</p>
+                {(this.state.apiFlage) && <div style={{ width: "100%", height: window.innerHeight, zIndex: 20, background: "#fff", position: "absolute", textAlign: "center",justifyContent:"center",display:"flex" }}>
+                <p style={{ color: "#383838", fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID RapidCheck</p>
                 </div>}
                 {(this.state.apiFlage) && <div className="loadingView" style={{ bottom: window.innerHeight * 0.5 }}>
                     <Loader
@@ -141,13 +134,13 @@ class PhotoLiveness extends Component {
                 </div>}
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
                     <div className="modalView" style={{ height: window.innerHeight * 0.5 }}>
-                        <div style={{ borderBottom: "solid 1px", borderColor: this.state.txtColor, width: "100%" }}>
+                        <div style={{ borderBottom: "solid 1px", borderColor: this.state.txtColor,width:"100%" }}>
                             <h2 style={{ paddingLeft: "30px", paddingRight: "30px", paddingTop: "10px", paddingBottom: "10px", color: "gray" }}>Leaving so soon?</h2>
                         </div>
                         <div>
                             <p style={{ color: this.state.txtColor, fontSize: "18px", paddingTop: "15px", paddingLeft: "10px", paddingRight: "10px" }}>Are you sure you want to exit the identification process?</p>
                         </div>
-                        <div style={{ position: "absolute", bottom: "15px", width: "100%", display: "flex", alignItems: "center", flexDirection: "column" }}>
+                        <div style={{ position: "absolute", bottom: "15px",width:"100%",display:"flex",alignItems:"center",flexDirection:"column"}}>
                             <ExitButton
                                 label="EXIT"
                                 onClick={this.onEXit} />
@@ -165,4 +158,4 @@ class PhotoLiveness extends Component {
     }
 }
 
-export default withTranslation(PhotoLiveness);
+export default withTranslation (PhotoLiveness);
