@@ -5,14 +5,15 @@ import DropIconURL from '../../assets/ic_drop.png'
 import Button from '../../Components/POAButton/POAButton'
 import CountryArray from '../../CommonData/CountriesList';
 import backImageURL from "../../assets/ic_back1.png"
+import searchImageURL from "../../assets/ic_search.png"
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { setTranslations, setDefaultLanguage, setLanguage, withTranslation, t } from 'react-multi-lang'
-
 import './DocumentCountry.css';
 
 let lan = localStorage.getItem('language');
 setDefaultLanguage(lan)
+let api = "https://fcc-weather-api.glitch.me/api/current?";
 
 
 class DocumentCountry extends React.Component<Props> {
@@ -26,24 +27,71 @@ class DocumentCountry extends React.Component<Props> {
             countryArray: CountryArray,
             countryName: "France",
             backImageSrc: backImageURL,
+            searchImageSrc: searchImageURL,
+            headerColor: "#7f00ff",
+            headerTitlecolor: "white",
+            buttonColor: ""
         };
     }
     componentDidMount = () => {
         console.log(lan)
+        var country
+        var getCountryName
+        this.state.countryArray.map((data, index) => {
+            if (data.country == this.state.countryName) {
+                console.log("counbtryJSON:", data);
+                window.surpportedDocType = data.docType
+                window.countryCode = data.countryCode
+                window.mrz = data.mrz
+            }
+        })
+        // if (navigator.geolocation) {
+        //     navigator.geolocation.watchPosition(function (position) {
+        //         console.log("asdfffffffffffffffffffff")
+        //         console.log("Latitude is :", position.coords.latitude);
+        //         console.log("Longitude is :", position.coords.longitude);
+        //         var crg = require('country-reverse-geocoding').country_reverse_geocoding();
+        //         country = crg.get_country(position.coords.latitude, position.coords.longitude);
+        //         getCountryName = country.name
+        //         console.log(getCountryName)
+        //     });
+        // }
+        // setTimeout(() => {
+        //     this.setState({ countryName: getCountryName })
+        //     this.state.countryArray.map((data, index) => {
+        //         if (data.country == getCountryName) {
+        //             console.log("counbtryJSON:", data);
+        //             window.surpportedDocType = data.docType
+        //             window.countryCode = data.countryCode
+        //         }
+        //     })
+        // }, 3000);
 
+        // var foucs = document.getElementById('search-text');
+        // foucs.blur();
     }
 
     handleChange = (e, { value }) => this.setState({ value })
 
     onContinue = () => {
-        window.countryName = this.state.countryName
-        this.props.history.push('idmain')
+        if (this.state.countryName == "") {
+            alert("Please select the issusing country")
+        } else {
+            window.countryName = this.state.countryName
+            this.props.history.push('idmain')
+        }
     }
-    onSelectedCountryItem = (country, docType) => {
-        console.log("clicked language", country)
-        console.log("countryDocType", docType)
-        this.setState({ countryName: country })
-        window.surpportedDocType = docType
+    onSelectedCountryItem = (data) => {
+        console.log(data.country)
+        console.log(data.docType)
+        console.log(data.PA_PREFIX)
+        console.log(data.ID_PREFIX)
+        console.log(data.RE_PREFIX)
+        console.log(data.mrz)
+        this.setState({ countryName: data.country })
+        window.surpportedDocType = data.docType
+        window.countryCode = data.countryCode
+        window.mrz = data.mrz
         this.onCloseModal()
     }
     onSearch = (e) => {
@@ -58,6 +106,13 @@ class DocumentCountry extends React.Component<Props> {
                 if (Country.country.includes(NewSearchUpperCase)) {
                     NewACountry.countryCode = Country.countryCode
                     NewACountry.country = Country.country
+                    NewACountry.region = Country.region
+                    NewACountry.docType = Country.docType
+                    NewACountry.PA_PREFIX = Country.PA_PREFIX
+                    NewACountry.ID_PREFIX = Country.ID_PREFIX
+                    NewACountry.RE_PREFIX = Country.RE_PREFIX
+                    NewACountry.mrz = Country.mrz
+
                     NewSearchCountry.push(NewACountry)
                 }
             })
@@ -82,12 +137,12 @@ class DocumentCountry extends React.Component<Props> {
         return (
             <div>
                 {!this.state.onSelectCountry && <div>
-                    <Header headerText={t('documentCountry.title')} url="photolivness" txtColor={this.state.titleColor} />
+                    <Header headerText={t('documentCountry.title')} headerBackgroundColor={this.state.headerColor} url="photolivness" txtColor={this.state.headerTitlecolor} />
                     <div className="documentContry_container" style={{ height: window.innerHeight - 50 }}>
                         <div className="documentContry_messageView" style={{ height: window.innerHeight * 0.15 }}>
-                            <p style={{ position: "absolute", bottom: "0px", paddingLeft: "20px", paddingRight: "20px", fontSize: "18px", color: this.state.titleColor }}>{t('documentCountry.message')}</p>
+                            <p style={{ position: "absolute", bottom: "0px", paddingLeft: "15px", paddingRight: "15px", fontSize: "16px", color: this.state.titleColor }}>{t('documentCountry.message')}</p>
                         </div>
-                        <div style={{ width: "100%", height: window.innerHeight * 0.2, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <div style={{ width: "100%", height: window.innerHeight * 0.2, display: "flex", alignItems: "center", justifyContent: "center", paddingLeft: "15px", paddingRight: "15px" }}>
                             <div className="selectDrop" onClick={this.onOpenModal}>
                                 <div style={{ display: "flex", alignItems: "center", fontSize: "18px", paddingLeft: "16px", color: this.state.titleColor }}>{this.state.countryName}</div>
                                 <div className="dropIconView">
@@ -96,37 +151,45 @@ class DocumentCountry extends React.Component<Props> {
 
                             </div>
                         </div>
-                        <div style={{ width: "100%", height: window.innerHeight * 0.4, position: "absolute", bottom: "0px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <div className="documentCountry_ButtonView" style={{ height: window.innerHeight * 0.4 }}>
                             <Button
                                 label={t('documentCountry.continueButton')}
                                 onClick={() => this.onContinue()} />
-                            <p style={{ color: this.state.titleColor, fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID RapidCheck</p>
+                            <p style={{ color: this.state.titleColor, fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID</p>
 
                         </div>
                     </div>
                 </div>}
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
-                    <div className="modalView" style={{ height: window.innerHeight * 0.9, width: "100%" }}>
-                        <div style = {{width:"100%"}}>
-                            <div className="whiteHeaderView">
-                                <img className="languagebtnBack" src={this.state.backImageSrc}
+                    <div className="modalView" style={{ height: window.innerHeight*0.9, width: "100%" }}>
+                        <div style={{ width: "100%" }}>
+                            <div className="whiteHeaderView" style={{ background: "#7f00ff" }}>
+                                <img className="countrybtnBack" src={this.state.backImageSrc}
                                     onClick={() => {
                                         this.onCloseModal()
                                     }} />
-                                <p className="whitetxtTitle" style={{ color: this.state.titleColor }}>Issuing Country</p>
+                                <p className="whitetxtTitle" style={{ color: "#fff" }}>Issuing Country</p>
                                 <div style={{ width: '10px' }}></div>
                             </div>
-                            {/* <input id="search-text" type="text" placeholder="Search the country" style={{ width: '100%', height: '30px' }} onChange={this.onSearch} /> */}
-                            {
-                                this.state.countryArray.map((data, index) => {
-                                    return (
-                                        <div className="languageInclude" onClick={this.onSelectedCountryItem.bind(this, data.country, data.docType)}>
-                                            <div className="languageArrayText" style={{ color: this.state.titleColor }} >{data.country}</div>
-                                        </div>
-                                    )
+                            <div className="countryArray_Container">
+                                <div className = "searchContainer">
+                                    <input id="search-text" type="text" placeholder="Document Country..." onChange={this.onSearch} />
+                                    <img src = {this.state.searchImageSrc}/>
+                                </div>
 
-                                })
-                            }
+                                <div className="container" >
+                                    {
+                                        this.state.countryArray.map((data, index) => {
+                                            return (
+                                                <div className="countryInclude" onClick={this.onSelectedCountryItem.bind(this, data)}>
+                                                    <div className="countryArrayText" style={{ color: this.state.titleColor }} >{data.country}</div>
+                                                </div>
+                                            )
+
+                                        })
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </Modal>

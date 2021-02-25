@@ -5,7 +5,7 @@
     "blurryErrorMes": "- Imaginea este neclară!",
     "glareErrorMes": "- Imaginea conține străluciri",
     "faceErrorMes":"- Acest document de identitate nu conține față, vă rugăm să utilizați un document de identitate valid",
-    "mrzErrorMes":"- Acest document de identitate nu conține MRZ valabil, vă rugăm să utilizați un document de identitate valid și să reluați",
+    "mrzErrorMes":"- Documentul de identitate nu este valid, vă rugăm să utilizați un document de identitate valid",
     "Home": {
         "companyName": "Numele Companiei",
         "title": "VERIFICA-TI IDENTITATEA",

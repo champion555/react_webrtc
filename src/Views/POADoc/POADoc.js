@@ -5,6 +5,7 @@ import IDDocButton from "../../Components/idDocButton/idDocButton"
 import POADocURL from "../../assets/ic_addressproof_purple.png"
 import dropURL from '../../assets/ic_drop.png'
 import dateURL from '../../assets/ic_date.png'
+import backbuttonURL from '../../assets/ic_back1.png'
 import countryList from 'react-select-country-list'
 import DatePicker from "react-datepicker";
 import DocumentArray from '../../CommonData/DocumentTypeArray';
@@ -34,6 +35,9 @@ class POADoc extends Component {
             onDocumentType: false,
             documentTypeArray: DocumentArray,
             setedDoc: "Electricity Billing",
+            headerColor: "#7f00ff",
+            headerTitleColor: "white",
+            backButtonSrc: backbuttonURL,
 
         }
     }
@@ -64,18 +68,18 @@ class POADoc extends Component {
             <div style={{ background: this.state.txtColor }}>
                 {(!this.state.selectCountryStatus) && !this.state.onDocumentType &&
                     <>
-                        <Header headerText={this.state.sendHeaderText} txtColor={this.state.txtColor} />
+                        <Header headerText={this.state.sendHeaderText} headerBackgroundColor={this.state.headerColor} txtColor={this.state.headerTitleColor} />
                         <div className="idmain_body-container" style={{ alignItems: "center" }}>
                             <div className="POA-container">
-                                <p style={{ paddingLeft: "16px", paddingRight: "16px", textAlign: "center",fontSize:"16px", color: this.state.txtColor }}>{t('poaDoc.message')}</p>
+                                <p style={{ paddingLeft: "16px", paddingRight: "16px", fontSize: "16px", color: this.state.txtColor }}>{t('poaDoc.message')}</p>
                             </div>
-                            <div className = "selectDocTitle" style={{ color: this.state.txtColor }}>{t('poaDoc.selectDocTitle')}</div>
+                            <div className="selectDocTitle" style={{ color: this.state.txtColor }}>{t('poaDoc.selectDocTitle')}</div>
                             <div className="selectTypeView" onClick={this.onSelectDocumentType}>
                                 <p style={{ paddingLeft: "20px", marginBottom: "0px", fontSize: "16px", color: this.state.txtColor }}>{this.state.setedDoc}</p>
                                 <img style={{ width: "15px", height: "10px", right: "25px", position: "absolute" }} src={this.state.dropSrc} />
                             </div>
-                            <div style={{ width: "100%", height: "70px", display: "flex", alignItems: "center",position:"relative" }}>
-                                <p className = "issueDate" style={{ color: this.state.txtColor }}>{t('poaDoc.issueDate')}</p>
+                            <div style={{ width: "100%", height: "70px", display: "flex", alignItems: "center", position: "relative" }}>
+                                <p className="issueDate" style={{ color: this.state.txtColor }}>{t('poaDoc.issueDate')}</p>
                             </div>
                             <div className="issuDateView" onClick={this.props.onClick}>
                                 <DatePicker
@@ -83,27 +87,34 @@ class POADoc extends Component {
                                     onChange={date => this.setStartDate(date)}
                                     customInput={<ExampleCustomInput />}
                                 />
-
                             </div>
-                            <Button
-                                label={t('poaDoc.scanPOAButton')}
-                                onClick={() => {
-                                    // localStorage.setItem("poaDate",this.state.startDate)
-                                    window.POADate = this.state.startDate
-                                    this.props.history.push('poacamera')
+                            <div style = {{width:"100%",paddingLeft:"15px",paddingRight:"15px"}}>
+                                <Button
+                                    label={t('poaDoc.scanPOAButton')}
+                                    onClick={() => {
+                                        // localStorage.setItem("poaDate",this.state.startDate)
+                                        window.POADate = this.state.startDate
+                                        this.props.history.push('poacamera')
+                                    }}
+                                />
+                            </div>
 
-                                }}
-                            />
                         </div>
-
                     </>}
                 {this.state.onDocumentType && <div>
-                    <Header headerText="Select POA Document Type" txtColor={this.state.txtColor} />
+                    {/* <Header headerText="Select POA Document Type" headerBackgroundColor = {this.state.headerColor} txtColor={this.state.headerTitleColor} /> */}
+                    <div className="POADocTypeTopBar" style={{ height: window.innerHeight * 0.07 }}>
+                        <img src={this.state.backButtonSrc} onClick={() => {
+                            this.setState({ onDocumentType: false })
+                        }} className="POADocbtnBack" />
+                        <p className="liveness_txtTitle" style={{ color: this.state.headerTitleColor }}>Select POA Document Type</p>
+                        <div style={{ width: '10px' }}></div>
+                    </div>
                     {
                         this.state.documentTypeArray.map((data, index) => {
                             return (
                                 <div className="documentInclude" onClick={this.onSelectedDocument.bind(this, data.value)}>
-                                    <div className="documentArrayText" style = {{color:this.state.txtColor}}>{data.value}</div>
+                                    <div className="documentArrayText" style={{ color: this.state.txtColor }}>{data.value}</div>
                                 </div>
                             )
 

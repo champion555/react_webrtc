@@ -5,7 +5,7 @@
     "blurryErrorMes": "- Het beeld is wazig!",
     "glareErrorMes": "- De afbeelding bevat blikken",
     "faceErrorMes":"- Dit ID-document bevat geen gezicht, gebruik een geldig ID-document",
-    "mrzErrorMes":"- Dit ID-document bevat geen geldige MRZ, gebruik een geldig ID-document en neem het opnieuw",
+    "mrzErrorMes":"- Identiteitsbewijs niet geldig, gebruik een geldig identiteitsbewijs",
     "Home": {
         "companyName": "Bedrijfsnaam",
         "title": "VERIFIEER UW IDENTITEIT",

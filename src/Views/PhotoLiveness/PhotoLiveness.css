@@ -4,7 +4,7 @@
     margin-top: 10px;
     z-index: 1;
 }
-.frame-view{
+/* .frame-view{
     z-index: 3;
     position: absolute;
     width: 100%;
@@ -14,7 +14,7 @@
     position: absolute;
     width: 95%;
     justify-content: center;
-}
+} */
 .liveness-captureButton{
     bottom: 0px;
     width: 100%;
@@ -22,7 +22,7 @@
     display: flex;    
     flex-direction: column;
     align-items: center;
-    background: #fff;
+    background: gray;
     position: relative;    
 }
 .loadingView{
@@ -37,7 +37,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    background: #fff;
 }
 .liveness_txtTitle{
     text-align: center;
@@ -49,6 +48,6 @@
 .photoLivenessbtnBack{
     display: flex;
     margin-left: 10px;
-    width: 18px;
-    height: 18px;
+    width: 12px;
+    height: 12px;
 }

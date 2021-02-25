@@ -5,7 +5,7 @@
     "blurryErrorMes": "- Gambarnya kabur!",
     "glareErrorMes": "- Gambar mengandung silau",
     "faceErrorMes":"- Dokumen ID ini tidak mengandung wajah, harap gunakan dokumen ID yang valid",
-    "mrzErrorMes":"- Dokumen ID ini tidak mengandung MRZ yang valid, harap gunakan dokumen ID yang valid dan ambil ulang",
+    "mrzErrorMes":"- Dokumen ID tidak valid, harap gunakan Dokumen ID yang valid",
     "Home": {
         "companyName":"Nama Perusahaan",
         "title":"VERIFIKASI IDENTITAS ANDA",

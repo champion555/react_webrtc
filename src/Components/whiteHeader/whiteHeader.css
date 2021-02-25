@@ -1,5 +1,4 @@
 .whiteHeaderView{
-    background: #fff;
     height: 50px;
     display: flex;
     justify-content: space-between;
@@ -8,8 +7,8 @@
 .whitebtnBack{
     display: flex;
     margin-left: 10px;
-    width: 18px;
-    height: 18px;
+    width: 12px;
+    height: 12px;
 }
 .whitetxtTitle{
     text-align: center;
@@ -21,8 +20,7 @@
 .react-responsive-modal-modal{
     padding: 0px !important;
     margin: 0px !important;
-    border-radius: 10px !important;
-    max-width: 350px !important;
+    max-width: 360px !important;
 }
 .modalView{
     width: 100%;

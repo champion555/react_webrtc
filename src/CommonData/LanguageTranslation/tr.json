@@ -5,7 +5,7 @@
     "blurryErrorMes": "- Görüntü bulanık!",
     "glareErrorMes": "- Görüntüde parlama var",
     "faceErrorMes":"- Bu Kimlik Belgesi yüz içermiyor, lütfen geçerli bir kimlik belgesi kullanın",
-    "mrzErrorMes":"- Bu kimlik belgesi geçerli MRZ içermiyor, lütfen geçerli bir kimlik belgesi kullanın ve yeniden alın",
+    "mrzErrorMes":"- Kimlik Belgesi geçerli değil, lütfen geçerli bir Kimlik Belgesi kullanın",
     "Home": {
         "companyName": "Şirket Adı",
         "title": "KİMLİGİNİZİ DOGRULAYİN",

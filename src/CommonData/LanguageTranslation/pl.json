@@ -5,7 +5,7 @@
     "blurryErrorMes": "- Obraz jest zamazany!",
     "glareErrorMes": "- Obraz zawiera odblaski",
     "faceErrorMes":"- Ten dokument tożsamości nie zawiera twarzy, użyj ważnego dokumentu tożsamości",
-    "mrzErrorMes":"- Ten dokument tożsamości nie zawiera ważnego MRZ, użyj ważnego dokumentu tożsamości i powtórz",
+    "mrzErrorMes":"- Dokument tożsamości jest nieważny, użyj ważnego dokumentu tożsamości",
     "Home": {
         "companyName": "Nazwa firmy",
         "title": "ZWERYFIKOWAĆ TWOJĄ TOŻSAMOŚĆ",

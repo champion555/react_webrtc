@@ -3,7 +3,6 @@
 }
 .documentContry_messageView{
     width: 100%;
-    text-align: center;
     position: relative;
 }
 .dropIconView{
@@ -17,11 +16,81 @@
     justify-content: center;
 }
 .selectDrop{
-    width: 70%;
+    width: 100%;
     height: 50px;
     position: relative;
     display: flex;
     border: solid 1px;
     border-color: #383838;
     border-radius: 5px;
+}
+.documentCountry_ButtonView{
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.countryArray_Container{
+    border-left: solid 1px;
+    border-color:rgb(128, 128, 128);
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+.countryArray_Container .searchContainer{
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+.countryArray_Container .searchContainer img{
+    width: 16px;
+    height: 16px;
+    margin-left: -30px;
+}
+.countryArray_Container .searchContainer input{
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border: solid 1px;
+    border-color: gray;
+    padding-left: 10px;
+}
+.countryArray_Container .container{
+    border: solid 1px;
+    border-color:gray;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.countryArrayText{
+    height: 50px;
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    padding-left: 15px;
+}
+.countryInclude:active{
+    background-color: #7f00ff;
+}
+.countryInclude{
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px;
+    border-color:rgb(128, 128, 128);
+}
+.countrybtnBack{
+    display: flex;
+    margin-left: 10px;
+    width: 11px;
+    height: 13x;
+}
+
+input[type=text]:focus {
+    outline: none !important;
 }

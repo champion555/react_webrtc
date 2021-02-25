@@ -5,7 +5,7 @@
     "blurryErrorMes": "- ¡La imagen está borrosa!",
     "glareErrorMes": "- La imagen contiene resplandores",
     "faceErrorMes":"- Este documento de identidad no contiene rostro, utilice un documento de identidad válido",
-    "mrzErrorMes":"- Este documento de identificación no contiene MRZ válido, utilice un documento de identificación válido y vuelva a tomar",
+    "mrzErrorMes":"- Documento de identificación no válido, utilice un documento de identificación válido",
     "Home": {
         "companyName":"Nombre de empresa",
         "title":"VERIFICA TU IDENTIDAD",

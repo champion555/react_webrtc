@@ -29,9 +29,13 @@ class IDMain extends Component {
             value: null,
             descriptionColor: "gray",
             clickFlag: 0,
-            idCardFlag : false,
-            passportFlag : false,
-            residentFlag : false
+            idCardFlag: false,
+            passportFlag: false,
+            residentFlag: false,
+            oldIDCardFlag:false,
+            oldResidentFlag:false,
+            headerColor: "#7f00ff",
+            headerTitleColor: "white"
         }
     }
 
@@ -39,38 +43,45 @@ class IDMain extends Component {
         console.log("countries:", this.options)
         console.log(window.countryName)
         console.log(window.surpportedDocType)
+        console.log(window.mrz)
         switch (window.surpportedDocType) {
             case 'PA':
                 console.log("PA_switch")
-                this.setState({passportFlag:true})
-                break;
-            case 'ID':
-                console.log("ID_switch")
-                this.setState({idCardFlag:true})
-                break;
-            case 'RE':
-                console.log("RE_switch")
-                this.setState({residentFlag:true})
+                this.setState({ passportFlag: true })
                 break;
             case 'PAID':
                 console.log("PAID_switch")
-                this.setState({passportFlag:true})
-                this.setState({idCardFlag:true})
+                this.setState({ passportFlag: true })
+                if (window.mrz == "OID") {                    
+                    this.setState({ oldIDCardFlag: true })
+                }else{
+                    this.setState({ idCardFlag: true })
+                }
+
                 break;
             case 'PARE':
                 console.log("PARE_switch")
-                this.setState({passportFlag:true})
-                this.setState({residentFlag:true})
-                break;
-            case 'IDRE':
-                this.setState({idCardFlag:true})
-                this.setState({residentFlag:true})
-                console.log("IDRE_switch")
+                this.setState({ passportFlag: true })
+                if (window.mrz == "ORE") {                    
+                    this.setState({ oldResidentFlag: true })
+                }else{
+                    this.setState({ residentFlag: true })
+                }
                 break;
             case 'PAIDRE':
-                this.setState({passportFlag:true})                
-                this.setState({idCardFlag:true})
-                this.setState({residentFlag:true})
+                this.setState({ passportFlag: true })
+                if (window.mrz == "OID") {                    
+                    this.setState({ oldIDCardFlag: true })
+                }else if (window.mrz == "ORE") {                    
+                    this.setState({ oldResidentFlag: true })
+                }else if (window.mrz === "OIDORE") {
+                    this.setState({oldIDCardFlag:true})
+                    this.setState({oldResidentFlag:true})
+                }else{
+                    this.setState({idCardFlag:true})
+                    this.setState({residentFlag:true})
+                }                
+                
                 console.log("PAIDRE_switch")
                 break;
             default:
@@ -85,6 +96,14 @@ class IDMain extends Component {
             window.IDType = "passport"
         } else if (link === "resident") {
             window.IDType = "resident"
+        } else if (link === "newIDCard") {
+            window.IDType = "idcard"
+        } else if (link === "oldIDCard") {
+            window.IDType = "oldidcard"
+        } else if (link === "newResident") {
+            window.IDType = "resident"
+        } else if (link === "oldResident") {
+            window.IDType = "oldresident"
         }
         this.props.history.push('iddoccamera')
     }
@@ -117,11 +136,11 @@ class IDMain extends Component {
             <div style={{ background: 'black' }}>
                 {(!this.state.selectCountryStatus) &&
                     <>
-                        <Header headerText={this.state.sendHeaderText} txtColor={this.state.descriptionColor} />
+                        <Header headerText={this.state.sendHeaderText} headerBackgroundColor={this.state.headerColor} txtColor={this.state.headerTitleColor} />
                         <div className="idmain_body-container">
                             <div className="mark-container" style={{ background: "#fff" }}>
                                 <p style={{ fontSize: "18px", color: this.state.descriptionColor }}>{window.countryName}</p>
-                                <p style={{ fontSize: "18px", paddingLeft: "10px", paddingRight: "10px", color: this.state.descriptionColor }}>{t('idMain.message')}</p>
+                                <p style={{ fontSize: "16px", paddingLeft: "10px", paddingRight: "10px", color: this.state.descriptionColor }}>{t('idMain.message')}</p>
                             </div>
                             {this.state.passportFlag && <IDDocButton
                                 label={t('idMain.passportButton')}
@@ -133,13 +152,22 @@ class IDMain extends Component {
                                 imgURL={this.state.IDCardSrc}
                                 onClick={this.onSelectNextURL.bind(this, "idcard")}
                             />}
-                            
+                            {this.state.oldIDCardFlag && <div className="IDDocButton" >
+                                <img src={this.state.IDCardSrc} className="imgIcon" />
+                                <p className="NewIDDocButton" onClick={this.onSelectNextURL.bind(this, "newIDCard")}>{t('idMain.idButton')}</p>
+                                <p className="OldIDButton" onClick={this.onSelectNextURL.bind(this, "oldIDCard")}>{t('idMain.OldButton')}</p>
+                            </div>}
                             {this.state.residentFlag && <IDDocButton
                                 label={t('idMain.residentButton')}
                                 imgURL={this.state.ResidentSrc}
                                 onClick={this.onSelectNextURL.bind(this, "resident")}
                             />}
-                            <p style={{ width: "100%", textAlign: "center", color: this.state.descriptionColor, fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID RapidCheck</p>
+                            {this.state.oldResidentFlag && <div className="IDDocButton" >
+                                <img src={this.state.ResidentSrc} className="imgIcon" />
+                                <p className="NewIDDocButton" onClick={this.onSelectNextURL.bind(this, "newResident")}>{t('idMain.residentButton')}</p>
+                                <p className="OldIDButton" onClick={this.onSelectNextURL.bind(this, "oldResident")}>{t('idMain.OldButton')}</p>
+                            </div>}
+                            <p style={{ width: "100%", textAlign: "center", color: this.state.descriptionColor, fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID</p>
                         </div>
 
                     </>}

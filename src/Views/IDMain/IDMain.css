@@ -32,6 +32,26 @@
 }
 .identityIcon{
     width: 60px;
-    height: 60px;
-    
+    height: 60px;    
 } 
+.NewIDDocButton{
+    margin-left: 10px;
+    margin-bottom: 0px;
+    font-size: 15px;
+    font-weight: 600;
+    color: gray;
+    height: 50px;
+    align-items: center;
+    display: flex;
+}
+.OldIDButton{
+    height: 50px;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    right: 10px;
+    margin-bottom: 0px;
+    font-size: 15px;
+    font-weight: 600;
+    color: gray;
+}

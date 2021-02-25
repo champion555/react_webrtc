@@ -5,7 +5,7 @@
     "blurryErrorMes": "- Hình ảnh bị mờ!",
     "glareErrorMes": "- Hình ảnh chứa ánh sáng chói",
     "faceErrorMes":"- Tài liệu ID này không chứa khuôn mặt, vui lòng sử dụng tài liệu ID hợp lệ",
-    "mrzErrorMes":"- Tài liệu ID này không chứa MRZ hợp lệ, vui lòng sử dụng tài liệu ID hợp lệ và làm lại",
+    "mrzErrorMes":"- Tài liệu Nhận dạng không hợp lệ, vui lòng sử dụng Tài liệu ID hợp lệ",
     "Home": {
         "companyName": "Tên công ty",
         "title": "XÁC MINH NHẬN DẠNG CỦA BẠN",

@@ -5,7 +5,7 @@
     "blurryErrorMes": "- 圖像模糊！",
     "glareErrorMes": "- 圖像包含眩光",
     "faceErrorMes":"-此身分證明文件不含臉孔，請使用有效的身分證明文件",
-    "mrzErrorMes":"- 該身份證件不包含有效的機讀區，請使用有效的身份證件並重新獲取",
+    "mrzErrorMes":"- 身份證件無效，請使用有效的身份證件",
     "Home": {
         "companyName": "公司名",
         "title": "驗證您的身份",

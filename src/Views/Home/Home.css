@@ -41,28 +41,33 @@
 }
 
 .content .info .heading {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     text-align: center;
+    
 }
 
 .content .info .desc {
-    font-size: 16px;
-    text-align: center;
+    font-size: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    line-height: 1.4;
+    padding-top: 15px;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 .personal_data_list .personal_data {
-    margin-left: 32px;
+    margin-left: 15px;
+    padding-top: 15px;
 }
 
 .personal_data .title_panel {
     display: flex;
     justify-content: flex-start;
-    /* align-items: center; */
 }
 
 .personal_data .title_panel .number {
-    height: 24px;
     border: 2px solid white;
     background-color:white;  
     font-size: 20px;
@@ -71,7 +76,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 8px;
 }
 
 .personal_data .title_panel .title p {
@@ -91,7 +95,6 @@
 .termsOfService {
     padding: 0px 8px;
     font-size: 15px;
-    text-align: center;
     margin-top: 8px;
     line-height: 25px;
     padding-left: 15px;
@@ -109,7 +112,7 @@ li{
     justify-content: center;
     align-items: center;
     height: 50px;
-    width: 80%;
+    width: 100%;
     color: white;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -138,12 +141,21 @@ li{
     border-color: #7f00ff;
 }
 .languageArrayText{
-    height: 40px;
+    height: 60px;
     align-items: center;
-    /* text-align: center; */
     display: flex;
-    font-size: 18px;
+    font-size: 16px;
     padding-left: 15px;
+    font-weight: bold;
+}
+.languageArrayText p{
+    margin-bottom: 0px;
+}
+.languageArrayText img{
+     width: 16px;
+     height: 16px;
+     position: absolute;
+     right: 10px;
 }
 .languageInclude:active{
     background-color: #7f00ff;
@@ -151,12 +163,13 @@ li{
 .languageInclude{
     display: flex;
     align-items: center;
-    border-bottom: solid 1px;
-    border-color:rgb(128, 128, 128);
+    /* border-bottom: solid 1px;
+    border-color:rgb(128, 128, 128); */
 }
 .languagebtnBack{
     display: flex;
     margin-left: 10px;
     width: 11px;
     height: 13x;
+
 }

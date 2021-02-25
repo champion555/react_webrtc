@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import captureImg from "../../assets/camera_take.png"
-import UndetectImgURL from "../../assets/ic_undetected2.png"
-import DetectImgURL from "../../assets/ic_detected2.png"
-import BackURL from "../../assets/ic_cancel.png"
+import UndetectImgURL from "../../assets/ic_undetected3.png"
+import DetectImgURL from "../../assets/ic_detected3.png"
+import BackURL from "../../assets/ic_cancel_white.png"
 import Button from "../../Components/POAButton/POAButton"
+import WarringImgURL from "../../assets/ic_error.png"
 import ExitButton from '../../Components/button/button'
 import ContinueButton from "../../Components/POAButton/POAButton"
 import 'react-responsive-modal/styles.css';
+import ReactCrop from "react-image-crop";
 import { Modal } from 'react-responsive-modal';
 import LogoURL from "../../assets/ic_logo1.png"
 import { PhotoUpload } from '../../lib/AppUtils';
@@ -16,9 +18,10 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './PhotoLiveness.css';
 import Webcam from "react-webcam";
 import { within } from '@testing-library/react';
-import { setTranslations, setDefaultLanguage, setLanguage,withTranslation } from 'react-multi-lang'
 
-let lan =   localStorage.getItem('language'); 
+import { setTranslations, setDefaultLanguage, setLanguage, withTranslation } from 'react-multi-lang'
+
+let lan = localStorage.getItem('language');
 setDefaultLanguage(lan)
 
 class PhotoLiveness extends Component {
@@ -29,27 +32,57 @@ class PhotoLiveness extends Component {
             captureImgSrc: captureImg,
             ImageURL: null,
             ImgSrc: DetectImgURL,
-            logoSrc: LogoURL,
             apiFlage: false,
             backButtonSrc: BackURL,
+            warringSrc: WarringImgURL,
             screenshot: null,
-            titleColor: "gray",
+            titleColor: "white",
+            backgroundColor: "#525151",
+            whiteColor: "#fff",
             modalOpen: false,
+            crop: null,
+            croppedImageUrl: null,
         };
     }
     componentDidMount = () => {
-        console.log("dadfadfa")        
-      console.log(lan) 
+        console.log("dadfadfa")
+        console.log(lan)
+        if (window.innerHeight > 600) {
+            this.setState({
+                crop: {
+                    unit: '%',
+                    x: 15,
+                    y: 5,
+                    width: 70,
+                    height: 83,
+                    aspect: 16 / 9
+                }
+            })
+
+        } else {
+            this.setState({
+                crop: {
+                    unit: '%',
+                    x: 15,
+                    y: 5,
+                    width: 70,
+                    height: 68,
+                    aspect: 16 / 9
+                }
+            })
+        }
     }
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
         this.setState({ screenshot: imageSrc })
+        window.livenessImage = imageSrc
 
         this.setState({ apiFlage: true })
         PhotoUpload(imageSrc, (total, progress) => {
         }).then(res => {
             this.setState({ apiFlage: false })
             var response = res.data;
+            alert("LivenessScore:"+ response.score)
             if (response.result === "LIVENESS") {
                 this.props.history.push('documentcountry')
             } else if (response.result === "SPOOF") {
@@ -71,6 +104,57 @@ class PhotoLiveness extends Component {
     setRef = webcam => {
         this.webcam = webcam;
     };
+    onImageLoaded = (image) => {
+        this.imageRef = image;
+    };
+    onCropComplete = (crop) => {
+        this.makeClientCrop(crop);
+    };
+    onCropChange = (crop, percentCrop) => {
+        this.setState({ crop });
+    };
+    async makeClientCrop(crop) {
+        if (this.imageRef && crop.width && crop.height) {
+            const croppedImageUrl = await this.getCroppedImg(
+                this.imageRef,
+                crop,
+                "newFile.jpeg"
+            );
+            this.setState({ croppedImageUrl: croppedImageUrl });
+            window.photoLivenessSrc = croppedImageUrl
+        }
+    }
+    getCroppedImg(image, crop, fileName) {
+        const canvas = document.createElement("canvas");
+        const scaleX = image.naturalWidth / image.width;
+        const scaleY = image.naturalHeight / image.height;
+        canvas.width = crop.width;
+        canvas.height = crop.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(
+            image,
+            crop.x * scaleX,
+            crop.y * scaleY,
+            crop.width * scaleX,
+            crop.height * scaleY,
+            0,
+            0,
+            crop.width,
+            crop.height
+        );
+        return new Promise((resolve, reject) => {
+            canvas.toBlob((blob) => {
+                if (!blob) {
+                    console.error("Canvas is empty");
+                    return;
+                }
+                blob.name = fileName;
+                window.URL.revokeObjectURL(this.fileUrl);
+                this.fileUrl = window.URL.createObjectURL(blob);
+                resolve(this.fileUrl);
+            }, "image/jpeg");
+        });
+    }
     onOpenModal = () => {
         console.log("sadf")
         this.setState({ modalOpen: true })
@@ -82,7 +166,7 @@ class PhotoLiveness extends Component {
         this.props.history.push('')
     }
     render() {
-        const {t} = this.props
+        const { t } = this.props
         const videoConstraints = {
             facingMode: "user"
         };
@@ -101,61 +185,76 @@ class PhotoLiveness extends Component {
                         forceScreenshotSourceSize="flase"
                     />
                 </div>
-                <div style={{ position: "absolute", zIndex: "2", width: "100%", height: window.innerHeight }}>
-                    <div className="LivenessTopBar" style={{ height: window.innerHeight * 0.07 }}>
+                <div style={{ width: "100%", position: "absolute", zIndex: "-5", marginTop: "10px" }}>
+                    <ReactCrop
+                        src={this.state.screenshot}
+                        crop={this.state.crop}
+                        ruleOfThirds
+                        onImageLoaded={this.onImageLoaded}
+                        onComplete={this.onCropComplete}
+                        onChange={this.onCropChange}
+                    />
+                </div>
+                <div style={{ position: "absolute", zIndex: "10", width: "100%", height: window.innerHeight }}>
+                    <div className="LivenessTopBar" style={{ height: window.innerHeight * 0.07, background: this.state.backgroundColor }}>
                         <img src={this.state.backButtonSrc} onClick={this.onOpenModal} className="photoLivenessbtnBack" />
-                        <p className="liveness_txtTitle" style={{ color: this.state.titleColor }}>{t('PhotoLivness.title')}</p>
+                        <p className="liveness_txtTitle" style={{ color: this.state.whiteColor }}>{t('PhotoLivness.title')}</p>
                         <div style={{ width: '10px' }}></div>
                     </div>
-                    <div style={{ width: "100%", height: window.innerHeight * 0.631, backgroundImage: `url(${this.state.ImgSrc})`, backgroundSize: "100% 100%" }}></div>
-                    <div className="liveness-captureButton" style={{ height: window.innerHeight * 0.3 }}>
-                        <p style={{ fontSize: "18px", color: this.state.titleColor, textAlign: "center", paddingLeft: "10px", paddingRight: "10px", position: "absolute", top: "5px" }}>{t('PhotoLivness.message')}</p>
-                        <div style = {{position:"absolute",bottom:"35px",width:'100%',display:"flex",justifyContent:"center"}}>
+                    <div style={{ width: "100%", height: window.innerHeight * 0.031, background: this.state.backgroundColor }} />
+                    <div style={{ width: "100%", height: window.innerHeight * 0.6, backgroundImage: `url(${this.state.ImgSrc})`, backgroundSize: "100% 100%" }}></div>
+                    <div className="liveness-captureButton" style={{ height: window.innerHeight * 0.3,background:this.state.backgroundColor }}>
+                        <div style={{ width: "100%", display: "flex", flexDirection: "row", position: "absolute", top: "5px", paddingLeft: "15px", paddingRight: "15px", alignItems: "center" }}>
+                            <img src={this.state.warringSrc} style={{ width: "20px", height: "20px" }} />
+                            <p style={{ fontSize: "16px", color: this.state.titleColor, paddingLeft: "10px" }}>{t('PhotoLivness.message')}</p>
+                        </div>
+
+                        <div style={{ position: "absolute", bottom: "35px", width: '100%', display: "flex", justifyContent: "center", paddingRight: "15px", paddingLeft: "15px" }}>
                             <Button
                                 label={t('PhotoLivness.takeCaptureButton')}
                                 onClick={() => this.onCapture()}
                             />
                         </div>
-                        <p style={{ color: this.state.titleColor, fontStyle: 'italic', position: "absolute", bottom: "5px" }}>Powerd by BIOMIID RapidCheck</p>
+                        <p style = {{ color: this.state.titleColor, fontStyle: 'italic', position: "absolute", bottom: "5px" }}>Powerd by BIOMIID</p>
                     </div>
 
                 </div>
 
-                {(this.state.apiFlage) && <div style={{ width: "100%", height: window.innerHeight, zIndex: 20, background: "#fff", position: "absolute", textAlign: "center",justifyContent:"center",display:"flex" }}>
-                <p style={{ color: "#383838", fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID RapidCheck</p>
+                {(this.state.apiFlage) && <div style={{ width: "100%", height: window.innerHeight, zIndex: 20, background: "#fff", position: "absolute", textAlign: "center", justifyContent: "center", display: "flex" }}>
+                    <p style={{ color: "#383838", fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID</p>
                 </div>}
-                {(this.state.apiFlage) && <div className="loadingView" style={{ bottom: window.innerHeight * 0.5 }}>
+                <div className="loadingView" style={{ bottom: window.innerHeight * 0.5 }}>
                     <Loader
-                        type="Puff"
+                        type="Oval"
                         color="#7f00ff"
                         height={80}
                         width={80}
+                        visible = {this.state.apiFlage}
                     />
-                </div>}
+                </div>
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
-                    <div className="modalView" style={{ height: window.innerHeight * 0.5 }}>
-                        <div style={{ borderBottom: "solid 1px", borderColor: this.state.txtColor,width:"100%" }}>
-                            <h2 style={{ paddingLeft: "30px", paddingRight: "30px", paddingTop: "10px", paddingBottom: "10px", color: "gray" }}>Leaving so soon?</h2>
-                        </div>
+                    <div className="modalView" style={{ height: window.innerHeight * 0.3 }}>
                         <div>
                             <p style={{ color: this.state.txtColor, fontSize: "18px", paddingTop: "15px", paddingLeft: "10px", paddingRight: "10px" }}>Are you sure you want to exit the identification process?</p>
                         </div>
-                        <div style={{ position: "absolute", bottom: "15px",width:"100%",display:"flex",alignItems:"center",flexDirection:"column"}}>
-                            <ExitButton
-                                label="EXIT"
-                                onClick={this.onEXit} />
-                            <ContinueButton
-                                label="CONTIMUE"
-                                onClick={this.onCloseModal} />
+                        <div style={{ position: "absolute", bottom: "15px", width: "100%", display: "flex", alignItems: "center", flexDirection: "row" }}>
+                            
+                            <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
+                                <ContinueButton
+                                    label="NO"
+                                    onClick={this.onCloseModal} />
+                            </div>
+                            <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
+                                <ContinueButton
+                                    label="YES"
+                                    onClick={this.onEXit} />
+                            </div>
                         </div>
-
-
                     </div>
-
                 </Modal>
             </div>
         )
     }
 }
 
-export default withTranslation (PhotoLiveness);
+export default withTranslation(PhotoLiveness);

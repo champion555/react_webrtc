@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import ImageURL from "../../assets/ic_logo.png"
-import CheckURL from "../../assets/ic_check_voilet.png"
+import lightURL from "../../assets/ic_light.png"
+import CheckURL1 from "../../assets/ic_description1.png"
+import CheckURL2 from "../../assets/ic_description2.png"
+import CheckURL3 from "../../assets/ic_description3.png"
+import ClockURL from '../../assets/ic_clock.png'
 import languageURL from '../../assets/ic_language_purple.png'
-import { Dropdown } from "semantic-ui-react";
+import unselectURL from '../../assets/ic_unselect.png'
+import selectURL from "../../assets/ic_select.png"
 import 'semantic-ui-css/semantic.min.css';
-import COUNTRY_OPTIONS from '../../CommonData/LanguageFlageList.js';
-import { countries } from 'country-flag-icons'
 import LanguageArray from '../../CommonData/LanguageArray';
 import backImageURL from "../../assets/ic_back1.png"
-import Header from '../../Components/whiteHeader/whiteHeader'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { setTranslations, setDefaultLanguage, setLanguage, withTranslation } from 'react-multi-lang'
@@ -52,7 +54,11 @@ class Home extends React.Component<Props> {
             ImageSrcs: ImageURL,
             languageSrc: languageURL,
             sendHeaderText: 'Home',
-            checkSrc: CheckURL,
+            checkSrc1: CheckURL1,
+            checkSrc2: CheckURL2,
+            checkSrc3: CheckURL3,
+            lightSrc: lightURL,
+            clockSrc: ClockURL,
             flag: false,
             value: null,
             headBackgroundColor: "white",
@@ -64,38 +70,56 @@ class Home extends React.Component<Props> {
             languageSet: "en",
             backImageSrc: backImageURL,
             modalOpen: false,
+            selectedCountry: '',
+            unselectSRC: unselectURL,
+            selectSrc: selectURL,
+            space: "15px"
         }
     }
-    componentDidMount = () => {
-        console.log(window.innerHeight)
+    componentDidMount = () => {     
+        console.log(process.env.REACT_APP_BASE_URL)          
         setDefaultLanguage("en")
         if (window.innerHeight > 600) {
-            console.log("big device")
             this.setState({ topMargin: "35px" })
         } else if (window.innerHeight < 600) {
             console.log("small device")
             this.setState({ topMargin: "15px" })
         }
-        console.log("window function : ", window.console_hmj)
-        console.log(window.location.href)
-        var pieces = window.location.href.split("/");
-        console.log(pieces)
-        console.log("url_valuclient_id:", this.props.match.params.client_id)
-        console.log("applicantId:", this.props.match.params.applicantId)
-        console.log("checkId:", this.props.match.params.checkId)
-        console.log("env:", this.props.match.params.env)
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        let clientId = params.get('clientId');
+        let applicantId = params.get('applicantId');
+        let checkId = params.get('checkId')
+        let checkType = params.get('checkType')
+        let env = params.get('env')
+        console.log("clientId",clientId)
+        console.log("applicantId",applicantId)
+        console.log("checkId", checkId)
+        console.log("checkType",checkType)
+        console.log("env",env) 
+        if (checkId === null || applicantId === null || checkId === null || checkType === null || env === null){
+            console.log("null value detected")
+
+        } else{
+            console.log("API call in here")
+            
+        }    
+
     }
     handleChange = (e, { value }) => this.setState({ value })
-    
+
     onSelectCountry = (language) => {
         console.log(language)
         this.setState({ languageSet: language })
         setLanguage(language)
         this.onCloseModal()
+        this.setState({ selectedCountry: language })
+
     }
     onstart = () => {
         localStorage.setItem('language', this.state.languageSet);
         window.location.href = "photoliveness"
+        // window.location.href = "photolivenesscamera"
     }
 
     onOpenModal = () => {
@@ -108,8 +132,6 @@ class Home extends React.Component<Props> {
     onEXit = () => {
         this.props.history.push('')
     }
-
-
     render() {
         const { t } = this.props
 
@@ -117,77 +139,97 @@ class Home extends React.Component<Props> {
             <div>
                 {!this.state.onSelectLanguage && <div className="body-container">
                     <div style={{ background: this.state.headBackgroundColor }}>
-                        <div className="logoView" style={{ height: window.innerHeight * 0.12, marginTop: window.innerHeight * 0.01, background: this.state.headBackgroundColor }}>
+                        <div className="logoView" style={{ marginTop: window.innerHeight * 0.03, background: this.state.headBackgroundColor }}>
                             <img src={this.state.ImageSrcs} className="logoIcon" />
                             <div className="languageView" onClick={this.onOpenModal} style={{ cursor: 'pointer' }}>
-                                <img src={this.state.languageSrc} style={{ width: "25px", height: "25px" }} />
+                                <img src={this.state.languageSrc} style={{ width: "45px", height: "45px" }} />
                             </div>
-                        </div>
-                        <div className="header">
-                            <div className="companyName" style={{ color: this.state.descriptionColor }}>Company Name</div>
                         </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", flexDirection: "column", background: "white" }}>
                         <div className="content">
-                            <div className="info">
+                            <div className="info" style={{ paddingTop: "10px" }}>
                                 <p className='heading' style={{ color: this.state.descriptionColor }}>{t('Home.title')}</p>
-                                <p className="desc" style={{ color: this.state.descriptionColor }}>{t('Home.titleDes')}</p>
-                                <p style={{ fontSize: "20px", color: this.state.descriptionColor, fontWeight: "400", textAlign: "center" }}>{t('Home.smallTitle')}</p>
+                                <div style={{ width: "100%", display: "flex", alignItems: "center", marginTop: "10px", paddingLeft: "15px", paddingRight: "15px" }}>
+                                    <img src={this.state.clockSrc} style={{ width: "20px", height: "20px" }} />
+                                    <p className="desc" style={{ color: this.state.descriptionColor, paddingLeft: "5px", paddingTop: "0px" }}>{t('Home.clockDes')}</p>
+                                </div>
+                                <p className="desc" style={{ color: this.state.descriptionColor }}>{t('Home.titleDes')}<strong>{t('Home.prodoctName')}</strong></p>
+                                <div style={{ width: "100%", display: "flex", alignItems: "center", marginTop: "10px", paddingLeft: "15px", paddingRight: "15px" }}>
+                                    <img src={this.state.lightSrc} style={{ width: "30px", height: "30px" }} />
+                                    <p className="desc" style={{ color: this.state.buttonColor, paddingLeft: "5px", paddingTop: this.state.space }}>{t('Home.titleDes1')}</p>
+                                </div>
+                                <p style={{ fontSize: "16px", paddingTop: this.state.space, color: this.state.descriptionColor, fontWeight: "400", textAlign: "center" }}>{t('Home.smallTitle')}</p>
+                                <p className="desc" style={{ color: this.state.descriptionColor, paddingTop: this.state.space }}>{t('Home.titleDes2')}</p>
                             </div>
                             <div className="personal_data_list">
                                 <div className="personal_data">
                                     <div className="title_panel">
-                                        <div className="number"><img src={this.state.checkSrc} style={{ width: "20px", height: "20px" }} /></div>
+                                        <div className="number"><img src={this.state.checkSrc1} style={{ width: "20px", height: "20px" }} /></div>
                                         <div className="title"><p style={{ color: this.state.descriptionColor }}>{t('Home.checkDes1')}</p></div>
                                     </div>
                                 </div>
                                 <div className="personal_data">
                                     <div className="title_panel">
-                                        <div className="number"><img src={this.state.checkSrc} style={{ width: "20px", height: "20px" }} /></div>
+                                        <div className="number"><img src={this.state.checkSrc2} style={{ width: "20px", height: "20px" }} /></div>
                                         <div className="title"><p style={{ color: this.state.descriptionColor }}>{t('Home.checkDes2')}</p></div>
                                     </div>
                                 </div>
                                 <div className="personal_data">
                                     <div className="title_panel">
-                                        <div className="number"><img src={this.state.checkSrc} style={{ width: "20px", height: "20px" }} /></div>
+                                        <div className="number"><img src={this.state.checkSrc3} style={{ width: "20px", height: "20px" }} /></div>
                                         <div className="title"><p style={{ color: this.state.descriptionColor }}>{t('Home.checkDes3')}</p></div>
                                     </div>
                                 </div>
                                 <div className='termsOfService' style={{ color: this.state.descriptionColor, marginTop: this.state.topMargin }}>
-                                    {t('Home.policyDes1')} <strong>{t('Home.policyDes2')}</strong> {t('Home.policyDes3')} <a href="#" style={{ color: this.state.descriptionColor, fontStyle: "italic" }}><strong>{t('Home.TermsofServiceTitle')}</strong></a>{t('Home.policyDes5')}<a href="#" style={{ color: this.state.descriptionColor, fontStyle: "italic" }}><strong>{t('Home.privacyPolicyTitle')}</strong></a>
+                                    {t('Home.policyDes1')} <strong>{t('Home.policyDes2')}</strong> {t('Home.policyDes3')} <a href="#" style={{ color: this.state.descriptionColor, fontStyle: "italic" }}><strong><u>{t('Home.TermsofServiceTitle')}</u></strong></a>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-                    <div style={{ width: "100%", flexDirection: "column", alignItems: "center", display: "flex", marginTop: this.state.topMargin }}>
-
+                    <div style={{ width: "100%", flexDirection: "column", alignItems: "center", display: "flex", paddingLeft: "15px", paddingRight: "15px" }}>
                         <div className="startButton"
                             style={{ backgroundColor: this.state.buttonColor }}
                             onClick={this.onstart}>
                             <p style={{ marginBottom: "0px", marginTop: "0px" }}>{t('Home.startButtonTitle')}</p>
                         </div>
-                        <div style={{ fontStyle: "italic", color: this.state.descriptionColor, marginTop: "10px" }}>Powerd by BIOMIID RapidCheck</div>
+                        <div style={{ fontStyle: "italic", color: this.state.descriptionColor, marginTop: "10px" }}>Powerd by BIOMIID</div>
                     </div>
                 </div>}
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
-                    <div className="modalView" style={{ height: window.innerHeight*0.9, width:"100%"}}>
-                        <div style = {{width:"100%"}}>
-                            <div className="whiteHeaderView"  style = {{width:"100%"}}>
+                    <div className="modalView" style={{ height: window.innerHeight * 0.95, width: "100%" }}>
+                        <div style={{ width: "100%" }}>
+                            <div className="whiteHeaderView" style={{ width: "100%", background: "#7f00ff" }}>
                                 <img className="languagebtnBack" src={this.state.backImageSrc}
                                     onClick={() => {
                                         this.onCloseModal()
                                     }} />
-                                <p className="whitetxtTitle" style={{ color: this.state.descriptionColor }}>Select the language</p>
+                                <p className="whitetxtTitle" style={{ color: "#fff" }}>Select the language</p>
                                 <div style={{ width: '10px' }}></div>
                             </div>
                             {
                                 this.state.countryLanguageArray.map((data, index) => {
-                                    return (
-                                        <div className="languageInclude" onClick={this.onSelectCountry.bind(this, data.key)} style = {{width:"100%"}}>
-                                            <div className="languageArrayText" style={{ color: this.state.descriptionColor }} style = {{width:"100%"}}>{data.value}</div>
-                                        </div>
-                                    )
+                                    if (this.state.selectedCountry && this.state.selectedCountry == data.key) {
+                                        return (
+                                            <div className="languageInclude" onClick={this.onSelectCountry.bind(this, data.key)} style={{ width: "100%" }}>
+                                                <div className="languageArrayText" style={{ width: "100%", color: '#7f00ff' }} >
+                                                    <p>{data.value}</p>
+                                                    <img src={this.state.selectSrc} />
+                                                </div>
+                                            </div>
+                                        )
+                                    } else {
+                                        return (
+                                            <div className="languageInclude" onClick={this.onSelectCountry.bind(this, data.key)} style={{ width: "100%" }}>
+                                                <div className="languageArrayText" style={{ width: "100%", color: this.state.descriptionColor }}>
+                                                    <p>{data.value}</p>
+                                                    <img src={this.state.unselectSRC} />
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+
                                 })
                             }
                         </div>

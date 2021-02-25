@@ -493,7 +493,7 @@ class IDDocumentCamera extends Component {
                                 label={t('idDocumentCamera.takePictureButton')}
                                 onClick={this.onCapture}
                             />}
-                            <p className="bottomTitle" style={{ color: this.state.txtColor }}>Powerd by BIOMIID RapidCheck</p>
+                            <p className="bottomTitle" style={{ color: this.state.txtColor }}>Powerd by BIOMIID</p>
                         </div>}
                         {(this.state.previewImageStatuse) && this.state.isMrzProcessing && <div className="ButtonPreview">
                             {(!this.state.isErrorStatus) && <Button
@@ -563,7 +563,7 @@ class IDDocumentCamera extends Component {
                                 label={t('idDocumentCamera.reTakeButton')}
                                 onClick={this.onReTake}
                             />
-                            <p className="bottomTitle" style={{ color: this.state.txtColor }}>Powerd by BIOMIID RapidCheck</p>
+                            <p className="bottomTitle" style={{ color: this.state.txtColor }}>Powerd by BIOMIID</p>
                         </div>}
                     </div>
                 </div>

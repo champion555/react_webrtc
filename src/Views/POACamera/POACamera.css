@@ -24,29 +24,33 @@
     display: flex;
     justify-content: center;
     position: absolute;
-    bottom: 15px;
+    bottom: 20px;
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 }
 .POAMessageView{
     width: 100%;
-    position: absolute;
-    bottom: 200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 .POAMessageView p{
     color: white;
-    text-align: center;
-    padding-right: 15px;
-    padding-left: 15px;
-    font-size: 18px;
+    padding-left: 5px;
+    font-size: 16px;
 }
+.POAMessageView .errorIcon{
+    width: 20px;
+    height: 20px;
+}
+
 .POACamErrorMessageView { 
     width: 100%;
     padding-left: 16px;
     padding-right: 16px; 
-    margin-top: 10px;
-    position: absolute;
 }
 
 .POACamErrorMessageView .container {
@@ -63,7 +67,7 @@
     height: 30px;
 }
 
-.POACamErrorMessageView .errortitle img {
+.POACamErrorMessageView .container .errortitle img {
     width: 16px;
 }
 .POACamErrorMessageView .errortitle p {
@@ -77,4 +81,22 @@
     margin-top: 0px;
     margin-left: 16px;
     font-size: 14px;
+}
+.POACam_PreviewView{
+    width: 100%;
+    position: absolute;
+    top:0px;
+    z-index: 100;
+}
+.POAPreviewImg{
+    width: 95%;
+}
+.POACAm_BottomTitle{
+    position: absolute;
+    bottom: 0px;
+}
+.POACropView{
+    position: absolute;
+    z-index: -10;
+    top: 0px;
 }

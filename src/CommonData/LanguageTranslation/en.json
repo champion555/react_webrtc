@@ -2,30 +2,38 @@
     "rapidCheckfooterTitle": "Powerd by BIOMIID RapidCheck",
     "scaleCheckfooterTitle": "Powerd by BIOMIID ScaleCheck",
     "errorMessageTitle": "ID Document Error",
-    "blurryErrorMes": "- The image  is blurry!",
-    "glareErrorMes": "- The image  contains glares",
+    "imageQualityErrorMes":"-The image contains:",
+    "blurryErrorMes": " Blurries",
+    "glareErrorMes": " Glares",
+    "reflectionErrorMes": "Reflections",
+    "shadowErrorMes": " Shadows",
     "faceErrorMes":"- This ID Document don't  contains  face, please use  valid  ID document",
-    "mrzErrorMes":"- This  ID document don't  contains  valid  MRZ, please  use valid ID document  and retake",
+    "mrzErrorMes":"- Wrong ID document Type,  Please select right issuing country",
+    "inputImgErrorMes":"- Bad ID document(no mrz or invalid ID document)",
     "Home": {
         "companyName": "Company Name",
         "title": "VERIFY YOUR IDENTITY",
-        "titleDes": "it will take a fews seconds",
-        "smallTitle": "BEFORE START, PLEASE",
-        "checkDes1": "Prepare a valid Goverment-issued ID Documemt(Passport, ID Card, Resident Permit).",
-        "checkDes2": "Be ready to capture your selfie and photos of your ID document.",
-        "checkDes3": "Be sure you are in well-lit room.",
-        "policyDes1": "By click on",
+        "clockDes":"it will take less more than 60 seconds",
+        "titleDes": "NEAKEL BANK company would like to verify your identity with ",
+        "prodoctName":"RAVESY",
+        "smallTitle": "VERIFICATION PROCESS",
+        "titleDes1":"Before starting the verification processing, make sure you are in well-lit place.",
+        "titleDes2":"The verification process consists of the follows steps:",
+        "checkDes1": "Selfie Capture with liveness detection",
+        "checkDes2": "Capture of your Goverment ID document (Passport, Identity Card and Resident Permit)",
+        "checkDes3": "Capture of proof of address Document (Electricity Bill, Gas Bill, Internet Bill, Telephone Bill, Tax Notice)",
+        "policyDes1": "By clicking on the ",
         "policyDes2": "START",
-        "policyDes3": "button you agree to our",
-        "TermsofServiceTitle": "Terms of Service",
-        "policyDes5": ". For more information see our ",
+        "policyDes3": " button below, you agree to BIOMIID",
+        "TermsofServiceTitle": " legal notice & privacy policy",
+        "policyDes5": "",
         "privacyPolicyTitle": "Privacy Policy.",
         "startButtonTitle": "START"
     },
     "PhotoLivness": {
         "title": "Selfie Capture",
-        "message": "Please place your face correctly inside the oval frame and take a capture",
-        "takeCaptureButton": "TAKE A CAPTURE"
+        "message": "Please place your face correctly inside the oval frame and press on take a selfie",
+        "takeCaptureButton": "TAKE A SELFIE"
     },
     "documentCountry": {
         "title": "ID Document Country",
@@ -35,9 +43,11 @@
     },
     "livenessResult": {
         "title": "Face Liveness Result",
-        "spoofMessage": "Spoof detected",
-        "unableMessage": "Unable to confirm liveness",
-        "unableMesDes": "Image is too blurry or contain glares!",
+        "unconfirmMes":"Liveness Unconfirmed!",
+        "possibleReason":"Possible Reasons",
+        "glareErrorMes":"- May be glares, blurries, shadows or reflections are detected",
+        "faceErrorMes":"- Face is not correctly placed inside of oval frame.",
+        "spoofErrorMes":"- Spoof detected",
         "retryButton": "RETRY"
     },
     "idMain": {
@@ -45,25 +55,26 @@
         "message": "Please select your ID Document type",
         "idButton": "National ID Card",
         "passportButton": "Passport",
-        "residentButton": "Residence Permit"
+        "residentButton": "Residence Permit",
+        "OldButton":"MRZ on front page"
     },
     "idDocumentCamera": {
         "idTitle": "National ID Card",
         "frontIDTitle": "Front of National ID Card",
         "backIDTitle": "Back of National ID Card",
-        "frontIDMes": "Place the front of National ID Card inside the frame and take the photo",
-        "backIDMes": "Place the back page of National ID Card inside the frame and take the photo",
+        "frontIDMes": "Place the front of National ID Card inside the frame and take a picture button",
+        "backIDMes": "Place the back page of National ID Card inside the frame and take a picture button",
         "passportTitle": "Passport",
-        "passportMes": "Place the Passport inside the frame and take the photo",
+        "passportMes": "Place the Passport inside the frame and take a picture button",
         "residentTitle": "Residence Permit Card",
-        "frontResidentTitle": "Front of Residence Permit Card",
+        "frontResidentTitle": "Front of Residence Permit",
         "backResidentTitle": "Back of Residence Permit",
-        "frontResidentMes": "Place the front of Residence Permit Card inside the frame and take the photo",
-        "backResidentMes": "Place the back of Residence Permit Card inside the frame and take the photo",
+        "frontResidentMes": "Place the front of Residence Permit Card inside the frame and take a picture button",
+        "backResidentMes": "Place the back of Residence Permit Card inside the frame and take a picture button",
         "previewTitle": "Image preview",
-        "previewMes": "Make sure  the  document  is clear  to read",
+        "previewMes": "Make sure all data on your document is clear and readable",
         "takePictureButton": "TAKE A PICTURE",
-        "photoClearButton": "MY PHOTO IS CLEAR",
+        "photoClearButton": "CONTINUE",
         "reTakeButton": "RE-TAKE"
     },
     "poaDoc": {
@@ -76,7 +87,7 @@
     "poaDocumentCamera": {
         "title": "Scan PoA Document",
         "message": "Place the  Proof of address  document  inside of frame  and capture  the document",
-        "previewMessage": "Make sure  the  document  is clear  to read",
+        "previewMessage": "Make sure all data on your document is clear and readable",
         "takePictureButton": "TAKE A CAPTURE",
         "retakeButton": "RE-TAKE",
         "continueButton": "CONTINUE"
@@ -84,7 +95,7 @@
     "idDocResult":{
         "title":"Result",
         "resultMessage":"Thank you!",
-        "message":"Your identity verification process is completed successfully",
+        "message":"Your identity verification process is completed, you will be notified about the decision soon",
         "buttonTitle":"Done"
     }
 }

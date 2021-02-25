@@ -160,6 +160,32 @@ export function PhotoUpload(blobData, prCallback) {
     })
   })
 }
+export function VaildIDDocumentCheck(blobData,docType,countryCode,mode, prCallback) {
+  console.log("backendCall:",blobData)
+  console.log("docType:",docType)
+  console.log("countryCode:",countryCode)
+  console.log("mode",mode)
+  const data = new FormData();
+  data.append('api_key', 'Mzc0MTExMjUtNTBmMS00ZTA3LWEwNjktZjQxM2UwNjA3ZGEw');
+  data.append('secret_key', 'YTE4YmM5YmYtZjZhYS00MTU5LWI4Y2EtYjQyYTRkNzAxOWZj');
+
+  return getToken().then(token => {
+    var data = new FormData();
+    const file = datauritoblob(blobData)
+
+    data.append('image_file', file);
+    data.append("countryCode",String(countryCode));
+    data.append("docType",String(docType));  
+    data.append("mode", String(mode))
+
+    return Axios.post("/biomiid/cores/mrz_idcheck1", data, {
+      headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
+      onUploadProgress: progressEvent => {
+        if (prCallback) prCallback(blobData.size, progressEvent.loaded)
+      }
+    })
+  })
+}
 export function VideoChallenge(blobData,challenge1,challenge2,challenge3, prCallback) {
   console.log(challenge1,challenge2,challenge3)
   const data = new FormData();

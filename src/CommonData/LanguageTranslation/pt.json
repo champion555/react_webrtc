@@ -5,7 +5,7 @@
     "blurryErrorMes": "- A imagem está borrada!",
     "glareErrorMes": "- A imagem contém brilhos",
     "faceErrorMes":"- Este documento de identidade não contém rosto, use um documento de identidade válido",
-    "mrzErrorMes":"- Este documento de identificação não contém MRZ válido, por favor, use um documento de identificação válido e refaça",
+    "mrzErrorMes":"- Documento de identidade inválido, por favor, use documento de identidade válido",
     "Home": {
 
         "companyName":"Nome da empresa",

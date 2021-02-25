@@ -5,7 +5,7 @@
     "blurryErrorMes": "- Bilden är suddig!",
     "glareErrorMes": "- Bilden innehåller bländningar",
     "faceErrorMes":"- Detta ID-dokument innehåller inte ansikte, använd ett giltigt ID-dokument",
-    "mrzErrorMes":"- Detta ID-dokument innehåller inte giltigt MRZ, använd ett giltigt ID-dokument och gör om",
+    "mrzErrorMes":"- Identitetsdokumentet är inte giltigt, använd ett giltigt ID-dokument",
     "Home": {
         "companyName": "Företagsnamn",
         "title": "VERIFIERA DIN IDENTITET",

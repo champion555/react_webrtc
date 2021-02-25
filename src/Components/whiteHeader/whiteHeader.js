@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
-import ImageURL from "../../assets/ic_cancel.png"
+import ImageURL from "../../assets/ic_cancel_white.png"
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import Button from '../button/button'
@@ -33,31 +33,30 @@ class whiteHeader extends Component {
 
     render() {
         return (
-            <div className="whiteHeaderView">
+            <div className="whiteHeaderView" style={{ background: this.props.headerBackgroundColor }}>
                 <img src={this.state.ImageSrcs} onClick={this.onOpenModal} className="whitebtnBack" />
                 <p className="whitetxtTitle" style={{ color: this.props.txtColor }}>{this.props.headerText}</p>
                 <div style={{ width: '10px' }}></div>
 
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
-                    <div className="modalView" style={{ height: window.innerHeight * 0.5 }}>
-                        <div style={{ borderBottom: "solid 1px", borderColor: this.state.txtColor, width: "100%" }}>
-                            <h2 style={{ paddingLeft: "30px", paddingRight: "30px", paddingTop: "10px", paddingBottom: "10px", color: "gray" }}>Leaving so soon?</h2>
-                        </div>
+                    <div className="modalView" style={{ height: window.innerHeight * 0.3 }}>
                         <div>
                             <p style={{ color: this.state.txtColor, fontSize: "18px", paddingTop: "15px", paddingLeft: "10px", paddingRight: "10px" }}>Are you sure you want to exit the identification process?</p>
                         </div>
-                        <div style={{ position: "absolute", bottom: "15px", width: "100%", display: "flex", alignItems: "center", flexDirection: "column" }}>
-                            <Button
-                                label="EXIT"
-                                onClick={this.onEXit} />
-                            <ContinueButton
-                                label="CONTIMUE"
-                                onClick={this.onCloseModal} />
+                        <div style={{ position: "absolute", bottom: "15px", width: "100%", display: "flex", alignItems: "center", flexDirection: "row" }}>
+                            <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
+                                <ContinueButton
+                                    label="NO"
+                                    onClick={this.onCloseModal} />
+                            </div>
+                            <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
+                                <ContinueButton
+                                    label="YES"
+                                    onClick={this.onEXit} />
+                            </div>
+
                         </div>
-
-
                     </div>
-
                 </Modal>
             </div>
         )

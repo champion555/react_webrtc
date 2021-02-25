@@ -5,7 +5,7 @@
     "blurryErrorMes": "- 画像がぼやけています！",
     "glareErrorMes": "- 画像にはグレアが含まれています",
     "faceErrorMes":"-このIDドキュメントには顔が含まれていません。有効なIDドキュメントを使用してください",
-    "mrzErrorMes":"-このIDドキュメントには有効なMRZが含まれていません。有効なIDドキュメントを使用して再取得してください",
+    "mrzErrorMes":"-身分証明書が無効です。有効な身分証明書を使用してください",
     "Home": {
 
         "companyName":"会社名",

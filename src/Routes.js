@@ -8,6 +8,7 @@ import Result from './Views/Result/Result'
 import IDDocResult from './Views/IDDocResult/IDDocResult'
 import POADoc from './Views/POADoc/POADoc'
 import PhotoLiveness from './Views/PhotoLiveness/PhotoLiveness'
+import PhotoLivenessCamera from './Views/PhotoLivenessCamera/PhotoLivenessCamera'
 import LivenessResult from './Views/LivenessResult/LivenessResult'
 import IDDocumentCamera from './Views/IDDocumentCamera/IDDocumentCamera'
 import VideoLiveness from './Views/VideoLiveness/VideoLiveness'
@@ -21,7 +22,7 @@ const Routes = () => {
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/client_id=:client_id&applicantId=:applicantId&checkId=:checkId&env=:env" component={Home} />
+                <Route exact path="/clientId=:clientId&applicantId=:applicantId&checkId=:checkId&checkType=:checkType&env=:env" component={Home} />
                 <Route exact path="/video" component={VideoPage} />
                 <Route exact path="/result" component={Result} />
                 <Route exact path="/idmain" component={IDMainPage} />
@@ -29,6 +30,7 @@ const Routes = () => {
                 <Route exact path="/iddocresult" component={IDDocResult} />
                 <Route exact path="/poadoc" component={POADoc} />
                 <Route exact path="/photoliveness" component={PhotoLiveness} />
+                <Route exact path="/photolivenesscamera" component={PhotoLivenessCamera} />
                 <Route exact path="/livenessresult" component={LivenessResult} />
                 <Route exact path="/videoliveness" component={VideoLiveness} />
                 <Route exact path="/videochallengeresult" component={VideoChallengResult} />

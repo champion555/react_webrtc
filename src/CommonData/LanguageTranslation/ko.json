@@ -5,7 +5,7 @@
     "blurryErrorMes": "- 이미지가 흐릿합니다!",
     "glareErrorMes": "- 이미지에 눈부심이 있습니다.",
     "faceErrorMes":"- 이 신분증에는 얼굴이 포함되어 있지 않습니다. 유효한 신분증을 사용하십시오.",
-    "mrzErrorMes":"- 이 신분증에는 유효한 MRZ가 포함되어 있지 않습니다. 유효한 신분증을 사용하고 다시 작성하십시오.",
+    "mrzErrorMes":"- 이 신분증은 유효하지 않습니다. 유효한 신분증을 사용하십시오.",
     "Home": {
         "companyName": "Company Name",
         "title": "신원 확인",

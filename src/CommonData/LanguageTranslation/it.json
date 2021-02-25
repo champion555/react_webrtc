@@ -5,7 +5,7 @@
     "blurryErrorMes": "- L'immagine è sfocata!",
     "glareErrorMes": "- L'immagine contiene riflessi",
     "faceErrorMes":"- Questo documento di identità non contiene il volto, utilizzare un documento di identità valido",
-    "mrzErrorMes":"- Questo documento d'identità non contiene un MRZ valido, si prega di utilizzare un documento d'identità valido e riprenderlo",
+    "mrzErrorMes":"- Documento di identità non valido, utilizzare un documento di identità valido",
     "Home": {
         "companyName":"Nome della ditta",
         "title":"VERIFICA LA TUA IDENTITÀ",

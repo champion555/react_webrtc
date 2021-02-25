@@ -5,7 +5,7 @@
     "blurryErrorMes": "- Das Bild ist verschwommen!",
     "glareErrorMes": "- Das Bild enthält Blendungen",
     "faceErrorMes":"- Dieses ID-Dokument enthält kein Gesicht. Bitte verwenden Sie ein gültiges ID-Dokument",
-    "mrzErrorMes":"- Dieses ID-Dokument enthält keine gültige MRZ. Bitte verwenden Sie ein gültiges ID-Dokument und wiederholen Sie den Vorgang",
+    "mrzErrorMes":"- ID-Dokument nicht gültig, bitte gültiges ID-Dokument verwenden",
     "Home": {
         "companyName": "Name der Firma",
         "title": "BESTÄTIGEN SIE IHRE IDENTITÄT",
