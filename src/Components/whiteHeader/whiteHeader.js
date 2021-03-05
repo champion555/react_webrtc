@@ -46,11 +46,15 @@ class whiteHeader extends Component {
                         <div style={{ position: "absolute", bottom: "15px", width: "100%", display: "flex", alignItems: "center", flexDirection: "row" }}>
                             <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
                                 <ContinueButton
+                                    backgroundColor={window.buttonBackgroundColor}
+                                    buttonTextColor={window.buttonTextColor}
                                     label="NO"
                                     onClick={this.onCloseModal} />
                             </div>
                             <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
                                 <ContinueButton
+                                    backgroundColor={window.buttonBackgroundColor}
+                                    buttonTextColor={window.buttonTextColor}
                                     label="YES"
                                     onClick={this.onEXit} />
                             </div>

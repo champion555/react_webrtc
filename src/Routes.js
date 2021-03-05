@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
+import ValidationPage from './Views/ValidationPage/ValidationPage'
 import Home from './Views/Home/Home'
 import VideoPage from './Views/Video/VideoPage'
 import IDMainPage from './Views/IDMain/IDMain'
@@ -21,7 +21,8 @@ const Routes = () => {
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path = "/" component = {ValidationPage}/>
+                <Route exact path="/home" component={Home} />
                 <Route exact path="/clientId=:clientId&applicantId=:applicantId&checkId=:checkId&checkType=:checkType&env=:env" component={Home} />
                 <Route exact path="/video" component={VideoPage} />
                 <Route exact path="/result" component={Result} />

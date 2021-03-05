@@ -10,6 +10,9 @@
     "faceErrorMes":"- This ID Document don't  contains  face, please use  valid  ID document",
     "mrzErrorMes":"- Wrong ID document Type,  Please select right issuing country",
     "inputImgErrorMes":"- Bad ID document(no mrz or invalid ID document)",
+    "session":{
+        "title":"Validation Session"
+    },
     "Home": {
         "companyName": "Company Name",
         "title": "VERIFY YOUR IDENTITY",

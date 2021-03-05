@@ -38,15 +38,27 @@ class POADoc extends Component {
             headerColor: "#7f00ff",
             headerTitleColor: "white",
             backButtonSrc: backbuttonURL,
+            background: "white",
 
         }
     }
     setStartDate(date) {
-        this.setState({ startDate: date })
+        this.setState({issusingDate: date.toLocaleString()})
+        console.log("date:",date.toLocaleString())
+        window.poaIssueDate = date.toLocaleString()
     }
 
     componentDidMount = () => {
-        console.log("countries:", this.options)
+        var date = { currentTime: new Date().toLocaleString() };
+        console.log("date: ", date.currentTime)
+        window.poaIssueDate = date.currentTime
+        window.poaDocType = this.state.setedDoc
+        this.setState({ headerColor: window.headerBackgroundColor })
+        this.setState({ headerTitleColor: window.headerTextColor })
+        this.setState({ background: window.pageBackgroundColor })
+        this.setState({ txtColor: window.pageTextColor })
+        this.setState({ buttonBackgroundColor: window.buttonBackgroundColor })
+        this.setState({ buttonTitleColor: window.buttonTextColor })
     }
     onSelectDocumentType = () => {
         this.setState({ onDocumentType: true })
@@ -55,6 +67,7 @@ class POADoc extends Component {
         this.setState({ onDocumentType: false })
         console.log(document)
         this.setState({ setedDoc: document })
+        window.poaDocType = document
     }
     render() {
         const ExampleCustomInput = ({ value, onClick }) => (
@@ -69,7 +82,7 @@ class POADoc extends Component {
                 {(!this.state.selectCountryStatus) && !this.state.onDocumentType &&
                     <>
                         <Header headerText={this.state.sendHeaderText} headerBackgroundColor={this.state.headerColor} txtColor={this.state.headerTitleColor} />
-                        <div className="idmain_body-container" style={{ alignItems: "center" }}>
+                        <div className="idmain_body-container" style={{ alignItems: "center", background: this.state.background }}>
                             <div className="POA-container">
                                 <p style={{ paddingLeft: "16px", paddingRight: "16px", fontSize: "16px", color: this.state.txtColor }}>{t('poaDoc.message')}</p>
                             </div>
@@ -88,8 +101,10 @@ class POADoc extends Component {
                                     customInput={<ExampleCustomInput />}
                                 />
                             </div>
-                            <div style = {{width:"100%",paddingLeft:"15px",paddingRight:"15px"}}>
+                            <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
                                 <Button
+                                    backgroundColor={this.state.buttonBackgroundColor}
+                                    buttonTextColor={this.state.buttonTitleColor}
                                     label={t('poaDoc.scanPOAButton')}
                                     onClick={() => {
                                         // localStorage.setItem("poaDate",this.state.startDate)
@@ -98,12 +113,13 @@ class POADoc extends Component {
                                     }}
                                 />
                             </div>
+                            {/* <p>{this.state.issusingDate}</p> */}
 
                         </div>
                     </>}
                 {this.state.onDocumentType && <div>
                     {/* <Header headerText="Select POA Document Type" headerBackgroundColor = {this.state.headerColor} txtColor={this.state.headerTitleColor} /> */}
-                    <div className="POADocTypeTopBar" style={{ height: window.innerHeight * 0.07 }}>
+                    <div className="POADocTypeTopBar" style={{ height: window.innerHeight * 0.07,background:this.state.headerColor }}>
                         <img src={this.state.backButtonSrc} onClick={() => {
                             this.setState({ onDocumentType: false })
                         }} className="POADocbtnBack" />

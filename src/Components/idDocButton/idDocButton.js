@@ -16,7 +16,7 @@ class IDDocButton extends Component {
         return (            
             <div className="IDDocButton" onClick={this.props.onClick}>
                 <img src={this.props.imgURL} onClick={this.goBack} className="imgIcon" />
-                <p style={{marginLeft:"10px", marginBottom:"0px",fontSize:"15px",fontWeight:"600",color:'gray'}}>{this.props.label}</p>
+                <p style={{marginLeft:"10px", marginBottom:"0px",fontSize:"15px",fontWeight:"600",color:this.props.textColor}}>{this.props.label}</p>
                 {/* <img src={this.state.ImageSrcs} className="arrowRight" /> */}
             </div>              
 

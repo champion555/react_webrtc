@@ -25,10 +25,19 @@ class LivenessResult extends Component {
             livnessPreviewHeight: null,
             imageHeight: null,
             headerColor: "#7f00ff",
-            headerTitleColor: "white"
+            headerTitleColor: "white",
+            background:"white",
+            buttonTitleColor: "white",
+            buttonBackgroundColor: "#7f00ff"
         }
     }
     componentDidMount = () => {
+        this.setState({headerColor:window.headerBackgroundColor})
+        this.setState({headerTitleColor: window.headerTextColor})
+        this.setState({background:window.pageBackgroundColor})
+        this.setState({txtColor:window.pageTextColor})
+        this.setState({buttonBackgroundColor:window.buttonBackgroundColor })
+        this.setState({buttonTitleColor:window.buttonTextColor })
         // this.setState({ livnessPreviewHeight: window.innerHeight * 0.4 })
         // this.setState({ imageHeight: window.innerHeight * 0.35 })
         if (window.innerHeight > 600) {
@@ -54,7 +63,7 @@ class LivenessResult extends Component {
         return (
             <div>
                 <Header headerBackgroundColor={this.state.headerColor} txtColor={this.state.headerTitleColor} />
-                <div className="result-body-container">
+                <div className="result-body-container" style = {{background:this.state.background}}>
                     <p className="txtLivnessResult" style={{ color: this.state.txtColor, marginTop: window.innerHeight * 0.04 }}> {this.state.message} </p>
                     <div style={{ width: "100%", height: this.state.livnessPreviewHeight, display: "flex", flexDirection: "row" }}>
                         <div className="livenessPreview" style={{ height: this.state.livnessPreviewHeight }}>
@@ -77,6 +86,8 @@ class LivenessResult extends Component {
                     </div>
                     <div className="liveness_Buttonpreview">
                         <Button
+                            backgroundColor = {this.state.buttonBackgroundColor}
+                            buttonTextColor = {this.state.buttonTitleColor}
                             label={t('livenessResult.retryButton')}
                             onClick={() => {
                                 this.props.history.push('photoliveness');
@@ -84,9 +95,9 @@ class LivenessResult extends Component {
                         />
                         <p style={{ fontStyle: "italic", color: this.state.txtColor, marginTop: "20px" }}>Powerd by BIOMIID</p>
                     </div>
-                    <Base64Downloader base64={window.livenessImage} downloadName="faceLivenessImage">
+                    {/* <Base64Downloader base64={window.livenessImage} downloadName="faceLivenessImage">
                         Click to download
-                    </Base64Downloader>
+                    </Base64Downloader> */}
 
                 </div>
             </div>)

@@ -7,18 +7,25 @@ class POAButton extends Component {
         super(props);
         this.state = {
             btnClass: props.btnClass,
-            backgroundColor:"#7f00ff"
+            background:"#7f00ff",
+            buttonTextColor:"#fff"
         }
     }
     componentDidMount = () => {
-        console.log(this.props.backgroundColor)
-        this.setState({backgroundColor: "#7f00ff"})
+        console.log("ssssssssssssssssssss", this.props.backgroundColor)
+        if(this.props.backgroundColor != null){
+            this.setState({background: this.props.backgroundColor})
+        }
+        if(this.props.buttonTextColor != null){
+            this.setState({background: this.props.buttonTextColor})
+        }        
+        
     }
 
     render() {
         return (
-            <div className={"POAButton "} onClick={this.props.onClick} style = {{background:this.state.backgroundColor}}>
-                <p>{this.props.label}</p>
+            <div className={"POAButton "} onClick={this.props.onClick} style = {{background:this.props.backgroundColor ? this.props.backgroundColor: this.state.background}}>
+                <p style = {{color: this.state.buttonTextColor}}>{this.props.label}</p>
             </div>
         )
     }

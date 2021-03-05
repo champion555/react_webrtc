@@ -30,10 +30,19 @@ class DocumentCountry extends React.Component<Props> {
             searchImageSrc: searchImageURL,
             headerColor: "#7f00ff",
             headerTitlecolor: "white",
-            buttonColor: ""
+            background:"white",
+            buttonBackgroundColor:"#7f00ff",
+            buttonTitleColor: "white",
         };
     }
     componentDidMount = () => {
+        this.setState({headerColor:window.headerBackgroundColor})
+        this.setState({headerTitleColor: window.headerTextColor})
+        this.setState({background:window.pageBackgroundColor})
+        this.setState({titleColor:window.pageTextColor})
+        this.setState({buttonBackgroundColor:window.buttonBackgroundColor })
+        this.setState({buttonTitleColor:window.buttonTextColor })
+
         console.log(lan)
         var country
         var getCountryName
@@ -45,30 +54,6 @@ class DocumentCountry extends React.Component<Props> {
                 window.mrz = data.mrz
             }
         })
-        // if (navigator.geolocation) {
-        //     navigator.geolocation.watchPosition(function (position) {
-        //         console.log("asdfffffffffffffffffffff")
-        //         console.log("Latitude is :", position.coords.latitude);
-        //         console.log("Longitude is :", position.coords.longitude);
-        //         var crg = require('country-reverse-geocoding').country_reverse_geocoding();
-        //         country = crg.get_country(position.coords.latitude, position.coords.longitude);
-        //         getCountryName = country.name
-        //         console.log(getCountryName)
-        //     });
-        // }
-        // setTimeout(() => {
-        //     this.setState({ countryName: getCountryName })
-        //     this.state.countryArray.map((data, index) => {
-        //         if (data.country == getCountryName) {
-        //             console.log("counbtryJSON:", data);
-        //             window.surpportedDocType = data.docType
-        //             window.countryCode = data.countryCode
-        //         }
-        //     })
-        // }, 3000);
-
-        // var foucs = document.getElementById('search-text');
-        // foucs.blur();
     }
 
     handleChange = (e, { value }) => this.setState({ value })
@@ -112,7 +97,6 @@ class DocumentCountry extends React.Component<Props> {
                     NewACountry.ID_PREFIX = Country.ID_PREFIX
                     NewACountry.RE_PREFIX = Country.RE_PREFIX
                     NewACountry.mrz = Country.mrz
-
                     NewSearchCountry.push(NewACountry)
                 }
             })
@@ -138,7 +122,7 @@ class DocumentCountry extends React.Component<Props> {
             <div>
                 {!this.state.onSelectCountry && <div>
                     <Header headerText={t('documentCountry.title')} headerBackgroundColor={this.state.headerColor} url="photolivness" txtColor={this.state.headerTitlecolor} />
-                    <div className="documentContry_container" style={{ height: window.innerHeight - 50 }}>
+                    <div className="documentContry_container" style={{ height: window.innerHeight - 50,background: this.state.background}}>
                         <div className="documentContry_messageView" style={{ height: window.innerHeight * 0.15 }}>
                             <p style={{ position: "absolute", bottom: "0px", paddingLeft: "15px", paddingRight: "15px", fontSize: "16px", color: this.state.titleColor }}>{t('documentCountry.message')}</p>
                         </div>
@@ -153,6 +137,8 @@ class DocumentCountry extends React.Component<Props> {
                         </div>
                         <div className="documentCountry_ButtonView" style={{ height: window.innerHeight * 0.4 }}>
                             <Button
+                                backgroundColor = {this.state.buttonBackgroundColor}
+                                buttonTextColor = {this.state.buttonTitleColor}
                                 label={t('documentCountry.continueButton')}
                                 onClick={() => this.onContinue()} />
                             <p style={{ color: this.state.titleColor, fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID</p>
@@ -161,22 +147,21 @@ class DocumentCountry extends React.Component<Props> {
                     </div>
                 </div>}
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
-                    <div className="modalView" style={{ height: window.innerHeight*0.9, width: "100%" }}>
+                    <div className="modalView" style={{ height: window.innerHeight*0.9, width: "100%", background:this.state.background }}>
                         <div style={{ width: "100%" }}>
-                            <div className="whiteHeaderView" style={{ background: "#7f00ff" }}>
+                            <div className="whiteHeaderView" style={{ background: this.state.headerColor }}>
                                 <img className="countrybtnBack" src={this.state.backImageSrc}
                                     onClick={() => {
                                         this.onCloseModal()
                                     }} />
-                                <p className="whitetxtTitle" style={{ color: "#fff" }}>Issuing Country</p>
+                                <p className="whitetxtTitle" style={{ color: this.state.headerTitlecolor }}>Issuing Country</p>
                                 <div style={{ width: '10px' }}></div>
                             </div>
                             <div className="countryArray_Container">
-                                <div className = "searchContainer">
+                                <div className = "searchContainer" style = {{background:this.state.background}}>
                                     <input id="search-text" type="text" placeholder="Document Country..." onChange={this.onSearch} />
                                     <img src = {this.state.searchImageSrc}/>
                                 </div>
-
                                 <div className="container" >
                                     {
                                         this.state.countryArray.map((data, index) => {

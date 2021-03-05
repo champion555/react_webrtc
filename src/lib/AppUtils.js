@@ -119,10 +119,39 @@ function getToken() {
     })
 
   })
-
 }
-export function ImageQuality(blobData, prCallback) {
+export function CheckSessionIdValidation(checkId,applicantId,env, prCallback) {   
+ 
+  const data = {
+    clientId:"156952291212",
+    checkId: "02e1e86049ce4b63805c40d48d1c8786",
+    applicantId: "84ae6948641b4bfb97a7b7ba3bb71ad0",
+    env: "SANDBOX"
+  }
 
+  return Axios.post("/client/checkSessionIdValidation", JSON.stringify(data), {
+    headers: { 'Content-Type': 'application/json'},
+    onUploadProgress: progressEvent => {
+      if (prCallback) prCallback(progressEvent.loaded)
+    }
+  })  
+}
+export function KeyValidation(clientId,checkId,checkKey,env, prCallback) {  
+  const data = new FormData();
+  data.append('clientId', clientId);
+  data.append('checkId', checkId);
+  data.append('checkKey',checkKey)
+  data.append('env', env);
+
+  return Axios.post("/client/checkSessionIdValidation", data, {
+    headers: { 'Content-Type': 'multipart/form-data'},
+    onUploadProgress: progressEvent => {
+      if (prCallback) prCallback(progressEvent.loaded)
+    }
+  })  
+}
+
+export function ImageQuality(blobData, prCallback) {
   const data = new FormData();
   data.append('api_key', 'Mzc0MTExMjUtNTBmMS00ZTA3LWEwNjktZjQxM2UwNjA3ZGEw');
   data.append('secret_key', 'YTE4YmM5YmYtZjZhYS00MTU5LWI4Y2EtYjQyYTRkNzAxOWZj');

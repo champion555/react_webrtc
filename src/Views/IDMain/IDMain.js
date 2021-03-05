@@ -26,20 +26,30 @@ class IDMain extends Component {
             ResidentSrc: ResidentURL,
             POADocSrc: POADocURL,
             sendHeaderText: t('idMain.title'),
-            value: null,
-            descriptionColor: "gray",
+            value: null,            
             clickFlag: 0,
             idCardFlag: false,
             passportFlag: false,
             residentFlag: false,
             oldIDCardFlag:false,
             oldResidentFlag:false,
+            descriptionColor: "gray",
             headerColor: "#7f00ff",
-            headerTitleColor: "white"
+            headerTitleColor: "white",
+            background: "white",
+            buttonBackgroundColor:"#7f00ff",
+            buttonTitleColor:"white"
         }
     }
 
     componentDidMount = () => {
+        this.setState({headerColor:window.headerBackgroundColor})
+        this.setState({headerTitleColor: window.headerTextColor})
+        this.setState({background:window.pageBackgroundColor})
+        this.setState({descriptionColor:window.pageTextColor})
+        this.setState({buttonBackgroundColor:window.buttonBackgroundColor })
+        this.setState({buttonTitleColor:window.buttonTextColor })
+
         console.log("countries:", this.options)
         console.log(window.countryName)
         console.log(window.surpportedDocType)
@@ -137,35 +147,38 @@ class IDMain extends Component {
                 {(!this.state.selectCountryStatus) &&
                     <>
                         <Header headerText={this.state.sendHeaderText} headerBackgroundColor={this.state.headerColor} txtColor={this.state.headerTitleColor} />
-                        <div className="idmain_body-container">
-                            <div className="mark-container" style={{ background: "#fff" }}>
+                        <div className="idmain_body-container" style = {{background:this.state.background}}>
+                            <div className="mark-container" style={{ background: this.state.background }}>
                                 <p style={{ fontSize: "18px", color: this.state.descriptionColor }}>{window.countryName}</p>
                                 <p style={{ fontSize: "16px", paddingLeft: "10px", paddingRight: "10px", color: this.state.descriptionColor }}>{t('idMain.message')}</p>
                             </div>
                             {this.state.passportFlag && <IDDocButton
+                                textColor = {this.state.descriptionColor}
                                 label={t('idMain.passportButton')}
                                 imgURL={this.state.PassportSrc}
                                 onClick={this.onSelectNextURL.bind(this, "passport")}
                             />}
                             {this.state.idCardFlag && <IDDocButton
+                                textColor = {this.state.descriptionColor}
                                 label={t('idMain.idButton')}
                                 imgURL={this.state.IDCardSrc}
                                 onClick={this.onSelectNextURL.bind(this, "idcard")}
                             />}
                             {this.state.oldIDCardFlag && <div className="IDDocButton" >
                                 <img src={this.state.IDCardSrc} className="imgIcon" />
-                                <p className="NewIDDocButton" onClick={this.onSelectNextURL.bind(this, "newIDCard")}>{t('idMain.idButton')}</p>
-                                <p className="OldIDButton" onClick={this.onSelectNextURL.bind(this, "oldIDCard")}>{t('idMain.OldButton')}</p>
+                                <p className="NewIDDocButton" style = {{color:this.state.descriptionColor}} onClick={this.onSelectNextURL.bind(this, "newIDCard")}>{t('idMain.idButton')}</p>
+                                <p className="OldIDButton" style = {{color:this.state.descriptionColor}} onClick={this.onSelectNextURL.bind(this, "oldIDCard")}>{t('idMain.OldButton')}</p>
                             </div>}
                             {this.state.residentFlag && <IDDocButton
+                                textColor = {this.state.descriptionColor}
                                 label={t('idMain.residentButton')}
                                 imgURL={this.state.ResidentSrc}
                                 onClick={this.onSelectNextURL.bind(this, "resident")}
                             />}
                             {this.state.oldResidentFlag && <div className="IDDocButton" >
                                 <img src={this.state.ResidentSrc} className="imgIcon" />
-                                <p className="NewIDDocButton" onClick={this.onSelectNextURL.bind(this, "newResident")}>{t('idMain.residentButton')}</p>
-                                <p className="OldIDButton" onClick={this.onSelectNextURL.bind(this, "oldResident")}>{t('idMain.OldButton')}</p>
+                                <p className="NewIDDocButton" style = {{color:this.state.descriptionColor}} onClick={this.onSelectNextURL.bind(this, "newResident")}>{t('idMain.residentButton')}</p>
+                                <p className="OldIDButton" style = {{color:this.state.descriptionColor}} onClick={this.onSelectNextURL.bind(this, "oldResident")}>{t('idMain.OldButton')}</p>
                             </div>}
                             <p style={{ width: "100%", textAlign: "center", color: this.state.descriptionColor, fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID</p>
                         </div>

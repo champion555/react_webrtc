@@ -93,10 +93,22 @@
 }
 .POACAm_BottomTitle{
     position: absolute;
-    bottom: 0px;
+    bottom: 20px;
 }
 .POACropView{
     position: absolute;
     z-index: -10;
     top: 0px;
+}
+.POACam_loaderView{
+    width: 100%;
+    background: white;
+    z-index: 60;
+    top: 0px;
+    position: absolute;
+}
+.POACam_loaderView .loader{
+    justify-content: center;
+    display: flex;
+
 }

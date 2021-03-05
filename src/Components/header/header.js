@@ -8,7 +8,8 @@ class header extends Component {
         super(props);
         this.state = {
             ImageSrcs: ImageURL,
-            url: props.url
+            url: props.url,
+            background:"#7f00ff"
         }
     }
     goBack = () => {
@@ -24,7 +25,7 @@ class header extends Component {
 
     render() {
         return (
-            <div className="HeaderView">
+            <div className="HeaderView" style = {{background:this.props.headerBackground? this.props.headerBackground: this.state.background}}>
                 {/* <img src={this.state.ImageSrcs} onClick={this.goBack} className="btnBack" /> */}
                 <h2 className="txtTitle">{this.props.headerText}</h2>
                 <div style={{ width: '10px' }}></div>

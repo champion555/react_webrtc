@@ -14,6 +14,7 @@ import LanguageArray from '../../CommonData/LanguageArray';
 import backImageURL from "../../assets/ic_back1.png"
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import ApiService from '../../Services/APIServices'
 import { setTranslations, setDefaultLanguage, setLanguage, withTranslation } from 'react-multi-lang'
 
 import bz from '../../CommonData/LanguageTranslation/bz.json'
@@ -39,14 +40,14 @@ import zh from '../../CommonData/LanguageTranslation/zh.json'
 import type { T } from 'react-multi-lan'
 import './Home.css';
 
+import axios from 'axios'
+var https = require('https');
+
 setTranslations({ bz, de, en, es, fr, id, it, ja, ko, nl, pl, pt, ro, ru, sv, th, tr, uk, vi, zh })
 setDefaultLanguage("en")
 type Props = {
     t: T
 }
-
-
-
 class Home extends React.Component<Props> {
     constructor(props) {
         super(props);
@@ -73,11 +74,33 @@ class Home extends React.Component<Props> {
             selectedCountry: '',
             unselectSRC: unselectURL,
             selectSrc: selectURL,
-            space: "15px"
+            space: "15px",
+            pageBackgroundColor: "white",
+            buttonTextColor: "white",
+            headerBackgroundColor: "#7f00ff",
+            headerTextColor: "white",
         }
     }
-    componentDidMount = () => {     
-        console.log(process.env.REACT_APP_BASE_URL)          
+    componentDidMount = () => {
+        console.log(window.companyName)
+        console.log(window.logoImage)
+        console.log(window.buttonBackgroundColor)
+        console.log(window.headerBackgroundColor)
+        console.log(window.pageBackgroundColor)
+        console.log(window.pageTextColor)
+        console.log(window.buttonTextColor)
+        console.log(window.headerTextColor)
+        console.log(window.websiteUrl)
+        console.log(window.rsaPublic_key)
+        console.log(window.api_key)
+        console.log(window.secret_key)
+
+        this.setState({ pageBackgroundColor: window.pageBackgroundColor })
+        this.setState({ descriptionColor: window.pageTextColor })
+        this.setState({ buttonColor: window.buttonBackgroundColor })
+        this.setState({ buttonTextColor: window.buttonTextColor })
+        this.setState({ headerBackgroundColor: window.headerBackgroundColor })
+        this.setState({ headerTextColor: window.headerTextColor })
         setDefaultLanguage("en")
         if (window.innerHeight > 600) {
             this.setState({ topMargin: "35px" })
@@ -85,27 +108,9 @@ class Home extends React.Component<Props> {
             console.log("small device")
             this.setState({ topMargin: "15px" })
         }
-        let search = window.location.search;
-        let params = new URLSearchParams(search);
-        let clientId = params.get('clientId');
-        let applicantId = params.get('applicantId');
-        let checkId = params.get('checkId')
-        let checkType = params.get('checkType')
-        let env = params.get('env')
-        console.log("clientId",clientId)
-        console.log("applicantId",applicantId)
-        console.log("checkId", checkId)
-        console.log("checkType",checkType)
-        console.log("env",env) 
-        if (checkId === null || applicantId === null || checkId === null || checkType === null || env === null){
-            console.log("null value detected")
-
-        } else{
-            console.log("API call in here")
-            
-        }    
 
     }
+    
     handleChange = (e, { value }) => this.setState({ value })
 
     onSelectCountry = (language) => {
@@ -114,14 +119,11 @@ class Home extends React.Component<Props> {
         setLanguage(language)
         this.onCloseModal()
         this.setState({ selectedCountry: language })
-
     }
     onstart = () => {
         localStorage.setItem('language', this.state.languageSet);
-        window.location.href = "photoliveness"
-        // window.location.href = "photolivenesscamera"
+        this.props.history.push('photoliveness')
     }
-
     onOpenModal = () => {
         console.log("sadf")
         this.setState({ modalOpen: true })
@@ -134,13 +136,14 @@ class Home extends React.Component<Props> {
     }
     render() {
         const { t } = this.props
-
+        const data = window.logoImage
         return (
             <div>
-                {!this.state.onSelectLanguage && <div className="body-container">
+                {!this.state.onSelectLanguage && <div className="body-container" style={{ background: this.state.pageBackgroundColor }}>
                     <div style={{ background: this.state.headBackgroundColor }}>
                         <div className="logoView" style={{ marginTop: window.innerHeight * 0.03, background: this.state.headBackgroundColor }}>
-                            <img src={this.state.ImageSrcs} className="logoIcon" />
+                            {/* <img src={this.state.ImageSrcs} className="logoIcon" /> */}
+                            <img src={`data:image/jpeg;base64,${data}`} style={{ width: "60px", height: "50px" }} />
                             <div className="languageView" onClick={this.onOpenModal} style={{ cursor: 'pointer' }}>
                                 <img src={this.state.languageSrc} style={{ width: "45px", height: "45px" }} />
                             </div>
@@ -192,7 +195,7 @@ class Home extends React.Component<Props> {
                         <div className="startButton"
                             style={{ backgroundColor: this.state.buttonColor }}
                             onClick={this.onstart}>
-                            <p style={{ marginBottom: "0px", marginTop: "0px" }}>{t('Home.startButtonTitle')}</p>
+                            <p style={{ marginBottom: "0px", marginTop: "0px", color: this.state.buttonTextColor }}>{t('Home.startButtonTitle')}</p>
                         </div>
                         <div style={{ fontStyle: "italic", color: this.state.descriptionColor, marginTop: "10px" }}>Powerd by BIOMIID</div>
                     </div>
@@ -200,12 +203,12 @@ class Home extends React.Component<Props> {
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
                     <div className="modalView" style={{ height: window.innerHeight * 0.95, width: "100%" }}>
                         <div style={{ width: "100%" }}>
-                            <div className="whiteHeaderView" style={{ width: "100%", background: "#7f00ff" }}>
+                            <div className="whiteHeaderView" style={{ width: "100%", background: this.state.headerBackgroundColor }}>
                                 <img className="languagebtnBack" src={this.state.backImageSrc}
                                     onClick={() => {
                                         this.onCloseModal()
                                     }} />
-                                <p className="whitetxtTitle" style={{ color: "#fff" }}>Select the language</p>
+                                <p className="whitetxtTitle" style={{ color: this.state.headerTextColor }}>Select the language</p>
                                 <div style={{ width: '10px' }}></div>
                             </div>
                             {

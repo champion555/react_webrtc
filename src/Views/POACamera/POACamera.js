@@ -11,6 +11,12 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+import Loader from 'react-loader-spinner';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import { decrypt, encrypt, generateKeyFromString } from 'dha-encryption';
+import { v4 as uuidv4 } from 'uuid';
+import { encryptRSA, decryptRSA, encryptionAES } from "../../Utils/crypto";
+import ApiService from '../../Services/APIServices'
 import { check_blur, check_blur_base64, check_glare_base64, check_face_base64, check_glare, check_face } from 'image-analitic-lib'
 import { setTranslations, setDefaultLanguage, setLanguage, withTranslation, t } from 'react-multi-lang'
 import './POACamera.css'
@@ -27,7 +33,7 @@ class POACamera extends Component {
             cameraRatio: null,
             capturedImageSrc: null,
             errorSRC: errorURL,
-            warringSRC:warringURL,
+            warringSRC: warringURL,
             previewImageStatuse: false,
             POAMessage: null,
             isErrorStatus: false,
@@ -37,6 +43,7 @@ class POACamera extends Component {
             backgroundColor: "#7f00ff",
             titleColor: "white",
             previewBackColor: "white",
+            pageTextColor: "gray",
             previewImgHeight: null,
             previewButtonHeight: null,
             croppedImageUrl: null,
@@ -49,9 +56,25 @@ class POACamera extends Component {
                 height: 81,
                 aspect: 16 / 9
             },
+            splitedBase64: null,
+            isLoader: false,
+            blurMesTitle: "",
+            glareMesTitle: "",
+            shadowMesTitle: "",
+            reflectionMesTitle: "",
+            imageQualityErrorMessage: ""
         }
     }
     componentDidMount = () => {
+        this.setState({ backgroundColor: window.headerBackgroundColor })
+        this.setState({ titleColor: window.headerTextColor })
+        this.setState({ pageTextColor: window.pageTextColor })
+        this.setState({ buttonBackgroundColor: window.buttonBackgroundColor })
+        this.setState({ buttonTitleColor: window.buttonTextColor })
+
+        console.log("poaIssueDate: ", window.poaIssueDate)
+        console.log("poaDocType: ", window.poaDocType)
+        console.log("poaLang: ", lan)
         const ratio = window.innerWidth / window.innerHeight
         this.setState({ cameraRatio: ratio })
         this.onSetMessage()
@@ -70,9 +93,105 @@ class POACamera extends Component {
         const imageSrc = this.webcamRef.current.takePhoto()
         this.setState({ capturedImageSrc: imageSrc })
         console.log(imageSrc)
-        this.setState({ previewImageStatuse: true })
-        this.setState({ POAMessage: t('poaDocumentCamera.previewMessage') })
+        var pieces = imageSrc.split(",");
+        this.setState({ splitedBase64: pieces[1] })
+        window.splitedBase64 = pieces[1]
+        console.log(pieces[1])
+        this.onPOACheck()
     }
+
+    onPOACheck = () => {        
+        this.setState({isLoader:true})
+        // var aesKey = "dca672ae13434b79aa628095f2393387"
+        var uuid = uuidv4()
+        var uuidKey = generateKeyFromString(uuid)
+        var hexstr = "";
+        for (var i = 0; i < uuidKey.length; i++) {
+            hexstr += uuidKey[i].toString(16);
+        }
+        var aesKey = hexstr.substring(0, 32)
+        console.log("aesKey: ", aesKey)
+
+        var publicKey = "-----BEGIN PUBLIC KEY-----\n" + window.rsaPublic_key + "\n-----END PUBLIC KEY-----"
+        var encryptedAesKey = encryptRSA(aesKey, publicKey)
+        console.log("encryptedAesKey: ", encryptedAesKey)
+
+        var base64 = window.splitedBase64
+        var aesEncryption = encryptionAES(base64, aesKey)
+        console.log("aesEnctryption: ", aesEncryption)
+
+        var url = process.env.REACT_APP_BASE_URL + "client/check/poaCheck"
+        var data = {
+            encryptedAESkey: encryptedAesKey,
+            applicantId: window.applicantId,
+            checkId: window.checkId,
+            poa_docType: window.poaDocType,
+            poa_language: lan,
+            poa_issueDate: window.poaIssueDate,
+            poa_image: aesEncryption,
+            env: window.env
+        }
+        ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
+            try {
+                var response = res.data
+                console.log(response)
+                var statusCode = response.statusCode
+                console.log("statusCode:", statusCode)
+                this.setState({isLoader:false})                
+                if (statusCode === "200") {    
+                    this.setState({ previewImageStatuse: true })                
+                    this.setState({ POAMessage: t('poaDocumentCamera.previewMessage') })
+                } else if(statusCode === "402") {
+                    this.setState({ previewImageStatuse: true })
+                    this.setState({ isErrorStatus: true })
+                    var errorList = response.errorList
+                    response.errorList.map((item, index) => {
+                        console.log(item)
+                        if (index == 0) {
+                            switch (item) {
+                                case "Glares":
+                                    this.setState({ glareMesTitle: t("glareErrorMes") })
+                                    break;
+                                case "Blurries":
+                                    this.setState({ blurMesTitle: t("blurryErrorMes") })
+                                    break;
+                                case "Shadows":
+                                    this.setState({ shadowMesTitle: t("shadowErrorMes") })
+                                    break;
+                                case "Reflections":
+                                    this.setState({ reflectionMesTitle: t("reflectionErrorMes") })
+                                    break;
+                            }
+                        } else {
+                            switch (item) {
+                                case "Glares":
+                                    this.setState({ glareMesTitle: ", " + t("glareErrorMes") })
+                                    break;
+                                case "Blurries":
+                                    this.setState({ blurMesTitle: ", " + t("blurryErrorMes") })
+                                    break;
+                                case "Shadows":
+                                    this.setState({ shadowMesTitle: ", " + t("shadowErrorMes") })
+                                    break;
+                                case "Reflections":
+                                    this.setState({ reflectionMesTitle: ", " + t("reflectionErrorMes") })
+                                    break;
+                            }
+                        }
+                    })
+                    this.setState({ imageQualityErrorMessage: t("imageQualityErrorMes") + this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle })
+                    console.log("errorMes: ",t("imageQualityErrorMes") + this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle )
+                }else if (statusCode === "401"){
+                    alert(response.message)
+                    this.setState({isLoader:false})
+                }
+            } catch (error) {
+                alert("The server is not working, please try again.")
+                this.setState({isLoader:false})
+            }
+        })
+    }
+
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
         this.setState({ isErrorStatus: false })
@@ -86,17 +205,6 @@ class POACamera extends Component {
         ctx.drawImage(document.getElementById("poaimageID"), 0, 0);
         var dataURL = canvas.toDataURL("image/png");
         this.setState({ croppedImageBase64: dataURL });
-        var b = check_blur('poaimageID');
-        var g = check_glare('poaimageID')
-        var f = check_face('poaimageID')
-        this.setState({ blurResult: b.b })
-        this.setState({ glareResult: g })
-        if (b.b == true || g == true) {
-            this.setState({ isErrorStatus: true })
-            console.log("ddddlajldjl")
-        }
-        console.log(b)
-        console.log(g)
     }
     onImageLoaded = (image) => {
         this.imageRef = image;
@@ -114,6 +222,7 @@ class POACamera extends Component {
                 crop,
                 "newFile.jpeg"
             );
+            console.log("croppedImageURL: ", croppedImageUrl)
             this.setState({ croppedImageUrl: croppedImageUrl });
         }
     }
@@ -164,7 +273,7 @@ class POACamera extends Component {
         return (
             <div>
                 <div style={{ position: "absolute", zIndex: "-10", top: "0px" }}>
-                    <img id="poaimageID" src={this.state.croppedImageUrl} onLoad={() => this.onLoadedImage()}/>
+                    <img id="poaimageID" src={this.state.croppedImageUrl} onLoad={() => this.onLoadedImage()} />
                     <canvas id="myCanvas" />
                 </div>
                 <div className="POACamera-Container">
@@ -173,9 +282,8 @@ class POACamera extends Component {
                         aspectRatio={this.state.cameraRatio}
                         facingMode={"environment"} />
                 </div>
-
                 {this.state.previewImageStatuse &&
-                    <div className = "POACropView">
+                    <div className="POACropView">
                         <ReactCrop
                             src={this.state.capturedImageSrc}
                             crop={this.state.crop}
@@ -185,9 +293,6 @@ class POACamera extends Component {
                             onChange={this.onCropChange}
                         />
                     </div>
-                    // <div className="POAPreviewImage-container" style={{ height: window.innerHeight }}>
-                    //     <img style={{ width: "100%", height: window.innerHeight }} id="poaimageID" src={this.state.capturedImageSrc} onLoad={() => this.onLoadedImage()} />
-                    // </div>
                 }
                 <div className="POAMain-container" style={{ height: window.innerHeight }}>
                     <div className="LivenessTopBar" style={{ height: window.innerHeight * 0.07, background: this.state.backgroundColor }}>
@@ -198,11 +303,27 @@ class POACamera extends Component {
                     {(!this.state.previewImageStatus) &&
                         <div className="POATakeButtonView" style={{ display: "flex", justifyContent: "center", paddingLeft: "15px", paddingRight: "15px" }}>
                             <Button
+                                backgroundColor={this.state.buttonBackgroundColor}
+                                buttonTextColor={this.state.buttonTitleColor}
                                 label={t('poaDocumentCamera.takePictureButton')}
                                 onClick={this.onCapture}
                             />
                         </div>}
                 </div>
+                {this.state.isLoader && <div className="POACam_loaderView" style={{ height: window.innerHeight }}>
+                    <div className="loader" style={{ marginTop: window.innerHeight * 0.4 }}>
+                        <Loader
+                            type="Oval"
+                            color={window.headerBackgroundColor}
+                            height={80}
+                            width={80}
+                            visible={this.state.apiFlage}
+                        />
+                    </div>
+                    <div style={{ width: "100%", justifyContent: "center", display: 'flex' }}>
+                        <p className="POACAm_BottomTitle" style={{ color: this.state.pageTextColor }}>Powerd by BIOMIID</p>
+                    </div>
+                </div>}
                 {this.state.previewImageStatuse &&
                     <div className="POACam_PreviewView" style={{ height: window.innerHeight }}>
                         <div className="LivenessTopBar" style={{ height: window.innerHeight * 0.07, background: this.state.backgroundColor }}>
@@ -218,18 +339,17 @@ class POACamera extends Component {
                         <div className="container" style={{ height: this.state.previewButtonHeight, background: this.state.previewBackColor }}>
                             {(!this.state.isErrorStatus) && <div className="POAMessageView">
                                 <img src={this.state.warringSRC} className="errorIcon" />
-                                <p style = {{color:"gray"}}>{this.state.POAMessage}</p>
+                                <p style={{ color: this.state.pageTextColor }}>{this.state.POAMessage}</p>
                             </div>}
                             {(this.state.isErrorStatus) &&
                                 <div className="POACamErrorMessageView" style={{ bottom: window.innerHeight * 0.3 }}>
                                     <div className="container" style={{ border: "1px solid #7f00ff" }}>
                                         <div className="errortitle">
                                             <img src={this.state.warringSRC} />
-                                            <p style = {{color:"gray"}}>{t('errorMessageTitle')}</p>
+                                            <p style={{ color: this.state.pageTextColor }}>{t('errorMessageTitle')}</p>
                                         </div>
                                         <div className="errormessage">
-                                            {(!this.state.blurResult) && <p style={{ marginBottom: "3px",color:"gray" }}> {t('blurryErrorMes')} </p>}
-                                            {(!this.state.glareResult) && <p style={{ marginBottom: "3px",color:"gray" }}> {t('glareErrorMes')} </p>}
+                                            {(!this.state.blurResult) && <p style={{ marginBottom: "3px", color: this.state.pageTextColor }}> {this.state.imageQualityErrorMessage} </p>}
                                         </div>
                                     </div>
                                 </div>}
@@ -243,6 +363,8 @@ class POACamera extends Component {
                                     </div>
                                     {(!this.state.isErrorStatus) && <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
                                         <Button
+                                            backgroundColor={this.state.buttonBackgroundColor}
+                                            buttonTextColor={this.state.buttonTitleColor}
                                             label={t('poaDocumentCamera.continueButton')}
                                             onClick={() => {
                                                 window.POADocPath = this.state.ImageURL
@@ -251,10 +373,9 @@ class POACamera extends Component {
                                         />
                                     </div>}
                                 </div>}
-                            <div style={{ width: "100%", justifyContent: "center", display: 'flex' }}>
+                            {/* <div style={{ width: "100%", justifyContent: "center", display: 'flex' }}>
                                 <p className="POACAm_BottomTitle" style={{ color: "#fff" }}>Powerd by BIOMIID</p>
-                            </div>
-
+                            </div> */}
                         </div>
                     </div>}
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
@@ -266,11 +387,15 @@ class POACamera extends Component {
 
                             <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
                                 <ContinueButton
+                                    backgroundColor={this.state.buttonBackgroundColor}
+                                    buttonTextColor={this.state.buttonTitleColor}
                                     label="NO"
                                     onClick={this.onCloseModal} />
                             </div>
                             <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
                                 <ContinueButton
+                                    backgroundColor={this.state.buttonBackgroundColor}
+                                    buttonTextColor={this.state.buttonTitleColor}
                                     label="YES"
                                     onClick={this.onEXit} />
                             </div>

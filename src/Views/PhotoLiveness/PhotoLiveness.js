@@ -11,14 +11,25 @@ import ContinueButton from "../../Components/POAButton/POAButton"
 import 'react-responsive-modal/styles.css';
 import ReactCrop from "react-image-crop";
 import { Modal } from 'react-responsive-modal';
-import LogoURL from "../../assets/ic_logo1.png"
+import LogoURL from "../../assets/ic_logo1.png";
 import { PhotoUpload } from '../../lib/AppUtils';
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
+import { decrypt, encrypt, generateKeyFromString } from 'dha-encryption';
+import { Encrypt } from "rsa-encrypt-long";
+import Crypt from "hybrid-crypto-js";
+import JSEncrypt from "jsencrypt";
+import CryptoJS from 'crypto-js';
+import aes from 'js-crypto-aes';
+import { v4 as uuidv4 } from 'uuid';
+import { encryptRSA, decryptRSA, encryptionAES } from "../../Utils/crypto";
+import forge from "node-forge";
+import { privateKey, publicKey } from '../../Utils/key';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import './PhotoLiveness.css';
 import Webcam from "react-webcam";
+import ApiService from '../../Services/APIServices'
 import { within } from '@testing-library/react';
-
+import Base64Downloader from 'react-base64-downloader';
 import { setTranslations, setDefaultLanguage, setLanguage, withTranslation } from 'react-multi-lang'
 
 let lan = localStorage.getItem('language');
@@ -42,11 +53,10 @@ class PhotoLiveness extends Component {
             modalOpen: false,
             crop: null,
             croppedImageUrl: null,
+            splitedBase64: null,
         };
     }
     componentDidMount = () => {
-        console.log("dadfadfa")
-        console.log(lan)
         if (window.innerHeight > 600) {
             this.setState({
                 crop: {
@@ -58,7 +68,6 @@ class PhotoLiveness extends Component {
                     aspect: 16 / 9
                 }
             })
-
         } else {
             this.setState({
                 crop: {
@@ -76,31 +85,90 @@ class PhotoLiveness extends Component {
         const imageSrc = this.webcam.getScreenshot();
         this.setState({ screenshot: imageSrc })
         window.livenessImage = imageSrc
-
-        this.setState({ apiFlage: true })
-        PhotoUpload(imageSrc, (total, progress) => {
-        }).then(res => {
-            this.setState({ apiFlage: false })
-            var response = res.data;
-            alert("LivenessScore:"+ response.score)
-            if (response.result === "LIVENESS") {
-                this.props.history.push('documentcountry')
-            } else if (response.result === "SPOOF") {
-                window.livenessResult = response.result
-                this.setState({ ImgSrc: UndetectImgURL })
-                this.props.history.push('livenessresult')
-            } else {
-                window.livenessResult = response.result
-                this.setState({ ImgSrc: UndetectImgURL })
-                this.props.history.push('livenessresult')
-            }
-
-        }).catch(e => {
-            alert("the server is not working, Please try again.");
-            this.setState({ apiFlage: false })
-            this.setState({ ImgSrc: UndetectImgURL })
-        })
+        var pieces = imageSrc.split(",");
+        this.setState({ splitedBase64: pieces[1] })
+        this.onGetAuthentication()
     };
+
+    onGetAuthentication = () => {
+        this.setState({ apiFlage: true })
+        var url = process.env.REACT_APP_BASE_URL + "client/authentificate"
+        var data = {
+            api_key: window.api_key,
+            secret_key: window.secret_key,
+            env: window.env
+        }
+        ApiService.apiCall('post', url, data, (res) => {
+            try {
+                console.log(res.data)
+                var response = res.data
+                var status = response.status
+                if (status === "SUCCESS") {
+                    var api_access_token = response.api_access_token
+                    window.api_access_token = api_access_token
+                    console.log(api_access_token)
+                    this.onUploadLivenessPhoto()
+                } else {
+                    alert(response.message)
+                }
+            } catch (error) {
+                console.log("error:", error)
+                alert("The server is not working, please try again")
+            }
+        })
+    }
+    onUploadLivenessPhoto = () => {
+        // var aesKey = "dca672ae13434b79aa628095f2393387"
+        var uuid = uuidv4()
+        var uuidKey = generateKeyFromString(uuid)
+        var hexstr = "";
+        for (var i = 0; i < uuidKey.length; i++) {
+            hexstr += uuidKey[i].toString(16);
+        }
+        var aesKey = hexstr.substring(0, 32)
+        console.log("aesKey: ", aesKey)
+
+        var publicKey = "-----BEGIN PUBLIC KEY-----\n" + window.rsaPublic_key + "\n-----END PUBLIC KEY-----"
+        var encryptedAesKey = encryptRSA(aesKey, publicKey)
+        console.log("encryptedAesKey: ", encryptedAesKey)
+        var base64 = this.state.splitedBase64
+        var aesEncryption = encryptionAES(base64, aesKey)
+        console.log("aesEnctryption: ", aesEncryption)
+
+        var url = process.env.REACT_APP_BASE_URL + "faceliveness"
+        var data = {
+            encryptedAESkey: encryptedAesKey,
+            live_image_file_web: aesEncryption,
+            applicantId: window.applicantId,
+            checkId: window.checkId,
+            imageType: "image/jpeg",
+            env: window.env
+        }
+        ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
+            try {
+                console.log(res.data)
+                this.setState({ apiFlage: false })
+                var response = res.data;
+                this.props.history.push('documentcountry')
+                // alert("LivenessScore:" + response.score)
+                // if (response.result === "LIVENESS") {
+                //     this.props.history.push('documentcountry')
+                // } else if (response.result === "SPOOF") {
+                //     window.livenessResult = response.result
+                //     this.setState({ ImgSrc: UndetectImgURL })
+                //     this.props.history.push('livenessresult')
+                // } else {
+                //     window.livenessResult = response.result
+                //     this.setState({ ImgSrc: UndetectImgURL })
+                //     this.props.history.push('livenessresult')
+                // }
+            } catch (error) {
+                alert("the server is not working, Please try again.");
+                this.setState({ apiFlage: false })
+                this.setState({ ImgSrc: UndetectImgURL })
+            }
+        })
+    }
     setRef = webcam => {
         this.webcam = webcam;
     };
@@ -162,9 +230,7 @@ class PhotoLiveness extends Component {
     onCloseModal = () => {
         this.setState({ modalOpen: false })
     }
-    onEXit = () => {
-        this.props.history.push('')
-    }
+
     render() {
         const { t } = this.props
         const videoConstraints = {
@@ -203,7 +269,7 @@ class PhotoLiveness extends Component {
                     </div>
                     <div style={{ width: "100%", height: window.innerHeight * 0.031, background: this.state.backgroundColor }} />
                     <div style={{ width: "100%", height: window.innerHeight * 0.6, backgroundImage: `url(${this.state.ImgSrc})`, backgroundSize: "100% 100%" }}></div>
-                    <div className="liveness-captureButton" style={{ height: window.innerHeight * 0.3,background:this.state.backgroundColor }}>
+                    <div className="liveness-captureButton" style={{ height: window.innerHeight * 0.3, background: this.state.backgroundColor }}>
                         <div style={{ width: "100%", display: "flex", flexDirection: "row", position: "absolute", top: "5px", paddingLeft: "15px", paddingRight: "15px", alignItems: "center" }}>
                             <img src={this.state.warringSrc} style={{ width: "20px", height: "20px" }} />
                             <p style={{ fontSize: "16px", color: this.state.titleColor, paddingLeft: "10px" }}>{t('PhotoLivness.message')}</p>
@@ -211,11 +277,13 @@ class PhotoLiveness extends Component {
 
                         <div style={{ position: "absolute", bottom: "35px", width: '100%', display: "flex", justifyContent: "center", paddingRight: "15px", paddingLeft: "15px" }}>
                             <Button
+                                backgroundColor={window.buttonBackgroundColor}
+                                buttonTextColor={window.buttonTextColor}
                                 label={t('PhotoLivness.takeCaptureButton')}
                                 onClick={() => this.onCapture()}
                             />
                         </div>
-                        <p style = {{ color: this.state.titleColor, fontStyle: 'italic', position: "absolute", bottom: "5px" }}>Powerd by BIOMIID</p>
+                        <p style={{ color: this.state.titleColor, fontStyle: 'italic', position: "absolute", bottom: "5px" }}>Powerd by BIOMIID</p>
                     </div>
 
                 </div>
@@ -226,10 +294,10 @@ class PhotoLiveness extends Component {
                 <div className="loadingView" style={{ bottom: window.innerHeight * 0.5 }}>
                     <Loader
                         type="Oval"
-                        color="#7f00ff"
+                        color={window.headerBackgroundColor}
                         height={80}
                         width={80}
-                        visible = {this.state.apiFlage}
+                        visible={this.state.apiFlage}
                     />
                 </div>
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
@@ -238,14 +306,18 @@ class PhotoLiveness extends Component {
                             <p style={{ color: this.state.txtColor, fontSize: "18px", paddingTop: "15px", paddingLeft: "10px", paddingRight: "10px" }}>Are you sure you want to exit the identification process?</p>
                         </div>
                         <div style={{ position: "absolute", bottom: "15px", width: "100%", display: "flex", alignItems: "center", flexDirection: "row" }}>
-                            
+
                             <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
                                 <ContinueButton
+                                    backgroundColor={window.buttonBackgroundColor}
+                                    buttonTextColor={window.buttonTextColor}
                                     label="NO"
                                     onClick={this.onCloseModal} />
                             </div>
                             <div style={{ width: "100%", paddingLeft: "15px", paddingRight: "15px" }}>
                                 <ContinueButton
+                                    backgroundColor={window.buttonBackgroundColor}
+                                    buttonTextColor={window.buttonTextColor}
                                     label="YES"
                                     onClick={this.onEXit} />
                             </div>

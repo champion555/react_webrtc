@@ -1,0 +1,35 @@
+.validation_container {
+    width: 100%;
+    background-color: white;
+}
+.validation_container .pinCodeView{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+.validation_container .pinCodeView p{
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+.validation_container .loaderView{
+    justify-content: center;
+    display: flex;
+    margin-top: 30px;
+    height: 100px;
+}
+.validation_container .buttonView{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.react-code-input input {
+    border: 0px !important;
+    border-bottom: 2px solid #7f00ff !important;    
+    border-radius: 0px !important;
+    box-shadow: none !important;
+}
