@@ -20,8 +20,9 @@ import Crypt from "hybrid-crypto-js";
 import JSEncrypt from "jsencrypt";
 import CryptoJS from 'crypto-js';
 import aes from 'js-crypto-aes';
-import { v4 as uuidv4 } from 'uuid';
+import { stringify, v4 as uuidv4 } from 'uuid';
 import { encryptRSA, decryptRSA, encryptionAES } from "../../Utils/crypto";
+import ClientJS from "clientjs"
 import forge from "node-forge";
 import { privateKey, publicKey } from '../../Utils/key';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -147,21 +148,24 @@ class PhotoLiveness extends Component {
         ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
             try {
                 console.log(res.data)
-                this.setState({ apiFlage: false })
+                
                 var response = res.data;
-                this.props.history.push('documentcountry')
+                alert(JSON.stringify(response))
+                // this.props.history.push('documentcountry')
                 // alert("LivenessScore:" + response.score)
-                // if (response.result === "LIVENESS") {
-                //     this.props.history.push('documentcountry')
-                // } else if (response.result === "SPOOF") {
-                //     window.livenessResult = response.result
-                //     this.setState({ ImgSrc: UndetectImgURL })
-                //     this.props.history.push('livenessresult')
-                // } else {
-                //     window.livenessResult = response.result
-                //     this.setState({ ImgSrc: UndetectImgURL })
-                //     this.props.history.push('livenessresult')
-                // }
+                if (response.result === "LIVENESS") {
+                    this.onUploadDeviceFeatures()                    
+                } else if (response.result === "SPOOF") {
+                    this.setState({ apiFlage: false })
+                    window.livenessResult = response.result
+                    this.setState({ ImgSrc: UndetectImgURL })
+                    this.props.history.push('livenessresult')
+                } else {
+                    this.setState({ apiFlage: false })
+                    window.livenessResult = response.result
+                    this.setState({ ImgSrc: UndetectImgURL })
+                    this.props.history.push('livenessresult')
+                }
             } catch (error) {
                 alert("the server is not working, Please try again.");
                 this.setState({ apiFlage: false })
@@ -169,6 +173,119 @@ class PhotoLiveness extends Component {
             }
         })
     }
+    onUploadDeviceFeatures = () =>{
+        var windowClient = new window.ClientJS();
+        var canvasPrint = windowClient.getCanvasPrint()
+        var customeFingerPrint = windowClient.getCustomFingerprint(canvasPrint);
+        console.log("customeFingerPrint: ",customeFingerPrint)
+        var userAgent = windowClient.getUserAgent();
+        console.log("userAgent: ", userAgent)
+        var browser = windowClient.getBrowser();
+        console.log("browser: ", browser)
+        var browserMajorVersion = windowClient.getBrowserMajorVersion()
+        console.log("browserMajorVersion: ", browserMajorVersion)
+        var engine = windowClient.getEngine()
+        console.log("engine: ", engine)
+        var engineVersion = windowClient.getEngineVersion()
+        console.log("engineVersion: ", engineVersion)
+        var osName = windowClient.getOS()
+        console.log("osName: ", osName)
+        var osVersion = windowClient.getOSVersion()
+        console.log("osVersion: ", osVersion)
+        var deviceType = windowClient.getDeviceType()
+        console.log("deviceType: ", deviceType)
+        var screenPrint = windowClient.getScreenPrint()
+        console.log("screenPrint: ", screenPrint)
+        var colorDepth = windowClient.getColorDepth()
+        console.log("colorDepth: ", colorDepth)
+        var currentResolution = windowClient.getCurrentResolution()
+        console.log("currentResolution: ", currentResolution)
+        var availableResolution = windowClient.getAvailableResolution()
+        console.log("availableResolution: ", availableResolution)
+        var localStorage = windowClient.isLocalStorage()
+        console.log("localStorage: ", localStorage)
+        var sessionStorage = windowClient.isSessionStorage();
+        console.log("sessionStorage: ", sessionStorage)
+        var timezone = windowClient.getTimeZone()
+        console.log("timezone: ", timezone)
+        var language = windowClient.getLanguage()
+        console.log("language: ", language)
+        var systemLanguage = windowClient.getSystemLanguage()
+        console.log("systemLanguage: ", systemLanguage)
+
+        var canvas = document.getElementById('canvas');
+        var gl = canvas.getContext('webgl');
+        var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        var webGLVendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+        console.log("webGLVendor:  ", webGLVendor);
+        var webGLRenderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        console.log("webGLRenderer: ", webGLRenderer);
+        var platform = navigator.platform
+        console.log("platform: ",platform)
+        var data = {
+                        fingerPrint:customeFingerPrint,
+                        userAgent:userAgent,
+                        browser:browser,
+                        browserMajorVersion:browserMajorVersion,
+                        engine:engine,
+                        engineVersion:engineVersion,
+                        osName:osName,
+                        osVersion:osVersion,
+                        deviceType:deviceType,
+                        screenPrint:screenPrint,
+                        colorDepth:colorDepth,
+                        currentResolution:currentResolution,
+                        availableResolution:availableResolution,
+                        localStorage:localStorage,
+                        sessionStorage:sessionStorage,
+                        timezone:timezone,
+                        language:language,
+                        systemLanguage:systemLanguage,
+                        canvasPrint:canvasPrint,
+                        webGLVendor:webGLVendor,
+                        webGLRenderer:webGLRenderer,
+                        platform:platform
+                    }
+        console.log(JSON.stringify(data))
+        var uuid = uuidv4()
+        var uuidKey = generateKeyFromString(uuid)
+        var hexstr = "";
+        for (var i = 0; i < uuidKey.length; i++) {
+            hexstr += uuidKey[i].toString(16);
+        }
+        var aesKey = hexstr.substring(0, 32)
+        console.log("aesKey: ", aesKey)
+        var publicKey = "-----BEGIN PUBLIC KEY-----\n" + window.rsaPublic_key + "\n-----END PUBLIC KEY-----"
+        var encryptedAesKey = encryptRSA(aesKey, publicKey)
+        console.log("encryptedAesKey: ", encryptedAesKey)
+        var base64 = JSON.stringify(data)
+        var aesEncryption = encryptionAES(base64, aesKey)
+        console.log("aesEnctryption: ", aesEncryption)
+        var url = process.env.REACT_APP_BASE_URL + "client/collectDeviceFeatures"
+        var data = {
+            checkId: window.checkId,
+            applicantId: window.applicantId,
+            env: window.env,
+            activityName: "activity_2",
+            isBot: window.isBot,
+            isIncognitoMode: false,
+            deviceType: "BROWSER",
+            browserComponents:aesEncryption,
+            encryptedAESKey:encryptedAesKey
+        }
+        ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
+            try {
+                console.log(res.data)
+                this.setState({ apiFlage: false })
+                var response = res.data;
+                this.props.history.push('documentcountry')
+            } catch (error) {
+                this.setState({ apiFlage: false })
+                alert("the server is not working, Please try again.");
+            }
+        })
+    }
+
     setRef = webcam => {
         this.webcam = webcam;
     };
@@ -230,6 +347,9 @@ class PhotoLiveness extends Component {
     onCloseModal = () => {
         this.setState({ modalOpen: false })
     }
+    onEXit = () => {
+        this.props.history.push('')
+    }
 
     render() {
         const { t } = this.props
@@ -238,6 +358,7 @@ class PhotoLiveness extends Component {
         };
         return (
             <div>
+                <canvas id="canvas" />
                 <div className="LivenessCamera-Container">
                     <Webcam
                         audio={false}

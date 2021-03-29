@@ -112,3 +112,12 @@
     display: flex;
 
 }
+.loader_divice{
+    margin-top: 315.6px;
+    z-index: 1000;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}

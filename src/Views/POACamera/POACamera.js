@@ -14,6 +14,7 @@ import "react-image-crop/dist/ReactCrop.css";
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import { decrypt, encrypt, generateKeyFromString } from 'dha-encryption';
+import ClientJS from "clientjs"
 import { v4 as uuidv4 } from 'uuid';
 import { encryptRSA, decryptRSA, encryptionAES } from "../../Utils/crypto";
 import ApiService from '../../Services/APIServices'
@@ -62,7 +63,8 @@ class POACamera extends Component {
             glareMesTitle: "",
             shadowMesTitle: "",
             reflectionMesTitle: "",
-            imageQualityErrorMessage: ""
+            imageQualityErrorMessage: "",
+            apiFlage:false,
         }
     }
     componentDidMount = () => {
@@ -100,8 +102,8 @@ class POACamera extends Component {
         this.onPOACheck()
     }
 
-    onPOACheck = () => {        
-        this.setState({isLoader:true})
+    onPOACheck = () => {
+        this.setState({ isLoader: true })
         // var aesKey = "dca672ae13434b79aa628095f2393387"
         var uuid = uuidv4()
         var uuidKey = generateKeyFromString(uuid)
@@ -137,11 +139,11 @@ class POACamera extends Component {
                 console.log(response)
                 var statusCode = response.statusCode
                 console.log("statusCode:", statusCode)
-                this.setState({isLoader:false})                
-                if (statusCode === "200") {    
-                    this.setState({ previewImageStatuse: true })                
+                this.setState({ isLoader: false })
+                if (statusCode === "200") {
+                    this.setState({ previewImageStatuse: true })
                     this.setState({ POAMessage: t('poaDocumentCamera.previewMessage') })
-                } else if(statusCode === "402") {
+                } else if (statusCode === "402") {
                     this.setState({ previewImageStatuse: true })
                     this.setState({ isErrorStatus: true })
                     var errorList = response.errorList
@@ -180,14 +182,130 @@ class POACamera extends Component {
                         }
                     })
                     this.setState({ imageQualityErrorMessage: t("imageQualityErrorMes") + this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle })
-                    console.log("errorMes: ",t("imageQualityErrorMes") + this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle )
-                }else if (statusCode === "401"){
+                    console.log("errorMes: ", t("imageQualityErrorMes") + this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle)
+                } else if (statusCode === "401") {
                     alert(response.message)
-                    this.setState({isLoader:false})
+                    this.setState({ isLoader: false })
                 }
             } catch (error) {
                 alert("The server is not working, please try again.")
-                this.setState({isLoader:false})
+                this.setState({ isLoader: false })
+            }
+        })
+    }
+    onTake = () => {
+        this.setState({apiFlage:true})
+        this.onUploadDeviceFeatures()
+    }
+    onUploadDeviceFeatures = () => {
+        var windowClient = new window.ClientJS();
+        var canvasPrint = windowClient.getCanvasPrint()
+        var customeFingerPrint = windowClient.getCustomFingerprint(canvasPrint);
+        console.log("customeFingerPrint: ", customeFingerPrint)
+        var userAgent = windowClient.getUserAgent();
+        console.log("userAgent: ", userAgent)
+        var browser = windowClient.getBrowser();
+        console.log("browser: ", browser)
+        var browserMajorVersion = windowClient.getBrowserMajorVersion()
+        console.log("browserMajorVersion: ", browserMajorVersion)
+        var engine = windowClient.getEngine()
+        console.log("engine: ", engine)
+        var engineVersion = windowClient.getEngineVersion()
+        console.log("engineVersion: ", engineVersion)
+        var osName = windowClient.getOS()
+        console.log("osName: ", osName)
+        var osVersion = windowClient.getOSVersion()
+        console.log("osVersion: ", osVersion)
+        var deviceType = windowClient.getDeviceType()
+        console.log("deviceType: ", deviceType)
+        var screenPrint = windowClient.getScreenPrint()
+        console.log("screenPrint: ", screenPrint)
+        var colorDepth = windowClient.getColorDepth()
+        console.log("colorDepth: ", colorDepth)
+        var currentResolution = windowClient.getCurrentResolution()
+        console.log("currentResolution: ", currentResolution)
+        var availableResolution = windowClient.getAvailableResolution()
+        console.log("availableResolution: ", availableResolution)
+        var localStorage = windowClient.isLocalStorage()
+        console.log("localStorage: ", localStorage)
+        var sessionStorage = windowClient.isSessionStorage();
+        console.log("sessionStorage: ", sessionStorage)
+        var timezone = windowClient.getTimeZone()
+        console.log("timezone: ", timezone)
+        var language = windowClient.getLanguage()
+        console.log("language: ", language)
+        var systemLanguage = windowClient.getSystemLanguage()
+        console.log("systemLanguage: ", systemLanguage)
+
+        var canvas = document.getElementById('canvas');
+        var gl = canvas.getContext('webgl');
+        var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        var webGLVendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+        console.log("webGLVendor:  ", webGLVendor);
+        var webGLRenderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        console.log("webGLRenderer: ", webGLRenderer);
+        var platform = navigator.platform
+        console.log("platform: ", platform)
+        var data = {
+            fingerPrint: customeFingerPrint,
+            userAgent: userAgent,
+            browser: browser,
+            browserMajorVersion: browserMajorVersion,
+            engine: engine,
+            engineVersion: engineVersion,
+            osName: osName,
+            osVersion: osVersion,
+            deviceType: deviceType,
+            screenPrint: screenPrint,
+            colorDepth: colorDepth,
+            currentResolution: currentResolution,
+            availableResolution: availableResolution,
+            localStorage: localStorage,
+            sessionStorage: sessionStorage,
+            timezone: timezone,
+            language: language,
+            systemLanguage: systemLanguage,
+            canvasPrint: canvasPrint,
+            webGLVendor: webGLVendor,
+            webGLRenderer: webGLRenderer,
+            platform: platform
+        }
+        console.log(JSON.stringify(data))
+        var uuid = uuidv4()
+        var uuidKey = generateKeyFromString(uuid)
+        var hexstr = "";
+        for (var i = 0; i < uuidKey.length; i++) {
+            hexstr += uuidKey[i].toString(16);
+        }
+        var aesKey = hexstr.substring(0, 32)
+        console.log("aesKey: ", aesKey)
+        var publicKey = "-----BEGIN PUBLIC KEY-----\n" + window.rsaPublic_key + "\n-----END PUBLIC KEY-----"
+        var encryptedAesKey = encryptRSA(aesKey, publicKey)
+        console.log("encryptedAesKey: ", encryptedAesKey)
+        var base64 = JSON.stringify(data)
+        var aesEncryption = encryptionAES(base64, aesKey)
+        console.log("aesEnctryption: ", aesEncryption)
+        var url = process.env.REACT_APP_BASE_URL + "client/collectDeviceFeatures"
+        var data = {
+            checkId: window.checkId,
+            applicantId: window.applicantId,
+            env: window.env,
+            activityName: "activity_5",
+            isBot: window.isBot,
+            isIncognitoMode: false,
+            deviceType: "BROWSER",
+            browserComponents: aesEncryption,
+            encryptedAESKey: encryptedAesKey
+        }
+        ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
+            try {
+                console.log(res.data)
+                this.setState({ apiFlage: false })
+                window.POADocPath = this.state.ImageURL
+                this.props.history.push('iddocresult')
+            } catch (error) {
+                this.setState({ apiFlage: false })
+                alert("the server is not working, Please try again.");
             }
         })
     }
@@ -272,6 +390,7 @@ class POACamera extends Component {
     render() {
         return (
             <div>
+                <canvas id="canvas" />
                 <div style={{ position: "absolute", zIndex: "-10", top: "0px" }}>
                     <img id="poaimageID" src={this.state.croppedImageUrl} onLoad={() => this.onLoadedImage()} />
                     <canvas id="myCanvas" />
@@ -317,7 +436,6 @@ class POACamera extends Component {
                             color={window.headerBackgroundColor}
                             height={80}
                             width={80}
-                            visible={this.state.apiFlage}
                         />
                     </div>
                     <div style={{ width: "100%", justifyContent: "center", display: 'flex' }}>
@@ -366,10 +484,7 @@ class POACamera extends Component {
                                             backgroundColor={this.state.buttonBackgroundColor}
                                             buttonTextColor={this.state.buttonTitleColor}
                                             label={t('poaDocumentCamera.continueButton')}
-                                            onClick={() => {
-                                                window.POADocPath = this.state.ImageURL
-                                                this.props.history.push('iddocresult')
-                                            }}
+                                            onClick={this.onTake}
                                         />
                                     </div>}
                                 </div>}
@@ -378,6 +493,15 @@ class POACamera extends Component {
                             </div> */}
                         </div>
                     </div>}
+                <div className="loader_divice" style={{ marginTop: window.innerHeight * 0.4}}>
+                    <Loader
+                        type="Oval"
+                        color={window.headerBackgroundColor}
+                        height={80}
+                        width={80}
+                        visible={this.state.apiFlage}
+                    />
+                </div>
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
                     <div className="modalView" style={{ height: window.innerHeight * 0.3 }}>
                         <div>

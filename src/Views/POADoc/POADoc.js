@@ -109,7 +109,8 @@ class POADoc extends Component {
                                     onClick={() => {
                                         // localStorage.setItem("poaDate",this.state.startDate)
                                         window.POADate = this.state.startDate
-                                        this.props.history.push('poacamera')
+                                        // this.props.history.push('poacamera')
+                                        this.props.history.push('poaverihelp')
                                     }}
                                 />
                             </div>

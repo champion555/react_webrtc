@@ -67,7 +67,6 @@ class IDDocumentCamera extends Component {
             console.error(e)
             console.log("mrz progressing is error lol!")
         })
-
         this.MrzDetector.on('result', (cardInfo) => {
             console.error(cardInfo)
             this.setState({ isMrzLoading: false })

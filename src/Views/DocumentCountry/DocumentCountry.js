@@ -137,8 +137,8 @@ class DocumentCountry extends React.Component<Props> {
                         </div>
                         <div className="documentCountry_ButtonView" style={{ height: window.innerHeight * 0.4 }}>
                             <Button
-                                backgroundColor = {this.state.buttonBackgroundColor}
-                                buttonTextColor = {this.state.buttonTitleColor}
+                                backgroundColor = {window.buttonBackgroundColor}
+                                buttonTextColor = {window.buttonTextColor}
                                 label={t('documentCountry.continueButton')}
                                 onClick={() => this.onContinue()} />
                             <p style={{ color: this.state.titleColor, fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID</p>

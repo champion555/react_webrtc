@@ -14,7 +14,6 @@ import LanguageArray from '../../CommonData/LanguageArray';
 import backImageURL from "../../assets/ic_back1.png"
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
-import ApiService from '../../Services/APIServices'
 import { setTranslations, setDefaultLanguage, setLanguage, withTranslation } from 'react-multi-lang'
 
 import bz from '../../CommonData/LanguageTranslation/bz.json'
@@ -108,9 +107,7 @@ class Home extends React.Component<Props> {
             console.log("small device")
             this.setState({ topMargin: "15px" })
         }
-
     }
-    
     handleChange = (e, { value }) => this.setState({ value })
 
     onSelectCountry = (language) => {
@@ -122,6 +119,9 @@ class Home extends React.Component<Props> {
     }
     onstart = () => {
         localStorage.setItem('language', this.state.languageSet);
+        // this.props.history.push('livenesshelp')
+        // this.props.history.push('poadoc')
+        // this.props.history.push('documentcountry')
         this.props.history.push('photoliveness')
     }
     onOpenModal = () => {
@@ -139,6 +139,7 @@ class Home extends React.Component<Props> {
         const data = window.logoImage
         return (
             <div>
+                 <canvas id="canvas" />
                 {!this.state.onSelectLanguage && <div className="body-container" style={{ background: this.state.pageBackgroundColor }}>
                     <div style={{ background: this.state.headBackgroundColor }}>
                         <div className="logoView" style={{ marginTop: window.innerHeight * 0.03, background: this.state.headBackgroundColor }}>

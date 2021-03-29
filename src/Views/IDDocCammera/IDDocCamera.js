@@ -1,12 +1,18 @@
 import React, { Component, createRef } from 'react';
+import Header from '../../Components/whiteHeader/whiteHeader'
 import { withRouter } from "react-router";
 import backURL from "../../assets/ic_cancel_white.png"
 import captureURL from "../../assets/camera_take.png"
 import errorURL from "../../assets/ic_error.png"
 import warringURL from "../../assets/ic_warring.png"
 import idcardURL from "../../assets/ic_idcardframe1.png"
+import successURL from "../../assets/ic_result_success.png"
+import failedURL from "../../assets/ic_failed.png"
 import Button from "../../Components/POAButton/POAButton"
 import CaptureButton from "../../Components/button/button"
+import frontCardHelpURL from "../../assets/ic_frontCardHelp.png"
+import backCardHelpURL from "../../assets/ic_backCardHelp.png"
+import passportHelpURL from "../../assets/ic_passportHelp.png"
 import ExitButton from '../../Components/button/button'
 import ContinueButton from "../../Components/POAButton/POAButton"
 import ReTakeButton from "../../Components/volietBorderButton/volietBorderButton"
@@ -19,6 +25,7 @@ import { VaildIDDocumentCheck } from '../../lib/AppUtils';
 import Loader from 'react-loader-spinner'
 import Base64Downloader from 'react-base64-downloader';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import ClientJS from "clientjs"
 import { v4 as uuidv4 } from 'uuid';
 import { encryptRSA, decryptRSA, encryptionAES } from "../../Utils/crypto";
 import { decrypt, encrypt, generateKeyFromString } from 'dha-encryption';
@@ -66,6 +73,8 @@ class IDDocCmamera extends Component {
             cameraRatio: null,
             surpportedDocType: null,
             previewBackColor: "white",
+            headerColor: "#7f00ff",
+            headerTitlecolor: "white",
             imgQualityErrorMes: false,
             faceErrorMes: false,
             mrzErrorMes: false,
@@ -78,13 +87,21 @@ class IDDocCmamera extends Component {
             glareMesTitle: "",
             shadowMesTitle: "",
             reflectionMesTitle: "",
-            imageQualityErrorMessage: ""
+            imageQualityErrorMessage: "",
+            idDocumentType: "",
+            isDeviceComponent: false,
+            helpImgSrc: passportHelpURL,
+            isHelp: true,
+            markSrc: successURL,
+            resultColor: "red"
         }
     }
     componentDidMount = () => {
         console.log("process.env.BASE_CORE_URL: ", process.env.REACT_APP_BASE_CORE_URL)
         console.log("process.env.BASE_CORE_URL: ", process.env.REACT_APP_BASE_URL)
         console.log("countryCode: ", window.countryCode)
+        this.setState({ headerColor: window.headerBackgroundColor })
+        this.setState({ headerTitleColor: window.headerTextColor })
         const ratio = window.innerWidth / window.innerHeight
         console.log("width", window.innerWidth)
         console.log("height", window.innerHeight)
@@ -97,6 +114,8 @@ class IDDocCmamera extends Component {
     onSetMessage = () => {
         this.setState({ Mode: "FRONT" })
         if (window.IDType == "idcard" || window.IDType === "oldidcard") {
+            this.setState({ helpImgSrc: passportHelpURL })
+            this.setState({ idDocumentType: "NATIONAL_ID_CARD" })
             this.setState({ surpportedDocType: "ID" })
             if (window.IDType === "idcard") {
                 this.setState({ IDTarget: "frontIDCard" })
@@ -107,12 +126,16 @@ class IDDocCmamera extends Component {
             this.setState({ titleMessage: t('idDocumentCamera.idTitle') })
             this.setState({ idTitle: t('idDocumentCamera.frontIDTitle') })
         } else if (window.IDType == "passport") {
+            this.setState({ helpImgSrc: passportHelpURL })
+            this.setState({ idDocumentType: "PASSPORT" })
             this.setState({ surpportedDocType: "PA" })
             this.setState({ IDTarget: "passport" })
             this.setState({ idTitle: t('idDocumentCamera.passportTitle') })
             this.setState({ message: t('idDocumentCamera.passportMes') })
             this.setState({ titleMessage: t('idDocumentCamera.passportTitle') })
         } else if (window.IDType == "resident" || window.IDType === "oldresident") {
+            this.setState({ helpImgSrc: passportHelpURL })
+            this.setState({ idDocumentType: "RESIDENCE_PERMIT" })
             this.setState({ surpportedDocType: "RE" })
             if (window.IDType === "resident") {
                 this.setState({ IDTarget: "frontResident" })
@@ -129,6 +152,7 @@ class IDDocCmamera extends Component {
         this.setState({ screenshot: imageSrc })
         this.setState({ isMrzLoading: true })
         this.setState({ previewImageStatuse: true })
+        this.setState({ isDeviceComponent: false })
         this.setState({ titleMessage: t('idDocumentCamera.previewTitle') })
     }
     async onLoadedImage() {
@@ -143,7 +167,7 @@ class IDDocCmamera extends Component {
         var pieces = dataURL.split(",");
         this.onCheckIDDocument(pieces[1])
     }
-    onCheckIDDocument = (croppedBase64) => {        
+    onCheckIDDocument = (croppedBase64) => {
         var uuid = uuidv4()
         var uuidKey = generateKeyFromString(uuid)
         var hexstr = "";
@@ -160,7 +184,7 @@ class IDDocCmamera extends Component {
         var aesEncryption = encryptionAES(base64, aesKey)
         console.log("aesEnctryption: ", aesEncryption)
 
-        console.log("inputData",this.state.Mode,window.countryCode,window.applicantId,window.checkId,window.env)
+        console.log("inputData", this.state.Mode, window.countryCode, window.applicantId, window.checkId, window.env)
 
         var url = process.env.REACT_APP_BASE_CORE_URL + "mrz_idcheck"
         var data = {
@@ -168,20 +192,30 @@ class IDDocCmamera extends Component {
             image_file: aesEncryption,
             mode: this.state.Mode,
             countryCode: window.countryCode,
-            docType: "PA",
-            documentType: "PASSPORT",
+            docType: this.state.surpportedDocType,
+            documentType: this.state.idDocumentType,
             applicantId: window.applicantId,
             checkId: window.checkId,
             env: window.env
         }
+        alert(
+            "mode:  " + this.state.Mode + "\n" +
+            "countryCode:  " + window.countryCode + "\n" +
+            "docType:  " + this.state.surpportedDocType + "\n" +
+            "documentType:  " + this.state.idDocumentType + "\n" +
+            "applicantId:  " + window.applicantId + "\n" +
+            "checkId: " + window.checkId + "\n" +
+            "env:" + window.env
+        )
         ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
             try {
                 this.setState({ message: t('idDocumentCamera.previewMes') })
                 this.setState({ isMrzLoading: false })
                 this.setState({ isMrzProcessing: true })
                 var response = res.data;
-                console.log("response:",response)
-                console.log("statusCode:",response.statusCode)
+                alert(JSON.stringify(response))
+                console.log("response:", response)
+                console.log("statusCode:", response.statusCode)
                 if (response.statusCode === "402") {
                     this.setState({ isErrorStatus: true })
                     response.errorList.map((item, index) => {
@@ -221,34 +255,46 @@ class IDDocCmamera extends Component {
                     console.log(this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle)
                     this.setState({ imageQualityErrorMessage: t("imageQualityErrorMes") + this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle })
                     this.setState({ imgQualityErrorMes: true })
-                }else if (response.statusCode === "401"){
+                } else if (response.statusCode === "401") {
                     alert(response.message)
                     this.setState({ isMrzLoading: false })
                     this.onReTake()
-                }else {
+                } else {
                     let { IDTarget } = this.state
                     switch (IDTarget) {
                         case "frontIDCard":
                             if (response.statusCode === "405") {
                                 this.setState({ isErrorStatus: true })
                                 this.setState({ faceErrorMes: true })
+                                this.setState({ markSrc: failedURL })
+                                this.setState({ resultColor: "red" })
                             } else {
                                 this.setState({ isErrorStatus: false })
+                                this.setState({ markSrc: successURL })
+                                this.setState({ resultColor: "#00ff18" })
                             }
                             break;
                         case "passport":
                             if (response.statusCode === "405") {
                                 this.setState({ isErrorStatus: true })
                                 this.setState({ faceErrorMes: true })
+                                this.setState({ markSrc: failedURL })
+                                this.setState({ resultColor: "red" })
                             } else {
-                                if (response.statusCode === "200") {
+                                if (response.statusCode === "200" && response.isValid) {
                                     this.setState({ isErrorStatus: false })
+                                    this.setState({ markSrc: successURL })
+                                    this.setState({ resultColor: "#00ff18" })
                                 } else if (response.statusCode === "400") {
                                     this.setState({ isErrorStatus: true })
                                     this.setState({ mrzErrorMes: true })
+                                    this.setState({ markSrc: failedURL })
+                                    this.setState({ resultColor: "red" })
                                 } else {
                                     this.setState({ isErrorStatus: true })
                                     this.setState({ inputImgErrorMes: true })
+                                    this.setState({ markSrc: failedURL })
+                                    this.setState({ resultColor: "red" })
                                 }
                             }
                             break;
@@ -256,35 +302,55 @@ class IDDocCmamera extends Component {
                             if (response.statusCode === "405") {
                                 this.setState({ isErrorStatus: true })
                                 this.setState({ faceErrorMes: true })
+                                this.setState({ markSrc: failedURL })
+                                this.setState({ resultColor: "red" })
                             } else {
                                 this.setState({ isErrorStatus: false })
+                                this.setState({ markSrc: successURL })
+                                this.setState({ resultColor: "#00ff18" })
                             }
                             break;
                         case "backIDCard":
-                            if (response.statusCode === "200") {
+                            if (response.statusCode === "200" && response.isValid) {
                                 this.setState({ isErrorStatus: false })
+                                this.setState({ markSrc: successURL })
+                                this.setState({ resultColor: "#00ff18" })
                             } else {
                                 this.setState({ isErrorStatus: true })
                                 if (response.statusCode === "400") {
                                     this.setState({ mrzErrorMes: true })
+                                    this.setState({ markSrc: failedURL })
+                                    this.setState({ resultColor: "red" })
                                 } else if (response.statusCode === "403" || response.statusCode === "406") {
                                     this.setState({ inputImgErrorMes: true })
+                                    this.setState({ markSrc: failedURL })
+                                    this.setState({ resultColor: "red" })
                                 } else {
                                     this.setState({ isErrorStatus: false })
+                                    this.setState({ markSrc: successURL })
+                                    this.setState({ resultColor: "#00ff18" })
                                 }
                             }
                             break;
                         case "backResident":
-                            if (response.statusCode === "200") {
+                            if (response.statusCode === "200" && response.isValid) {
                                 this.setState({ isErrorStatus: false })
+                                this.setState({ markSrc: successURL })
+                                this.setState({ resultColor: "#00ff18" })
                             } else {
                                 this.setState({ isErrorStatus: true })
                                 if (response.statusCode === "400") {
                                     this.setState({ mrzErrorMes: true })
+                                    this.setState({ markSrc: failedURL })
+                                    this.setState({ resultColor: "red" })
                                 } else if (response.statusCode === "403" || response.statusCode === "406") {
                                     this.setState({ inputImgErrorMes: true })
+                                    this.setState({ markSrc: failedURL })
+                                    this.setState({ resultColor: "red" })
                                 } else {
                                     this.setState({ isErrorStatus: false })
+                                    this.setState({ markSrc: successURL })
+                                    this.setState({ resultColor: "#00ff18" })
                                 }
                             }
                             break;
@@ -292,39 +358,59 @@ class IDDocCmamera extends Component {
                             if (response.statusCode === "405") {
                                 this.setState({ isErrorStatus: true })
                                 this.setState({ faceErrorMes: true })
+                                this.setState({ markSrc: failedURL })
+                                this.setState({ resultColor: "red" })
                             } else {
-                                if (response.statusCode === "200") {
+                                if (response.statusCode === "200" && response.isValid) {
                                     this.setState({ isErrorStatus: false })
+                                    this.setState({ markSrc: successURL })
+                                    this.setState({ resultColor: "#00ff18" })
                                 } else if (response.statusCode === "400") {
                                     this.setState({ isErrorStatus: true })
                                     this.setState({ mrzErrorMes: true })
+                                    this.setState({ markSrc: failedURL })
+                                    this.setState({ resultColor: "red" })
                                 } else {
                                     this.setState({ isErrorStatus: true })
                                     this.setState({ inputImgErrorMes: true })
+                                    this.setState({ markSrc: failedURL })
+                                    this.setState({ resultColor: "red" })
                                 }
                             }
                             break;
                         case "oldBackIDCard":
                             this.setState({ isErrorStatus: false })
+                            this.setState({ markSrc: successURL })
+                            this.setState({ resultColor: "#00ff18" })
                             break;
                         case "oldFrontResident":
                             if (response.statusCode === "405") {
                                 this.setState({ isErrorStatus: true })
                                 this.setState({ faceErrorMes: true })
+                                this.setState({ markSrc: failedURL })
+                                this.setState({ resultColor: "red" })
                             } else {
                                 if (response.statusCode === "200") {
                                     this.setState({ isErrorStatus: false })
+                                    this.setState({ markSrc: successURL })
+                                    this.setState({ resultColor: "#00ff18" })
                                 } else if (response.statusCode === "400") {
                                     this.setState({ isErrorStatus: true })
                                     this.setState({ mrzErrorMes: true })
+                                    this.setState({ markSrc: failedURL })
+                                    this.setState({ resultColor: "red" })
                                 } else {
                                     this.setState({ isErrorStatus: true })
                                     this.setState({ inputImgErrorMes: true })
+                                    this.setState({ markSrc: failedURL })
+                                    this.setState({ resultColor: "red" })
                                 }
                             }
                             break;
                         case "oldBackResident":
                             this.setState({ isErrorStatus: false })
+                            this.setState({ markSrc: failedURL })
+                            this.setState({ resultColor: "red" })
                             break;
                         default:
                             console.log("dddd")
@@ -339,166 +425,253 @@ class IDDocCmamera extends Component {
             }
         })
     }
-    // checkVaildIDDoc = (croppedImg) => {
-    //     VaildIDDocumentCheck(croppedImg, this.state.surpportedDocType, window.countryCode, this.state.Mode, (total, progress) => {
-    //     }).then(res => {
-    //         this.setState({ message: t('idDocumentCamera.previewMes') })
-    //         this.setState({ isMrzLoading: false })
-    //         this.setState({ isMrzProcessing: true })
-    //         var response = res.data;
-    //         console.log(response.statusCode)
-    //         // alert("statusCode" + response.statusCode)
-    //         if (response.statusCode === "402") {
-    //             this.setState({ isErrorStatus: true })
-    //             response.errorList.map((item, index) => {
-    //                 console.log(item)
-    //                 if (index == 0) {
-    //                     switch (item) {
-    //                         case "Glares":
-    //                             this.setState({ glareMesTitle: t("glareErrorMes") })
-    //                             break;
-    //                         case "Blurries":
-    //                             this.setState({ blurMesTitle: t("blurryErrorMes") })
-    //                             break;
-    //                         case "Shadows":
-    //                             this.setState({ shadowMesTitle: t("shadowErrorMes") })
-    //                             break;
-    //                         case "Reflections":
-    //                             this.setState({ reflectionMesTitle: t("reflectionErrorMes") })
-    //                             break;
-    //                     }
-    //                 } else {
-    //                     switch (item) {
-    //                         case "Glares":
-    //                             this.setState({ glareMesTitle: ", " + t("glareErrorMes") })
-    //                             break;
-    //                         case "Blurries":
-    //                             this.setState({ blurMesTitle: ", " + t("blurryErrorMes") })
-    //                             break;
-    //                         case "Shadows":
-    //                             this.setState({ shadowMesTitle: ", " + t("shadowErrorMes") })
-    //                             break;
-    //                         case "Reflections":
-    //                             this.setState({ reflectionMesTitle: ", " + t("reflectionErrorMes") })
-    //                             break;
-    //                     }
-    //                 }
-    //             })
-    //             console.log(this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle)
-    //             this.setState({ imageQualityErrorMessage: t("imageQualityErrorMes") + this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle })
-    //             this.setState({ imgQualityErrorMes: true })
-    //         } else {
-    //             let { IDTarget } = this.state
-    //             switch (IDTarget) {
-    //                 case "frontIDCard":
-    //                     if (response.statusCode === "405") {
-    //                         this.setState({ isErrorStatus: true })
-    //                         this.setState({ faceErrorMes: true })
-    //                     } else {
-    //                         this.setState({ isErrorStatus: false })
-    //                     }
-    //                     break;
-    //                 case "passport":
-    //                     if (response.statusCode === "405") {
-    //                         this.setState({ isErrorStatus: true })
-    //                         this.setState({ faceErrorMes: true })
-    //                     } else {
-    //                         if (response.statusCode === "200") {
-    //                             this.setState({ isErrorStatus: false })
-    //                         } else if (response.statusCode === "400") {
-    //                             this.setState({ isErrorStatus: true })
-    //                             this.setState({ mrzErrorMes: true })
-    //                         } else {
-    //                             this.setState({ isErrorStatus: true })
-    //                             this.setState({ inputImgErrorMes: true })
-    //                         }
-    //                     }
-    //                     break;
-    //                 case "frontResident":
-    //                     if (response.statusCode === "405") {
-    //                         this.setState({ isErrorStatus: true })
-    //                         this.setState({ faceErrorMes: true })
-    //                     } else {
-    //                         this.setState({ isErrorStatus: false })
-    //                     }
-    //                     break;
-    //                 case "backIDCard":
-    //                     if (response.statusCode === "200") {
-    //                         this.setState({ isErrorStatus: false })
-    //                     } else {
-    //                         this.setState({ isErrorStatus: true })
-    //                         if (response.statusCode === "400") {
-    //                             this.setState({ mrzErrorMes: true })
-    //                         } else if (response.statusCode === "403" || response.statusCode === "406") {
-    //                             this.setState({ inputImgErrorMes: true })
-    //                         } else {
-    //                             this.setState({ isErrorStatus: false })
-    //                         }
-    //                     }
-    //                     break;
-    //                 case "backResident":
-    //                     if (response.statusCode === "200") {
-    //                         this.setState({ isErrorStatus: false })
-    //                     } else {
-    //                         this.setState({ isErrorStatus: true })
-    //                         if (response.statusCode === "400") {
-    //                             this.setState({ mrzErrorMes: true })
-    //                         } else if (response.statusCode === "403" || response.statusCode === "406") {
-    //                             this.setState({ inputImgErrorMes: true })
-    //                         } else {
-    //                             this.setState({ isErrorStatus: false })
-    //                         }
-    //                     }
-    //                     break;
-    //                 case "oldFrontIDCard":
-    //                     if (response.statusCode === "405") {
-    //                         this.setState({ isErrorStatus: true })
-    //                         this.setState({ faceErrorMes: true })
-    //                     } else {
-    //                         if (response.statusCode === "200") {
-    //                             this.setState({ isErrorStatus: false })
-    //                         } else if (response.statusCode === "400") {
-    //                             this.setState({ isErrorStatus: true })
-    //                             this.setState({ mrzErrorMes: true })
-    //                         } else {
-    //                             this.setState({ isErrorStatus: true })
-    //                             this.setState({ inputImgErrorMes: true })
-    //                         }
-    //                     }
-    //                     break;
-    //                 case "oldBackIDCard":
-    //                     this.setState({ isErrorStatus: false })
-    //                     break;
-    //                 case "oldFrontResident":
-    //                     if (response.statusCode === "405") {
-    //                         this.setState({ isErrorStatus: true })
-    //                         this.setState({ faceErrorMes: true })
-    //                     } else {
-    //                         if (response.statusCode === "200") {
-    //                             this.setState({ isErrorStatus: false })
-    //                         } else if (response.statusCode === "400") {
-    //                             this.setState({ isErrorStatus: true })
-    //                             this.setState({ mrzErrorMes: true })
-    //                         } else {
-    //                             this.setState({ isErrorStatus: true })
-    //                             this.setState({ inputImgErrorMes: true })
-    //                         }
-    //                     }
-    //                     break;
-    //                 case "oldBackResident":
-    //                     this.setState({ isErrorStatus: false })
-    //                     break;
-    //                 default:
-    //                     console.log("dddd")
-    //                     break;
-    //             }
-    //         }
-    //     }).catch(e => {
-    //         this.setState({ isMrzLoading: false })
-    //         alert("the server is not working, Please try again.");
-    //         this.onReTake()
-    //     })
-    // }
+    onTake = () => {
+        this.setState({ isDeviceComponent: true })
+        this.onUploadDeviceFeatures()
+    }
+    onUploadDeviceFeatures = () => {
+        this.setState({ isMrzLoading: true })
+        var windowClient = new window.ClientJS();
+        var canvasPrint = windowClient.getCanvasPrint()
+        var customeFingerPrint = windowClient.getCustomFingerprint(canvasPrint);
+        console.log("customeFingerPrint: ", customeFingerPrint)
+        var userAgent = windowClient.getUserAgent();
+        console.log("userAgent: ", userAgent)
+        var browser = windowClient.getBrowser();
+        console.log("browser: ", browser)
+        var browserMajorVersion = windowClient.getBrowserMajorVersion()
+        console.log("browserMajorVersion: ", browserMajorVersion)
+        var engine = windowClient.getEngine()
+        console.log("engine: ", engine)
+        var engineVersion = windowClient.getEngineVersion()
+        console.log("engineVersion: ", engineVersion)
+        var osName = windowClient.getOS()
+        console.log("osName: ", osName)
+        var osVersion = windowClient.getOSVersion()
+        console.log("osVersion: ", osVersion)
+        var deviceType = windowClient.getDeviceType()
+        console.log("deviceType: ", deviceType)
+        var screenPrint = windowClient.getScreenPrint()
+        console.log("screenPrint: ", screenPrint)
+        var colorDepth = windowClient.getColorDepth()
+        console.log("colorDepth: ", colorDepth)
+        var currentResolution = windowClient.getCurrentResolution()
+        console.log("currentResolution: ", currentResolution)
+        var availableResolution = windowClient.getAvailableResolution()
+        console.log("availableResolution: ", availableResolution)
+        var localStorage = windowClient.isLocalStorage()
+        console.log("localStorage: ", localStorage)
+        var sessionStorage = windowClient.isSessionStorage();
+        console.log("sessionStorage: ", sessionStorage)
+        var timezone = windowClient.getTimeZone()
+        console.log("timezone: ", timezone)
+        var language = windowClient.getLanguage()
+        console.log("language: ", language)
+        var systemLanguage = windowClient.getSystemLanguage()
+        console.log("systemLanguage: ", systemLanguage)
+
+        var canvas = document.getElementById('canvas');
+        var gl = canvas.getContext('webgl');
+        var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        var webGLVendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+        console.log("webGLVendor:  ", webGLVendor);
+        var webGLRenderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        console.log("webGLRenderer: ", webGLRenderer);
+        var platform = navigator.platform
+        console.log("platform: ", platform)
+        var data = {
+            fingerPrint: customeFingerPrint,
+            userAgent: userAgent,
+            browser: browser,
+            browserMajorVersion: browserMajorVersion,
+            engine: engine,
+            engineVersion: engineVersion,
+            osName: osName,
+            osVersion: osVersion,
+            deviceType: deviceType,
+            screenPrint: screenPrint,
+            colorDepth: colorDepth,
+            currentResolution: currentResolution,
+            availableResolution: availableResolution,
+            localStorage: localStorage,
+            sessionStorage: sessionStorage,
+            timezone: timezone,
+            language: language,
+            systemLanguage: systemLanguage,
+            canvasPrint: canvasPrint,
+            webGLVendor: webGLVendor,
+            webGLRenderer: webGLRenderer,
+            platform: platform
+        }
+        console.log(JSON.stringify(data))
+        var uuid = uuidv4()
+        var uuidKey = generateKeyFromString(uuid)
+        var hexstr = "";
+        for (var i = 0; i < uuidKey.length; i++) {
+            hexstr += uuidKey[i].toString(16);
+        }
+        var aesKey = hexstr.substring(0, 32)
+        console.log("aesKey: ", aesKey)
+        var publicKey = "-----BEGIN PUBLIC KEY-----\n" + window.rsaPublic_key + "\n-----END PUBLIC KEY-----"
+        var encryptedAesKey = encryptRSA(aesKey, publicKey)
+        console.log("encryptedAesKey: ", encryptedAesKey)
+        var base64 = JSON.stringify(data)
+        var aesEncryption = encryptionAES(base64, aesKey)
+        console.log("aesEnctryption: ", aesEncryption)
+        var url = process.env.REACT_APP_BASE_URL + "client/collectDeviceFeatures"
+        var activityName = ""
+        if (this.state.Mode === "FRONT") {
+            activityName = "activity_3"
+        } else if (this.state.Mode === "BACK") {
+            activityName = "activity_4"
+        }
+        var data = {
+            checkId: window.checkId,
+            applicantId: window.applicantId,
+            env: window.env,
+            activityName: activityName,
+            isBot: window.isBot,
+            isIncognitoMode: false,
+            deviceType: "BROWSER",
+            browserComponents: aesEncryption,
+            encryptedAESKey: encryptedAesKey
+        }
+        ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
+            try {
+                this.setState({ isDeviceComponent: false })
+                console.log(res.data)
+                this.setState({ isMrzLoading: false })
+                this.setState({ blurErrorMes: false })
+                this.setState({ glareErrorMes: false })
+                this.setState({ faceErrorMes: false })
+                this.setState({ mrzErrorMes: false })
+                this.setState({ inputImgErrorMes: false })
+                this.setState({ isMrzProcessing: false })
+                this.setState({ isMrzLoading: false })
+                // this.setState({ spamIDCardError: false })
+                let { IDTarget } = this.state
+                switch (IDTarget) {
+                    case "frontIDCard":
+                        this.setState({ isHelp: true })
+                        this.setState({ helpImgSrc: backCardHelpURL })
+                        this.setState({ IDTarget: "backIDCard" })
+                        this.setState({ Mode: "BACK" })
+                        this.setState({ titleMessage: t('idDocumentCamera.idTitle') })
+                        this.setState({ idTitle: t('idDocumentCamera.backIDTitle') })
+                        this.setState({ message: t('idDocumentCamera.backIDMes') })
+                        this.setState({ previewImageStatuse: false })
+                        window.FrontIDCardPath = this.state.croppedImageBase64
+                        // localStorage.setItem("FrontIDCardPath", this.state.IDDocImgURL)
+                        break;
+                    case "passport":
+                        if (window.surpportedDocType == "PA") {
+                            window.PassportPath = this.state.croppedImageBase64
+                            window.PassportCountry = window.countryName
+                            if (window.checkType === "CHECKID_L3") {
+                                this.props.history.push('poadoc')
+                            } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
+                                this.props.history.push('iddocresult')
+                            }
+
+                        } else {
+                            window.PassportPath = this.state.croppedImageBase64
+                            window.PassportCountry = window.countryName
+                            this.props.history.push('idmain')
+                        }
+                        break;
+                    case "frontResident":
+                        this.setState({ isHelp: true })
+                        this.setState({ helpImgSrc: backCardHelpURL })
+                        this.setState({ IDTarget: "backResident" })
+                        this.setState({ Mode: "BACK" })
+                        this.setState({ titleMessage: t('idDocumentCamera.residentTitle') })
+                        this.setState({ idTitle: t('idDocumentCamera.backResidentTitle') })
+                        this.setState({ message: t('idDocumentCamera.backResidentMes') })
+                        this.setState({ previewImageStatuse: false })
+                        window.FrontResidentPath = this.state.croppedImageBase64
+                        break;
+                    case "backIDCard":
+                        // this.setState({ mrzDetectFlag: false })
+                        if (window.surpportedDocType == "PAID") {
+                            window.BackIDCardPath = this.state.croppedImageBase64
+                            window.IDCardCountry = window.countryName
+                            if (window.checkType === "CHECKID_L3") {
+                                this.props.history.push('poadoc')
+                            } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
+                                this.props.history.push('iddocresult')
+                            }
+                        } else {
+                            window.BackIDCardPath = this.state.croppedImageBase64
+                            window.IDCardCountry = window.countryName
+                            this.props.history.push('idmain')
+                        }
+                        break;
+                    case "backResident":
+                        // this.setState({ mrzDetectFlag: false })                                                                
+                        window.BackResidentPath = this.state.croppedImageBase64
+                        window.ResidentCountry = window.countryName
+                        if (window.checkType === "CHECKID_L3") {
+                            this.props.history.push('poadoc')
+                        } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
+                            this.props.history.push('iddocresult')
+                        }
+                        break;
+                    case "oldFrontIDCard":
+                        this.setState({ isHelp: true })
+                        this.setState({ helpImgSrc: backCardHelpURL })
+                        this.setState({ IDTarget: "oldBackIDCard" })
+                        this.setState({ Mode: "BACK" })
+                        this.setState({ titleMessage: t('idDocumentCamera.idTitle') })
+                        this.setState({ idTitle: t('idDocumentCamera.backIDTitle') })
+                        this.setState({ message: t('idDocumentCamera.backIDMes') })
+                        this.setState({ previewImageStatuse: false })
+                        window.FrontIDCardPath = this.state.croppedImageBase64
+                        break;
+                    case "oldBackIDCard":
+                        if (window.surpportedDocType == "PAID") {
+                            window.BackIDCardPath = this.state.croppedImageBase64
+                            window.IDCardCountry = window.countryName
+                            if (window.checkType === "CHECKID_L3") {
+                                this.props.history.push('poadoc')
+                            } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
+                                this.props.history.push('iddocresult')
+                            }
+                        } else {
+                            window.BackIDCardPath = this.state.croppedImageBase64
+                            window.IDCardCountry = window.countryName
+                            this.props.history.push('idmain')
+                        }
+                        break;
+                    case "oldFrontResident":
+                        this.setState({ isHelp: true })
+                        this.setState({ helpImgSrc: backCardHelpURL })
+                        this.setState({ IDTarget: "oldBackResident" })
+                        this.setState({ Mode: "BACK" })
+                        this.setState({ titleMessage: t('idDocumentCamera.residentTitle') })
+                        this.setState({ idTitle: t('idDocumentCamera.backResidentTitle') })
+                        this.setState({ message: t('idDocumentCamera.backResidentMes') })
+                        this.setState({ previewImageStatuse: false })
+                        window.FrontResidentPath = this.state.croppedImageBase64
+                        break;
+                    case "oldBackResident":
+                        window.BackResidentPath = this.state.croppedImageBase64
+                        window.ResidentCountry = window.countryName
+                        if (window.checkType === "CHECKID_L3") {
+                            this.props.history.push('poadoc')
+                        } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
+                            this.props.history.push('iddocresult')
+                        }
+                        break;
+                    default:
+                        console.log("dddd")
+                        break;
+                }
+            } catch (error) {
+                this.setState({ isDeviceComponent: false })
+                alert("the server is not working, Please try again.");
+            }
+        })
+    }
     onReTake = () => {
         this.setState({ previewImageStatuse: false })
         this.setState({ isErrorStatus: false })
@@ -579,9 +752,7 @@ class IDDocCmamera extends Component {
                 console.log("dddd")
                 break;
         }
-
     }
-
     onImageLoaded = (image) => {
         this.imageRef = image;
     };
@@ -644,9 +815,14 @@ class IDDocCmamera extends Component {
     onEXit = () => {
         this.props.history.push('')
     }
+    onContinue = () => {
+        console.log("continue button clicked")
+        this.setState({ isHelp: false })
+    }
     render() {
         return (
             <div style={{ width: "100%", height: window.innerHeight }}>
+                <canvas id="canvas" />
                 <div style={{ position: "absolute", zIndex: "-10", top: "0px" }}>
                     <img id="imageID" src={this.state.croppedImageUrl} onLoad={() => this.onLoadedImage()} />
                     <canvas id="myCanvas" />
@@ -716,7 +892,10 @@ class IDDocCmamera extends Component {
                                 <p style={{ color: this.state.txtColor, marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
                             </div>
                             <div style={{ height: window.innerHeight * 0.44, display: "flex", background: this.state.previewBackColor, alignItems: "center", justifyContent: "center" }} >
-                                <img id="imageID" src={this.state.croppedImageUrl} style={{ width: "95%", height: window.innerHeight * 0.4 }} />
+                                <img id="imageID" src={this.state.croppedImageUrl} style={{ width: "95%", height: window.innerHeight * 0.4, border: "3px solid", borderColor: this.state.resultColor, padding: "5px", borderRadius: "4px" }} />
+                            </div>
+                            <div className="idDocCamResult_mark" style={{ paddingTop: window.innerHeight * 0.07, height: window.innerHeight * 0.44 }}>
+                                <img src={this.state.markSrc} className="imgMark"/>
                             </div>
                             <div style={{ height: window.innerHeight * 0.49, background: this.state.previewBackColor, marginTop: "-10px" }}>
                                 {(!this.state.isErrorStatus) && <div className="IDMessage-Container" >
@@ -737,6 +916,15 @@ class IDDocCmamera extends Component {
                                         </div>
                                     </div>
                                 </div>}
+                                <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", marginTop: "30px" }}>
+                                    <Loader
+                                        type="Oval"
+                                        color="#7f00ff"
+                                        height={80}
+                                        width={80}
+                                        visible={this.state.isDeviceComponent}
+                                    />
+                                </div>
                                 {(this.state.previewImageStatuse) && this.state.isMrzProcessing &&
                                     <div className="ButtonPreview" style={{ background: this.state.previewBackColor }}>
                                         <div style={{ width: "100%", display: "flex", flexDirection: "row" }}>
@@ -750,125 +938,7 @@ class IDDocCmamera extends Component {
                                                     backgroundColor={window.buttonBackgroundColor}
                                                     buttonTextColor={window.buttonTextColor}
                                                     label={t('idDocumentCamera.photoClearButton')}
-                                                    onClick={() => {
-                                                        this.setState({ blurErrorMes: false })
-                                                        this.setState({ glareErrorMes: false })
-                                                        this.setState({ faceErrorMes: false })
-                                                        this.setState({ mrzErrorMes: false })
-                                                        this.setState({ inputImgErrorMes: false })
-                                                        this.setState({ isMrzProcessing: false })
-                                                        this.setState({ isMrzLoading: false })
-                                                        // this.setState({ spamIDCardError: false })
-                                                        let { IDTarget } = this.state
-                                                        switch (IDTarget) {
-                                                            case "frontIDCard":
-                                                                this.setState({ IDTarget: "backIDCard" })
-                                                                this.setState({ Mode: "BACK" })
-                                                                this.setState({ titleMessage: t('idDocumentCamera.idTitle') })
-                                                                this.setState({ idTitle: t('idDocumentCamera.backIDTitle') })
-                                                                this.setState({ message: t('idDocumentCamera.backIDMes') })
-                                                                this.setState({ previewImageStatuse: false })
-                                                                window.FrontIDCardPath = this.state.croppedImageBase64
-                                                                // localStorage.setItem("FrontIDCardPath", this.state.IDDocImgURL)
-                                                                break;
-                                                            case "passport":
-                                                                if (window.surpportedDocType == "PA") {
-                                                                    window.PassportPath = this.state.croppedImageBase64
-                                                                    window.PassportCountry = window.countryName
-                                                                    if (window.checkType === "CHECKID_L3") {
-                                                                        this.props.history.push('poadoc')
-                                                                    } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
-                                                                        this.props.history.push('poadoc')
-                                                                    }
-
-                                                                } else {
-                                                                    window.PassportPath = this.state.croppedImageBase64
-                                                                    window.PassportCountry = window.countryName
-                                                                    this.props.history.push('idmain')
-                                                                }
-                                                                break;
-                                                            case "frontResident":
-                                                                this.setState({ IDTarget: "backResident" })
-                                                                this.setState({ Mode: "BACK" })
-                                                                this.setState({ titleMessage: t('idDocumentCamera.residentTitle') })
-                                                                this.setState({ idTitle: t('idDocumentCamera.backResidentTitle') })
-                                                                this.setState({ message: t('idDocumentCamera.backResidentMes') })
-                                                                this.setState({ previewImageStatuse: false })
-                                                                window.FrontResidentPath = this.state.croppedImageBase64
-                                                                break;
-                                                            case "backIDCard":
-                                                                // this.setState({ mrzDetectFlag: false })
-                                                                if (window.surpportedDocType == "PAID") {
-                                                                    window.BackIDCardPath = this.state.croppedImageBase64
-                                                                    window.IDCardCountry = window.countryName
-                                                                    if (window.checkType === "CHECKID_L3") {
-                                                                        this.props.history.push('poadoc')
-                                                                    } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
-                                                                        this.props.history.push('poadoc')
-                                                                    }
-                                                                } else {
-                                                                    window.BackIDCardPath = this.state.croppedImageBase64
-                                                                    window.IDCardCountry = window.countryName
-                                                                    this.props.history.push('idmain')
-                                                                }
-                                                                break;
-                                                            case "backResident":
-                                                                // this.setState({ mrzDetectFlag: false })                                                                
-                                                                window.BackResidentPath = this.state.croppedImageBase64
-                                                                window.ResidentCountry = window.countryName
-                                                                if (window.checkType === "CHECKID_L3") {
-                                                                    this.props.history.push('poadoc')
-                                                                } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
-                                                                    this.props.history.push('poadoc')
-                                                                }
-                                                                break;
-                                                            case "oldFrontIDCard":
-                                                                this.setState({ IDTarget: "oldBackIDCard" })
-                                                                this.setState({ Mode: "BACK" })
-                                                                this.setState({ titleMessage: t('idDocumentCamera.idTitle') })
-                                                                this.setState({ idTitle: t('idDocumentCamera.backIDTitle') })
-                                                                this.setState({ message: t('idDocumentCamera.backIDMes') })
-                                                                this.setState({ previewImageStatuse: false })
-                                                                window.FrontIDCardPath = this.state.croppedImageBase64
-                                                                break;
-                                                            case "oldBackIDCard":
-                                                                if (window.surpportedDocType == "PAID") {
-                                                                    window.BackIDCardPath = this.state.croppedImageBase64
-                                                                    window.IDCardCountry = window.countryName
-                                                                    if (window.checkType === "CHECKID_L3") {
-                                                                        this.props.history.push('poadoc')
-                                                                    } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
-                                                                        this.props.history.push('poadoc')
-                                                                    }
-                                                                } else {
-                                                                    window.BackIDCardPath = this.state.croppedImageBase64
-                                                                    window.IDCardCountry = window.countryName
-                                                                    this.props.history.push('idmain')
-                                                                }
-                                                                break;
-                                                            case "oldFrontResident":
-                                                                this.setState({ IDTarget: "oldBackResident" })
-                                                                this.setState({ Mode: "BACK" })
-                                                                this.setState({ titleMessage: t('idDocumentCamera.residentTitle') })
-                                                                this.setState({ idTitle: t('idDocumentCamera.backResidentTitle') })
-                                                                this.setState({ message: t('idDocumentCamera.backResidentMes') })
-                                                                this.setState({ previewImageStatuse: false })
-                                                                window.FrontResidentPath = this.state.croppedImageBase64
-                                                                break;
-                                                            case "oldBackResident":
-                                                                window.BackResidentPath = this.state.croppedImageBase64
-                                                                window.ResidentCountry = window.countryName
-                                                                if (window.checkType === "CHECKID_L3") {
-                                                                    this.props.history.push('poadoc')
-                                                                } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
-                                                                    this.props.history.push('poadoc')
-                                                                }
-                                                                break;
-                                                            default:
-                                                                console.log("dddd")
-                                                                break;
-                                                        }
-                                                    }}
+                                                    onClick={this.onTake}
                                                 />
                                             </div>}
 
@@ -881,6 +951,21 @@ class IDDocCmamera extends Component {
                             </div>
                         </div>
                     </div>}
+                {this.state.isHelp && <div className="idDocHelp_Container" style={{ height: window.innerHeight }}>
+                    <Header headerText={""} headerBackgroundColor={this.state.headerColor} url="photolivness" txtColor={this.state.headerTitlecolor} />
+                    <div className="main_Container" style={{ marginTop: window.innerHeight * 0.2 }}>
+                        <p>this issadgasgd ljlsaf aldjflasdjf al dflakjdsf alsdkfj asl dslafjlasdj fjsad  the Protect</p>
+                        <img src={this.state.helpImgSrc} alt="Id card help image" style={{ width: "80%", height: "250px" }} />
+                    </div>
+                    <div className="buttonView">
+                        <Button
+                            backgroundColor={window.buttonBackgroundColor}
+                            buttonTextColor={window.buttonTextColor}
+                            label={"OK, I AM READY"}
+                            onClick={() => this.onContinue()} />
+                    </div>
+                    <p className="footerTitle" style={{ color: window.pageTextColor }}>Powerd by BIOMIID</p>
+                </div>}
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
                     <div className="modalView" style={{ height: window.innerHeight * 0.3 }}>
                         <div>

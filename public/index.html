@@ -25,6 +25,17 @@
     <title>React App</title>
   </head>
   <body>
+    <script src="bot-detector.js"></script>
+		<script type="text/javascript" language="javascript">
+			new BotDetector({
+				timeout: 1,
+				callback: function(result) {
+					console.log("bot detecter:", result.isBot ? true : false)
+          window.isBot = result.isBot
+				}
+			}).monitor();
+		</script>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

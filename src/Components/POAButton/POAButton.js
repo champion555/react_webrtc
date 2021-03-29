@@ -7,7 +7,7 @@ class POAButton extends Component {
         super(props);
         this.state = {
             btnClass: props.btnClass,
-            background:"#7f00ff",
+            background:"#7133ff",
             buttonTextColor:"#fff"
         }
     }
