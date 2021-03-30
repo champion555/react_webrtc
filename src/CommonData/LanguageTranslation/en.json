@@ -1,37 +1,39 @@
 {
-    "rapidCheckfooterTitle": "Powerd by BIOMIID RapidCheck",
-    "scaleCheckfooterTitle": "Powerd by BIOMIID ScaleCheck",
     "errorMessageTitle": "ID Document Error",
     "imageQualityErrorMes":"-The image contains:",
     "blurryErrorMes": " Blurries",
     "glareErrorMes": " Glares",
     "reflectionErrorMes": "Reflections",
     "shadowErrorMes": " Shadows",
-    "faceErrorMes":"- This ID Document don't  contains  face, please use  valid  ID document",
+    "faceErrorMes":"- This ID Document don't  contains face, please use  valid  ID document",
     "mrzErrorMes":"- Wrong ID document Type,  Please select right issuing country",
     "inputImgErrorMes":"- Bad ID document(no mrz or invalid ID document)",
     "session":{
         "title":"Validation Session"
     },
     "Home": {
-        "companyName": "Company Name",
         "title": "VERIFY YOUR IDENTITY",
-        "clockDes":"it will take less more than 60 seconds",
-        "titleDes": "NEAKEL BANK company would like to verify your identity with ",
-        "prodoctName":"RAVESY",
+        "clockDes":"The verification process will take less than a minute",
+        "titleDes": " would like to verify your identity, a process powered by ",
+        "prodoctName":"BIOMIID CheckID",
         "smallTitle": "VERIFICATION PROCESS",
         "titleDes1":"Before starting the verification processing, make sure you are in well-lit place.",
         "titleDes2":"The verification process consists of the follows steps:",
-        "checkDes1": "Selfie Capture with liveness detection",
-        "checkDes2": "Capture of your Goverment ID document (Passport, Identity Card and Resident Permit)",
-        "checkDes3": "Capture of proof of address Document (Electricity Bill, Gas Bill, Internet Bill, Telephone Bill, Tax Notice)",
+        "checkDes1": "Take your selfie photo for liveness verification",
+        "checkDes2": "Capture the photo of your goverment-issued ID document (Passport, National ID Card and Residence license)",
+        "checkDes3": "Capture the photo of your address document (Electricity Bill, Gas Bill, Internet Provider Bill, Telephone Bill)",
+        "privateMessage":"Your private information will use only for identity verification processing propose and shared securely with latest encryptioin technology",
         "policyDes1": "By clicking on the ",
-        "policyDes2": "START",
-        "policyDes3": " button below, you agree to BIOMIID",
-        "TermsofServiceTitle": " legal notice & privacy policy",
+        "policyDes2": " button below, you agree with BIOMIID CheckID",
+        "TermsofServiceTitle": "Privacy Policy",
         "policyDes5": "",
         "privacyPolicyTitle": "Privacy Policy.",
-        "startButtonTitle": "START"
+        "startButtonTitle": "LET'S START VERIFICATION!"
+    },
+    "LivenessHelp":{
+        "title": "Get ready to take  a capture of  your  selfie for  liveness verification.",
+        "message":"Make  sure your face  is place  correctly  inside  the oval frame and press the 'Take  a capture' button.",
+        "buttonTitle":"OK, I AM READY"
     },
     "PhotoLivness": {
         "title": "Selfie Capture",
@@ -51,7 +53,7 @@
         "glareErrorMes":"- May be glares, blurries, shadows or reflections are detected",
         "faceErrorMes":"- Face is not correctly placed inside of oval frame.",
         "spoofErrorMes":"- Spoof detected",
-        "retryButton": "RETRY"
+        "retryButton": "RE-TRY"
     },
     "idMain": {
         "title": "ID Document Type",
@@ -60,6 +62,13 @@
         "passportButton": "Passport",
         "residentButton": "Residence Permit",
         "OldButton":"MRZ on front page"
+    },
+    "idDocHelp":{
+        "passportTitle": "Get ready to take  a capture of  the  photo of your Passport document.",
+        "frontIDTitle": "Get ready to take  a capture the  photo of  the Front of your Identity document.",
+        "backIDTitle": "Get ready to take  a capture the  photo of  the Back of your Identity document.",
+        "message":"Place your Identity  Document within the  rectangle  frame and press the 'Take  a capture' button.",
+        "buttonTitle":"OK, I AM READY"
     },
     "idDocumentCamera": {
         "idTitle": "National ID Card",
@@ -81,24 +90,30 @@
         "reTakeButton": "RE-TAKE"
     },
     "poaDoc": {
-        "title": "POA Document",
-        "message":"Please select the type of document and enter the proof of address document issuing date.",
+        "title": "Address Document",
+        "message":"Please select the type of address document and enter issuing date.",
         "selectDocTitle":"Select type of document",
         "issueDate": "Issue Date",
-        "scanPOAButton": "SCAN POA DOCUMENT"
+        "scanPOAButton": "SCAN Address Document"
+    },
+    "poaDocHelp":{
+        "title": "Get ready to  scan your address document.",
+        "message":"Place your address  document within the  camera  frame and press the 'Take  a capture' button.",
+        "buttonTitle":"OK, I AM READY"
     },
     "poaDocumentCamera": {
-        "title": "Scan PoA Document",
-        "message": "Place the  Proof of address  document  inside of frame  and capture  the document",
+        "title": "Scan address Document",
+        "message": "Place the address  document  inside of frame  and capture  the document",
         "previewMessage": "Make sure all data on your document is clear and readable",
         "takePictureButton": "TAKE A CAPTURE",
         "retakeButton": "RE-TAKE",
         "continueButton": "CONTINUE"
     },
-    "idDocResult":{
+	"idDocResult":{
         "title":"Result",
         "resultMessage":"Thank you!",
-        "message":"Your identity verification process is completed, you will be notified about the decision soon",
-        "buttonTitle":"Done"
+	    "passedMessage":"Your identity is successfully confirmed",
+        "otherMessage":"Your identity verification process is completed, you will be notified about the decision soon",
+        "buttonTitle":"DONE"
     }
 }

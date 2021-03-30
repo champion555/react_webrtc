@@ -21,3 +21,22 @@
     flex-direction: column;
     align-items: center;
 }
+.poaHelp_Container .main_Container p{
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 17px;
+}
+.poaHelp_Container .poaHelp_message{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    padding-left: 15px;
+    padding-right: 15px;
+    align-items: center;
+    padding-top: 30px;
+}
+.poaHelp_Container .poaHelp_message p{
+    font-size: 16px;
+    padding-left: 10px;
+}

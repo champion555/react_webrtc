@@ -93,7 +93,8 @@ class IDDocCmamera extends Component {
             helpImgSrc: passportHelpURL,
             isHelp: true,
             markSrc: successURL,
-            resultColor: "red"
+            resultColor: "red",
+            helpTitle: "",
         }
     }
     componentDidMount = () => {
@@ -115,6 +116,7 @@ class IDDocCmamera extends Component {
         this.setState({ Mode: "FRONT" })
         if (window.IDType == "idcard" || window.IDType === "oldidcard") {
             this.setState({ helpImgSrc: passportHelpURL })
+            this.setState({ helpTitle: t('idDocHelp.frontIDTitle') })
             this.setState({ idDocumentType: "NATIONAL_ID_CARD" })
             this.setState({ surpportedDocType: "ID" })
             if (window.IDType === "idcard") {
@@ -127,6 +129,7 @@ class IDDocCmamera extends Component {
             this.setState({ idTitle: t('idDocumentCamera.frontIDTitle') })
         } else if (window.IDType == "passport") {
             this.setState({ helpImgSrc: passportHelpURL })
+            this.setState({ helpTitle: t('idDocHelp.passportTitle') })
             this.setState({ idDocumentType: "PASSPORT" })
             this.setState({ surpportedDocType: "PA" })
             this.setState({ IDTarget: "passport" })
@@ -135,6 +138,7 @@ class IDDocCmamera extends Component {
             this.setState({ titleMessage: t('idDocumentCamera.passportTitle') })
         } else if (window.IDType == "resident" || window.IDType === "oldresident") {
             this.setState({ helpImgSrc: passportHelpURL })
+            this.setState({ helpTitle: t('idDocHelp.frontIDTitle') })
             this.setState({ idDocumentType: "RESIDENCE_PERMIT" })
             this.setState({ surpportedDocType: "RE" })
             if (window.IDType === "resident") {
@@ -520,10 +524,70 @@ class IDDocCmamera extends Component {
         console.log("aesEnctryption: ", aesEncryption)
         var url = process.env.REACT_APP_BASE_URL + "client/collectDeviceFeatures"
         var activityName = ""
-        if (this.state.Mode === "FRONT") {
-            activityName = "activity_3"
-        } else if (this.state.Mode === "BACK") {
-            activityName = "activity_4"
+        let { IDTarget } = this.state
+        switch (IDTarget) {
+            case "frontIDCard":
+                activityName = "activity_3"
+                break;
+            case "passport":
+                if (window.surpportedDocType == "PA") {
+                    if (window.checkType === "CHECKID_L3") {
+                        activityName = "activity_3"
+                    } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
+                        activityName = "activity_end"
+                    }
+                } else {
+                    activityName = "activity_3"
+                }
+                break;
+            case "frontResident":
+                activityName = "activity_3"
+                break;
+            case "backIDCard":
+                if (window.surpportedDocType == "PAID") {
+                    if (window.checkType === "CHECKID_L3") {
+                        activityName = "activity_4"
+                    } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
+                        activityName = "activity_end"
+                    }
+                } else {
+                    activityName = "activity_4"
+                }
+                break;
+            case "backResident":
+                if (window.checkType === "CHECKID_L3") {
+                    activityName = "activity_4"
+                } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
+                    activityName = "activity_end"
+                }
+                break;
+            case "oldFrontIDCard":
+                activityName = "activity_3"
+                break;
+            case "oldBackIDCard":
+                if (window.surpportedDocType == "PAID") {
+                    if (window.checkType === "CHECKID_L3") {
+                        activityName = "activity_4"
+                    } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
+                        activityName = "activity_end"
+                    }
+                } else {
+                    activityName = "activity_4"
+                }
+                break;
+            case "oldFrontResident":
+                activityName = "activity_3"
+                break;
+            case "oldBackResident":
+                if (window.checkType === "CHECKID_L3") {
+                    activityName = "activity_4"
+                } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
+                    activityName = "activity_end"
+                }
+                break;
+            default:
+                console.log("dddd")
+                break;
         }
         var data = {
             checkId: window.checkId,
@@ -554,6 +618,7 @@ class IDDocCmamera extends Component {
                     case "frontIDCard":
                         this.setState({ isHelp: true })
                         this.setState({ helpImgSrc: backCardHelpURL })
+                        this.setState({ helpTitle: t('idDocHelp.backIDTitle') })
                         this.setState({ IDTarget: "backIDCard" })
                         this.setState({ Mode: "BACK" })
                         this.setState({ titleMessage: t('idDocumentCamera.idTitle') })
@@ -572,7 +637,6 @@ class IDDocCmamera extends Component {
                             } else if (window.checkType === "CHECKID_L1" || window.checkType === "CHECKID_L2") {
                                 this.props.history.push('iddocresult')
                             }
-
                         } else {
                             window.PassportPath = this.state.croppedImageBase64
                             window.PassportCountry = window.countryName
@@ -582,6 +646,7 @@ class IDDocCmamera extends Component {
                     case "frontResident":
                         this.setState({ isHelp: true })
                         this.setState({ helpImgSrc: backCardHelpURL })
+                        this.setState({ helpTitle: t('idDocHelp.backIDTitle') })
                         this.setState({ IDTarget: "backResident" })
                         this.setState({ Mode: "BACK" })
                         this.setState({ titleMessage: t('idDocumentCamera.residentTitle') })
@@ -619,6 +684,7 @@ class IDDocCmamera extends Component {
                     case "oldFrontIDCard":
                         this.setState({ isHelp: true })
                         this.setState({ helpImgSrc: backCardHelpURL })
+                        this.setState({ helpTitle: t('idDocHelp.backIDTitle') })
                         this.setState({ IDTarget: "oldBackIDCard" })
                         this.setState({ Mode: "BACK" })
                         this.setState({ titleMessage: t('idDocumentCamera.idTitle') })
@@ -645,6 +711,7 @@ class IDDocCmamera extends Component {
                     case "oldFrontResident":
                         this.setState({ isHelp: true })
                         this.setState({ helpImgSrc: backCardHelpURL })
+                        this.setState({ helpTitle: t('idDocHelp.backIDTitle') })
                         this.setState({ IDTarget: "oldBackResident" })
                         this.setState({ Mode: "BACK" })
                         this.setState({ titleMessage: t('idDocumentCamera.residentTitle') })
@@ -895,7 +962,7 @@ class IDDocCmamera extends Component {
                                 <img id="imageID" src={this.state.croppedImageUrl} style={{ width: "95%", height: window.innerHeight * 0.4, border: "3px solid", borderColor: this.state.resultColor, padding: "5px", borderRadius: "4px" }} />
                             </div>
                             <div className="idDocCamResult_mark" style={{ paddingTop: window.innerHeight * 0.07, height: window.innerHeight * 0.44 }}>
-                                <img src={this.state.markSrc} className="imgMark"/>
+                                <img src={this.state.markSrc} className="imgMark" />
                             </div>
                             <div style={{ height: window.innerHeight * 0.49, background: this.state.previewBackColor, marginTop: "-10px" }}>
                                 {(!this.state.isErrorStatus) && <div className="IDMessage-Container" >
@@ -953,15 +1020,19 @@ class IDDocCmamera extends Component {
                     </div>}
                 {this.state.isHelp && <div className="idDocHelp_Container" style={{ height: window.innerHeight }}>
                     <Header headerText={""} headerBackgroundColor={this.state.headerColor} url="photolivness" txtColor={this.state.headerTitlecolor} />
-                    <div className="main_Container" style={{ marginTop: window.innerHeight * 0.2 }}>
-                        <p>this issadgasgd ljlsaf aldjflasdjf al dflakjdsf alsdkfj asl dslafjlasdj fjsad  the Protect</p>
+                    <div className="main_Container" style={{ marginTop: window.innerHeight * 0.05 }}>
+                        <p>{this.state.helpTitle}</p>
                         <img src={this.state.helpImgSrc} alt="Id card help image" style={{ width: "80%", height: "250px" }} />
+                    </div>
+                    <div className="idDocHelp_message">
+                        <img src={this.state.warringSRC} style={{ width: "20px", height: "20px" }} />
+                        <p style={{ color: this.state.titleColor }}>{t('idDocHelp.message')}</p>
                     </div>
                     <div className="buttonView">
                         <Button
                             backgroundColor={window.buttonBackgroundColor}
                             buttonTextColor={window.buttonTextColor}
-                            label={"OK, I AM READY"}
+                            label={t('idDocHelp.buttonTitle')}
                             onClick={() => this.onContinue()} />
                     </div>
                     <p className="footerTitle" style={{ color: window.pageTextColor }}>Powerd by BIOMIID</p>

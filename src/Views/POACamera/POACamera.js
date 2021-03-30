@@ -290,7 +290,7 @@ class POACamera extends Component {
             checkId: window.checkId,
             applicantId: window.applicantId,
             env: window.env,
-            activityName: "activity_5",
+            activityName: "activity_end",
             isBot: window.isBot,
             isIncognitoMode: false,
             deviceType: "BROWSER",

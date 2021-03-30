@@ -116,9 +116,9 @@ class ValidationPage extends Component {
                     console.log("Vald Code")
                     this.onGetClientDetails()                    
                 } else {
-                    this.onGetClientDetails()
-                    // this.setState({ isKeyValidation: false })
-                    // alert("Digits code already used!")
+                    // this.onGetClientDetails()
+                    this.setState({ isKeyValidation: false })
+                    alert("Digits code already used!")
                 }
             } catch (error) {
                 this.setState({ isKeyValidation: false })

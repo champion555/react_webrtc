@@ -24,6 +24,7 @@ class Result extends Component {
             background: "white",
             headerColor: "#7f00ff",
             isStatus: false,
+            message: ""
         }
     }
     componentDidMount = () => {
@@ -45,10 +46,6 @@ class Result extends Component {
 
     }
     onInitCheckSession = () => {
-        // window.api_access_token = "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SmhjR2xmYTJWNUlqb2lXbGRaTTA1NlZtbFphbFYwVFVSRk1VOVRNREJPVjFsNlRGUnJlbGxYVFhSTlZFSm9Ua2RGTVZwSFZtdE5la3BySWl3aWMyVmpjbVYwWDJ0bGVTSTZJazU2WXpWWlYwWnFUWHByZEUxSFJYaE5RekF3V1cxT2EweFVhM3BhUjBsMFRsUmthVnBYU1hkT01sRXpXVmRKTVNJc0ltVnVkaUk2SWxOQlRrUkNUMWdpTENKbGVIQWlPakUyTVRRNU16WXpNVE45Lkt2UGozNmE2a1VMcWZEMlhYRE1pVC1PaGYtek0wNEdFeEg1NmpISl9ONGM="
-        // window.applicantId = "146e1eafc71a4b55acd60db241b1741b"
-        // window.checkId = "71ae95e4247a4f71aa7d32133dde5e52"
-        // window.env = "SANDBOX"
         var url = process.env.REACT_APP_BASE_URL + "client/check/initCheckSession"
         var data = {
             applicantId: window.applicantId,
@@ -60,37 +57,50 @@ class Result extends Component {
                 var response = res.data;
                 console.log(response)
                 var checkStatus = response.checkStatus
-                if(checkStatus === "COMPLETED"){
-                    this.setState({isStatus: true})
-                }else {
-                    this.onGetStatus()
+                var checkResult = response.checkResult
+                var statusCode = response.statusCode
+                this.setState({isStatus: true})
+                alert(JSON.stringify(response))
+                if (statusCode === "401"){
+                    alert("Token is invalied, you can not verify, please try again");
+                }else{
+                    if(checkStatus === "COMPLETED"){                    
+                        if(checkResult === "PASSED"){
+                            this.setState({message: t('idDocResult.passedMessage')})
+                        }else{
+                            this.setState({message: t('idDocResult.otherMessage')})
+                        }                    
+                    }else {
+                        this.setState({message: t('idDocResult.otherMessage')})
+                    }
                 }
+                
             } catch (error) {
                 alert("the server is not working, Please try again.");
             }
         })
     }
-    onGetStatus = () => {
-        var url = process.env.REACT_APP_BASE_URL + "client/check/getStatus"
-        var data = {
-            checkId: window.checkId,
-            env: window.env
-        }
-        ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
-            try {                              
-                var response = res.data;
-                console.log(response)
-                var checkStatus = response.checkStatus
-                if(checkStatus === "COMPLETED"){
-                    this.setState({isStatus: true})
-                }else {
-                    this.onGetStatus()
-                }
-            } catch (error) {
-                alert("the server is not working, Please try again.");
-            }
-        })
-    }
+    // onGetStatus = () => {
+    //     var url = process.env.REACT_APP_BASE_URL + "client/check/getStatus"
+    //     var data = {
+    //         checkId: window.checkId,
+    //         env: window.env
+    //     }
+    //     ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
+    //         try {                              
+    //             var response = res.data;
+    //             console.log(response)
+    //             var checkStatus = response.checkStatus
+    //             if(checkStatus === "COMPLETED"){
+    //                 this.setState({isStatus: true})
+    //             }else {
+    //                 this.onGetStatus()
+    //             }
+    //         } catch (error) {
+    //             alert("the server is not working, Please try again.");
+    //         }
+    //     })
+    // }
     onClose = () => {
         // window.open('https://www.biomiid.com')
         this.props.history.push('')
@@ -116,7 +126,7 @@ class Result extends Component {
                     {this.state.isStatus && <div className="uploadResultMesView" style={{ marginTop: this.state.topMargin }}>
                         <p className="txtLivnessResult" style={{ color: this.state.txtColor, marginBottom: this.state.txtMarginBottom }}> {t('idDocResult.resultMessage')} </p>
                         <p className="clientName" style={{ color: this.state.txtColor }}>Ghislain Bienvenu MAMAT</p>
-                        <p className="message" style={{ color: this.state.txtColor }}>{t('idDocResult.message')}</p>
+                        <p className="message" style={{ color: this.state.txtColor }}>{this.state.message}</p>
                     </div>}
                     {this.state.isStatus && <div className="buttonPreview">
                         <Button

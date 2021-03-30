@@ -167,6 +167,7 @@
 .idDocHelp_Container .main_Container p{
     padding-left: 15px;
     padding-right: 15px;
+    font-size: 17px;
 }
 .idDocCamResult_mark{
     position: absolute;
@@ -180,4 +181,18 @@
 .idDocCamResult_mark .imgMark{
     width: 45px;
     height: 45px;    
+}
+.idDocHelp_Container .idDocHelp_message{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    padding-left: 15px;
+    padding-right: 15px;
+    align-items: center;
+    padding-top: 30px;
+}
+.idDocHelp_Container .idDocHelp_message p{
+    font-size: 16px;
+    padding-left: 10px;
 }
