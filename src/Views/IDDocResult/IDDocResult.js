@@ -5,12 +5,15 @@ import Button from '../../Components/POAButton/POAButton'
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import ApiService from '../../Services/APIServices'
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 import './IDDocResult.css'
 import { setTranslations, setDefaultLanguage, setLanguage, withTranslation, t } from 'react-multi-lang'
 let lan = localStorage.getItem('language');
 setDefaultLanguage(lan)
 
 var openWindow;
+var count = 0;
 
 class Result extends Component {
     constructor(props) {
@@ -24,7 +27,9 @@ class Result extends Component {
             background: "white",
             headerColor: "#7f00ff",
             isStatus: false,
-            message: ""
+            message: "",
+            alertMessage: "",
+            alertOpen: false
         }
     }
     componentDidMount = () => {
@@ -42,8 +47,10 @@ class Result extends Component {
             this.setState({ topMargin: window.innerHeight * 0.05 })
             this.setState({ txtMarginBottom: "0px" })
         }
-        this.onInitCheckSession()       
 
+        setTimeout(() => {
+            this.onInitCheckSession()
+        }, 5000);
     }
     onInitCheckSession = () => {
         var url = process.env.REACT_APP_BASE_URL + "client/check/initCheckSession"
@@ -53,57 +60,47 @@ class Result extends Component {
             env: window.env
         }
         ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
-            try {                              
+            try {
                 var response = res.data;
                 console.log(response)
                 var checkStatus = response.checkStatus
                 var checkResult = response.checkResult
                 var statusCode = response.statusCode
-                this.setState({isStatus: true})
-                alert(JSON.stringify(response))
-                if (statusCode === "401"){
-                    alert("Token is invalied, you can not verify, please try again");
-                }else{
-                    if(checkStatus === "COMPLETED"){                    
-                        if(checkResult === "PASSED"){
-                            this.setState({message: t('idDocResult.passedMessage')})
-                        }else{
-                            this.setState({message: t('idDocResult.otherMessage')})
-                        }                    
-                    }else {
-                        this.setState({message: t('idDocResult.otherMessage')})
+                this.setState({ isStatus: true })
+                // alert(JSON.stringify(response))
+                if (statusCode === "401") {
+                    this.setState({ alertMessage: response.message })
+                    this.setState({ alertOpen: true })
+                } else {
+                    if (checkStatus === "COMPLETED") {
+                        if (checkResult === "PASSED") {
+                            this.setState({ message: t('idDocResult.passedMessage') })
+                        } else {
+                            this.setState({ message: t('idDocResult.otherMessage') })
+                        }
+                    } else {
+                        // this.setState({message: t('idDocResult.otherMessage')})
+                        if (count < 3) {
+                            setTimeout(() => {
+                                this.onInitCheckSession()
+                                count++
+                            }, 2000);
+                        }
+
                     }
                 }
-                
+
             } catch (error) {
-                alert("the server is not working, Please try again.");
+                this.setState({ alertMessage: "the server is not working, Please try again." })
+                this.setState({ alertOpen: true })
             }
         })
     }
-    // onGetStatus = () => {
-    //     var url = process.env.REACT_APP_BASE_URL + "client/check/getStatus"
-    //     var data = {
-    //         checkId: window.checkId,
-    //         env: window.env
-    //     }
-    //     ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
-    //         try {                              
-    //             var response = res.data;
-    //             console.log(response)
-    //             var checkStatus = response.checkStatus
-    //             if(checkStatus === "COMPLETED"){
-    //                 this.setState({isStatus: true})
-    //             }else {
-    //                 this.onGetStatus()
-    //             }
-    //         } catch (error) {
-    //             alert("the server is not working, Please try again.");
-    //         }
-    //     })
-    // }
     onClose = () => {
-        // window.open('https://www.biomiid.com')
-        this.props.history.push('')
+        this.props.history.push('/blank')
+    }
+    onCloseAlert = () => {
+        this.setState({ alertOpen: false })
     }
     render() {
         return (
@@ -112,21 +109,21 @@ class Result extends Component {
                 <div className="result-body-container" style={{ background: this.state.background }}>
                     <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", marginTop: this.state.topMargin }}>
                         {this.state.isStatus && <img src={this.state.imgSrc} className="uploadResultMark" style={{ width: "100px", height: "100px" }} />}
-                        {! this.state.isStatus && <div className="iddocResult_loader">
+                        {!this.state.isStatus && <div className="iddocResult_loader">
                             <Loader
-                                type="Bars"
-                                color={window.headerBackgroundColor}
+                                type="Oval"
+                                color={window.buttonBackgroundColor}
                                 height={80}
                                 width={80}
                                 visible={this.state.apiFlage}
                             />
-                            <p style={{ color: this.state.headerColor }}>Pending...</p>
+                            <p style={{ color: window.buttonBackgroundColor }}>Pending...</p>
                         </div>}
                     </div>
                     {this.state.isStatus && <div className="uploadResultMesView" style={{ marginTop: this.state.topMargin }}>
                         <p className="txtLivnessResult" style={{ color: this.state.txtColor, marginBottom: this.state.txtMarginBottom }}> {t('idDocResult.resultMessage')} </p>
-                        <p className="clientName" style={{ color: this.state.txtColor }}>Ghislain Bienvenu MAMAT</p>
-                        <p className="message" style={{ color: this.state.txtColor }}>{this.state.message}</p>
+                        <p className="clientName" style={{ color: this.state.txtColor,textAlign:"center" }}>The verification process is completed</p>
+                        <p className="message" style={{ color: this.state.txtColor,textAlign:"center" }}>{this.state.message}</p>
                     </div>}
                     {this.state.isStatus && <div className="buttonPreview">
                         <Button
@@ -138,6 +135,12 @@ class Result extends Component {
                         <p style={{ marginTop: "10px", color: this.state.txtColor }}>Powerd by BIOMIID</p>
                     </div>}
                 </div>
+                <Modal open={this.state.alertOpen} showCloseIcon={false} center>
+                    <div className="alertView" style={{ height: window.innerHeight * 0.2 }}>
+                        <p>{this.state.alertMessage}</p>
+                        <div className="alert_button" onClick={this.onCloseAlert}> OK </div>
+                    </div>
+                </Modal>
             </div>
         )
     }

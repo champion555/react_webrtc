@@ -29,6 +29,16 @@
     border-bottom: solid 1px;
     border-color: gray;
 }
+.selectPOALanguageView{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    border-top: solid 1px;
+    border-bottom: solid 1px;
+    border-color: gray;
+
+}
 .documentArrayText{
     height: 40px;
     align-items: center;

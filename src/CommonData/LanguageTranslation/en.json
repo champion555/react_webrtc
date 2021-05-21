@@ -22,7 +22,7 @@
         "checkDes1": "Take your selfie photo for liveness verification",
         "checkDes2": "Capture the photo of your goverment-issued ID document (Passport, National ID Card and Residence license)",
         "checkDes3": "Capture the photo of your address document (Electricity Bill, Gas Bill, Internet Provider Bill, Telephone Bill)",
-        "privateMessage":"Your private information will use only for identity verification processing propose and shared securely with latest encryptioin technology",
+        "privateMessage":"Your private information will use only for identification and authentication proposes and will shared securely with latest encryption technology according GDPR compliance requirements. By clicking on the button bellow, you agree with BIOMIID",
         "policyDes1": "By clicking on the ",
         "policyDes2": " button below, you agree with BIOMIID CheckID",
         "TermsofServiceTitle": "Privacy Policy",
@@ -31,9 +31,10 @@
         "startButtonTitle": "LET'S START VERIFICATION!"
     },
     "LivenessHelp":{
+        "headerTitle":"Take a Selfie",
         "title": "Get ready to take  a capture of  your  selfie for  liveness verification.",
         "message":"Make  sure your face  is place  correctly  inside  the oval frame and press the 'Take  a capture' button.",
-        "buttonTitle":"OK, I AM READY"
+        "buttonTitle":"OK, I'M READY"
     },
     "PhotoLivness": {
         "title": "Selfie Capture",
@@ -64,11 +65,14 @@
         "OldButton":"MRZ on front page"
     },
     "idDocHelp":{
+        "passportHeaderTitle":"Passport  Document",
+        "frontIDtHeaderTitle":"Front of Identity Document",
+        "backIDHeaderTitle":"Back  of Identity Document",
         "passportTitle": "Get ready to take  a capture of  the  photo of your Passport document.",
         "frontIDTitle": "Get ready to take  a capture the  photo of  the Front of your Identity document.",
         "backIDTitle": "Get ready to take  a capture the  photo of  the Back of your Identity document.",
         "message":"Place your Identity  Document within the  rectangle  frame and press the 'Take  a capture' button.",
-        "buttonTitle":"OK, I AM READY"
+        "buttonTitle":"OK, I'M READY"
     },
     "idDocumentCamera": {
         "idTitle": "National ID Card",
@@ -93,13 +97,15 @@
         "title": "Address Document",
         "message":"Please select the type of address document and enter issuing date.",
         "selectDocTitle":"Select type of document",
+        "selectLanguageTitle":"Select POA issue language",
         "issueDate": "Issue Date",
         "scanPOAButton": "SCAN Address Document"
     },
     "poaDocHelp":{
+        "headerTitle":"Scan Address Document",
         "title": "Get ready to  scan your address document.",
         "message":"Place your address  document within the  camera  frame and press the 'Take  a capture' button.",
-        "buttonTitle":"OK, I AM READY"
+        "buttonTitle":"OK, I'M READY"
     },
     "poaDocumentCamera": {
         "title": "Scan address Document",

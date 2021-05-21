@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react';
 import Header from '../../Components/whiteHeader/whiteHeader'
 import { withRouter } from "react-router";
 import backURL from "../../assets/ic_cancel_white.png"
+import grayBackURL from "../../assets/ic_cancel.png"
 import captureURL from "../../assets/camera_take.png"
 import errorURL from "../../assets/ic_error.png"
 import warringURL from "../../assets/ic_warring.png"
@@ -27,7 +28,7 @@ import Base64Downloader from 'react-base64-downloader';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import ClientJS from "clientjs"
 import { v4 as uuidv4 } from 'uuid';
-import { encryptRSA, decryptRSA, encryptionAES } from "../../Utils/crypto";
+import { encryptRSA, decryptRSA, encryptionAES,aes_encryption } from "../../Utils/crypto";
 import { decrypt, encrypt, generateKeyFromString } from 'dha-encryption';
 import ApiService from '../../Services/APIServices'
 import './IDDocCamera.css'
@@ -49,6 +50,7 @@ class IDDocCmamera extends Component {
             errorSRC: errorURL,
             warringSRC: warringURL,
             idCardSRC: idcardURL,
+            previewBackSrc: grayBackURL,
             IDTarget: "",
             message: "",
             titleMessage: "",
@@ -94,7 +96,12 @@ class IDDocCmamera extends Component {
             isHelp: true,
             markSrc: successURL,
             resultColor: "red",
+            helpHeaderTitle: "",
             helpTitle: "",
+            alertMessage: "",
+            alertOpen: false,
+            bottomMargin:"50px",
+            imageHeight:window.innerHeight*0.4
         }
     }
     componentDidMount = () => {
@@ -111,11 +118,20 @@ class IDDocCmamera extends Component {
         console.log(window.IDType)
         console.log(window.cameraMode)
         this.onSetMessage()
+        if (window.innerHeight > 600) {
+            this.setState({bottomMargin:"50px"})
+            this.setState({imageHeight:window.innerHeight*0.4})
+
+        } else {
+            this.setState({bottomMargin:"25px"})
+            this.setState({imageHeight:window.innerHeight*0.3})
+        }
     }
     onSetMessage = () => {
         this.setState({ Mode: "FRONT" })
         if (window.IDType == "idcard" || window.IDType === "oldidcard") {
-            this.setState({ helpImgSrc: passportHelpURL })
+            this.setState({ helpImgSrc: frontCardHelpURL })
+            this.setState({ helpHeaderTitle: t('idDocHelp.frontIDtHeaderTitle') })
             this.setState({ helpTitle: t('idDocHelp.frontIDTitle') })
             this.setState({ idDocumentType: "NATIONAL_ID_CARD" })
             this.setState({ surpportedDocType: "ID" })
@@ -129,6 +145,7 @@ class IDDocCmamera extends Component {
             this.setState({ idTitle: t('idDocumentCamera.frontIDTitle') })
         } else if (window.IDType == "passport") {
             this.setState({ helpImgSrc: passportHelpURL })
+            this.setState({ helpHeaderTitle: t('idDocHelp.passportHeaderTitle') })
             this.setState({ helpTitle: t('idDocHelp.passportTitle') })
             this.setState({ idDocumentType: "PASSPORT" })
             this.setState({ surpportedDocType: "PA" })
@@ -137,7 +154,8 @@ class IDDocCmamera extends Component {
             this.setState({ message: t('idDocumentCamera.passportMes') })
             this.setState({ titleMessage: t('idDocumentCamera.passportTitle') })
         } else if (window.IDType == "resident" || window.IDType === "oldresident") {
-            this.setState({ helpImgSrc: passportHelpURL })
+            this.setState({ helpImgSrc: frontCardHelpURL })
+            this.setState({ helpHeaderTitle: t('idDocHelp.frontIDtHeaderTitle') })
             this.setState({ helpTitle: t('idDocHelp.frontIDTitle') })
             this.setState({ idDocumentType: "RESIDENCE_PERMIT" })
             this.setState({ surpportedDocType: "RE" })
@@ -185,7 +203,7 @@ class IDDocCmamera extends Component {
         console.log("encryptedAesKey: ", encryptedAesKey)
 
         var base64 = croppedBase64
-        var aesEncryption = encryptionAES(base64, aesKey)
+        var aesEncryption = aes_encryption(base64, aesKey)
         console.log("aesEnctryption: ", aesEncryption)
 
         console.log("inputData", this.state.Mode, window.countryCode, window.applicantId, window.checkId, window.env)
@@ -202,26 +220,28 @@ class IDDocCmamera extends Component {
             checkId: window.checkId,
             env: window.env
         }
-        alert(
-            "mode:  " + this.state.Mode + "\n" +
-            "countryCode:  " + window.countryCode + "\n" +
-            "docType:  " + this.state.surpportedDocType + "\n" +
-            "documentType:  " + this.state.idDocumentType + "\n" +
-            "applicantId:  " + window.applicantId + "\n" +
-            "checkId: " + window.checkId + "\n" +
-            "env:" + window.env
-        )
+        // alert(
+        //     "mode:  " + this.state.Mode + "\n" +
+        //     "countryCode:  " + window.countryCode + "\n" +
+        //     "docType:  " + this.state.surpportedDocType + "\n" +
+        //     "documentType:  " + this.state.idDocumentType + "\n" +
+        //     "applicantId:  " + window.applicantId + "\n" +
+        //     "checkId: " + window.checkId + "\n" +
+        //     "env:" + window.env
+        // )
         ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
             try {
                 this.setState({ message: t('idDocumentCamera.previewMes') })
                 this.setState({ isMrzLoading: false })
                 this.setState({ isMrzProcessing: true })
                 var response = res.data;
-                alert(JSON.stringify(response))
+                // alert(JSON.stringify(response))
                 console.log("response:", response)
                 console.log("statusCode:", response.statusCode)
                 if (response.statusCode === "402") {
                     this.setState({ isErrorStatus: true })
+                    this.setState({ markSrc: failedURL })
+                    this.setState({ resultColor: "red" })
                     response.errorList.map((item, index) => {
                         console.log(item)
                         if (index == 0) {
@@ -259,8 +279,10 @@ class IDDocCmamera extends Component {
                     console.log(this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle)
                     this.setState({ imageQualityErrorMessage: t("imageQualityErrorMes") + this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle })
                     this.setState({ imgQualityErrorMes: true })
+
                 } else if (response.statusCode === "401") {
-                    alert(response.message)
+                    this.setState({ alertMessage: response.message })
+                    this.setState({ alertOpen: true })
                     this.setState({ isMrzLoading: false })
                     this.onReTake()
                 } else {
@@ -424,7 +446,8 @@ class IDDocCmamera extends Component {
 
             } catch (error) {
                 this.setState({ isMrzLoading: false })
-                alert("the server is not working, Please try again.");
+                this.setState({ alertMessage: "The server is not working, please try again." })
+                this.setState({ alertOpen: true })
                 this.onReTake()
             }
         })
@@ -520,7 +543,7 @@ class IDDocCmamera extends Component {
         var encryptedAesKey = encryptRSA(aesKey, publicKey)
         console.log("encryptedAesKey: ", encryptedAesKey)
         var base64 = JSON.stringify(data)
-        var aesEncryption = encryptionAES(base64, aesKey)
+        var aesEncryption = aes_encryption(base64, aesKey)
         console.log("aesEnctryption: ", aesEncryption)
         var url = process.env.REACT_APP_BASE_URL + "client/collectDeviceFeatures"
         var activityName = ""
@@ -619,6 +642,7 @@ class IDDocCmamera extends Component {
                         this.setState({ isHelp: true })
                         this.setState({ helpImgSrc: backCardHelpURL })
                         this.setState({ helpTitle: t('idDocHelp.backIDTitle') })
+                        this.setState({ helpHeaderTitle: t('idDocHelp.backIDHeaderTitle') })
                         this.setState({ IDTarget: "backIDCard" })
                         this.setState({ Mode: "BACK" })
                         this.setState({ titleMessage: t('idDocumentCamera.idTitle') })
@@ -647,6 +671,7 @@ class IDDocCmamera extends Component {
                         this.setState({ isHelp: true })
                         this.setState({ helpImgSrc: backCardHelpURL })
                         this.setState({ helpTitle: t('idDocHelp.backIDTitle') })
+                        this.setState({ helpHeaderTitle: t('idDocHelp.backIDHeaderTitle') })
                         this.setState({ IDTarget: "backResident" })
                         this.setState({ Mode: "BACK" })
                         this.setState({ titleMessage: t('idDocumentCamera.residentTitle') })
@@ -685,6 +710,7 @@ class IDDocCmamera extends Component {
                         this.setState({ isHelp: true })
                         this.setState({ helpImgSrc: backCardHelpURL })
                         this.setState({ helpTitle: t('idDocHelp.backIDTitle') })
+                        this.setState({ helpHeaderTitle: t('idDocHelp.backIDHeaderTitle') })
                         this.setState({ IDTarget: "oldBackIDCard" })
                         this.setState({ Mode: "BACK" })
                         this.setState({ titleMessage: t('idDocumentCamera.idTitle') })
@@ -712,6 +738,7 @@ class IDDocCmamera extends Component {
                         this.setState({ isHelp: true })
                         this.setState({ helpImgSrc: backCardHelpURL })
                         this.setState({ helpTitle: t('idDocHelp.backIDTitle') })
+                        this.setState({ helpHeaderTitle: t('idDocHelp.backIDHeaderTitle') })
                         this.setState({ IDTarget: "oldBackResident" })
                         this.setState({ Mode: "BACK" })
                         this.setState({ titleMessage: t('idDocumentCamera.residentTitle') })
@@ -735,7 +762,8 @@ class IDDocCmamera extends Component {
                 }
             } catch (error) {
                 this.setState({ isDeviceComponent: false })
-                alert("the server is not working, Please try again.");
+                this.setState({ alertMessage: "The server is not working, please try again." })
+                this.setState({ alertOpen: true })
             }
         })
     }
@@ -886,6 +914,10 @@ class IDDocCmamera extends Component {
         console.log("continue button clicked")
         this.setState({ isHelp: false })
     }
+    onCloseAlert = () => {
+        this.setState({ alertOpen: false })
+    }
+
     render() {
         return (
             <div style={{ width: "100%", height: window.innerHeight }}>
@@ -924,7 +956,7 @@ class IDDocCmamera extends Component {
                         <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <Loader
                                 type="Oval"
-                                color="#7f00ff"
+                                color={window.buttonBackgroundColor}
                                 height={100}
                                 width={100}
                                 visible={this.state.isMrzLoading}
@@ -952,11 +984,11 @@ class IDDocCmamera extends Component {
                 {(this.state.previewImageStatuse) && this.state.isMrzProcessing &&
                     <div className="IDDocCam_PreviewContainer" style={{ height: window.innerHeight }}>
                         <div style={{ height: window.innerHeight * 0.07, background: "#7f00ff" }}>
-                            <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex", background: "" }}>
-                                <img src={this.state.backButtonSRC} style={{ width: "15px", height: "15px", marginLeft: "10px" }}
+                            <div style={{ width: "100%", height: window.innerHeight * 0.07, alignItems: "center", display: "flex", background: "white" }}>
+                                <img src={this.state.previewBackSrc} style={{ width: "15px", height: "15px", marginLeft: "10px" }}
                                     onClick={this.onOpenModal} />
-                                <p style={{ width: "60%", color: this.state.txtColor, marginLeft: "10px", fontWeight: "bold", fontSize: "18px", marginBottom: "0px" }}>{this.state.idTitle}</p>
-                                <p style={{ color: this.state.txtColor, marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
+                                <p style={{ width: "60%", color: "gray", marginLeft: "10px", fontWeight: "bold", fontSize: "18px", marginBottom: "0px" }}>{this.state.idTitle}</p>
+                                <p style={{ color: "gray", marginLeft: "auto", marginRight: "10px" }}>{window.countryName}</p>
                             </div>
                             <div style={{ height: window.innerHeight * 0.44, display: "flex", background: this.state.previewBackColor, alignItems: "center", justifyContent: "center" }} >
                                 <img id="imageID" src={this.state.croppedImageUrl} style={{ width: "95%", height: window.innerHeight * 0.4, border: "3px solid", borderColor: this.state.resultColor, padding: "5px", borderRadius: "4px" }} />
@@ -986,7 +1018,7 @@ class IDDocCmamera extends Component {
                                 <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", marginTop: "30px" }}>
                                     <Loader
                                         type="Oval"
-                                        color="#7f00ff"
+                                        color={window.buttonBackgroundColor}
                                         height={80}
                                         width={80}
                                         visible={this.state.isDeviceComponent}
@@ -1019,16 +1051,16 @@ class IDDocCmamera extends Component {
                         </div>
                     </div>}
                 {this.state.isHelp && <div className="idDocHelp_Container" style={{ height: window.innerHeight }}>
-                    <Header headerText={""} headerBackgroundColor={this.state.headerColor} url="photolivness" txtColor={this.state.headerTitlecolor} />
+                    <Header headerText={this.state.helpHeaderTitle} headerBackgroundColor={this.state.headerColor} url="photolivness" txtColor={window.headerTextColor} />
                     <div className="main_Container" style={{ marginTop: window.innerHeight * 0.05 }}>
-                        <p>{this.state.helpTitle}</p>
-                        <img src={this.state.helpImgSrc} alt="Id card help image" style={{ width: "80%", height: "250px" }} />
+                        <p style={{ color: window.pageTextColor }}>{this.state.helpTitle}</p>
+                        <img src={this.state.helpImgSrc} alt="Id card help image" style={{ width: "80%", height: this.state.imageHeight }} />
                     </div>
                     <div className="idDocHelp_message">
                         <img src={this.state.warringSRC} style={{ width: "20px", height: "20px" }} />
-                        <p style={{ color: this.state.titleColor }}>{t('idDocHelp.message')}</p>
+                        <p style={{ color: window.pageTextColor }}>{t('idDocHelp.message')}</p>
                     </div>
-                    <div className="buttonView">
+                    <div className="buttonView" style = {{bottom:this.state.bottomMargin}}>
                         <Button
                             backgroundColor={window.buttonBackgroundColor}
                             buttonTextColor={window.buttonTextColor}
@@ -1059,6 +1091,13 @@ class IDDocCmamera extends Component {
                             </div>
 
                         </div>
+                    </div>
+                </Modal>
+
+                <Modal open={this.state.alertOpen} showCloseIcon={false} center>
+                    <div className="alertView" style={{ height: window.innerHeight * 0.2 }}>
+                        <p>{this.state.alertMessage}</p>
+                        <div className="alert_button" onClick={this.onCloseAlert}> OK </div>
                     </div>
                 </Modal>
 

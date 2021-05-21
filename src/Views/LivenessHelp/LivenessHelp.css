@@ -4,14 +4,14 @@
 .livenessHelp_Container .buttonView{
     position: absolute;
     width: 100%;
-    bottom: 50px;
+    bottom: 25px;
     padding-left: 15px;
     padding-right: 15px;
 }
 .livenessHelp_Container .footerTitle{
     font-style: italic;
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     width: 100%;
     text-align: center;
 }
@@ -34,7 +34,7 @@
     padding-left: 15px;
     padding-right: 15px;
     align-items: center;
-    padding-top: 30px;
+    padding-top: 20px;
 }
 .livenessHelp_Container .liveness_message p{
     font-size: 16px;

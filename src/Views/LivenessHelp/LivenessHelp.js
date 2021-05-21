@@ -19,14 +19,23 @@ class LivenessHelp extends React.Component<Props> {
             imgSrc: imgURL,
             headerColor: "#7f00ff",
             headerTitlecolor: "white",
-            warringSrc:WarringImgURL
-
+            warringSrc:WarringImgURL,
+            bottomMargin:"50px",
+            imageHeight:window.innerHeight*0.4
         }
     }
     componentDidMount() {
         this.setState({ txtColor: window.pageTextColor })
         this.setState({ headerColor: window.headerBackgroundColor })
         this.setState({ headerTitleColor: window.headerTextColor })
+        if (window.innerHeight > 600) {
+            this.setState({bottomMargin:"30px"})
+            this.setState({imageHeight:window.innerHeight*0.4})
+
+        } else {
+            this.setState({bottomMargin:"25px"})
+            this.setState({imageHeight:window.innerHeight*0.3})
+        }
     }
     onContinue = () => {
         console.log("the continue button clicked")
@@ -36,16 +45,16 @@ class LivenessHelp extends React.Component<Props> {
     render() {
         return (
             <div className="livenessHelp_Container" style={{ height: window.innerHeight }}>
-                <Header headerText={""} headerBackgroundColor={this.state.headerColor} url="photolivness" txtColor={this.state.headerTitlecolor} />
+                <Header headerText={t('LivenessHelp.headerTitle')} headerBackgroundColor={this.state.headerColor} url="photolivness" txtColor={window.headerTextColor} />
                 <div className="main_Container" style={{ marginTop: window.innerHeight * 0.05 }}>
-                    <p>{t('LivenessHelp.title')}</p>
-                    <img src={this.state.imgSrc} alt="Liveness help image" style={{ width: "60%", height: window.innerHeight * 0.4 }} />
+                    <p style = {{color: window.pageTextColor}}>{t('LivenessHelp.title')}</p>
+                    <img src={this.state.imgSrc} alt="Liveness help image" style={{ width: "60%", height:this.state.imageHeight}} />
                 </div>
                 <div className="liveness_message">
                     <img src={this.state.warringSrc} style={{ width: "20px", height: "20px" }} />
-                    <p style={{color: this.state.titleColor}}>{t('LivenessHelp.message')}</p>
+                    <p style={{color: window.pageTextColor}}>{t('LivenessHelp.message')}</p>
                 </div>
-                <div className="buttonView">
+                <div className="buttonView" style = {{bottom: this.state.bottomMargin}}>
                     <Button
                         backgroundColor={window.buttonBackgroundColor}
                         buttonTextColor={window.buttonTextColor}

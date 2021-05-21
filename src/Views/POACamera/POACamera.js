@@ -3,7 +3,7 @@ import { Camera } from "react-camera-pro";
 import Button from "../../Components/POAButton/POAButton"
 import errorURL from "../../assets/ic_error.png"
 import warringURL from "../../assets/ic_warring.png"
-import BackURL from "../../assets/ic_cancel_white.png"
+import BackURL from "../../assets/ic_cancel.png"
 import ReTakeButton from "../../Components/volietBorderButton/volietBorderButton"
 import ExitButton from '../../Components/button/button'
 import ContinueButton from "../../Components/POAButton/POAButton"
@@ -16,7 +16,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import { decrypt, encrypt, generateKeyFromString } from 'dha-encryption';
 import ClientJS from "clientjs"
 import { v4 as uuidv4 } from 'uuid';
-import { encryptRSA, decryptRSA, encryptionAES } from "../../Utils/crypto";
+import { encryptRSA, decryptRSA, encryptionAES,aes_encryption } from "../../Utils/crypto";
 import ApiService from '../../Services/APIServices'
 import { check_blur, check_blur_base64, check_glare_base64, check_face_base64, check_glare, check_face } from 'image-analitic-lib'
 import { setTranslations, setDefaultLanguage, setLanguage, withTranslation, t } from 'react-multi-lang'
@@ -64,7 +64,9 @@ class POACamera extends Component {
             shadowMesTitle: "",
             reflectionMesTitle: "",
             imageQualityErrorMessage: "",
-            apiFlage:false,
+            apiFlage: false,
+            alertMessage: "",
+            alertOpen: false
         }
     }
     componentDidMount = () => {
@@ -119,7 +121,7 @@ class POACamera extends Component {
         console.log("encryptedAesKey: ", encryptedAesKey)
 
         var base64 = window.splitedBase64
-        var aesEncryption = encryptionAES(base64, aesKey)
+        var aesEncryption = aes_encryption(base64, aesKey)
         console.log("aesEnctryption: ", aesEncryption)
 
         var url = process.env.REACT_APP_BASE_URL + "client/check/poaCheck"
@@ -128,11 +130,19 @@ class POACamera extends Component {
             applicantId: window.applicantId,
             checkId: window.checkId,
             poa_docType: window.poaDocType,
-            poa_language: lan,
+            poa_language: window.POALanguage,
             poa_issueDate: window.poaIssueDate,
             poa_image: aesEncryption,
             env: window.env
         }
+        alert(
+            "applicantId:  " + window.applicantId + "\n" +
+            "checkId:  " + window.checkId + "\n" +
+            "poa_docType:  " + window.poaDocType + "\n" +
+            "poa_language:  " + window.POALanguage + "\n" +
+            "poa_issueDate:  " + window.poaIssueDate + "\n" +
+            "env:" + window.env
+        )
         ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
             try {
                 var response = res.data
@@ -184,17 +194,19 @@ class POACamera extends Component {
                     this.setState({ imageQualityErrorMessage: t("imageQualityErrorMes") + this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle })
                     console.log("errorMes: ", t("imageQualityErrorMes") + this.state.glareMesTitle + this.state.blurMesTitle + this.state.shadowMesTitle + this.state.reflectionMesTitle)
                 } else if (statusCode === "401") {
-                    alert(response.message)
+                    this.setState({ alertMessage: response.message })
+                    this.setState({ alertOpen: true })
                     this.setState({ isLoader: false })
                 }
             } catch (error) {
-                alert("The server is not working, please try again.")
+                this.setState({ alertMessage: "The server is not working, please try again." })
+                this.setState({ alertOpen: true })
                 this.setState({ isLoader: false })
             }
         })
     }
     onTake = () => {
-        this.setState({apiFlage:true})
+        this.setState({ apiFlage: true })
         this.onUploadDeviceFeatures()
     }
     onUploadDeviceFeatures = () => {
@@ -283,7 +295,7 @@ class POACamera extends Component {
         var encryptedAesKey = encryptRSA(aesKey, publicKey)
         console.log("encryptedAesKey: ", encryptedAesKey)
         var base64 = JSON.stringify(data)
-        var aesEncryption = encryptionAES(base64, aesKey)
+        var aesEncryption = aes_encryption(base64, aesKey)
         console.log("aesEnctryption: ", aesEncryption)
         var url = process.env.REACT_APP_BASE_URL + "client/collectDeviceFeatures"
         var data = {
@@ -305,7 +317,8 @@ class POACamera extends Component {
                 this.props.history.push('iddocresult')
             } catch (error) {
                 this.setState({ apiFlage: false })
-                alert("the server is not working, Please try again.");
+                this.setState({ alertMessage: "The server is not working, please try again." })
+                this.setState({ alertOpen: true })
             }
         })
     }
@@ -387,6 +400,9 @@ class POACamera extends Component {
     onEXit = () => {
         this.props.history.push('')
     }
+    onCloseAlert = () => {
+        this.setState({ alertOpen: false })
+    }
     render() {
         return (
             <div>
@@ -433,7 +449,7 @@ class POACamera extends Component {
                     <div className="loader" style={{ marginTop: window.innerHeight * 0.4 }}>
                         <Loader
                             type="Oval"
-                            color={window.headerBackgroundColor}
+                            color={window.buttonBackgroundColor}
                             height={80}
                             width={80}
                         />
@@ -444,7 +460,7 @@ class POACamera extends Component {
                 </div>}
                 {this.state.previewImageStatuse &&
                     <div className="POACam_PreviewView" style={{ height: window.innerHeight }}>
-                        <div className="LivenessTopBar" style={{ height: window.innerHeight * 0.07, background: this.state.backgroundColor }}>
+                        <div className="LivenessTopBar" style={{ height: window.innerHeight * 0.07, background: "white" }}>
                             <img src={this.state.backButtonSrc} onClick={this.onOpenModal} className="photoLivenessbtnBack" />
                             <p className="liveness_txtTitle" style={{ color: this.state.titleColor }}>{t('poaDocumentCamera.title')}</p>
                             <div style={{ width: '10px' }}></div>
@@ -493,10 +509,10 @@ class POACamera extends Component {
                             </div> */}
                         </div>
                     </div>}
-                <div className="loader_divice" style={{ marginTop: window.innerHeight * 0.4}}>
+                <div className="loader_divice" style={{ marginTop: window.innerHeight * 0.4 }}>
                     <Loader
                         type="Oval"
-                        color={window.headerBackgroundColor}
+                        color={window.buttonBackgroundColor}
                         height={80}
                         width={80}
                         visible={this.state.apiFlage}
@@ -524,6 +540,13 @@ class POACamera extends Component {
                                     onClick={this.onEXit} />
                             </div>
                         </div>
+                    </div>
+                </Modal>
+
+                <Modal open={this.state.alertOpen} showCloseIcon={false} center>
+                    <div className="alertView" style={{ height: window.innerHeight * 0.2 }}>
+                        <p>{this.state.alertMessage}</p>
+                        <div className="alert_button" onClick={this.onCloseAlert}> OK </div>
                     </div>
                 </Modal>
             </div>

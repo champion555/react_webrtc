@@ -30,18 +30,21 @@ class DocumentCountry extends React.Component<Props> {
             searchImageSrc: searchImageURL,
             headerColor: "#7f00ff",
             headerTitlecolor: "white",
-            background:"white",
-            buttonBackgroundColor:"#7f00ff",
+            background: "white",
+            buttonBackgroundColor: "#7f00ff",
             buttonTitleColor: "white",
+            alertMessage: "",
+            alertOpen: false,
+            modalOpen: false
         };
     }
     componentDidMount = () => {
-        this.setState({headerColor:window.headerBackgroundColor})
-        this.setState({headerTitleColor: window.headerTextColor})
-        this.setState({background:window.pageBackgroundColor})
-        this.setState({titleColor:window.pageTextColor})
-        this.setState({buttonBackgroundColor:window.buttonBackgroundColor })
-        this.setState({buttonTitleColor:window.buttonTextColor })
+        this.setState({ headerColor: window.headerBackgroundColor })
+        this.setState({ headerTitleColor: window.headerTextColor })
+        this.setState({ background: window.pageBackgroundColor })
+        this.setState({ titleColor: window.pageTextColor })
+        this.setState({ buttonBackgroundColor: window.buttonBackgroundColor })
+        this.setState({ buttonTitleColor: window.buttonTextColor })
 
         console.log(lan)
         var country
@@ -60,7 +63,8 @@ class DocumentCountry extends React.Component<Props> {
 
     onContinue = () => {
         if (this.state.countryName == "") {
-            alert("Please select the issusing country")
+            this.setState({ alertMessage: "Please select the issusing country" })
+            this.setState({ alertOpen: true })
         } else {
             window.countryName = this.state.countryName
             this.props.history.push('idmain')
@@ -115,14 +119,17 @@ class DocumentCountry extends React.Component<Props> {
     onEXit = () => {
         this.props.history.push('')
     }
+    onCloseAlert = () => {
+        this.setState({ alertOpen: false })
+    }
 
     render() {
         const { t } = this.props
         return (
             <div>
                 {!this.state.onSelectCountry && <div>
-                    <Header headerText={t('documentCountry.title')} headerBackgroundColor={this.state.headerColor} url="photolivness" txtColor={this.state.headerTitlecolor} />
-                    <div className="documentContry_container" style={{ height: window.innerHeight - 50,background: this.state.background}}>
+                    <Header headerText={t('documentCountry.title')} headerBackgroundColor={window.headerBackgroundColor} url="photolivness" txtColor={window.headerTextColor} />
+                    <div className="documentContry_container" style={{ height: window.innerHeight - 50, background: this.state.background }}>
                         <div className="documentContry_messageView" style={{ height: window.innerHeight * 0.15 }}>
                             <p style={{ position: "absolute", bottom: "0px", paddingLeft: "15px", paddingRight: "15px", fontSize: "16px", color: this.state.titleColor }}>{t('documentCountry.message')}</p>
                         </div>
@@ -137,8 +144,8 @@ class DocumentCountry extends React.Component<Props> {
                         </div>
                         <div className="documentCountry_ButtonView" style={{ height: window.innerHeight * 0.4 }}>
                             <Button
-                                backgroundColor = {window.buttonBackgroundColor}
-                                buttonTextColor = {window.buttonTextColor}
+                                backgroundColor={window.buttonBackgroundColor}
+                                buttonTextColor={window.buttonTextColor}
                                 label={t('documentCountry.continueButton')}
                                 onClick={() => this.onContinue()} />
                             <p style={{ color: this.state.titleColor, fontStyle: 'italic', position: "absolute", bottom: "15px" }}>Powerd by BIOMIID</p>
@@ -147,20 +154,20 @@ class DocumentCountry extends React.Component<Props> {
                     </div>
                 </div>}
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
-                    <div className="modalView" style={{ height: window.innerHeight*0.9, width: "100%", background:this.state.background }}>
+                    <div className="modalView" style={{ height: window.innerHeight * 0.9, width: "100%", background: this.state.background }}>
                         <div style={{ width: "100%" }}>
-                            <div className="whiteHeaderView" style={{ background: this.state.headerColor }}>
+                            <div className="whiteHeaderView" style={{ background: window.headerBackgroundColor }}>
                                 <img className="countrybtnBack" src={this.state.backImageSrc}
                                     onClick={() => {
                                         this.onCloseModal()
                                     }} />
-                                <p className="whitetxtTitle" style={{ color: this.state.headerTitlecolor }}>Issuing Country</p>
+                                <p className="whitetxtTitle" style={{ color:window.headerTextColor }}>Issuing Country</p>
                                 <div style={{ width: '10px' }}></div>
                             </div>
                             <div className="countryArray_Container">
-                                <div className = "searchContainer" style = {{background:this.state.background}}>
+                                <div className="searchContainer" style={{ background: this.state.background }}>
                                     <input id="search-text" type="text" placeholder="Document Country..." onChange={this.onSearch} />
-                                    <img src = {this.state.searchImageSrc}/>
+                                    <img src={this.state.searchImageSrc} />
                                 </div>
                                 <div className="container" >
                                     {
@@ -176,6 +183,13 @@ class DocumentCountry extends React.Component<Props> {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </Modal>
+
+                <Modal open={this.state.alertOpen} showCloseIcon={false} center>
+                    <div className="alertView" style={{ height: window.innerHeight * 0.2 }}>
+                        <p>{this.state.alertMessage}</p>
+                        <div className="alert_button" onClick={this.onCloseAlert}> OK </div>
                     </div>
                 </Modal>
 

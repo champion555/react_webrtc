@@ -6,7 +6,7 @@ import CheckURL from "../../assets/ic_check_voilet.png"
 import CheckURL1 from "../../assets/ic_description1.png"
 import CheckURL2 from "../../assets/ic_description2.png"
 import CheckURL3 from "../../assets/ic_description3.png"
-import RemiderURL from "../../assets/ic_reminder.png"
+import RemiderURL from "../../assets/ic_policy.png"
 import ClockURL from '../../assets/ic_clock.png'
 import languageURL from '../../assets/ic_language_purple.png'
 import unselectURL from '../../assets/ic_unselect.png'
@@ -76,11 +76,12 @@ class Home extends React.Component<Props> {
             selectedCountry: '',
             unselectSRC: unselectURL,
             selectSrc: selectURL,
-            space: "15px",
+            space: "5px",
             pageBackgroundColor: "white",
             buttonTextColor: "white",
             headerBackgroundColor: "#7f00ff",
             headerTextColor: "white",
+            isCheckType: false
         }
     }
     componentDidMount = () => {
@@ -96,6 +97,9 @@ class Home extends React.Component<Props> {
         console.log(window.rsaPublic_key)
         console.log(window.api_key)
         console.log(window.secret_key)
+        if (window.checkType === "CHECKID_L3"){
+            this.setState({isCheckType: true})
+        }
 
         this.setState({ pageBackgroundColor: window.pageBackgroundColor })
         this.setState({ descriptionColor: window.pageTextColor })
@@ -105,10 +109,10 @@ class Home extends React.Component<Props> {
         this.setState({ headerTextColor: window.headerTextColor })
         setDefaultLanguage("en")
         if (window.innerHeight > 600) {
-            this.setState({ topMargin: "35px" })
+            this.setState({ topMargin: "15px" })
         } else if (window.innerHeight < 600) {
             console.log("small device")
-            this.setState({ topMargin: "15px" })
+            this.setState({ topMargin: "10px" })
         }
     }
     handleChange = (e, { value }) => this.setState({ value })
@@ -145,7 +149,7 @@ class Home extends React.Component<Props> {
                  <canvas id="canvas" />
                 {!this.state.onSelectLanguage && <div className="body-container" style={{ background: this.state.pageBackgroundColor }}>
                     <div style={{ background: this.state.headBackgroundColor }}>
-                        <div className="logoView" style={{ marginTop: window.innerHeight * 0.03, background: this.state.headBackgroundColor }}>
+                        <div className="logoView" style={{ marginTop: window.innerHeight * 0.02, background: this.state.headBackgroundColor }}>
                             <img src={this.state.ImageSrcs} style={{ width: "50px", height: "50px" }}/>
                             {/* <img src={`data:image/jpeg;base64,${data}`} style={{ width: "60px", height: "50px" }} /> */}
                             <div className="languageView" onClick={this.onOpenModal} style={{ cursor: 'pointer' }}>
@@ -158,11 +162,11 @@ class Home extends React.Component<Props> {
                             <div className="info" style={{ paddingTop: "10px" }}>
                                 <p className='heading' style={{ color: this.state.descriptionColor }}>{t('Home.title')}</p>                                
                                 <p className="desc" style={{ color: this.state.descriptionColor }}>{window.companyName} {t('Home.titleDes')}<strong>{t('Home.prodoctName')}</strong></p>
-                                <div style={{ width: "100%", display: "flex", alignItems: "center", marginTop: "10px", paddingLeft: "15px", paddingRight: "15px" }}>
+                                <div style={{ width: "100%", display: "flex", alignItems: "center", marginTop: "5px", paddingLeft: "15px", paddingRight: "15px" }}>
                                     <img src={this.state.clockSrc} style={{ width: "20px", height: "20px" }} />
                                     <p className="desc" style={{ color: this.state.descriptionColor, paddingLeft: "5px", paddingTop: "0px" }}>{t('Home.clockDes')}</p>
                                 </div>
-                                <div style={{ width: "100%", display: "flex", alignItems: "center", marginTop: "10px", paddingLeft: "15px", paddingRight: "15px" }}>
+                                <div style={{ width: "100%", display: "flex", alignItems: "center", marginTop: "5px", paddingLeft: "15px", paddingRight: "15px" }}>
                                     <img src={this.state.lightSrc} style={{ width: "30px", height: "30px" }} />
                                     <p className="desc" style={{ color: this.state.buttonColor, paddingLeft: "5px", paddingTop: this.state.space }}>{t('Home.titleDes1')}</p>
                                 </div>
@@ -182,18 +186,18 @@ class Home extends React.Component<Props> {
                                         <div className="title"><p style={{ color: this.state.descriptionColor }}>{t('Home.checkDes2')}</p></div>
                                     </div>
                                 </div>
-                                <div className="personal_data">
+                                {this.state.isCheckType && <div className="personal_data">
                                     <div className="title_panel">
                                         <div className="number"><img src={this.state.checkSrc3} style={{ width: "20px", height: "20px" }} /></div>
                                         <div className="title"><p style={{ color: this.state.descriptionColor }}>{t('Home.checkDes3')}</p></div>
                                     </div>
-                                </div>
-                                <div style={{ width: "100%", display: "flex", alignItems: "center", marginTop: "3px", paddingLeft: "15px", paddingRight: "15px" }}>
+                                </div>}
+                                {/* <div style={{ width: "100%", display: "flex", alignItems: "center", marginTop: "3px", paddingLeft: "15px", paddingRight: "15px" }}>
                                     <img src={this.state.reminderSrc} style={{ width: "20px", height: "20px" }} />
-                                    <p className="desc" style={{ color: this.state.descriptionColor, paddingLeft: "5px", paddingTop: "0px" }}>{t('Home.privateMessage')}</p>
-                                </div>
+                                    <p className="desc" style={{ color: this.state.descriptionColor, paddingLeft: "5px", paddingTop: "0px",fontSize:"15px" }}>{t('Home.privateMessage')} <a href="#" style={{ color: window.buttonBackgroundColor, fontStyle: "italic" }}><strong><u>{t('Home.TermsofServiceTitle')}</u></strong></a></p> 
+                                </div> */}
                                 <div className='termsOfService' style={{ color: this.state.descriptionColor, marginTop: this.state.topMargin }}>
-                                    {t('Home.policyDes1')}{t('Home.policyDes2')} <a href="#" style={{ color: window.headerBackgroundColor, fontStyle: "italic" }}><strong><u>{t('Home.TermsofServiceTitle')}</u></strong></a>
+                                <img src={this.state.reminderSrc} style={{ width: "20px", height: "20px" }} />   {t('Home.privateMessage')} <a href="#" style={{ color: window.buttonBackgroundColor, fontStyle: "italic" }}><strong><u>{t('Home.TermsofServiceTitle')}</u></strong></a>
                                 </div>
                             </div>
                         </div>

@@ -223,7 +223,7 @@ class IDMain extends Component {
                 <Modal open={this.state.modalOpen} showCloseIcon={false} center>
                     <div className="modalView" style={{ height: window.innerHeight * 0.3 }}>
                         <div>
-                            <p style={{ color: this.state.txtColor, fontSize: "18px", paddingTop: "15px", paddingLeft: "10px", paddingRight: "10px" }}>If your ID Document has MRZ in front, please click "FRONT" button, else "BACK" button.</p>
+                            <p style={{ color: window.pageTextColor, fontSize: "18px", paddingTop: "15px", paddingLeft: "10px", paddingRight: "10px" }}>If your ID Document has MRZ in front, please click "FRONT" button, else "BACK" button.</p>
                         </div>
                         <div style={{ position: "absolute", bottom: "15px", width: "100%", display: "flex", alignItems: "center", flexDirection: "row" }}>
 

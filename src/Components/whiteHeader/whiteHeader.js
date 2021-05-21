@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
-import ImageURL from "../../assets/ic_cancel_white.png"
+import ImageURL from "../../assets/ic_cancel.png"
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import Button from '../button/button'

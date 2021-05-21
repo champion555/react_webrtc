@@ -20,7 +20,9 @@ class POAVeriHelp extends React.Component<Props> {
             imgSrc: imgURL,
             headerColor: "#7f00ff",
             headerTitlecolor: "white",
-            warringSrc:WarringImgURL
+            warringSrc:WarringImgURL,
+            bottomMargin:"50px",
+            imageHeight:window.innerHeight*0.4
 
         }
     }
@@ -28,6 +30,14 @@ class POAVeriHelp extends React.Component<Props> {
         this.setState({ headerColor: window.headerBackgroundColor })
         this.setState({ headerTitleColor: window.headerTextColor })
         this.setState({ txtColor: window.pageTextColor})
+        if (window.innerHeight > 600) {
+            this.setState({bottomMargin:"50px"})
+            this.setState({imageHeight:window.innerHeight*0.4})
+
+        } else {
+            this.setState({bottomMargin:"25px"})
+            this.setState({imageHeight:window.innerHeight*0.3})
+        }
     }
     onContinue = () => {
         this.props.history.push('poacamera')
@@ -37,16 +47,16 @@ class POAVeriHelp extends React.Component<Props> {
 
         return (
             <div className="poaHelp_Container" style={{ height: window.innerHeight }}>
-                <Header headerText={""} headerBackgroundColor={this.state.headerColor} url="photolivness" txtColor={this.state.headerTitlecolor} />
+                <Header headerText={t('poaDocHelp.headerTitle')} headerBackgroundColor={this.state.headerColor} url="photolivness" txtColor={window.headerTextColor} />
                 <div className="main_Container" style={{ marginTop: window.innerHeight * 0.05 }}>
-                    <p>{t('poaDocHelp.title')}</p>
-                    <img src={this.state.imgSrc} alt="POA help image" style={{ width: "70%", height: "300px" }} />
+                    <p style = {{color: window.pageTextColor,width:"100%"}}>{t('poaDocHelp.title')}</p>
+                    <img src={this.state.imgSrc} alt="POA help image" style={{ width: "70%", height: this.state.imageHeight }} />
                 </div>
                 <div className="poaHelp_message">
                     <img src={this.state.warringSrc} style={{ width: "20px", height: "20px" }} />
-                    <p style={{ color: this.state.titleColor }}>{t('poaDocHelp.message')}</p>
+                    <p style={{ color: window.pageTextColor }}>{t('poaDocHelp.message')}</p>
                 </div>
-                <div className="buttonView">
+                <div className="buttonView" style = {{bottom:this.state.bottomMargin}}>
                     <Button
                         backgroundColor={window.buttonBackgroundColor}
                         buttonTextColor={window.buttonTextColor}

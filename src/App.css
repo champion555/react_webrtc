@@ -7,7 +7,11 @@
   display: none;
 }
 
-
+/* .App {
+  max-width: 500px;
+  max-height: 900px;
+  background-color: white;
+} */
 
 .margin-t {
   margin-top: 30px;
@@ -39,3 +43,11 @@ input{
 video{
   width: 100%;
 }
+
+/* #root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  height: 100vh;
+} */

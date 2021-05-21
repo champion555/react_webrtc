@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import captureImg from "../../assets/camera_take.png"
-import UndetectImgURL from "../../assets/ic_undetected3.png"
-import DetectImgURL from "../../assets/ic_detected3.png"
+import UndetectImgURL from "../../assets/ic_undetected4.png"
+import DetectImgURL from "../../assets/ic_detected4.png"
 import BackURL from "../../assets/ic_cancel_white.png"
 import Button from "../../Components/POAButton/POAButton"
 import WarringImgURL from "../../assets/ic_error.png"
@@ -21,7 +21,7 @@ import JSEncrypt from "jsencrypt";
 import CryptoJS from 'crypto-js';
 import aes from 'js-crypto-aes';
 import { stringify, v4 as uuidv4 } from 'uuid';
-import { encryptRSA, decryptRSA, encryptionAES } from "../../Utils/crypto";
+import { encryptRSA, decryptRSA, encryptionAES,aes_encryption } from "../../Utils/crypto";
 import ClientJS from "clientjs"
 import forge from "node-forge";
 import { privateKey, publicKey } from '../../Utils/key';
@@ -52,12 +52,14 @@ class PhotoLiveness extends Component {
             backgroundColor: "#525151",
             whiteColor: "#fff",
             modalOpen: false,
+            alertOpen: false,
             crop: null,
             croppedImageUrl: null,
             splitedBase64: null,
+            alertMessage: ""
         };
     }
-    componentDidMount = () => {
+    componentDidMount = () => {        
         if (window.innerHeight > 600) {
             this.setState({
                 crop: {
@@ -81,6 +83,7 @@ class PhotoLiveness extends Component {
                 }
             })
         }
+
     }
     onCapture = () => {
         const imageSrc = this.webcam.getScreenshot();
@@ -110,11 +113,13 @@ class PhotoLiveness extends Component {
                     console.log(api_access_token)
                     this.onUploadLivenessPhoto()
                 } else {
-                    alert(response.message)
+                    this.setState({ alertMessage: response.message })
+                    this.setState({ alertOpen: true })
                 }
             } catch (error) {
                 console.log("error:", error)
-                alert("The server is not working, please try again")
+                this.setState({ alertMessage: "The server is not working, please try again" })
+                this.setState({ alertOpen: true })
             }
         })
     }
@@ -133,7 +138,7 @@ class PhotoLiveness extends Component {
         var encryptedAesKey = encryptRSA(aesKey, publicKey)
         console.log("encryptedAesKey: ", encryptedAesKey)
         var base64 = this.state.splitedBase64
-        var aesEncryption = encryptionAES(base64, aesKey)
+        var aesEncryption = aes_encryption(base64, aesKey)
         console.log("aesEnctryption: ", aesEncryption)
 
         var url = process.env.REACT_APP_BASE_URL + "faceliveness"
@@ -148,13 +153,12 @@ class PhotoLiveness extends Component {
         ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
             try {
                 console.log(res.data)
-                
                 var response = res.data;
-                alert(JSON.stringify(response))
+                // alert(JSON.stringify(response))
                 // this.props.history.push('documentcountry')
                 // alert("LivenessScore:" + response.score)
                 if (response.result === "LIVENESS") {
-                    this.onUploadDeviceFeatures()                    
+                    this.onUploadDeviceFeatures()
                 } else if (response.result === "SPOOF") {
                     this.setState({ apiFlage: false })
                     window.livenessResult = response.result
@@ -167,17 +171,18 @@ class PhotoLiveness extends Component {
                     this.props.history.push('livenessresult')
                 }
             } catch (error) {
-                alert("the server is not working, Please try again.");
+                this.setState({ alertMessage: "The server is not working, please try again" })
+                this.setState({ alertOpen: true })
                 this.setState({ apiFlage: false })
                 this.setState({ ImgSrc: UndetectImgURL })
             }
         })
     }
-    onUploadDeviceFeatures = () =>{
+    onUploadDeviceFeatures = () => {
         var windowClient = new window.ClientJS();
         var canvasPrint = windowClient.getCanvasPrint()
         var customeFingerPrint = windowClient.getCustomFingerprint(canvasPrint);
-        console.log("customeFingerPrint: ",customeFingerPrint)
+        console.log("customeFingerPrint: ", customeFingerPrint)
         var userAgent = windowClient.getUserAgent();
         console.log("userAgent: ", userAgent)
         var browser = windowClient.getBrowser();
@@ -221,31 +226,31 @@ class PhotoLiveness extends Component {
         var webGLRenderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
         console.log("webGLRenderer: ", webGLRenderer);
         var platform = navigator.platform
-        console.log("platform: ",platform)
+        console.log("platform: ", platform)
         var data = {
-                        fingerPrint:customeFingerPrint,
-                        userAgent:userAgent,
-                        browser:browser,
-                        browserMajorVersion:browserMajorVersion,
-                        engine:engine,
-                        engineVersion:engineVersion,
-                        osName:osName,
-                        osVersion:osVersion,
-                        deviceType:deviceType,
-                        screenPrint:screenPrint,
-                        colorDepth:colorDepth,
-                        currentResolution:currentResolution,
-                        availableResolution:availableResolution,
-                        localStorage:localStorage,
-                        sessionStorage:sessionStorage,
-                        timezone:timezone,
-                        language:language,
-                        systemLanguage:systemLanguage,
-                        canvasPrint:canvasPrint,
-                        webGLVendor:webGLVendor,
-                        webGLRenderer:webGLRenderer,
-                        platform:platform
-                    }
+            fingerPrint: customeFingerPrint,
+            userAgent: userAgent,
+            browser: browser,
+            browserMajorVersion: browserMajorVersion,
+            engine: engine,
+            engineVersion: engineVersion,
+            osName: osName,
+            osVersion: osVersion,
+            deviceType: deviceType,
+            screenPrint: screenPrint,
+            colorDepth: colorDepth,
+            currentResolution: currentResolution,
+            availableResolution: availableResolution,
+            localStorage: localStorage,
+            sessionStorage: sessionStorage,
+            timezone: timezone,
+            language: language,
+            systemLanguage: systemLanguage,
+            canvasPrint: canvasPrint,
+            webGLVendor: webGLVendor,
+            webGLRenderer: webGLRenderer,
+            platform: platform
+        }
         console.log(JSON.stringify(data))
         var uuid = uuidv4()
         var uuidKey = generateKeyFromString(uuid)
@@ -259,7 +264,7 @@ class PhotoLiveness extends Component {
         var encryptedAesKey = encryptRSA(aesKey, publicKey)
         console.log("encryptedAesKey: ", encryptedAesKey)
         var base64 = JSON.stringify(data)
-        var aesEncryption = encryptionAES(base64, aesKey)
+        var aesEncryption = aes_encryption(base64, aesKey)
         console.log("aesEnctryption: ", aesEncryption)
         var url = process.env.REACT_APP_BASE_URL + "client/collectDeviceFeatures"
         var data = {
@@ -270,8 +275,8 @@ class PhotoLiveness extends Component {
             isBot: window.isBot,
             isIncognitoMode: false,
             deviceType: "BROWSER",
-            browserComponents:aesEncryption,
-            encryptedAESKey:encryptedAesKey
+            browserComponents: aesEncryption,
+            encryptedAESKey: encryptedAesKey
         }
         ApiService.uploadDoc('post', url, data, window.api_access_token, (res) => {
             try {
@@ -281,7 +286,8 @@ class PhotoLiveness extends Component {
                 this.props.history.push('documentcountry')
             } catch (error) {
                 this.setState({ apiFlage: false })
-                alert("the server is not working, Please try again.");
+                this.setState({ alertMessage: "The server is not working, please try again" })
+                this.setState({ alertOpen: true })
             }
         })
     }
@@ -350,6 +356,9 @@ class PhotoLiveness extends Component {
     onEXit = () => {
         this.props.history.push('')
     }
+    onCloseAlert = () => {
+        this.setState({ alertOpen: false })
+    }
 
     render() {
         const { t } = this.props
@@ -415,7 +424,7 @@ class PhotoLiveness extends Component {
                 <div className="loadingView" style={{ bottom: window.innerHeight * 0.5 }}>
                     <Loader
                         type="Oval"
-                        color={window.headerBackgroundColor}
+                        color={window.buttonBackgroundColor}
                         height={80}
                         width={80}
                         visible={this.state.apiFlage}
@@ -443,6 +452,13 @@ class PhotoLiveness extends Component {
                                     onClick={this.onEXit} />
                             </div>
                         </div>
+                    </div>
+                </Modal>
+
+                <Modal open={this.state.alertOpen} showCloseIcon={false} center>
+                    <div className="alertView" style={{ height: window.innerHeight * 0.2 }}>
+                        <p>{this.state.alertMessage}</p>
+                        <div className="alert_button" onClick={this.onCloseAlert}> OK </div>
                     </div>
                 </Modal>
             </div>

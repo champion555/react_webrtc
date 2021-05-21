@@ -67,7 +67,7 @@ class LivenessResult extends Component {
                     <p className="txtLivnessResult" style={{ color: this.state.txtColor, marginTop: window.innerHeight * 0.04 }}> {this.state.message} </p>
                     <div style={{ width: "100%", height: this.state.livnessPreviewHeight, display: "flex", flexDirection: "row" }}>
                         <div className="livenessPreview" style={{ height: this.state.livnessPreviewHeight }}>
-                            <img src={window.photoLivenessSrc} style={{ height: this.state.imageHeight, width: "100%", paddingLeft: "20px", paddingRight: "5px" }} />
+                            <img src={window.livenessImage} style={{ height: this.state.imageHeight, width: "100%", paddingLeft: "20px", paddingRight: "5px" }} />
                             <img src={this.state.imgSrc} style={{ width: "30px", height: "30px", marginTop: "-15px" }} />
                         </div>
                         <div className="livenessPreview" style={{ height: this.state.livnessPreviewHeight }}>
